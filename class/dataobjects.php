@@ -6,9 +6,9 @@
 class Control {
 	public $security;
 	public $status;
-	public function __construct($params)
+	public function __construct()
 	{
-		$this->status=$params->status;
+	//	$this->status=$params->status;
 	}
     /*public function __call($method, $args)
     {
@@ -49,11 +49,11 @@ class State {
     
 	public function getControlManagerClassName()
     {
-        return CONTROL_PATH . $this->state->getSiteView() . '\\' . str_replace("/","\\",$this->state->getArea()) . "\\Control";
+        return  $this->getSiteView() . '\\' . str_replace("/","\\",$this->getArea()) . "\\Control";
     }
     public function getControlFilePath()
     {
-        return CONTROL_PATH . $this->state->getSiteView() . "/" . $this->state->getArea();
+        return CONTROL_PATH . $this->getSiteView() . "/" . $this->getArea();
     }
     public function toString()
     {
@@ -61,7 +61,7 @@ class State {
     }
     public function __toString()
     {
-        return 	$this->state->getSiteView() . "/" . $this->state->getArea();
+        return 	$this->getSiteView() . "/" . $this->getArea();
     }
 }
 

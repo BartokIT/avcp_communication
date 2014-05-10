@@ -30,7 +30,7 @@ class MainFlow
     public $debug=false;
     public $user=NULL;
     public $history=NULL;
-    public $control_rights=array();
+    public $states_cache=array();
     public $state=NULL;
     public $flow_name="";
     public $annotation_reader = NULL;
@@ -87,8 +87,11 @@ class MainFlow
         {
             //Extract control class annotation
             require_once($control_file_path);
-            if (!isset($this->control_rights[$state->toString()]))
-                $this->control_rights[$state->toString()] = MainFlow::read_annotation($state->getControlManagerClassName());
+            $cfs= '$c= new ' . $state->getControlManagerClassName() . '();';
+            eval($cfs);
+            MainFlow::read_annotation($c);
+            if (!isset($this->states_cache[$state->toString()]))
+                $this->states_cache[$state->toString()] = MainFlow::read_annotation($state->getControlManagerClassName());
             
             eval('$c = new ' . $state->getControlManagerClassName . '();');
             return $c;
@@ -113,60 +116,6 @@ class MainFlow
         return $return; 
     }
     
-    /**
-     * Read one control file and extract annotation information:
-     * if the represented state is skippable and security settings for eache action
-     * @param string $control_file_path the string containing path of the control file
-     * @return object  Description      
-     */
-    static public function read_control_annotation_old($control_file_path)
-    {
-        //TODO: insert caching system
-        $return = (object)array("class"=>new Skippable(array("value"=>true)),
-                                "methods"=>array());
-        $this->parser->setIgnoreNotImportedAnnotations(true);
-        $this->parser->setImports(array('Access'=>'Access','Skippable'=>'Skippable'));
-        $tokens = token_get_all(file_get_contents($control_file_path));
-        
-        for ($i=0; $i < count($tokens);$i++)
-        {
-            $token = $tokens[$i];
-            
-            if ($token[0] == T_OPEN_TAG)
-            {
-                $j=$i+1;
-                while ($tokens[$j][0] == T_WHITESPACE) $j++;
-                if ($tokens[$j][0] == T_DOC_COMMENT)
-                    $return->class=$this->parser->parse(($tokens[$j][1]));
-            }
-            //echo token_name($token[0]);
-            if ($token[0] == T_WHITESPACE)
-             //skip whitspaces
-                continue;
-            
-            if ($token[0] == T_DOC_COMMENT)
-            {
-                //if $c found continue search
-                $j=$i+1;
-                while ($tokens[$j][0] == T_WHITESPACE) $j++;
-                
-                if ($tokens[$j][0] != T_VARIABLE && strcmp($tokens[$j][1],$instance_name) ==0)
-                    continue;
-                                
-                //if found -> continue the search
-                $j++;
-                while ($tokens[$j][0] == T_WHITESPACE) $j++;
-                if ($tokens[$j][0] != T_OBJECT_OPERATOR)
-                    continue;
-                                
-                //capture the method name
-                $j++;
-                while ($tokens[$j][0] == T_WHITESPACE) $j++;
-                $return->methods[$tokens[$j][1]] =$this->parser->parse($token[1]);
-            }
-        }
-        return $return; 
-    }
     
     /**
      * Controlla se è possibile uscire incondizionatamente dallo stato attuale dell'applicazione
@@ -175,8 +124,8 @@ class MainFlow
      */
     public function is_skippable($state)
     {
-        if (isset($this->control_rights[$state .""]))
-            return $this->control_rights[$state .""]["class"]->value;
+        if (isset($this->states_cache[$state .""]))
+            return $this->states_cache[$state .""]["class"]->value;
         else
             return true;
     }
@@ -189,7 +138,7 @@ class MainFlow
      */
     public function check_permission($state,$action)
     {
-        if (isset($this->control_rights[$state .""]) &&
+        if (isset($this->states_cache[$state .""]) &&
             isset($this->check_permission[$state .""]["methods"][$action]))
         {
             $access_info = $this->check_permission[$state .""]["methods"][$action];
@@ -236,7 +185,7 @@ class MainFlow
         }
         
         $ro = new NilObject();
-        $co=retrieve_control($this->state);
+        $co=$this->retrieve_control($this->state);
         //interpello tutti i controllori di gerarchia superiore
         //fino a trovarne uno che sappia gestire
         do

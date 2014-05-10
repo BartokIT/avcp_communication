@@ -71,7 +71,10 @@ function r2()
 	$path = "control/avcpman/pubblicazioni/default.php" ;	
 	include $path;	
 	$site_view = "public";
-	eval('$c = new avcpman\pubblicazioni\Control($site_view);');
+	define("CONTROL_PATH","control/");
+	$s = new State("avcpman","pubblicazioni");        
+	$cfs= '$c= new ' . $s->getControlManagerClassName() . '();';
+	eval($cfs);
 	$reflClass = new ReflectionObject($c);
 	$reader = new \Doctrine\Common\Annotations\AnnotationReader();
 	
