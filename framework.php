@@ -3,7 +3,8 @@
 include_once("class/globalfun.php");
 parse_resources();
 @session_start();
-
+include_once("class/returned_object.php");
+include_once("class/core.php");
 
 /*
 ini_set('error_reporting',  E_ALL & ~E_DEPRECATED  );

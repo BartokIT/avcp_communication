@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\pubblicazioni;
+namespace avcpman\pubblicazioni\def;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -12,10 +12,7 @@ class Control extends \Control
      */
     function d(){
             //default action
-            $prova = "controlprova";
-            echo $prova;
-            echo strlen($prova);
-            oppps();
+            echo "called default";
             
     }
     
