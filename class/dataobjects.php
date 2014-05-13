@@ -143,6 +143,10 @@ class State {
     }
 }
 
+class History {
+	
+}
+
 class HistoryItem
 {
     public $state;

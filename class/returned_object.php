@@ -16,7 +16,7 @@
     }
     
     abstract class BackObject extends ReturnedObject {
-	    
+	
     }
     
     
@@ -40,23 +40,23 @@
     
     class ReturnedArea extends BackObject
     {
-	public $sub_area;
-	public $area;
-	public $site_view;		
-	public $action;
+	private $status;
+	private $action=NULL;
 	
 	public $name_class = __CLASS__;
-	function __construct($site_view, $area, $action="")
+	function __construct($site_view, $area, $action=NULL)
 	{
-	    $this->area = $area;
-	    $this->site_view = $site_view;
-
-	    //nel caso in cui la sotto area non è specificata, viene preso lo stesso nome dell'area
-	    if ($sub_area == FALSE)
-		    $this->sub_area = $area;
-	    else
-		    $this->sub_area = $sub_area;
+	    //Create and store the new state
+	    $this->status = new State($site_view,$area);
 	    $this->action = $action;
+	}
+	public function getStatus()
+	{
+	    return $this->status;
+	}
+	public function getAciton()
+	{
+	    return $action;
 	}
     }
     

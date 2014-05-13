@@ -15,7 +15,7 @@ require_once LIB_PATH . 'Doctrine/Common/ClassLoader.php';
 $DoctrineClassLoader = new Doctrine\Common\ClassLoader('Doctrine\Common', LIB_PATH);
 $DoctrineClassLoader->register();
 
-require_once "dataobjects.php";
+
 /**
  * Explantion of variable abbreviation:
  * <ul>
@@ -32,6 +32,7 @@ class MainFlow
     public $history=NULL;
     public $states_cache=array();
     public $default_action ="d";
+    public $_s=NULL;
     /**
      * @property State $state The current state of the application
      * */
@@ -89,16 +90,16 @@ class MainFlow
     public function load_state()
     {
         @session_start();
-        $_s=@$_SESSION[sha1($this->flow_name)];
-        if ($_s === NULL)
+        $this->_s=@$_SESSION[sha1($this->flow_name)];
+        if ($this->_s === NULL)
         {
-            $this->state= $_s["_state"] = clone $this->init_state;
-            $this->history= $_s["_history"] = array();
+            $this->state= $this->_s["_state"] = clone $this->init_state;
+            $this->history= $this->_s["_history"] = array();
         }
         else
         {
-            $this->history = $_s["_history"];
-            $this->state = $_s["_state"];
+            $this->history = $this->_s["_history"];
+            $this->state = $this->_s["_state"];
         }        
     }
     
@@ -207,10 +208,13 @@ class MainFlow
     
     /**
      * Salta ad un nuovo stato memorizzando le informazioni nella history
-     * @param object $next_state Description
-     * @return object  Description
+     * @param State $next_state This is the state wich need to go to.
+     * @param boolean $inconditional True if the jump request come from the header, false if it is from an elaboration
      */
-    public function jump_to_state($next_state)  { }
+    public function go_to_state($next_state,$inconditional)
+    {
+        $this->state = $next_state;
+    }
     
     /**
      * Salta ad uno stato gerarchicamente superiore, se si trova in uno stato
@@ -239,18 +243,26 @@ class MainFlow
      * */
     public function retrieve_action()
     {
-        if (isset($_REQUEST["action"]))
+        // If the action is null then search from the request
+        if (is_null($this->action))
         {
-            //if the state is not skippable and is requested a inconditional jump
-            //to another state, than the default action is setted
-            if (!($this->state->isSkippable()) && $this->request_to_jump())
+            if (isset($_REQUEST["action"]))
+            {
+                //if the state is not skippable and is requested a inconditional jump
+                //to another state, than the default action is setted
+                if (!($this->state->isSkippable()) && $this->request_to_jump())
+                    $this->action = $this->default_action;
+                else
+                    $this->action = $_REQUEST["action"];
+                
+            }
+            else //if the action is not set, return the default action
                 $this->action = $this->default_action;
-            else
-                $this->action = $_REQUEST["action"];
-            
         }
-        else //if the action is not set, return the default action
-            $this->action = $this->default_action;
+        else
+        {
+            //nothing to do    
+        }
     }
     /**
      * This method control if the state passed as argument, can manage the action specified
@@ -268,6 +280,10 @@ class MainFlow
     
     public function request_to_jump() {}
     
+    
+    /**
+     * This is the main method of the execution
+     * */
     public function execute_action()
     {
         
@@ -275,16 +291,18 @@ class MainFlow
         //controllo se è necessario è possibile ed è richiesto salto
         if ($this->state->isSkippable() && $this->request_to_jump())
         {
-            jump_to_state(/* requested state*/);
+            go_to_state(/* requested state*/);
         }
         
+        //At first execution loop, return object is void (NilObject)
         $ro = new NilObject();
-        $this->retrieve_control($this->state);
-        //interpello tutti i controllori di gerarchia superiore
-        //fino a trovarne uno che sappia gestire
-        $this->retrieve_action();
         do
         {
+            $this->retrieve_control($this->state);
+            $this->retrieve_action();
+            
+            //interpello tutti i controllori di gerarchia superiore
+            //fino a trovarne uno che sappia gestire
             while (!$this->action_exists($this->state,$this->action) &&
                    $this->state->wantDelegate()  && //true if is permitted to delegate to ancestor
                    !$this->state->isRoot()) //root state is a state without ancestor
@@ -307,9 +325,30 @@ class MainFlow
                 {
                     //$ro = $this->jump_to_state($this->login_state);
                     $ro = $this->state->getControlObject()->{$this->action}();
+                    $this->manage_ro($ro);                   
                 }
             }
         } while ( $ro instanceof BackObject);
+    }
+    
+    
+    /**
+     * This method provide managemente for the returned object of the execution flow.
+     * Depends on the type of the object different behaviour will be maked.
+     * @param ReturnObject $ro The returned object
+     * */
+    public function manage_ro($ro)
+    {
+        if ($ro instanceof BackObject)
+        {
+            //If the returned object is a new state
+            if ($ro instanceof ReturnedArea)
+            {
+                $this->go_to_state($ro->getStatus());
+                $this->action = $ro->getAction();
+            }
+        }
+        
     }
 }
 ?>

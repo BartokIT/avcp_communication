@@ -3,6 +3,7 @@
 include_once("class/globalfun.php");
 parse_resources();
 @session_start();
+require_once "class/dataobjects.php";
 include_once("class/returned_object.php");
 include_once("class/core.php");
 
