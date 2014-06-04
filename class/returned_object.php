@@ -14,13 +14,17 @@
 	{
 	}
     }
-    
+    /**
+     * Base class used to specify that is necessary another cycle in main flow
+     * */
     abstract class BackObject extends ReturnedObject {
 	
     }
     
     
-    //Classe da utilizzare per restituire una pagina da visualizzare
+    /**
+     * Class that represent a front-end page
+     * */
     class ReturnedPage 
     {
 	public $page;

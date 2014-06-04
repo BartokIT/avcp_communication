@@ -32,7 +32,14 @@ class MainFlow
     public $history=NULL;
     public $states_cache=array();
     public $default_action ="d";
+    /**
+     * @property array $_s Maintain a refer to the session
+     * */
     public $_s=NULL;
+    /**
+     * @property array $_r Maintain a link to the reqests array
+     * */
+    public $_r=NULL;
     /**
      * @property State $state The current state of the application
      * */
@@ -42,6 +49,7 @@ class MainFlow
     public $control=NULL;
     public $login_state=NULL;
     public $action=NULL;
+    public $delegation_stack=array();
     
     public function __construct()
     {
@@ -64,7 +72,7 @@ class MainFlow
         
         $this->flow_name=$configuration->flow_name;
         $this->reader=new \Doctrine\Common\Annotations\AnnotationReader();
-        
+        $this->_r = $_REQUEST;
         if (isset($_REQUEST["resources"]))
             $this->print_resources();
         else
@@ -74,10 +82,19 @@ class MainFlow
         }
     }
     
-    
-    public function error_page()
+    /**
+     * Print out an error page to inform the user about
+     * eventual problem
+     * */
+    public function error_page($http_code,$message)
     {
-        $i;
+        http_response_code($http_code);
+        echo <<<OUT
+            <pre>
+                $message
+            </pre>        
+OUT;
+        die();
     }
     
     /**
@@ -87,20 +104,30 @@ class MainFlow
         
     }
     
+    /**
+     * Load the status stored in the session or set the initial status
+     * if this is a new execution flow
+     * */
     public function load_state()
     {
         @session_start();
-        $this->_s=@$_SESSION[sha1($this->flow_name)];
-        if ($this->_s === NULL)
+        if (!isset($_SESSION[sha1($this->flow_name)]))
+            $_SESSION[sha1($this->flow_name)]=array();
+        
+        $this->_s=&$_SESSION[sha1($this->flow_name)];
+
+        if (count($this->_s)==0)
         {
-            $this->state= $this->_s["_state"] = clone $this->init_state;
+            $this->state= clone $this->init_state;
+            $this->_s["_state"] = serialize ($this->state);            
             $this->history= $this->_s["_history"] = array();
         }
         else
         {
             $this->history = $this->_s["_history"];
-            $this->state = $this->_s["_state"];
-        }        
+            $this->state =unserialize( $this->_s["_state"]);
+        }
+
     }
     
     /**
@@ -109,25 +136,36 @@ class MainFlow
      */
     public function retrieve_control($status)
     {
+        global $keywords;
+        //if the status control file is already read, set the correspondently control object
         if (isset($this->states_cache[$status . ""]))
         {
-            return $this->states_cache[$status . ""];
+            $status->setControlObject($this->states_cache[$status . ""]->getControlObject());
+            return;// $this->states_cache[$status . ""];
         }
         else
         {
+            //...else retrieve control object from the file system
             $control_file_path=$status->getControlFilePath();
-            //TODO: add control to default keyword
+                        
             if (file_exists($control_file_path) && is_file($control_file_path))
             {
-                //Extract control class annotation
-                echo $control_file_path;
-                require_once $control_file_path;
-                echo '$c= new ' . $status->getControlManagerClassName() . '($status);';
-                eval('$c= new ' . $status->getControlManagerClassName() . '($status);');
-                
-                $this->read_annotation($c);
-                $this->states_cache[$status .""] = $status;
-                $status->setControlObject($c);
+                //check if some reserved words are used in namespace string
+                $unusable_words  = array_intersect($status->getAreaArray(),$keywords);
+                if (count($unusable_words)>0)
+                {
+                    $this->error_page(500,"Sorry you are using reserved word in control object namespace [" . implode(",",$reserved_words) . "]");
+                }
+                else
+                {
+                    //Extract control class annotation
+                    require_once $control_file_path;                
+                    eval('$c= new ' . $status->getControlManagerClassName() . '($status);');
+                    
+                    $this->read_annotation($c);
+                    $this->states_cache[$status .""] = $status;
+                    $status->setControlObject($c);
+                }
             }
             else
             {
@@ -150,8 +188,8 @@ class MainFlow
         foreach ($return->class as $a)
         {
             //set the skippable and delegation properties
-            if ($a instanceof Skippable) { $object->getStatus()->setSkippable($a->value); break; }
-            if ($a instanceof AncestorDelegation) { $object->getStatus()->wantDelegate($a->value); break; }
+            if ($a instanceof Skippable) { $object->getStatus()->setSkippable($a->value); }
+            if ($a instanceof AncestorDelegation) { $object->getStatus()->setAncestorDelegation($a->value); }
         }
         
         $methods = $reflClass->getMethods();
@@ -207,13 +245,15 @@ class MainFlow
     }
     
     /**
-     * Salta ad un nuovo stato memorizzando le informazioni nella history
+     * Goes to another status storing the information into the session and write the history
      * @param State $next_state This is the state wich need to go to.
      * @param boolean $inconditional True if the jump request come from the header, false if it is from an elaboration
      */
-    public function go_to_state($next_state,$inconditional)
+    public function go_to_state($next_state,$inconditional=false)
     {
         $this->state = $next_state;
+        $this->retrieve_control($this->state);
+        $this->_s["_state"]=serialize($next_state);
     }
     
     /**
@@ -227,17 +267,32 @@ class MainFlow
             return $state;
         else
         {
-            $aa = $this->state->getAreaArray();
+            //push the current state up to the stack
+            array_push($this->delegation_stack,$state);
+            
+            //get upper (or lower?) lever control state
+            $aa = $state->getAreaArray();
             array_pop($aa);            
             $as = implode("/",$aa);
-            $ns = new State($this->state->getSiteView(),$as);
-            $this->retrieve_control($ns);
-            
+            $ns = new State($state->getSiteView(),$as);
+            $this->retrieve_control($ns);            
             //TODO: log the status change to the state history
             $this->state = $ns;
         }
     }
     
+    /**
+     * This routine reset data structure of the delegation process, to permit
+     * correct information storing and logical processing
+     * */
+    public function delegation_restore()
+    {
+        
+        while (count($this->delegation_stack) > 1)
+        {
+            $this->state = array_pop($this->delegation_stack);
+        }
+    }
     /**
      * This method set the correct action requested by the user
      * */
@@ -264,6 +319,7 @@ class MainFlow
             //nothing to do    
         }
     }
+    
     /**
      * This method control if the state passed as argument, can manage the action specified
      * @param State $state The state for wich need to check the action
@@ -272,13 +328,27 @@ class MainFlow
      * */
     public function action_exists($state,$action)
     {
+        echo "action exists: " .  $state . " " . (method_exists($state->getControlObject(),$action)?"true":"false"   );
+        
         if (method_exists($state->getControlObject(),$action))
-            return true;
-        else
+            return true;        
+        else        
             return false;
     }
     
-    public function request_to_jump() {}
+    /**
+     * This method return an area directl requested by the user via GET or POST
+     * or, if there is no resquest, return false
+     * @return mixed Return false if there is no requests, or the area requested
+     * */
+    public function request_to_jump() {
+        if (isset($this->_r["area"]))
+        {
+            return new State($this->state->getSiteView(),$this->_r["area"]);
+        }
+        else
+            return false;
+    }
     
     
     /**
@@ -289,9 +359,9 @@ class MainFlow
         
         
         //controllo se è necessario è possibile ed è richiesto salto
-        if ($this->state->isSkippable() && $this->request_to_jump())
+        if ($this->state->isSkippable() && ( (boolean)$this->request_to_jump()))
         {
-            go_to_state(/* requested state*/);
+            $this->go_to_state($this->request_to_jump(),true);
         }
         
         //At first execution loop, return object is void (NilObject)
@@ -302,33 +372,38 @@ class MainFlow
             $this->retrieve_action();
             
             //interpello tutti i controllori di gerarchia superiore
-            //fino a trovarne uno che sappia gestire
+            //fino a trovarne uno che sappia gestire            
             while (!$this->action_exists($this->state,$this->action) &&
                    $this->state->wantDelegate()  && //true if is permitted to delegate to ancestor
                    !$this->state->isRoot()) //root state is a state without ancestor
-            {
+            {    
                 $this->delegate_to_ancestor($this->state);
             }
             
+            //Check if the action exists or not
             if (!$this->action_exists($this->state,$this->action))
             {
                 $ro = $this->error_page(500,"Current application state is not capable to manage specified action");
             }
             else
-            {        
+            {
+                //check if the user has the permission to execute
                 if (!$this->check_permission($this->state,$this->action))
                 {
-                    //se non ho i diritti 
                     $ro = $this->error_page(403,"Access restricted to authorized principal");
                 }
                 else
                 {
                     //$ro = $this->jump_to_state($this->login_state);
-                    $ro = $this->state->getControlObject()->{$this->action}();
-                    $this->manage_ro($ro);                   
+                    $ro = $this->state->getControlObject()->{$this->action}();                    
+                    $this->manage_ro($ro);
+                    //reset possibile delegation
+                    $this->delegation_restore();
                 }
             }
         } while ( $ro instanceof BackObject);
+        
+        $this->manage_ro($ro);
     }
     
     

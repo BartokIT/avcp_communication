@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\pubblicazioni\def;
+namespace avcpman\pubblicazioni\login;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -13,19 +13,9 @@ class Control extends \Control
      */
     function d(){
             //default action
-            echo "called default";
+            echo "called login";
             
     }
     
-
-    
-    /**
-     * @abstract
-     * @Access(roles="administrator")
-     */
-    function insert(){
-            //insert new pubblication
-            echo $this->status;
-    }
 }
 ?>

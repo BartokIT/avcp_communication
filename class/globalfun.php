@@ -1,5 +1,25 @@
 <?php
 
+// For 4.3.0 <= PHP <= 5.4.0
+    if (!function_exists('http_response_code'))
+    {
+	    function http_response_code($newcode = NULL)
+	    {
+		    static $code = 200;
+		    if($newcode !== NULL)
+		    {
+			    header('X-PHP-Response-Code: '.$newcode, true, $newcode);
+			    if(!headers_sent())
+				    $code = $newcode;
+		    }       
+		    return $code;
+	    }
+    }
+	
+	$keywords = array('__halt_compiler', 'abstract', 'and', 'array', 'as', 'break', 'callable', 'case', 'catch', 'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do', 'echo', 'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach', 'endif', 'endswitch', 'endwhile', 'eval', 'exit', 'extends', 'final', 'for', 'foreach', 'function', 'global', 'goto', 'if', 'implements', 'include', 'include_once', 'instanceof', 'insteadof', 'interface', 'isset', 'list', 'namespace', 'new', 'or', 'print', 'private', 'protected', 'public', 'require', 'require_once', 'return', 'static', 'switch', 'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor');
+
+	$predefined_constants = array('__CLASS__', '__DIR__', '__FILE__', '__FUNCTION__', '__LINE__', '__METHOD__', '__NAMESPACE__', '__TRAIT__');
+
     function _i($file,$ver="",$type="")
     {
         $ver_st = strcmp($ver,"") ? "&amp;ver=" . $ver : "";

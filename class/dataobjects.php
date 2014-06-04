@@ -93,7 +93,8 @@ class State {
 	{
 		return $this->want_delegate;
 	}
-	public function setAncestoreDelegation($boolean)
+	
+	public function setAncestorDelegation($boolean)
 	{
 		$this->want_delegate=$boolean;
 	}

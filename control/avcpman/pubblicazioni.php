@@ -1,9 +1,8 @@
 <?php
-namespace avcpman\pubblicazioni\def;
+namespace avcpman\pubblicazioni;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
-* @AncestorDelegation(true)
 */
 class Control extends \Control
 {
@@ -13,19 +12,17 @@ class Control extends \Control
      */
     function d(){
             //default action
-            echo "called default";
+            echo "called pubblicazioni";
             
     }
     
-
-    
     /**
-     * @abstract
-     * @Access(roles="administrator")
+     * Summary
+
      */
-    function insert(){
-            //insert new pubblication
-            echo $this->status;
+    function logout(){
+            //logout user
     }
+
 }
 ?>
