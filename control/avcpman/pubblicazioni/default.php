@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\pubblicazioni\def;
+namespace avcpman\pubblicazioni\default;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -13,7 +13,8 @@ class Control extends \Control
      */
     function d(){
             //default action
-            return ReturnArea($this->status->getSiteView(),"pubblicazioni/login");
+            echo "called default";
+            
     }
     
 

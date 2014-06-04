@@ -24,7 +24,7 @@ $config = (object) array("init_status"=>array("site_view"=>"avcpman",
 			 "flow_name"=>"main",
 			 "login_status"=>NULL,
 			 "history_len"=>10 );
-//var_dump($config);
+
 new MainFlow($config);
 var_dump($_SESSION);
 //phpinfo();

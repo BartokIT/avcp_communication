@@ -13,7 +13,7 @@ class Control extends \Control
      */
     function d(){
             //default action
-            echo "called login";
+            return ReturnPage("test.html");
             
     }
     

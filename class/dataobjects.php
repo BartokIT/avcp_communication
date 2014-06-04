@@ -5,7 +5,14 @@
  */
 class Control {	
 	public $status;
-	public function __construct($st)
+	/**
+	 * This method make a Control status class.
+	 * @param MainFlow $fl Contain a refer to the main execution flow
+	 * @param State $st Contain a refer to the state that this control object manage
+	 * @param array $r Contain a refer to the request array
+	 * @param array $s Contain a refer to the session area specific for this status
+	 * */
+	public function __construct($fl,$st,$r,$s)
 	{
 		//@TODO: check if the object is an instance of the class State
 		$this->status=$st;
@@ -59,6 +66,7 @@ class State {
 	{
 		return $this->metainfo;
 	}
+	
 	/**
 	 * This method check if the state is a root state, means that it doesn't have an
 	 * ancestor state to wich delegate execution flow
@@ -183,6 +191,7 @@ final class Skippable{
 			$this->value=true;
 	}
 }
+
 /**
  * This annotation class control if the execution of the status is allowed to
  * flow through a status hierarchical upper.

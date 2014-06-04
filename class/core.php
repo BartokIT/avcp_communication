@@ -108,17 +108,17 @@ OUT;
      * Load the status stored in the session or set the initial status
      * if this is a new execution flow
      * */
-    public function load_state()
+    private function load_state()
     {
         @session_start();
         if (!isset($_SESSION[sha1($this->flow_name)]))
             $_SESSION[sha1($this->flow_name)]=array();
         
         $this->_s=&$_SESSION[sha1($this->flow_name)];
-
         if (count($this->_s)==0)
         {
             $this->state= clone $this->init_state;
+            $this->retrieve_control($this->state);
             $this->_s["_state"] = serialize ($this->state);            
             $this->history= $this->_s["_history"] = array();
         }
@@ -127,21 +127,21 @@ OUT;
             $this->history = $this->_s["_history"];
             $this->state =unserialize( $this->_s["_state"]);
         }
-
     }
     
     /**
-     * Search for a state control file and add it to cache
+     * Search for a state control file and add it to cache, also permit to check if the
+     * control file of the status exists and is valid
      * @param State $status the state object instance for with
      */
-    public function retrieve_control($status)
+    private function retrieve_control($status)
     {
         global $keywords;
         //if the status control file is already read, set the correspondently control object
         if (isset($this->states_cache[$status . ""]))
         {
             $status->setControlObject($this->states_cache[$status . ""]->getControlObject());
-            return;// $this->states_cache[$status . ""];
+            return;
         }
         else
         {
@@ -154,13 +154,14 @@ OUT;
                 $unusable_words  = array_intersect($status->getAreaArray(),$keywords);
                 if (count($unusable_words)>0)
                 {
-                    $this->error_page(500,"Sorry you are using reserved word in control object namespace [" . implode(",",$reserved_words) . "]");
+                    $this->error_page(500,"Sorry you are using reserved word in control object namespace [" . implode(",",$unusable_words) . "]");
                 }
                 else
                 {
                     //Extract control class annotation
-                    require_once $control_file_path;                
-                    eval('$c= new ' . $status->getControlManagerClassName() . '($status);');
+                    require_once $control_file_path;
+                    $session = $this->init_session($status);                    
+                    eval('$c= new ' . $status->getControlManagerClassName() . '($this,$status,$this->_r,$session);');
                     
                     $this->read_annotation($c);
                     $this->states_cache[$status .""] = $status;
@@ -175,11 +176,32 @@ OUT;
     }
 
     /**
+     * Initialize the portion of session dedicated to the status passed
+     * @param State $state The state whose session is for
+     * */
+    private function &init_session($state)
+    {
+        $sa = $state->getAreaArray();
+        
+        if (!isset($this->_s[$state->getSiteView()]))
+            $this->_s[$state->getSiteView()]=array();
+        
+        $a = &$this->_s[$state->getSiteView()];
+        foreach ($sa as $area)
+        {
+            if (!isset($a[$area]))
+                $a[$area]=array();
+            $a=&$a[$area];
+        }
+        return $a;
+    }
+    
+    /**
      * Read the annotation inserted in the object and set the
      * metainfo for the relative status
      * @param Control $object 
      * */
-    public function read_annotation($object)
+    private function read_annotation($object)
     {
         //TODO: insert caching system
         $reflClass = new ReflectionObject($object);
@@ -293,6 +315,7 @@ OUT;
             $this->state = array_pop($this->delegation_stack);
         }
     }
+    
     /**
      * This method set the correct action requested by the user
      * */
@@ -341,7 +364,8 @@ OUT;
      * or, if there is no resquest, return false
      * @return mixed Return false if there is no requests, or the area requested
      * */
-    public function request_to_jump() {
+    public function request_to_jump()
+    {
         if (isset($this->_r["area"]))
         {
             return new State($this->state->getSiteView(),$this->_r["area"]);
@@ -356,8 +380,6 @@ OUT;
      * */
     public function execute_action()
     {
-        
-        
         //controllo se è necessario è possibile ed è richiesto salto
         if ($this->state->isSkippable() && ( (boolean)$this->request_to_jump()))
         {
@@ -368,6 +390,7 @@ OUT;
         $ro = new NilObject();
         do
         {
+            //retrieve control class for the state
             $this->retrieve_control($this->state);
             $this->retrieve_action();
             
@@ -396,14 +419,14 @@ OUT;
                 {
                     //$ro = $this->jump_to_state($this->login_state);
                     $ro = $this->state->getControlObject()->{$this->action}();                    
-                    $this->manage_ro($ro);
+                    $this->manage_ro($ro,0);
                     //reset possibile delegation
                     $this->delegation_restore();
                 }
             }
         } while ( $ro instanceof BackObject);
         
-        $this->manage_ro($ro);
+        $this->manage_ro($ro,1);
     }
     
     
@@ -412,18 +435,24 @@ OUT;
      * Depends on the type of the object different behaviour will be maked.
      * @param ReturnObject $ro The returned object
      * */
-    public function manage_ro($ro)
+    public function manage_ro($ro,$phase=0)
     {
-        if ($ro instanceof BackObject)
+        if ($ro instanceof BackObject && $phase==0)
         {
             //If the returned object is a new state
             if ($ro instanceof ReturnedArea)
             {
                 $this->go_to_state($ro->getStatus());
-                $this->action = $ro->getAction();
+                if (is_null($ro->getAction()))
+                    $this->action = $this->default_action;
+                else
+                    $this->action = $ro->getAction();
             }
         }
-        
+        else if ($ro instanceof PrintableObject && $phase==1)
+        {
+            include PRESENTATION_PATH . $ro->getPage();
+        }
     }
 }
 ?>
