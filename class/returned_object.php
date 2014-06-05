@@ -20,30 +20,22 @@
      * */
     abstract class BackObject extends ReturnedObject {	
     }
-    /**
-	 * Base classe use to specify that the output is printable
-	 * */
+
     abstract class PrintableObject extends ReturnedObject{
-		public $page;
-		public $parameters;
-		public $name_class = __CLASS__;
-		
-		function __construct($page, $parameters=array())
+		/**
+		 * Method that need to be overwrited to implement the print
+		 * */
+		public function out()
 		{
-			$this->page = $page;
-			$this->parameters = $parameters;
+			/**/
 		}
-		public function getPage()
-		{
-			return $this->page;
-		}
-	}
+    }
 	
     
-	/**
-	 * This class represent a site area used to address
-	 * the execution flows
-	 * */
+    /**
+     * This class represent a site area used to address
+     * the execution flows
+     * */
     class ReturnedArea extends BackObject
     {
 		private $status;
@@ -67,60 +59,90 @@
 			return $action;
 		}
     }
+    
     /**
-	 * Wrapper function that return an object
-	 * of type ReturnedArea
-	 * */
+    * Wrapper function that return an object
+    * of type ReturnedArea
+    * */
     function ReturnArea($site_view,$area,$action=NULL)
     {
 		return new ReturnedArea($site_view,$area,$action);	
     }
     
-	/**
-     * Class that represent a front-end php page
-     * */
+    /**
+    * Class that represent a front-end page, php or html
+    * */
     class ReturnedPage extends PrintableObject
     {
-		
-    }
-	
-	/**
-	 *Returned page
-	 **/
-	function ReturnPage($page,$parameter=NULL)
-	{
-		return new ReturnedPage($page,$parameter=NULL);
-	}
-	
-	/**
-     * Class that represent a front-end html page
-     * */
-    class ReturnedHTMLPage extends PrintableObject
-    {
-		
-    }
-	
-	/**
-	 *Returned page
-	 **/
-	function ReturnHTMLPage($page)
-	{
-		return new ReturnedHTMLPage($page);
-	}
-	
-    //Classe da utilizzare per una richiesta di tipo Ajax
-    class ReturnedAjax extends PrintableObject
-    {
+		public $page;
+		public $parameters;
 		public $name_class = __CLASS__;
-		public $code;
 		
-		function __construct($mode="json",$code)
+		   /**
+			* Constructor of the class 
+		* @param string $page The name of the page that contain the front end
+			* @param array $parameters The set of parameters to be passed to the page
+		**/
+		function __construct($page, $parameters=array())
 		{
-			if (strcmp($mode,"json") == 0)
-				$this->code = json_encode($code);
-			else
-				$this->code = $code;
+			$this->page = $page;
+			$this->parameters = $parameters;
+		}
+		
+		/**
+		 * Include the front-end page
+		 * */
+		public function out()
+		{
+			$p = $this->parameters;
+			include PRESENTATION_PATH . $this->page;
 		}
     }
+	
+    /**
+    * Wrapper function that return an object of type ReturnedPage
+    * @param string $page The name of the page that contain the front end
+    * @param array $parameters The set of parameters to be passed to the page
+    **/
+    function ReturnPage($page,$parameters=array())
+    {
+		return new ReturnedPage($page,$parameters);
+    }
+	
+    /**
+     * Class that permit to out a string
+     * */
+    class ReturnedInline extends PrintableObject
+    {
+		public $data;
+		public $type;
+		function __construct($data, $type="plain")
+		{
+			$this->data = $data;
+			$this->type = $type;
+		}
+		
+		/**
+		 * Out the data passed with given format
+		 * */
+		public function out()
+		{
+			if ($this->type == "json")
+			{
+			echo json_encode($this->data);
+			}
+			else
+			echo $this->data;
+		}
+    }
+	
+    /**
+     * Wrapper to the ReturnedInline class
+     **/
+    function ReturnInline($data,$type="plain")
+    {
+	    return new ReturnedInline($data,$type);
+    }
+	
 
 ?>

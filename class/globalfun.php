@@ -11,12 +11,24 @@
 			    header('X-PHP-Response-Code: '.$newcode, true, $newcode);
 			    if(!headers_sent())
 				    $code = $newcode;
-		    }       
+		    }
 		    return $code;
 	    }
     }
-	
-	$keywords = array('__halt_compiler', 'abstract', 'and', 'array', 'as', 'break', 'callable', 'case', 'catch', 'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do', 'echo', 'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach', 'endif', 'endswitch', 'endwhile', 'eval', 'exit', 'extends', 'final', 'for', 'foreach', 'function', 'global', 'goto', 'if', 'implements', 'include', 'include_once', 'instanceof', 'insteadof', 'interface', 'isset', 'list', 'namespace', 'new', 'or', 'print', 'private', 'protected', 'public', 'require', 'require_once', 'return', 'static', 'switch', 'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor');
+
+	$keywords = array('__halt_compiler', 'abstract', 'and', 'array',
+					  'as', 'break', 'callable', 'case', 'catch', 'class',
+					  'clone', 'const', 'continue', 'declare', 'default',
+					  'die', 'do', 'echo', 'else', 'elseif', 'empty',
+					  'enddeclare', 'endfor', 'endforeach', 'endif',
+					  'endswitch', 'endwhile', 'eval', 'exit', 'extends',
+					  'final', 'for', 'foreach', 'function', 'global', 'goto',
+					  'if', 'implements', 'include', 'include_once',
+					  'instanceof', 'insteadof', 'interface', 'isset', 'list',
+					  'namespace', 'new', 'or', 'print', 'private', 'protected',
+					  'public', 'require', 'require_once', 'return', 'static',
+					  'switch', 'throw', 'trait', 'try', 'unset', 'use', 'var',
+					  'while', 'xor');
 
 	$predefined_constants = array('__CLASS__', '__DIR__', '__FILE__', '__FUNCTION__', '__LINE__', '__METHOD__', '__NAMESPACE__', '__TRAIT__');
 
@@ -36,16 +48,16 @@
 		$action_st = strcmp($action,"") ? "&amp;action=" . $action : "";
         return INDEX ."?area=" . $area . $sub_area_st . $action_st ;
     }
-    
+
 	function _l_a($area="default",$subarea="default", $action="")
     {
 		$js_link = array("index"=>INDEX,"area"=>$area);
         if (strcmp($subarea,"default") != 0) $js_link["subarea"]=$subarea;
 		if (strcmp($action,"") != 0) $js_link["action"]=$action;
-		
+
         return $js_link;
     }
-	
+
     function _i_script($files)
     {
 		$string = INDEX . "?i=0";
@@ -57,14 +69,14 @@
 				$type_st = ",'type':'min'	";
 			else
 				$type_st = strcmp(@$filespec["type"],"") ? ",'type'='" . $filespec["type"] . "'": "";
-				
+
 			$string .= "&amp;include[$i]={'name':'" . $filespec["file"] ."'" . $ver_st . $type_st ."}";
 			$i++;
 		}
-		        
+
         return "<script src=\"$string\"></script>";
     }
-	
+
 	function _to_string_file($file)
 	{
 		$parameter = get_file_data($file,array("title"=>"title"),"b");
@@ -88,16 +100,16 @@
 				{
 					//var_dump($file_spec);
 					$file = json_decode(str_replace("'","\"",$file_spec),true);
-					
+
 					//var_dump($file);
 					$file_info = pathinfo($file["name"]);
-					
+
 					$filename=$filename_backup= "resources/"  . $file_info["extension"] . "/". substr($file_info["filename"],0,100);
-					
+
 					//valuto la correttezza dei parametri inseriti
 					$ver=@$file["ver"] ? $file["ver"]  : "";
 					$filename .=  (0 + $ver) > 0 ? "-" . $ver  : "";
-					
+
 					$type=@$file["type"] ? @$file["type"] : "";
 					$filename .= !strcmp($type,"min") ? ( (0 + $ver) > 0 ? "." .  $type : "-" .  $type ): "";
 
@@ -114,7 +126,7 @@
 						//echo file_get_contents( $filename);
 						fpassthru($fp);
 						fclose($fp);
-					} 
+					}
 					else  if (file_exists($filename_backup))
 					{
 						$fp = fopen($filename_backup, 'rb');
@@ -126,7 +138,7 @@
 				}
 				die();
 			}
-			
+
 			//estraggo le informazioni del path dal file richiesto
 			$file_info = pathinfo($_REQUEST["include"]);
 			$filename=$filename_backup= "resources/"  . $file_info["extension"] . "/". substr($file_info["dirname"] . "/" . $file_info["filename"],0,100);
@@ -138,7 +150,7 @@
 			if (($file_info["filename"] . "." .$file_info["extension"] ) == "clputils.js")
 					{
 						@session_start();
-						header("Content-Type: text/javascript");						
+						header("Content-Type: text/javascript");
 						include("lib/js/clputils.php");
 						die();
 					}
@@ -149,7 +161,7 @@
 			else if ($file_info["extension"] == "css")
 				header("Content-Type: text/css");
 			//includo le risorse richieste
-			
+
 			if (file_exists($filename))
 			{
 				$fp = fopen($filename, 'rb');
@@ -164,10 +176,10 @@
 				fpassthru($fp);
 				fclose($fp);
 			}
-			die();  
+			die();
 		}
 	}
-	
+
 	/**
  * Retrieve metadata from a file.
  *
@@ -198,10 +210,10 @@ function get_file_data( $file, $default_headers, $context = '' ) {
 	// Make sure we catch CR-only line endings.
 	$file_data = str_replace( "\r", "\n", $file_data );
 	$all_headers = $default_headers;
-	
+
 
 	foreach ( $all_headers as $field => $regex ) {
-		if ( preg_match( '/^[ \t\/*#@]*' . preg_quote( $regex, '/' ) . ':(.*)$/mi', $file_data, $match ) && $match[1] )		
+		if ( preg_match( '/^[ \t\/*#@]*' . preg_quote( $regex, '/' ) . ':(.*)$/mi', $file_data, $match ) && $match[1] )
 			$all_headers[ $field ] = trim(preg_replace("/\s*(?:\*\/|\?>).*/", '', $match[1]));
 		else
 			$all_headers[ $field ] = '';
@@ -214,7 +226,7 @@ define("NONCE_SALT","mail_manager");
 function get_nonce_value($action,$itemtype="")
 {
     $nonce = $itemtype . date("Ymd") . md5($action . $itemtype . session_id() . time() . NONCE_SALT);
-    
+
 	//Search for another nonces of the same type
 	$found=false;
 	if (isset($_SESSION["nonces"]))
@@ -227,17 +239,17 @@ function get_nonce_value($action,$itemtype="")
 			break;
 		}
 	}
-	
+
 	if (!$found)
 	{
 		//echo "Not found";
 		if (!isset($_SESSION["nonces"]))
 			$_SESSION["nonces"]=array();
-		
-		$_SESSION["nonces"][]=$nonce;    
-	}	
+
+		$_SESSION["nonces"][]=$nonce;
+	}
 		return $nonce;
-	
+
 }
 
 function verify_nonce($nonce_to_test)
@@ -246,7 +258,7 @@ function verify_nonce($nonce_to_test)
     {
 		$nonce_key = array_search($nonce_to_test,$_SESSION["nonces"]);
 		unset($_SESSION["nonces"][$nonce_key]); //verify another method to remove a key
-		
+
 		return true;
     }
     else

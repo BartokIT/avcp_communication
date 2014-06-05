@@ -18,12 +18,11 @@ include("framework.php");
 $table_prefix = "idx_";			
 */
 
-$config = (object) array("init_status"=>array("site_view"=>"avcpman",
-					      "area"=>"pubblicazioni/def"),
-			 "debug"=>true,
-			 "flow_name"=>"main",
-			 "login_status"=>NULL,
-			 "history_len"=>10 );
+$config =  array("init_status"=>array("site_view"=>"avcpman",
+				      "area"=>"pubblicazioni/def"),
+		"debug"=>true,
+		"flow_name"=>"main",
+		"history_len"=>20 );
 
 new MainFlow($config);
 var_dump($_SESSION);

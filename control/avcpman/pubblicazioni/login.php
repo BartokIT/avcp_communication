@@ -13,7 +13,8 @@ class Control extends \Control
      */
     function d(){
             //default action
-            return ReturnPage("test.html");
+            return ReturnInline(array("prova","pipp"),'json');
+            //return ReturnInline('<html><body><h1>Inline Tests</h1></body></html>','plain');
             
     }
     

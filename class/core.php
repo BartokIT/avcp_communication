@@ -4,11 +4,6 @@ define("PRESENTATION_PATH","presentation/");
 define("LIB_PATH","lib/");
 
 /**
- * Default configuration settings variable
- */
-$config = (object) array("init_status"=>array("site_view"=>"default", "area"=>"default"), "debug"=>false, "flow_name"=>NULL, "login_status"=>NULL,"history_len"=>10 );
-
-/**
  * Init Doctrine library to manage annotation
  */
 require_once LIB_PATH . 'Doctrine/Common/ClassLoader.php';
@@ -32,6 +27,7 @@ class MainFlow
     public $history=NULL;
     public $states_cache=array();
     public $default_action ="d";
+
     /**
      * @property array $_s Maintain a refer to the session
      * */
@@ -50,29 +46,36 @@ class MainFlow
     public $login_state=NULL;
     public $action=NULL;
     public $delegation_stack=array();
-    
+    /**
+     * @property Object Default configuration settings variable
+    */
+    public $configuration= array("init_status"=>array("site_view"=>"def", "area"=>"def"),
+                                    "debug"=>false,
+                                    "flow_name"=>"std",
+                                    "login_status"=>NULL,
+                                    "history_len"=>10 );
     public function __construct()
     {
-        global $config;
-        $configuration = array();
+        var_dump($this->configuration);
         if (func_num_args() > 0)
         {
             $arg_list = func_get_args();
-            $configuration =  $arg_list[0];
+            $user_configuration =  $arg_list[0];
+            $this->configuration=array_merge($this->configuration,$user_configuration);
+            var_dump($this->configuration);
         }
-        else
-        {
-            $configuration = $config;
-        }
-        
-        $this->init_state=new State($configuration->init_status["site_view"],
-                                    $configuration->init_status["area"]);
-        $this->debug=$configuration->debug;
+
+        $this->configuration["init_status"]=new State($this->configuration["init_status"]["site_view"],
+                                                    $this->configuration["init_status"]["area"]);
+        $this->configuration = (object)$this->configuration;
+        var_dump($this->configuration);
         define("DEBUG",$this->debug);
-        
-        $this->flow_name=$configuration->flow_name;
+
+
         $this->reader=new \Doctrine\Common\Annotations\AnnotationReader();
         $this->_r = $_REQUEST;
+        //Check if there are some resources to be returned
+        //TODO: check if this do some enhancement to rpdoctivity
         if (isset($_REQUEST["resources"]))
             $this->print_resources();
         else
@@ -81,7 +84,7 @@ class MainFlow
             $this->execute_action();
         }
     }
-    
+
     /**
      * Print out an error page to inform the user about
      * eventual problem
@@ -92,18 +95,18 @@ class MainFlow
         echo <<<OUT
             <pre>
                 $message
-            </pre>        
+            </pre>
 OUT;
         die();
     }
-    
+
     /**
      * Routine that returns various resource file
      */
     public function print_resources(){
-        
+
     }
-    
+
     /**
      * Load the status stored in the session or set the initial status
      * if this is a new execution flow
@@ -111,15 +114,15 @@ OUT;
     private function load_state()
     {
         @session_start();
-        if (!isset($_SESSION[sha1($this->flow_name)]))
-            $_SESSION[sha1($this->flow_name)]=array();
-        
-        $this->_s=&$_SESSION[sha1($this->flow_name)];
+        if (!isset($_SESSION[sha1($this->configuration->flow_name)]))
+            $_SESSION[sha1($this->configuration->flow_name)]=array();
+
+        $this->_s=&$_SESSION[sha1($this->configuration->flow_name)];
         if (count($this->_s)==0)
         {
-            $this->state= clone $this->init_state;
+            $this->state= clone $this->configuration->init_state;
             $this->retrieve_control($this->state);
-            $this->_s["_state"] = serialize ($this->state);            
+            $this->_s["_state"] = serialize ($this->state);
             $this->history= $this->_s["_history"] = array();
         }
         else
@@ -128,7 +131,7 @@ OUT;
             $this->state =unserialize( $this->_s["_state"]);
         }
     }
-    
+
     /**
      * Search for a state control file and add it to cache, also permit to check if the
      * control file of the status exists and is valid
@@ -147,7 +150,7 @@ OUT;
         {
             //...else retrieve control object from the file system
             $control_file_path=$status->getControlFilePath();
-                        
+
             if (file_exists($control_file_path) && is_file($control_file_path))
             {
                 //check if some reserved words are used in namespace string
@@ -160,9 +163,9 @@ OUT;
                 {
                     //Extract control class annotation
                     require_once $control_file_path;
-                    $session = $this->init_session($status);                    
+                    $session = $this->init_session($status);
                     eval('$c= new ' . $status->getControlManagerClassName() . '($this,$status,$this->_r,$session);');
-                    
+
                     $this->read_annotation($c);
                     $this->states_cache[$status .""] = $status;
                     $status->setControlObject($c);
@@ -182,10 +185,10 @@ OUT;
     private function &init_session($state)
     {
         $sa = $state->getAreaArray();
-        
+
         if (!isset($this->_s[$state->getSiteView()]))
             $this->_s[$state->getSiteView()]=array();
-        
+
         $a = &$this->_s[$state->getSiteView()];
         foreach ($sa as $area)
         {
@@ -195,11 +198,11 @@ OUT;
         }
         return $a;
     }
-    
+
     /**
      * Read the annotation inserted in the object and set the
      * metainfo for the relative status
-     * @param Control $object 
+     * @param Control $object
      * */
     private function read_annotation($object)
     {
@@ -213,17 +216,17 @@ OUT;
             if ($a instanceof Skippable) { $object->getStatus()->setSkippable($a->value); }
             if ($a instanceof AncestorDelegation) { $object->getStatus()->setAncestorDelegation($a->value); }
         }
-        
+
         $methods = $reflClass->getMethods();
         foreach ($methods  as $method)
-        {            
+        {
             $return->methods[$method->getName()] =$this->reader->getMethodAnnotations($method);
         }
-        
+
         $object->getStatus()->setMetainfo($return);
-        
+
     }
-    
+
 
     /**
      * Controlla se l'utente corrente ha i permessi per effettuare l'azione corrente
@@ -235,7 +238,7 @@ OUT;
     {
         if (isset($this->states_cache[$state .""]))
         {
-            
+
             $ma = $this->states_cache[$state .""]->getMetainfo()->methods[$action];
             $access_info =NULL;
             foreach($ma as $a)
@@ -250,7 +253,7 @@ OUT;
             {
                 if (in_array("everyone",$access_info->roles))
                     return true;
-                
+
                 foreach ($this->user as $user_role)
                 {
                     if (in_array($user_role,$access_info->roles))
@@ -260,12 +263,12 @@ OUT;
             }
             else //the action is accessible if is not specified access info
                 return true;
-            
+
         }
         //TODO: emettere un warning?
         return true;
     }
-    
+
     /**
      * Goes to another status storing the information into the session and write the history
      * @param State $next_state This is the state wich need to go to.
@@ -277,12 +280,12 @@ OUT;
         $this->retrieve_control($this->state);
         $this->_s["_state"]=serialize($next_state);
     }
-    
+
     /**
      * Salta ad uno stato gerarchicamente superiore, se si trova in uno stato
-     * nel quale non vi è più alcun superiore, restituisce l'oggetto stesso
+     * nel quale non vi ï¿½ piï¿½ alcun superiore, restituisce l'oggetto stesso
      * @param object $state Description
-     * @return object  Description  
+     * @return object  Description
      */
     public function delegate_to_ancestor($state) {
         if ($this->state->isRoot())
@@ -291,31 +294,31 @@ OUT;
         {
             //push the current state up to the stack
             array_push($this->delegation_stack,$state);
-            
+
             //get upper (or lower?) lever control state
             $aa = $state->getAreaArray();
-            array_pop($aa);            
+            array_pop($aa);
             $as = implode("/",$aa);
             $ns = new State($state->getSiteView(),$as);
-            $this->retrieve_control($ns);            
+            $this->retrieve_control($ns);
             //TODO: log the status change to the state history
             $this->state = $ns;
         }
     }
-    
+
     /**
      * This routine reset data structure of the delegation process, to permit
      * correct information storing and logical processing
      * */
     public function delegation_restore()
     {
-        
+
         while (count($this->delegation_stack) > 1)
         {
             $this->state = array_pop($this->delegation_stack);
         }
     }
-    
+
     /**
      * This method set the correct action requested by the user
      * */
@@ -332,17 +335,17 @@ OUT;
                     $this->action = $this->default_action;
                 else
                     $this->action = $_REQUEST["action"];
-                
+
             }
             else //if the action is not set, return the default action
                 $this->action = $this->default_action;
         }
         else
         {
-            //nothing to do    
+            //nothing to do
         }
     }
-    
+
     /**
      * This method control if the state passed as argument, can manage the action specified
      * @param State $state The state for wich need to check the action
@@ -352,13 +355,13 @@ OUT;
     public function action_exists($state,$action)
     {
         echo "action exists: " .  $state . " " . (method_exists($state->getControlObject(),$action)?"true":"false"   );
-        
+
         if (method_exists($state->getControlObject(),$action))
-            return true;        
-        else        
+            return true;
+        else
             return false;
     }
-    
+
     /**
      * This method return an area directl requested by the user via GET or POST
      * or, if there is no resquest, return false
@@ -373,19 +376,19 @@ OUT;
         else
             return false;
     }
-    
-    
+
+
     /**
      * This is the main method of the execution
      * */
     public function execute_action()
     {
-        //controllo se è necessario è possibile ed è richiesto salto
+        //controllo se ï¿½ necessario ï¿½ possibile ed ï¿½ richiesto salto
         if ($this->state->isSkippable() && ( (boolean)$this->request_to_jump()))
         {
             $this->go_to_state($this->request_to_jump(),true);
         }
-        
+
         //At first execution loop, return object is void (NilObject)
         $ro = new NilObject();
         do
@@ -393,16 +396,16 @@ OUT;
             //retrieve control class for the state
             $this->retrieve_control($this->state);
             $this->retrieve_action();
-            
+
             //interpello tutti i controllori di gerarchia superiore
-            //fino a trovarne uno che sappia gestire            
+            //fino a trovarne uno che sappia gestire
             while (!$this->action_exists($this->state,$this->action) &&
                    $this->state->wantDelegate()  && //true if is permitted to delegate to ancestor
                    !$this->state->isRoot()) //root state is a state without ancestor
-            {    
+            {
                 $this->delegate_to_ancestor($this->state);
             }
-            
+
             //Check if the action exists or not
             if (!$this->action_exists($this->state,$this->action))
             {
@@ -418,18 +421,19 @@ OUT;
                 else
                 {
                     //$ro = $this->jump_to_state($this->login_state);
-                    $ro = $this->state->getControlObject()->{$this->action}();                    
+                    $ro = $this->state->getControlObject()->{$this->action}();
                     $this->manage_ro($ro,0);
                     //reset possibile delegation
                     $this->delegation_restore();
                 }
             }
         } while ( $ro instanceof BackObject);
-        
+
+        //Print output pages
         $this->manage_ro($ro,1);
     }
-    
-    
+
+
     /**
      * This method provide managemente for the returned object of the execution flow.
      * Depends on the type of the object different behaviour will be maked.
@@ -451,7 +455,7 @@ OUT;
         }
         else if ($ro instanceof PrintableObject && $phase==1)
         {
-            include PRESENTATION_PATH . $ro->getPage();
+            $ro->out();
         }
     }
 }
