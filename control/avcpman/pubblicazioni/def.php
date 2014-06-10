@@ -13,7 +13,7 @@ class Control extends \Control
      */
     function d(){
             //default action
-            return ReturnArea($this->status->getSiteView(),"pubblicazioni/login");
+            //return ReturnArea($this->status->getSiteView(),"pubblicazioni/login");
     }
     
 

@@ -56,7 +56,7 @@
 		
 		public function getAction()
 		{
-			return $action;
+			return $this->action;
 		}
     }
     

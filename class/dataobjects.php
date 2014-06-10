@@ -1,10 +1,145 @@
 <?php
 
+
+
+/**
+ * Represente an user that access to the application
+ * */
+class User implements Serializable {
+	/* System parameter */
+	/**
+	 * @property MainFlow $flow Contains a refer to the execution flow
+	 * */
+	private $flow;
+	private $session;
+	
+	/* User specific parameter*/
+	private $logged=FALSE;
+	private $roles;
+	private $first_name=NULL;
+	private $surname=NULL;
+	private $id=NULL;
+	private $displayed_name=NULL;
+	
+	public function __construct($fl,&$s)
+	{
+		$this->flow = $fl;
+		$this->session = &$s;
+		$this->roles=array();		
+	}
+	
+	
+	/**
+	 * Get the user identifier
+	 * */
+	public function getID()
+	{
+		return $this->id;
+	}
+
+	
+	public function setName($first,$suname,$displayname=NULL)
+	{
+		$this->first_name= $first;
+		$this->surname=$suname;
+		$this->displayed_name = $displayname;
+	}
+	
+	public function login($id,$password)
+	{
+		echo "<p>login called</p>";
+		$auth_config = $this->flow->configuration->authentication;
+		
+		//check if the authentication is alreay done
+		$identified=false;
+		if (!$auth_config["external"])
+		{
+			$identified=$auth_config["authenticator"]->authenticate($id,$password);
+			
+		}
+		else
+		{
+			//get user id from external source
+			//retrieve user info from database
+		}
+		
+		if ($identified)
+		{
+			$this->id = $id;
+			$auth_config["userinforetriever"]->getUserInfo($this);
+			$this->session["_user"]=serialize($this);
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public function logout()
+	{
+		unset($this->session["_user"]);
+	}
+	
+	public function isLogged()
+	{
+		return $this->logged;
+	}
+	
+	public function getRoles()
+	{
+		return $this->roles;
+	}
+	
+	public function getDisplayName()
+	{
+		if (is_null($this->displayed_name) || empty($this->displayed_name))
+			return $this->first_name . " " . $this->surname;
+		else
+			return $this->displayed_name;		
+	}
+	
+	/**
+	 * Imposta il riferimento al flusso di esecuzione
+	 * */
+	public function setFlow($fl)
+	{
+		$this->flow = $fl;
+	}
+	
+	public function setSession(&$s)
+	{
+		$this->session=&$s;
+	}
+	
+	/**
+	 * Method that serialize user object without refering to flow and session
+	 * */
+	public function serialize() {
+		$p = array();
+		$op = get_object_vars($this);
+		foreach ($op as $key=>$value)
+		{
+			if (!($key == "flow" || $key == "session"))
+			{
+				$p[$key]=$value;
+			}
+		}
+		return serialize($p);
+    }
+	
+    public function unserialize($data) {
+		$data = unserialize($data);
+		foreach ($data as $key => $value){
+			$this->$key = $value; 
+		}        
+    }
+}
+
 /**
  * Represent a control object that manage an application state
  */
 class Control {	
 	public $status;
+	public $user;
 	/**
 	 * This method make a Control status class.
 	 * @param MainFlow $fl Contain a refer to the main execution flow
@@ -16,6 +151,7 @@ class Control {
 	{
 		//@TODO: check if the object is an instance of the class State
 		$this->status=$st;
+		$this->user = $fl->user;
 		$st->setControlObject($this); //double linked class :D
 	}
 	

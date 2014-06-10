@@ -21,13 +21,17 @@ $DoctrineClassLoader->register();
  */
 class MainFlow
 {
-    public $init_state = NULL;
-    public $debug=false;
-    public $user=NULL;
+    
+    
+    
     public $history=NULL;
     public $states_cache=array();
-    public $default_action ="d";
-
+ 
+    /**
+     * @property User $user Maintain the current logged user
+     * */
+    public $user=NULL;
+    
     /**
      * @property array $_s Maintain a refer to the session
      * */
@@ -40,11 +44,15 @@ class MainFlow
      * @property State $state The current state of the application
      * */
     public $state=NULL;
-    public $flow_name="";
+    /**
+     * @property string $action Contain current action
+     * */
+    public $action=NULL;
+    
     public $annotation_reader = NULL;
     public $control=NULL;
     public $login_state=NULL;
-    public $action=NULL;
+    
     public $delegation_stack=array();
     /**
      * @property Object Default configuration settings variable
@@ -53,23 +61,23 @@ class MainFlow
                                     "debug"=>false,
                                     "flow_name"=>"std",
                                     "login_status"=>NULL,
-                                    "history_len"=>10 );
+                                    "history_len"=>10,
+                                    "default_action"=>"d");
     public function __construct()
     {
-        var_dump($this->configuration);
+
         if (func_num_args() > 0)
         {
             $arg_list = func_get_args();
             $user_configuration =  $arg_list[0];
             $this->configuration=array_merge($this->configuration,$user_configuration);
-            var_dump($this->configuration);
+            
         }
 
         $this->configuration["init_status"]=new State($this->configuration["init_status"]["site_view"],
                                                     $this->configuration["init_status"]["area"]);
-        $this->configuration = (object)$this->configuration;
-        var_dump($this->configuration);
-        define("DEBUG",$this->debug);
+        $this->configuration = (object)$this->configuration;        
+        define("DEBUG",$this->configuration->debug);
 
 
         $this->reader=new \Doctrine\Common\Annotations\AnnotationReader();
@@ -81,6 +89,7 @@ class MainFlow
         else
         {
             $this->load_state();
+            $this->configure_user();
             $this->execute_action();
         }
     }
@@ -100,6 +109,21 @@ OUT;
         die();
     }
 
+    public function configure_user()
+    {
+        
+        if (isset($this->_s["_user"]))
+        {            
+            $this->user = unserialize($this->_s["_user"]);
+            $this->user ->setFlow($this);
+            $this->user ->setSession($this->_s);            
+        }
+        else
+        {            
+            $this->user = new User($this,$this->_s);   
+        }        
+    }
+    
     /**
      * Routine that returns various resource file
      */
@@ -120,7 +144,7 @@ OUT;
         $this->_s=&$_SESSION[sha1($this->configuration->flow_name)];
         if (count($this->_s)==0)
         {
-            $this->state= clone $this->configuration->init_state;
+            $this->state= clone $this->configuration->init_status;
             $this->retrieve_control($this->state);
             $this->_s["_state"] = serialize ($this->state);
             $this->history= $this->_s["_history"] = array();
@@ -150,7 +174,6 @@ OUT;
         {
             //...else retrieve control object from the file system
             $control_file_path=$status->getControlFilePath();
-
             if (file_exists($control_file_path) && is_file($control_file_path))
             {
                 //check if some reserved words are used in namespace string
@@ -165,7 +188,6 @@ OUT;
                     require_once $control_file_path;
                     $session = $this->init_session($status);
                     eval('$c= new ' . $status->getControlManagerClassName() . '($this,$status,$this->_r,$session);');
-
                     $this->read_annotation($c);
                     $this->states_cache[$status .""] = $status;
                     $status->setControlObject($c);
@@ -254,7 +276,7 @@ OUT;
                 if (in_array("everyone",$access_info->roles))
                     return true;
 
-                foreach ($this->user as $user_role)
+                foreach ($this->user->getRoles() as $user_role)
                 {
                     if (in_array($user_role,$access_info->roles))
                         return true;
@@ -332,13 +354,13 @@ OUT;
                 //if the state is not skippable and is requested a inconditional jump
                 //to another state, than the default action is setted
                 if (!($this->state->isSkippable()) && $this->request_to_jump())
-                    $this->action = $this->default_action;
+                    $this->action = $this->configuration->default_action;
                 else
                     $this->action = $_REQUEST["action"];
 
             }
             else //if the action is not set, return the default action
-                $this->action = $this->default_action;
+                $this->action = $this->configuration->default_action;
         }
         else
         {
@@ -354,7 +376,7 @@ OUT;
      * */
     public function action_exists($state,$action)
     {
-        echo "action exists: " .  $state . " " . (method_exists($state->getControlObject(),$action)?"true":"false"   );
+        echo "<p>action exists: " .  $state . " " . (method_exists($state->getControlObject(),$action)?"true":"false"   ) . "</p>";
 
         if (method_exists($state->getControlObject(),$action))
             return true;
@@ -448,7 +470,7 @@ OUT;
             {
                 $this->go_to_state($ro->getStatus());
                 if (is_null($ro->getAction()))
-                    $this->action = $this->default_action;
+                    $this->action = $this->configuration->default_action;
                 else
                     $this->action = $ro->getAction();
             }
