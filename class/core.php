@@ -119,7 +119,8 @@ OUT;
             $this->user ->setSession($this->_s);            
         }
         else
-        {            
+        {
+            
             $this->user = new User($this,$this->_s);   
         }        
     }
@@ -260,8 +261,9 @@ OUT;
     {
         if (isset($this->states_cache[$state .""]))
         {
-
+            
             $ma = $this->states_cache[$state .""]->getMetainfo()->methods[$action];
+            var_dump($this->states_cache[$state .""]->getMetainfo()->methods["insert"]  );
             $access_info =NULL;
             foreach($ma as $a)
             {

@@ -13,6 +13,7 @@ class Control extends \Control
      */
     function d(){
             //default action
+            echo "action default test";
             //return ReturnArea($this->status->getSiteView(),"pubblicazioni/login");
     }
     
@@ -20,7 +21,7 @@ class Control extends \Control
     
     /**
      * @abstract
-     * @Access(roles="administrator")
+     * @Access("administrator")
      */
     function insert(){
             //insert new pubblication

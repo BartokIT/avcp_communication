@@ -13,8 +13,8 @@ class Control extends \Control
      */
     function d(){
             //default action
-            $this->user->logout();
-            //echo $this->user->login("claudio.papa","Inpdap02");
+            //$this->user->logout();
+            $this->user->login("claudio.papa","Inpdap02");
             //return ReturnInline(array("prova","pipp"),'json');
             return ReturnInline('<html><body><h1>Inline Tests</h1><p>'. $this->user->getDisplayName() .'</p></body></html>','plain');
             

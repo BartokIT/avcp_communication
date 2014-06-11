@@ -18,6 +18,15 @@ interface Authenticator
     public function authenticate($id,$password=NULL,$domain=NULL);
 }
 
+interface UserRoleMapper
+{
+ /**
+ * Map the user and its group to application roles
+ * @param User $user Pass the user object to refer
+ * */
+    public function setUserRoles($user);
+}
+
 class LDAPAuthentication implements Authenticator, UserInfoRetriever
 {
     private $ldap_host;
@@ -67,6 +76,8 @@ class LDAPAuthentication implements Authenticator, UserInfoRetriever
                     if ( strcmp($row[$this->idattribute][0],$user->getID()) == 0)
                     {
                         $found=true;
+                        unset($row["memberof"]["count"]);
+                        $user->setGroups($row["memberof"]);
                         $user->setName($row["givenname"][0],$row["sn"][0],$row["displayname"][0]);
                         break;
                     }                    
@@ -115,5 +126,47 @@ class LDAPAuthentication implements Authenticator, UserInfoRetriever
         }
     }
 }
+
+class SimpleUserRoleMapper implements UserRoleMapper{
+    private $user_list;
+    private $group_list;
+    public function __construct($users_roles=array(),$groups_roles=array())
+    {
+        $this->user_list=$users_roles;
+        $this->group_list = $groups_roles;
+    }
+    /**
+     * @param User $user Pass the user object to be filled with information
+     * */
+    public function setUserRoles($user)
+    {
+        if (array_key_exists($user->getID(),$this->user_list))
+        {
+            if (is_array($this->user_list[$user->getID()]))
+            {
+                foreach($this->user_list[$user->getID()] as $role)
+                {
+                    $user->addUserRole($role);
+                }
+            }
+            else
+                $user->addUserRole($this->user_list[$user->getID()]);
+        }
+        
+        foreach ($user->getGroups() as $group_key=>$roles)
+        {
+            if (is_array($roles))
+            {
+                foreach($roles as $role)
+                {
+                    $user->addUserRole($role);
+                }
+            }
+            else
+                $user->addUserRole($roles);
+        }
+    }
+}
+
 
 ?>

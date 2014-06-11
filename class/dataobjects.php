@@ -15,9 +15,21 @@ class User implements Serializable {
 	
 	/* User specific parameter*/
 	private $logged=FALSE;
+	
+	private $groups;
+	
 	private $roles;
+	
+	/**
+	 * @property string $first_name The first name of the user
+	 * */
 	private $first_name=NULL;
+	
+	/**
+	 * @property string $surname Surname of the user
+	 * */	
 	private $surname=NULL;
+	
 	private $id=NULL;
 	private $displayed_name=NULL;
 	
@@ -28,7 +40,10 @@ class User implements Serializable {
 		$this->roles=array();		
 	}
 	
-	
+	public function addUserRole($role)
+	{
+		$this->roles[$role]=$role;
+	}
 	/**
 	 * Get the user identifier
 	 * */
@@ -37,6 +52,18 @@ class User implements Serializable {
 		return $this->id;
 	}
 
+	/**
+	 * @return array Return the array wich user belong
+	 * */
+	public function getGroups()
+	{
+		return $this->groups;
+	}
+	
+	public function setGroups($groups)
+	{
+		$this->groups = $groups;
+	}
 	
 	public function setName($first,$suname,$displayname=NULL)
 	{
@@ -45,7 +72,7 @@ class User implements Serializable {
 		$this->displayed_name = $displayname;
 	}
 	
-	public function login($id,$password)
+	public function login($id,$password=NULL)
 	{
 		echo "<p>login called</p>";
 		$auth_config = $this->flow->configuration->authentication;
@@ -59,14 +86,17 @@ class User implements Serializable {
 		}
 		else
 		{
-			//get user id from external source
-			//retrieve user info from database
+			if (isset($_SERVER['PHP_AUTH_USER'])) {
+				$id= $_SERVER['PHP_AUTH_USER'];
+				$identified=true;
+			}
 		}
 		
 		if ($identified)
 		{
 			$this->id = $id;
 			$auth_config["userinforetriever"]->getUserInfo($this);
+			$auth_config["rolemapper"]->setUserRoles($this);
 			$this->session["_user"]=serialize($this);
 			return true;
 		}
