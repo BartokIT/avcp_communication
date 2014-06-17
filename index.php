@@ -24,20 +24,23 @@ $au = new LDAPAuthentication("dcServer01.terracina.local",3268,
 			     'DC=terracina,DC=local',
 			     "samaccountname",
 			     '(&(objectClass=user)(objectCategory=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))');
-$rm = new SimpleUserRoleMapper(array(),
+$rm = new SimpleUserRoleMapper(array("claudio.papa"=>"administrator"),
 			       array("CN=Remote Desktop Users,CN=Builtin,DC=terracina,DC=local"=>"reader"));
 $config =  array("init_status"=>array("site_view"=>"avcpman",
 				      "area"=>"pubblicazioni/def"),
 		 "authentication"=>array("authenticator"=>$au,
 					 "userinforetriever"=>$au,
 					 "rolemapper"=>$rm,
-					 "external"=>true),
+					 "external"=>false),
+		 "login_status"=>array("site_view"=>"avcpman",
+				      "area"=>"pubblicazioni/login"),
 		"debug"=>true,
 		"flow_name"=>"main",
 		"history_len"=>20 );
 
 $f = new MainFlow($config);
-var_dump($_SESSION);
-
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 
 ?>

@@ -140,6 +140,8 @@ class SimpleUserRoleMapper implements UserRoleMapper{
      * */
     public function setUserRoles($user)
     {
+        
+        //Scan for a user role
         if (array_key_exists($user->getID(),$this->user_list))
         {
             if (is_array($this->user_list[$user->getID()]))
@@ -153,17 +155,22 @@ class SimpleUserRoleMapper implements UserRoleMapper{
                 $user->addUserRole($this->user_list[$user->getID()]);
         }
         
-        foreach ($user->getGroups() as $group_key=>$roles)
+        //Scan for a group role
+        foreach ($user->getGroups() as $group_key=>$group_value)
         {
-            if (is_array($roles))
+            if (isset($this->group_list[$group_key]))
             {
-                foreach($roles as $role)
+                $roles = $this->group_list[$group_key];
+                if (is_array($roles))
                 {
-                    $user->addUserRole($role);
+                    foreach($roles as $role)
+                    {
+                        $user->addUserRole($role);
+                    }
                 }
+                else
+                    $user->addUserRole($roles);
             }
-            else
-                $user->addUserRole($roles);
         }
     }
 }

@@ -23,15 +23,16 @@ class MainFlow
 {
     
     
-    
+    /**
+    * @property History $history Maintain the status history flow
+    * */
     public $history=NULL;
     public $states_cache=array();
  
     /**
      * @property User $user Maintain the current logged user
      * */
-    public $user=NULL;
-    
+    public $user=NULL;    
     /**
      * @property array $_s Maintain a refer to the session
      * */
@@ -63,25 +64,37 @@ class MainFlow
                                     "login_status"=>NULL,
                                     "history_len"=>10,
                                     "default_action"=>"d");
+    
     public function __construct()
     {
 
+        //Merge user configuration with default configuration
         if (func_num_args() > 0)
         {
             $arg_list = func_get_args();
             $user_configuration =  $arg_list[0];
             $this->configuration=array_merge($this->configuration,$user_configuration);
-            
         }
 
         $this->configuration["init_status"]=new State($this->configuration["init_status"]["site_view"],
-                                                    $this->configuration["init_status"]["area"]);
-        $this->configuration = (object)$this->configuration;        
+                                                $this->configuration["init_status"]["area"]);
+        
+        $this->configuration = (object)$this->configuration;
+        
+        //if specified use a login status
+        if (!is_null($this->configuration->login_status))
+        {
+            $this->configuration->login_status=new State($this->configuration->login_status["site_view"],
+                                                    $this->configuration->login_status["area"]);
+        }        
+        
         define("DEBUG",$this->configuration->debug);
 
 
         $this->reader=new \Doctrine\Common\Annotations\AnnotationReader();
         $this->_r = $_REQUEST;
+        
+        
         //Check if there are some resources to be returned
         //TODO: check if this do some enhancement to rpdoctivity
         if (isset($_REQUEST["resources"]))
@@ -120,8 +133,12 @@ OUT;
         }
         else
         {
+            $this->user = new User($this,$this->_s);
+            if ($this->configuration->authentication["external"]==true)
+            {
+                $this->user->login($_SERVER['PHP_AUTH_USER']);
+            }
             
-            $this->user = new User($this,$this->_s);   
         }        
     }
     
@@ -142,17 +159,20 @@ OUT;
         if (!isset($_SESSION[sha1($this->configuration->flow_name)]))
             $_SESSION[sha1($this->configuration->flow_name)]=array();
 
-        $this->_s=&$_SESSION[sha1($this->configuration->flow_name)];
+        $this->_s=&$_SESSION[sha1($this->configuration->flow_name)];        
         if (count($this->_s)==0)
         {
+            $this->history=new History($this->_s);
             $this->state= clone $this->configuration->init_status;
             $this->retrieve_control($this->state);
             $this->_s["_state"] = serialize ($this->state);
-            $this->history= $this->_s["_history"] = array();
+            /*$hi = new HistoryItem($next_state);
+            $this->history->addHistoryItem($hi);*/
         }
         else
         {
-            $this->history = $this->_s["_history"];
+            $this->history=new History($this->_s);
+            //$this->history = $this->_s["_history"]; 
             $this->state =unserialize( $this->_s["_state"]);
         }
     }
@@ -257,13 +277,13 @@ OUT;
      * @param string $action una stringa che contiene la action da eseguire
      * @return boolean <strong>true</strong> se l'utente corrente ha diritto di accesso/<strong>false</strong> altrimenti
      */
-    public function check_permission($state,$action)
+    private function check_permission($state,$action)
     {
+        
         if (isset($this->states_cache[$state .""]))
         {
-            
+
             $ma = $this->states_cache[$state .""]->getMetainfo()->methods[$action];
-            var_dump($this->states_cache[$state .""]->getMetainfo()->methods["insert"]  );
             $access_info =NULL;
             foreach($ma as $a)
             {
@@ -273,11 +293,13 @@ OUT;
                     break;
                 }
             }
+
             if ( !is_null($access_info))
             {
                 if (in_array("everyone",$access_info->roles))
                     return true;
 
+               
                 foreach ($this->user->getRoles() as $user_role)
                 {
                     if (in_array($user_role,$access_info->roles))
@@ -289,10 +311,65 @@ OUT;
                 return true;
 
         }
+
         //TODO: emettere un warning?
         return true;
     }
+    
+    private function check_permission_everyone($state,$action)
+    {
+        if (isset($this->states_cache[$state .""]))
+        {
 
+            $ma = $this->states_cache[$state .""]->getMetainfo()->methods[$action];
+            $access_info =NULL;
+            foreach($ma as $a)
+            {
+                if ($a instanceof Access)
+                {
+                    $access_info=$a;
+                    break;
+                }
+            }
+                        if ( !is_null($access_info))
+            {
+            
+            if (in_array("everyone",$access_info->roles))
+                    return true;
+            else
+                return false;
+            }
+        }
+        return true;    
+    }
+    
+    /**
+     * This method return true or false, that means that in case of no authorization in
+     * execution of an action, if true the user will redirected on a state that present a login
+     * form, false if display an error message
+     * @param State $state instance of the class for wich verify redirection
+     * @param string $action a string that represent an action
+     * @return boolean <strong>true</strong> if the action permit redirection <strong>false</strong> otherwise
+     * */
+    private function redirect_on_no_permission($state,$action)
+    {
+        if (isset($this->states_cache[$state .""]))
+        {
+            
+            $ma = $this->states_cache[$state .""]->getMetainfo()->methods[$action];
+            $access_info =NULL;
+            foreach($ma as $a)
+            {
+                if ($a instanceof Access)
+                {
+                    return $a->redirectToLogin();                    
+                    break;
+                }
+            }
+        }
+        return false;
+    }
+    
     /**
      * Goes to another status storing the information into the session and write the history
      * @param State $next_state This is the state wich need to go to.
@@ -303,8 +380,22 @@ OUT;
         $this->state = $next_state;
         $this->retrieve_control($this->state);
         $this->_s["_state"]=serialize($next_state);
+        
+        $this->retrieve_action();
+        $hi = new HistoryItem($next_state);
+        $this->history->addHistoryItem($hi);
     }
 
+    /**
+     * Return the status specified by user to wich perform login
+     * @return ReturnedArea The return area object
+     * */
+    public function go_to_login_state()
+    {
+        $ls = $this->configuration->login_status;
+        return ReturnArea($ls->getSiteView(),$ls->getArea());
+    }
+    
     /**
      * Salta ad uno stato gerarchicamente superiore, se si trova in uno stato
      * nel quale non vi � pi� alcun superiore, restituisce l'oggetto stesso
@@ -378,7 +469,7 @@ OUT;
      * */
     public function action_exists($state,$action)
     {
-        echo "<p>action exists: " .  $state . " " . (method_exists($state->getControlObject(),$action)?"true":"false"   ) . "</p>";
+        //echo "<p>action exists: " .  $state . " " . (method_exists($state->getControlObject(),$action)?"true":"false"   ) . "</p>";
 
         if (method_exists($state->getControlObject(),$action))
             return true;
@@ -420,7 +511,7 @@ OUT;
             //retrieve control class for the state
             $this->retrieve_control($this->state);
             $this->retrieve_action();
-
+            
             //interpello tutti i controllori di gerarchia superiore
             //fino a trovarne uno che sappia gestire
             while (!$this->action_exists($this->state,$this->action) &&
@@ -428,6 +519,7 @@ OUT;
                    !$this->state->isRoot()) //root state is a state without ancestor
             {
                 $this->delegate_to_ancestor($this->state);
+                
             }
 
             //Check if the action exists or not
@@ -437,12 +529,19 @@ OUT;
             }
             else
             {
+
                 //check if the user has the permission to execute
                 if (!$this->check_permission($this->state,$this->action))
                 {
-                    $ro = $this->error_page(403,"Access restricted to authorized principal");
+                    if (!is_null($this->configuration->login_status) && $this->redirect_on_no_permission($this->state,$this->action))
+                    {
+                        $ro = $this->go_to_login_state();
+                        $this->manage_ro($ro,0);
+                    }
+                    else
+                        $ro = $this->error_page(403,"Access restricted to authorized principal");
                 }
-                else
+                else                
                 {
                     //$ro = $this->jump_to_state($this->login_state);
                     $ro = $this->state->getControlObject()->{$this->action}();
@@ -450,9 +549,9 @@ OUT;
                     //reset possibile delegation
                     $this->delegation_restore();
                 }
+                
             }
         } while ( $ro instanceof BackObject);
-
         //Print output pages
         $this->manage_ro($ro,1);
     }

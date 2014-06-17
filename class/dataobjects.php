@@ -74,7 +74,7 @@ class User implements Serializable {
 	
 	public function login($id,$password=NULL)
 	{
-		echo "<p>login called</p>";
+		//echo "<p>login called</p>";
 		$auth_config = $this->flow->configuration->authentication;
 		
 		//check if the authentication is alreay done
@@ -182,7 +182,7 @@ class Control {
 		//@TODO: check if the object is an instance of the class State
 		$this->status=$st;
 		$this->user = $fl->user;
-		$st->setControlObject($this); //double linked class :D
+		$st->setControlObject($this); //double linked class :D		
 	}
 	
 	/**
@@ -192,6 +192,11 @@ class Control {
 	public function getStatus()
 	{
 		return $this->status;
+	}
+	
+	public function getUser()
+	{
+		return $this->user;
 	}
 	
     /*public function __call($method, $args)
@@ -209,7 +214,7 @@ class Control {
  * Represent a state of the application, contains generical information and
  * store control class instance
  */
-class State {
+class State implements Serializable {
     public $site_view="default";
     public $area=array("default");
     private $control=NULL;
@@ -316,18 +321,72 @@ class State {
     {
         return 	$this->getSiteView() . "/" . $this->getArea();
     }
+	
+		/**
+	 * Method that serialize user object without refering to flow and session
+	 * */
+	public function serialize() {
+		$p = array("site_view"=>$this->getSiteView(),"area"=>$this->getAreaArray());
+		return serialize($p);
+    }
+	
+    public function unserialize($data) {
+		$data = unserialize($data);
+		foreach ($data as $key => $value){
+			$this->$key = $value; 
+		}        
+    }
 }
 
 class History {
+	private $states_list=array();
+	private $_s;
+	public function __construct(&$_s)
+	{		
+		if (isset($_s["_history"]))
+		{
+			$this->_s = &$_s["_history"];		
+			$this->states_list = unserialize($this->_s);
+		}
+		else
+		{
+			$_s["_history"]=serialize(array());
+			$this->_s = &$_s["_history"];		
+		}
+	}
 	
+	public function addHistoryItem($item)
+	{
+		$this->states_list[]=$item;
+		$this->_s=serialize($this->states_list);
+	}
+	
+	public function addDelegatedItem($item)
+	{
+		$this->states_list[count($this->states_list) - 1]->delegation[]=$item;
+	}
 }
 
 class HistoryItem
 {
+	/**
+	 * @property State $state A status item
+	 * */
     public $state;
+	/**
+	 * @property string $action A string representation of an action
+	 * */
     public $action;
-    public $skippable;
-    public $automatic;
+	
+	/**
+	 * @property array $delegation An array with the states delegated by current item
+	 * */
+    public $delegation=array();
+	public function __construct($state,$action=NULL)
+	{
+		$this->state=$state;
+		$this->action=$action;
+	}
 }
 
 
@@ -393,6 +452,7 @@ final class AncestorDelegation {
 final class Access 
 {
 	public $roles=array("everyone"); //default access is for everyone
+	public $redirect=false;
 	public function __construct($values)
 	{
 		//Read the user role allowed to execute specific action
@@ -400,9 +460,21 @@ final class Access
 		{
 			$this->roles = explode(",",$values["value"]);
 		}
+		if (isset($values["roles"]))
+		{
+			$this->roles = explode(",",$values["roles"]);
+		}
 		
-			
+		if (isset($values["redirect"]))
+		{
+			$this->redirect = $values["redirect"];
+		}	
 	}
+	public function redirectToLogin()
+	{
+		return $this->redirect;
+	}
+	
 	public function __toString()
 	{
 		return "$this->roles";

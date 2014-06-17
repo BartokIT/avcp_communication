@@ -9,12 +9,14 @@ class Control extends \Control
 {
     /**
      * Summary
+     * @Access(roles="reader",redirect=true  )
      * @return object  Description
      */
     function d(){
             //default action
             echo "action default test";
-            //return ReturnArea($this->status->getSiteView(),"pubblicazioni/login");
+            
+            return ReturnInline('<html><body><h1>Default Form</h1><p>'. $this->getStatus()->getArea() .'</p></body></html>','plain');
     }
     
 
