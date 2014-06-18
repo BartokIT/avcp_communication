@@ -15,7 +15,7 @@ class Control extends \Control
             //default action
             //$this->user->logout();
             
-            $this->user->login("claudio.papa","Inpdap02");
+            var_dump($this->user->login("claudio.papa","Inpdap02"));
             //return ReturnInline(array("prova","pipp"),'json');
             return ReturnInline('<html><body><h1>Login Form</h1><p>'. $this->getStatus()->getArea() .'</p></body></html>','plain');
             

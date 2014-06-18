@@ -162,16 +162,16 @@ OUT;
         $this->_s=&$_SESSION[sha1($this->configuration->flow_name)];        
         if (count($this->_s)==0)
         {
-            $this->history=new History($this->_s);
+            $this->history=new History($this->_s,$this->configuration->history_len);
             $this->state= clone $this->configuration->init_status;
             $this->retrieve_control($this->state);
             $this->_s["_state"] = serialize ($this->state);
-            /*$hi = new HistoryItem($next_state);
-            $this->history->addHistoryItem($hi);*/
+            $hi = new HistoryItem($this->state);
+            $this->history->addHistoryItem($hi);
         }
         else
         {
-            $this->history=new History($this->_s);
+            $this->history=new History($this->_s,$this->configuration->history_len);
             //$this->history = $this->_s["_history"]; 
             $this->state =unserialize( $this->_s["_state"]);
         }
@@ -380,8 +380,6 @@ OUT;
         $this->state = $next_state;
         $this->retrieve_control($this->state);
         $this->_s["_state"]=serialize($next_state);
-        
-        $this->retrieve_action();
         $hi = new HistoryItem($next_state);
         $this->history->addHistoryItem($hi);
     }
@@ -393,6 +391,7 @@ OUT;
     public function go_to_login_state()
     {
         $ls = $this->configuration->login_status;
+        $this->user->setPreLoginStatus($this->state,$this->action);
         return ReturnArea($ls->getSiteView(),$ls->getArea());
     }
     
@@ -418,6 +417,7 @@ OUT;
             $this->retrieve_control($ns);
             //TODO: log the status change to the state history
             $this->state = $ns;
+            $this->history->addDelegatedItem(new HistoryItem($ns));
         }
     }
 
@@ -459,6 +459,7 @@ OUT;
         {
             //nothing to do
         }
+        $this->history->addHistoryAction($this->action);
     }
 
     /**

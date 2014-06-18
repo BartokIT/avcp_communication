@@ -13,7 +13,7 @@ class Control extends \Control
     function d(){
             //default action
             echo "called pubblicazioni";
-            
+            return ReturnInline('<html><body><h1>Default Form</h1><p>'. $this->getStatus()->getArea() .'</p></body></html>','plain');
     }
     
     /**
@@ -24,5 +24,13 @@ class Control extends \Control
             //logout user
     }
 
+      /**
+     * @abstract
+     */
+    function delete(){
+            //insert new pubblication
+            echo "delete";
+            return ReturnInline('<html><body><h1>Default Form</h1><p>'. $this->getStatus()->getArea() .'</p></body></html>','plain');
+    }
 }
 ?>
