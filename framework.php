@@ -1,12 +1,19 @@
 <?php
+define("CONTROL_PATH","control/");
+define("PRESENTATION_PATH","presentation/");
+define("LIB_PATH","lib/");
 //inizializzo la sessione
 include_once("class/globalfun.php");
 parse_resources();
 @session_start();
+date_default_timezone_set('Europe/Rome');
+
+require_once(LIB_PATH . 'Smarty/Smarty.class.php');
 require_once "class/dataobjects.php";
 include_once("class/returned_object.php");
 include_once("class/core.php");
 include ("abstraction/authentication.php");
+
 /*
 ini_set('error_reporting',  E_ALL & ~E_DEPRECATED  );
 ini_set('display_errors', 'On');

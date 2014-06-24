@@ -1,7 +1,4 @@
 <?php
-define("CONTROL_PATH","control/");
-define("PRESENTATION_PATH","presentation/");
-define("LIB_PATH","lib/");
 
 /**
  * Init Doctrine library to manage annotation
@@ -171,9 +168,10 @@ OUT;
         }
         else
         {
-            $this->history=new History($this->_s,$this->configuration->history_len);
+            $this->history=new History($this->_s,$this->configuration->history_len);            
             //$this->history = $this->_s["_history"]; 
             $this->state =unserialize( $this->_s["_state"]);
+            $this->history->addHistoryItem( new HistoryItem($this->state));
         }
     }
 
@@ -579,7 +577,21 @@ OUT;
         }
         else if ($ro instanceof PrintableObject && $phase==1)
         {
+            $ro->parameters["user"] = $this->user;
+            $ro->parameters["state"] = $this->state;
+            
             $ro->out();
+            $this->history->addHistoryItem(new HistoryItem($this->state,true));
+            if  ($this->configuration->debug)
+            {
+                echo "=====DEBUG====";
+                echo "<pre>";
+                    echo $this->history->printRawHistory();
+                echo "</pre>";
+                echo "<pre>";
+                    print_r($_SESSION);
+                echo "</pre>";
+            }
         }
     }
 }

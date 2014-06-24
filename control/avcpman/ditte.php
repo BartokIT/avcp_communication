@@ -12,7 +12,7 @@ class Control extends \Control
      */
     function d(){
             //default action
-            return ReturnSmarty('index.tpl',array("name"=>"prova"));
+            return ReturnSmarty('ditte.tpl');
     }
     
     /**

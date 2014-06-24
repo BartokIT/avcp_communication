@@ -434,6 +434,85 @@ class History {
 		$this->states_list[count($this->states_list) - 1]->delegation[]=$item;
 		$this->_s=serialize($this->states_list);
 	}
+	
+	public function printRawHistory()
+	{
+		$printed="";
+		$i=0;
+		foreach ( $this->states_list as $item)
+		{
+			var_dump($item);
+			//if (!$item->printable)
+			//{
+			//	$printed .= "-----------> [>" . $item->state . "<]\n";
+			//	$jmax= count($item->action);
+			//	for ($j=0; $j < $jmax; $j++)
+			//	{
+			//		echo $j;
+			//		if ($j == ($jmax - 1) )
+			//		{
+			//			$printed .= "[>" . $item->state . "<] ------> [" . $item->action[$j] . "]";
+			//		}
+			//		else
+			//		{
+			//			
+			//			$printed .= "[<" . $item->state . ">] ------> [" . $item->action[$j] . "]";
+			//			$printed .= " ------> [#" . $item->state . "#] ";
+			//		
+			//		}*/
+			//	}
+			//}
+			//else
+			//{
+			//	$printed .="--------> < output >\n";
+			//}
+			/*if ($i != 0)
+			{
+				$printed .= " [* " . $item->state .  "*]";
+			}
+		
+			$printed .= "\n";
+			
+			$jmax= count($item->action);
+			for ($j=0; $j < $jmax; $j++)
+			{
+				if ($j == ($jmax - 1) )
+				{
+					if (count($item->delegation)!=0)
+					{
+						$printed .= " [" . $item->delegation[count($item->delegation) - 1 ] . "] on  [" .
+							$item->state . "] delegation";				
+					}
+					else
+					{
+						$printed .= " [" . $item->state . "] ";
+					}
+					$printed .= " ------> [" . $item->action[$j] . "] ------>";
+				}
+				else
+				{
+
+					if (count($item->delegation)!=0)
+					{
+						$printed .= " [" . $item->delegation[count($item->delegation) - 1 ] . "] on  [" .
+							$item->state . "] delegation";				
+					}
+					else
+					{
+						$printed .= " [" . $item->state . "] ";
+					}
+				
+					$printed .= " ------> [" . $item->action[$j] . "]";
+					$printed .= " ------> [" ." [#" . $item->state . "#] \n";
+				}
+			}
+			
+*/			
+			$i++;
+		}
+		return $printed;
+	}
+
 }
 
 class HistoryItem
@@ -447,17 +526,23 @@ class HistoryItem
 	 * */
     public $action;
 	
+	public $printable=false;
 	/**
 	 * @property array $delegation An array with the states delegated by current item
 	 * */
     public $delegation;
-	public function __construct($state)
+	public function __construct($state,$printable=false)
 	{
 		$this->state=$state;
 		$this->action=array();
 		$this->delegation=array();
+		if ($printable != false)
+		{
+			$this->printable=$printable;
+		}
 	}
 }
+
 
 
 /**

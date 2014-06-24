@@ -14,13 +14,9 @@ class Control extends \Control
      */
     function d(){
             //default action
-            echo "action default test";
             return ReturnArea($this->getStatus()->getSiteView(),"pubblicazioni","delete");
             //return ReturnInline('<html><body><h1>Default Form</h1><p>'. $this->getStatus()->getArea() .'</p></body></html>','plain');
     }
-    
-
-    
-
 }
+
 ?>

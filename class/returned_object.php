@@ -106,7 +106,7 @@
     **/
     function ReturnPage($page,$parameters=array())
     {
-		return new ReturnedPage($page,$parameters);
+	return new ReturnedPage($page,$parameters);
     }
 	
     /**
@@ -143,7 +143,48 @@
     {
 	    return new ReturnedInline($data,$type);
     }
-	
-	
-
+    
+    /**
+     * Class that permit to out a smarty template pages
+     * */
+    class ReturnedSmarty extends PrintableObject
+    {
+		public $page;
+		public $parameters;
+		public $name_class = __CLASS__;
+		
+		   /**
+			* Constructor of the class 
+		* @param string $page The name of the page that contain the front end
+			* @param array $parameters The set of parameters to be passed to the page
+		**/
+		function __construct($page, $parameters=array())
+		{
+			$this->page = $page;
+			$this->parameters = $parameters;
+		}
+		
+		/**
+		 * Include the front-end page
+		 * */
+		public function out()
+		{
+		    $smarty = new Smarty();
+		    $smarty->setTemplateDir(PRESENTATION_PATH);
+		    $smarty->debugging = DEBUG;
+		    foreach ($this->parameters as $key=>$value)
+		    {
+			$smarty->assign($key, $value);
+		    }
+		    $smarty->display($this->page);
+		}
+    }
+    
+    /**
+     *  Restituisce un oggetto
+     **/
+    function ReturnSmarty($page,$parameters=array())
+    {
+	return new ReturnedSmarty($page,$parameters);
+    }
 ?>

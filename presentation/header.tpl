@@ -5,14 +5,7 @@
         <div id="inside"> <!-- [inside] -->
 	        <div id="header"><!-- [header] -->
                 <div class="content">
-                    <div id="h_main"><a href="<?php echo _l("default","default") ?>"><img src="resources/css/logo-def.png" alt="Logo del Conservatorio di Latina" /></a></div>
+                    <div id="h_main"><img src="resources/css/logo-def.png" alt="Logo del Conservatorio di Latina" /></div>
                 </div>
-				<div class="menu"><ul>
-					<?php
-						//if (isset($_SESSION["user"]) && !(isset($_REQUEST["action"]) && strcmp($_REQUEST["action"],"logout") == 0))
-						if (strcmp($p["site_view"],"public") != 0)
-							echo '<li><a href="'. _l("default","default","logout")  . '">Logout (' . $p["user"]->display_name .')</a></li>';
-					?>
-				</ul></div>
             </div><!-- [/header] -->
 

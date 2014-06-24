@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\pubblicazioni;
+namespace avcpman\def;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
