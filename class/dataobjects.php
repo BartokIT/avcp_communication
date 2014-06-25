@@ -193,6 +193,7 @@ class User implements Serializable {
 class Control {	
 	public $status;
 	public $user;
+	public $_r;
 	/**
 	 * This method make a Control status class.
 	 * @param MainFlow $fl Contain a refer to the main execution flow
@@ -205,6 +206,7 @@ class Control {
 		//@TODO: check if the object is an instance of the class State
 		$this->status=$st;
 		$this->user = $fl->user;
+		$this->_r=$r;
 		$st->setControlObject($this); //double linked class :D		
 	}
 	

@@ -17,6 +17,10 @@ class Control extends \Control
             return ReturnSmarty('ditte.tpl',array("ditte"=>$ditte));
     }
     
+    function edit(){
+        return ReturnArea($this->status->getSiteView(),"ditte/edit");
+    }
+    
 
 }
 ?>

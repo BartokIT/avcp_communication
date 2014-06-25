@@ -40,6 +40,25 @@ function smarty_function_urlarea($params, $template)
 		$counter++;
 	}
 	
+	if (isset($params['parameters']))
+	{
+		if (is_array($params['parameters']))
+		{
+			foreach($params['parameters'] as $key=>$value)
+			{
+				if ($counter > 0 ) { $link .="&";};
+					$link .= "$key=" . urlencode($value);
+				$counter++;
+			}
+		}
+		else
+		{
+			if ($counter > 0 ) { $link .="&";};
+					$link .= "parameter=" . urlencode($params['parameters']);
+			$counter++;
+		}
+	}
+	
     return $link;
 
 }

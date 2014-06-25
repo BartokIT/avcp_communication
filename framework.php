@@ -13,7 +13,7 @@ require_once "class/dataobjects.php";
 include_once("class/returned_object.php");
 include_once("class/core.php");
 include ("abstraction/authentication.php");
-
+include ("abstraction/sql_manager.php");
 /*
 ini_set('error_reporting',  E_ALL & ~E_DEPRECATED  );
 ini_set('display_errors', 'On');

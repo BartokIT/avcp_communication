@@ -1,5 +1,5 @@
 <?php
-
+include("sql.php");
 function execute_sql_file($id_sql_connection, $database_name,$sql_file)
 {
 	$select_result = mysql_select_db($database_name,$id_sql_connection);
@@ -336,6 +336,20 @@ function get_ditte()
 
 
 /**
+ * Restituisce l'elenco di tutte le ditte
+ * */
+function get_ditta($did)
+{
+	global $db;
+	
+	$ditta = $db->get_row("SELECT d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . "ditta d ");
+	if ($ditta == NULL)
+		return array();
+	else
+		return $ditta;
+}
+
+/**
  * Inserisce una singola ditta nel database
  * */
 
@@ -349,7 +363,7 @@ function insert_ditta($ragione_sociale,$estera,$identificativo_fiscale)
 	//build the insert string semi-automatically
 	$sql_string = build_insert_string($db->prefix . "ditta",$data);
 	$result = $db->query($sql_string);
-    $db->query("COMMIT");
+	$db->query("COMMIT");
 
 	if ($result)
 		return $db->insert_id;
@@ -380,7 +394,7 @@ function update_ditta($id,$identificativo_fiscale=null,$ragione_sociale=null,$es
 	//build the update string semi-automatically
 	$sql_string = build_update_string($db->prefix . "ditta",$data," WHERE did = $id");
 	$result = $db->query($sql_string);
-    $db->query("COMMIT");
+	$db->query("COMMIT");
 
 	if ($result)
 		return $result;

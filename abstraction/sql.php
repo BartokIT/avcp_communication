@@ -6,9 +6,9 @@ include_once "lib/ezSQL/mysqli/ez_sql_mysqli.php";
 
 
 $db_host="localhost";
-$db_name="avpcman_terracina";
+$db_name="avcp_terracina";
 $db_user="root";
-$db_pass="";
+$db_pass="root";
 
 
 global $id_db_connection,$db;
