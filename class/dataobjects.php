@@ -114,7 +114,7 @@ class User implements Serializable {
 			{
 				$la=$this->flow->configuration->default_action;	
 			}
-
+			//var_dump(ReturnArea($li->getSiteView(),$li->getArea(),$la));
 			return ReturnArea($li->getSiteView(),$li->getArea(),$la);
 		}
 		else
@@ -362,7 +362,7 @@ class State implements Serializable {
 }
 
 class History {
-	private $states_list=array();
+	private $item_list=array();
 	private $_s;
 	private $_l;
 	public function __construct(&$_s,$maxitem)
@@ -371,7 +371,7 @@ class History {
 		if (isset($_s["_history"]))
 		{
 			$this->_s = &$_s["_history"];		
-			$this->states_list = unserialize($this->_s);
+			$this->item_list = unserialize($this->_s);
 		}
 		else
 		{
@@ -382,132 +382,87 @@ class History {
 	
 	public function getLastStatus()
 	{
-		if (count($this->states_list)==0)
+		if (count($this->item_list)==0)
 			return NULL;
 		else
 		{
-			$s=$this->states_list[count($this->states_list)-1]->state;
+			$s=$this->item_list[count($this->item_list)-1]->state;
 			return new State($s->getSiteView(),$s->getArea());
 		}
 	}
 	
 	public function getLastAction()
 	{
-		if (count($this->states_list)==0)
+		if (count($this->item_list)==0)
 			return NULL;
 		else
 		{
-			$last_item=$this->states_list[count($this->states_list)-1];
+			$last_item=$this->item_list[count($this->item_list)-1];
 			return $last_item->action[count($last_item->action)-1];
 		}
 	}
 	public function deleteLastItem()
 	{
-		unset($this->states_list[count($this->states_list) - 1]);
-		$this->_s=serialize($this->states_list);
+		unset($this->item_list[count($this->item_list) - 1]);
+		$this->_s=serialize($this->item_list);
 	}
 	
-	public function addHistoryAction($action)
+	public function addAction($action)
 	{
-		if (count($this->states_list[count($this->states_list) - 1]->action) > $this->_l)
-		{
-			array_shift($this->states_list[count($this->states_list) - 1]->action);
-		}
-		
-		$this->states_list[count($this->states_list) - 1]->action[]=$action;
-		$this->_s=serialize($this->states_list);
+		$li=$this->item_list[count($this->item_list) - 1];
+		$ls=$li[count($li) - 1];
+		$ls->action[]=$action;
+		$this->_s=serialize($this->item_list);
 	}
-	public function addHistoryItem($item)
+	
+	public function addItem()
 	{
 		
-		if (count($this->states_list) >= $this->_l)
+		if (count($this->item_list) >= $this->_l)
 		{
-			array_shift($this->states_list);
+			array_shift($this->item_list);
 		}
-		$this->states_list[]=$item;		
-		$this->_s=serialize($this->states_list);
-		
+		$this->item_list[]=array();		
+		$this->_s=serialize($this->item_list);		
+	}
+	
+	public function addStatus($s)
+	{
+		$this->item_list[count($this->item_list) - 1][]=$s;
+		$this->_s=serialize($this->item_list);
 	}
 	
 	public function addDelegatedItem($item)
 	{
-		$this->states_list[count($this->states_list) - 1]->delegation[]=$item;
-		$this->_s=serialize($this->states_list);
+		$li=$this->item_list[count($this->item_list) - 1];
+		$ls=$li[count($li) - 1];
+		$ls->delegation[]=$item;
+		
+		//$this->item_list[count($this->item_list) - 1]->delegation[]=$item;
+		$this->_s=serialize($this->item_list);
 	}
 	
 	public function printRawHistory()
 	{
 		$printed="";
 		$i=0;
-		foreach ( $this->states_list as $item)
+		reset($this->item_list);
+		foreach ( $this->item_list as $states)
 		{
-			var_dump($item);
-			//if (!$item->printable)
-			//{
-			//	$printed .= "-----------> [>" . $item->state . "<]\n";
-			//	$jmax= count($item->action);
-			//	for ($j=0; $j < $jmax; $j++)
-			//	{
-			//		echo $j;
-			//		if ($j == ($jmax - 1) )
-			//		{
-			//			$printed .= "[>" . $item->state . "<] ------> [" . $item->action[$j] . "]";
-			//		}
-			//		else
-			//		{
-			//			
-			//			$printed .= "[<" . $item->state . ">] ------> [" . $item->action[$j] . "]";
-			//			$printed .= " ------> [#" . $item->state . "#] ";
-			//		
-			//		}*/
-			//	}
-			//}
-			//else
-			//{
-			//	$printed .="--------> < output >\n";
-			//}
-			/*if ($i != 0)
+			$last=count($states)-1;
+			$i=0;
+			for ($i=0; $i <= $last; $i++)
 			{
-				$printed .= " [* " . $item->state .  "*]";
-			}
-		
-			$printed .= "\n";
-			
-			$jmax= count($item->action);
-			for ($j=0; $j < $jmax; $j++)
-			{
-				if ($j == ($jmax - 1) )
+				if (!$states[$i]->printable)
 				{
-					if (count($item->delegation)!=0)
-					{
-						$printed .= " [" . $item->delegation[count($item->delegation) - 1 ] . "] on  [" .
-							$item->state . "] delegation";				
-					}
-					else
-					{
-						$printed .= " [" . $item->state . "] ";
-					}
-					$printed .= " ------> [" . $item->action[$j] . "] ------>";
+					$printed .=" [" . $states[$i]->state ."] ---[" . implode(",",$states[$i]->action) . "]---> ";
 				}
 				else
 				{
-
-					if (count($item->delegation)!=0)
-					{
-						$printed .= " [" . $item->delegation[count($item->delegation) - 1 ] . "] on  [" .
-							$item->state . "] delegation";				
-					}
-					else
-					{
-						$printed .= " [" . $item->state . "] ";
-					}
-				
-					$printed .= " ------> [" . $item->action[$j] . "]";
-					$printed .= " ------> [" ." [#" . $item->state . "#] \n";
+					$printed .="< output >";
 				}
 			}
-			
-*/			
+			$printed .="\n";
 			$i++;
 		}
 		return $printed;
@@ -515,7 +470,7 @@ class History {
 
 }
 
-class HistoryItem
+class HistoryStatus
 {
 	/**
 	 * @property State $state A status item

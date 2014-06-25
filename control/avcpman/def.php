@@ -8,28 +8,23 @@ class Control extends \Control
 {
     /**
      * Summary
+     * @Access(roles="administrator,publisher,reader,editors",redirect=true  )
      * @return object  Description
      */
     function d(){
             //default action
-            return ReturnSmarty('index.tpl',array("name"=>"prova"));
+            return ReturnSmarty('index.tpl');
     }
-    
     /**
      * Summary
-
      */
     function logout(){
-            //logout user
+        $this->user->logout();
     }
 
-      /**
-     * @abstract
-     */
-    function delete(){
-            //insert new pubblication
-            echo "delete";
-            return ReturnInline('<html><body><h1>Default Form</h1><p>'. $this->getStatus()->getArea() .'</p></body></html>','plain');
-    }
+
+    function login(){
+            return $this->user->login("claudio.papa","Inpdap02");
+    }    
 }
 ?>

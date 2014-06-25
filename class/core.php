@@ -163,15 +163,16 @@ OUT;
             $this->state= clone $this->configuration->init_status;
             $this->retrieve_control($this->state);
             $this->_s["_state"] = serialize ($this->state);
-            $hi = new HistoryItem($this->state);
-            $this->history->addHistoryItem($hi);
+            $this->history->addItem();
+            $this->history->addStatus(new HistoryStatus($this->state));
         }
         else
         {
             $this->history=new History($this->_s,$this->configuration->history_len);            
             //$this->history = $this->_s["_history"]; 
             $this->state =unserialize( $this->_s["_state"]);
-            $this->history->addHistoryItem( new HistoryItem($this->state));
+            $this->history->addItem();
+            $this->history->addStatus(new HistoryStatus($this->state));
         }
     }
 
@@ -378,8 +379,8 @@ OUT;
         $this->state = $next_state;
         $this->retrieve_control($this->state);
         $this->_s["_state"]=serialize($next_state);
-        $hi = new HistoryItem($next_state);
-        $this->history->addHistoryItem($hi);
+        $this->history->addStatus(new HistoryStatus($this->state));
+
     }
 
     /**
@@ -415,7 +416,7 @@ OUT;
             $this->retrieve_control($ns);
             //TODO: log the status change to the state history
             $this->state = $ns;
-            $this->history->addDelegatedItem(new HistoryItem($ns));
+            
         }
     }
 
@@ -457,7 +458,7 @@ OUT;
         {
             //nothing to do
         }
-        $this->history->addHistoryAction($this->action);
+        $this->history->addAction($this->action);
     }
 
     /**
@@ -579,9 +580,9 @@ OUT;
         {
             $ro->parameters["user"] = $this->user;
             $ro->parameters["state"] = $this->state;
-            
+            $this->history->addStatus(new HistoryStatus($this->state,true));
             $ro->out();
-            $this->history->addHistoryItem(new HistoryItem($this->state,true));
+            
             if  ($this->configuration->debug)
             {
                 echo "=====DEBUG====";
