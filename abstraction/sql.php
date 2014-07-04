@@ -61,7 +61,7 @@ function sql_create_array($function_name,$arguments)
 	$function_info = new ReflectionFunction($function_name);
 	$returned = array();
 	$i=0;
-	var_dump($arguments);
+	//var_dump($arguments);
 	foreach ($function_info->getParameters() as $parameter_info) {
 		if (isset($arguments[$i]) && ($arguments[$i] !== null && $arguments[$i] !== ""))
 			$returned[$parameter_info->getName()] = $arguments[$i];
@@ -118,7 +118,6 @@ function build_insert_string($table,$params)
     $column_string = substr($column_string,0,-1) . ") ";
     $values_string = substr($values_string,0,-1) . ")";
     $sql_string .= $column_string . $values_string;
-    echo $sql_string;
     return $sql_string;
 }
 

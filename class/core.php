@@ -85,9 +85,24 @@ class MainFlow
                                                     $this->configuration->login_status["area"]);
         }        
         
-        define("DEBUG",$this->configuration->debug);
-
-
+        if (is_array($this->configuration->debug))
+        {
+            if (isset($this->configuration->debug["framework"]))
+                define("DEBUG",$this->configuration->debug["framework"]);
+            else
+                define("DEBUG",false);
+                
+            if (isset($this->configuration->debug["smarty"]))
+                define("DEBUG_SMARTY",$this->configuration->debug["smarty"]);
+            else
+                define("DEBUG_SMARTY",false);
+        }
+        else
+        {
+            define("DEBUG",$this->configuration->debug);
+            define("DEBUG_SMARTY",$this->configuration->debug);
+        }
+        
         $this->reader=new \Doctrine\Common\Annotations\AnnotationReader();
         $this->_r = $_REQUEST;
         
@@ -206,7 +221,7 @@ OUT;
                 {
                     //Extract control class annotation
                     require_once $control_file_path;
-                    $session = $this->init_session($status);
+                    $session = &$this->init_session($status);
                     eval('$c= new ' . $status->getControlManagerClassName() . '($this,$status,$this->_r,$session);');
                     $this->read_annotation($c);
                     $this->states_cache[$status .""] = $status;
@@ -580,6 +595,7 @@ OUT;
         {
             $ro->parameters["user"] = $this->user;
             $ro->parameters["state"] = $this->state;
+            $ro->parameters["configuration"] = $this->configuration;
             $this->history->addStatus(new HistoryStatus($this->state,true));
             $ro->out();
             

@@ -34,7 +34,8 @@ $config =  array("init_status"=>array("site_view"=>"avcpman",
 					 "external"=>false),
 		 "login_status"=>array("site_view"=>"avcpman",
 				      "area"=>"login"),
-		"debug"=>true,
+		"debug"=>array("framework"=>true,
+					   "smarty"=>false),
 		"flow_name"=>"main",
 		"history_len"=>20 );
 

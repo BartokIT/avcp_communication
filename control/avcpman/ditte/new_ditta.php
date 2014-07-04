@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\ditte\edit;
+namespace avcpman\ditte\new_ditta;
 class Control extends \Control
 {
     /**
@@ -8,30 +8,24 @@ class Control extends \Control
      * @return object  Description
      */
     function d(){
-        if (isset($this->_r["parameter"]))
-        {
-            $did  = (int) $this->_r["parameter"];
-            $ditta =get_ditta($did);
-            
-            //default action
-            return ReturnSmarty('ditte.edit.tpl',array("ditta"=>$ditta,
+            return ReturnSmarty('ditte.edit.tpl',array("ditta"=>(object)array(
+                                                        "did"=>-1,
+                                                        "ragione_sociale"=>"",
+                                                        "estera"=>"N",
+                                                        "identificativo_fiscale"=>""),
                                                        "estero"=>array("N"=>"Italia","Y"=>"Estero")));
-        }
-        else
-                return ReturnArea($this->status->getSiteView(),"ditte");
+
     }
     
-    function submit()
-    {
-        
+    function submit(){
         if ($this->_r["submit"] == "save")
         {
-                update_ditta($this->_r["did"],
-                     $this->_r["ditta_edit_identificativo"],
+                insert_ditta($this->_r["ditta_edit_identificativo"],
                      $this->_r["ditta_edit_ragione_sociale"],
                      $this->_r["ditta_edit_estero"]);
         }
         return ReturnArea($this->status->getSiteView(),"ditte");
     }
+    
 }
 ?>

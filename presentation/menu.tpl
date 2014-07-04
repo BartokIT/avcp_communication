@@ -5,7 +5,7 @@
     </li>
     {/authorized}
     <li>
-        <a href="{urlarea area="contratti"}">Contratti</a>
+        <a href="{urlarea area="gare"}">Gare</a>
     </li>
     <li>
         <a href="{urlarea area="ditte"}">Ditte</a>

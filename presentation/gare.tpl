@@ -5,10 +5,11 @@
     <body>
         {include file="header.tpl"}
         {include file="menu.tpl"}
-        <h1>Ditte</h1>
-        <a href="{urlarea area="ditte" action="new_ditta"}">+</a>        
+        <h1>Gare</h1>
+        <a href="{urlarea action="new_gara"}">+</a><br/>
+		Anno di gestione : {$year}
         <table>
-            {section name=ditta loop=$ditte}
+            {section name=gara loop=$gare}
                 <tr>
                     <td>{$smarty.section.ditta.index + 1}</td>
                     <td>

@@ -331,7 +331,9 @@ function get_ditte()
 	if ($ditte == NULL)
 		return array();
 	else
+	{
 		return $ditte;
+	}
 }
 
 
@@ -342,7 +344,7 @@ function get_ditta($did)
 {
 	global $db;
 	
-	$ditta = $db->get_row("SELECT d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . "ditta d ");
+	$ditta = $db->get_row("SELECT d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . "ditta d WHERE d.did = " . $did);
 	if ($ditta == NULL)
 		return array();
 	else
@@ -353,7 +355,7 @@ function get_ditta($did)
  * Inserisce una singola ditta nel database
  * */
 
-function insert_ditta($ragione_sociale,$estera,$identificativo_fiscale)
+function insert_ditta($identificativo_fiscale,$ragione_sociale,$estera)
 {
 	global $db;
 	$db->query("BEGIN");
@@ -375,10 +377,10 @@ function insert_ditta($ragione_sociale,$estera,$identificativo_fiscale)
 /**
  *  Permette di aggiornare i dati di una ditta
  * 
- * @param unknown $id                     Description
- * @param unknown $identificativo_fiscale Description
- * @param unknown $ragione_sociale        Description
- * @param unknown $estera                 Description
+ * @param int $id                     Description
+ * @param string $identificativo_fiscale Description
+ * @param string $ragione_sociale        Description
+ * @param string $estera                 Description
  * 
  * @return Type    Description				
  */

@@ -171,10 +171,11 @@
 		{
 		    $smarty = new Smarty();
 		    $smarty->setTemplateDir(PRESENTATION_PATH);
-		    $smarty->debugging = DEBUG;
+		    $smarty->debugging = DEBUG_SMARTY;
+			$smarty->addPluginsDir(SMARTY_DIR .'frameworkplugins/');
 		    foreach ($this->parameters as $key=>$value)
 		    {
-			$smarty->assign($key, $value);
+				$smarty->assign($key, $value);
 		    }
 		    $smarty->display($this->page);
 		}

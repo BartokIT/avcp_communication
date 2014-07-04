@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\ditte;
+namespace avcpman\gare;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -13,18 +13,23 @@ class Control extends \Control
      */
     function d(){
             $ditte =get_ditte();
+            if (!isset($this->_s["year"]))
+            {
+                $this->_s["year"]=date("Y");
+            }
             //default action
-            return ReturnSmarty('ditte.tpl',array("ditte"=>$ditte));
+            return ReturnSmarty('gare.tpl',array("year"=>$this->_s["year"],
+                                                 "gare"=>array()));
     }
     
-    function edit(){
+    /*function edit(){
         
         return ReturnArea($this->status->getSiteView(),"ditte/edit");
     }
-    
-    function new_ditta(){
+    */
+    function new_gara(){
         
-        return ReturnArea($this->status->getSiteView(),"ditte/new_ditta");
+        return ReturnArea($this->status->getSiteView(),"gare/new_gara");
     }
 }
 ?>

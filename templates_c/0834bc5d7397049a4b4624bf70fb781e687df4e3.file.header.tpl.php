@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-06-24 16:28:35
+<?php /* Smarty version Smarty-3.1.18, created on 2014-06-30 12:01:00
          compiled from "presentation\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:91153a98b13766933-40103017%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1847753b1355cbc0083-25660544%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '91153a98b13766933-40103017',
+  'nocache_hash' => '1847753b1355cbc0083-25660544',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_53a98b1376e631_20978952',
+  'unifunc' => 'content_53b1355cc83589_84116969',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_53a98b1376e631_20978952')) {function content_53a98b1376e631_20978952($_smarty_tpl) {?>        <!--[if lt IE 7]>
+<?php if ($_valid && !is_callable('content_53b1355cc83589_84116969')) {function content_53b1355cc83589_84116969($_smarty_tpl) {?>        <!--[if lt IE 7]>
             <p class="chromeframe">State usando un browser <strong>datato</strong>. Per cortesia <a href="http://browsehappy.com/">aggiornate il vostro browser</a> o <a href="http://www.google.com/chromeframe/?redirect=true">attivate Google Chrome Frame</a> per rendere la vostra migliore la vostra esperienza di navigazione.</p>
         <![endif]-->
     <div id="container">

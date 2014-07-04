@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `avcpman_gara` (
 	data_fine DATE,
 	f_pub_numero NUMERIC,
 	f_pub_anno  INT(4),
+    f_user_id  VARCHAR(255)
 	CONSTRAINT fk_pubblicazione FOREIGN KEY  (f_pub_anno,f_pub_numero) REFERENCES avcpman_pubblicazione (anno,numero) ON DELETE SET NULL	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sui lotti di gara';
 

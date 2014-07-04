@@ -201,12 +201,13 @@ class Control {
 	 * @param array $r Contain a refer to the request array
 	 * @param array $s Contain a refer to the session area specific for this status
 	 * */
-	public function __construct($fl,$st,$r,$s)
+	public function __construct($fl,$st,$r,&$s)
 	{
 		//@TODO: check if the object is an instance of the class State
 		$this->status=$st;
 		$this->user = $fl->user;
 		$this->_r=$r;
+		$this->_s=&$s;
 		$st->setControlObject($this); //double linked class :D		
 	}
 	

@@ -27,11 +27,11 @@ function smarty_function_urlarea($params, $template)
 		$link .= "area=" . urlencode($params['area']);
 		$counter++;
 	}
-	else
+	/*else
 	{
 		$link .= "area=" . urlencode($state->toString());
 		$counter++;
-	}
+	}*/
 	
 	if (isset($params['action']))
 	{
