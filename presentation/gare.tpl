@@ -11,17 +11,11 @@
         <table>
             {section name=gara loop=$gare}
                 <tr>
-                    <td>{$smarty.section.ditta.index + 1}</td>
-                    <td>
-                        {if $ditte[ditta]->estera eq "Y"}
-                            E
-                        {else}
-                            I
-                        {/if}
-                    </td>
-                    <td>{$ditte[ditta]->ragione_sociale}</td>
-                    <td>{$ditte[ditta]->identificativo_fiscale}</td>
-                    <td><a href="{urlarea area="ditte" action="edit" parameters="{$ditte[ditta]->did}"}">e</a></td>
+                    <td>{$smarty.section.gara.index + 1}</td>
+                    <td>{$gare[gara]->oggetto}</td>
+					<td>{$gare[gara]->partecipanti}</td>
+                    <td><a href="{urlarea area="gare" action="edit" parameters="{$gare[gara]->gid}"}">e</a></td>
+					<td><a href="{urlarea area="gare/edit_partecipanti"  parameters="{$gare[gara]->gid}"}">ep</a></td>
                 </tr>
             {/section}
         </table>

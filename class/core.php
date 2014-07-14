@@ -601,13 +601,16 @@ OUT;
             
             if  ($this->configuration->debug)
             {
-                echo "=====DEBUG====";
-                echo "<pre>";
-                    echo $this->history->printRawHistory();
-                echo "</pre>";
-                echo "<pre>";
-                    print_r($_SESSION);
-                echo "</pre>";
+                if (!($ro instanceof ReturnedInline))
+                {
+                    echo "=====DEBUG====";
+                    echo "<pre>";
+                        echo $this->history->printRawHistory();
+                    echo "</pre>";
+                    echo "<pre>";
+                        print_r($_SESSION);
+                    echo "</pre>";
+                }
             }
         }
     }

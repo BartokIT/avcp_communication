@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-06-30 12:01:35
+<?php /* Smarty version Smarty-3.1.18, created on 2014-07-09 12:22:16
          compiled from "presentation\footer.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1528053b1357f2fdea5-57025371%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8a75453efc5fb364542b210010279fc3bc659ecb' => 
     array (
       0 => 'presentation\\footer.tpl',
-      1 => 1389777688,
+      1 => 1404901332,
       2 => 'file',
     ),
   ),
@@ -15,9 +15,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.18',
   'unifunc' => 'content_53b1357f3349c1_93118549',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_53b1357f3349c1_93118549')) {function content_53b1357f3349c1_93118549($_smarty_tpl) {?>
 	    </div> <!-- [/inside] -->
@@ -29,16 +29,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     Piazza Municipio, 1 - 04019 Terracina (LT)) <br>
                     C.F. 00246180590<br>
                 </div>
-                <div id="contacts">  <!-- [contacts] -->
-                    <h1>Contatti</h1>
-                    <ul>
-                        <li>Tel. 0773-7071</li>
-                        <li>Fax. 0773-702273</li>
-                        <li>PEC: <a title="pec" href="mailto:info@pec.conslatina.it">posta@pec.comune.terracina.lt.it</a></li>
-                    </ul>
-                </div> <!-- [/contacts] -->
-            <div class="clr"></div>
-        </div>	<!-- [/content_footer] -->
+				<div class="clr"></div>
+			</div>	<!-- [/content_footer] -->
         </div> <!-- [/footer] -->
-        </div><!-- [/container] -->
+    </div><!-- [/container] -->
 <?php }} ?>

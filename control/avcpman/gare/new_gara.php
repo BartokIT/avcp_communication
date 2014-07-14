@@ -7,7 +7,7 @@ class Control extends \Control
      * @Access(roles="administrator,editors",redirect=true  )
      * @return object  Description
      */
-    function d(){
+        function d(){
                 $contest_type=array(
                 1=>"Procedura aperta",
                 2=>"Procedura ristretta",
@@ -26,15 +26,34 @@ class Control extends \Control
                 26=>"Affidamento diretto in adesione ad accordo quadro/convenzione",
                 27=>"Confronto competitivo in adesione ad accordo quadro/convenzione",
                 28=>"Procedura ai sensi dei regolamenti degli organi costituzionali");
-            return ReturnSmarty('gare.edit.tpl',array("gare"=>(object)array(
-                                                        "did"=>-1,
-                                                        "ragione_sociale"=>"",
-                                                        "estera"=>"N",
-                                                        "identificativo_fiscale"=>""),
-                                                       "contest_type"=>$contest_type));
+                return ReturnSmarty('gare.edit.tpl',array("gara"=>(object)array(
+                                                        "gid"=>-1,
+                                                        "cig"=>"",
+                                                        "oggetto"=>"",
+                                                        "f_pub_anno"=>"",
+                                                        "scelta_contraente"=>1,
+                                                        "importo"=>0,
+                                                        "importo_liquidato"=>0,
+                                                        "data_inizio"=>"",
+                                                        "data_fine"=>""),
+                                                        "contest_type"=>$contest_type));
+        }
 
-    }
-    
+        function submit(){
+                if ($this->_r["submit"] == "save")
+                {
+                        insert_gara($this->_r["gare_edit_cig"],
+                             $this->_r["gare_edit_subject"],
+                             $this->_r["gare_edit_contest_type"],
+                             $this->_r["gare_edit_amount"],
+                             $this->_r["gare_edit_payed_amount"],
+                             $this->_r["gare_edit_job_start_date"],
+                             $this->_r["gare_edit_job_end_date"],
+                             $this->_r["gare_edit_year"]
+                             );
+                }
+                return ReturnArea($this->status->getSiteView(),"gare");
+        }
     
     
 }

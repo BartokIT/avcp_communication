@@ -129,10 +129,10 @@
 		{
 			if ($this->type == "json")
 			{
-			echo json_encode($this->data);
+				echo "{ \"data\":" .json_encode($this->data) . "}";
 			}
 			else
-			echo $this->data;
+				echo $this->data;
 		}
     }
 	

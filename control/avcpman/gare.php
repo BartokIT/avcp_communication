@@ -12,21 +12,22 @@ class Control extends \Control
      * @return object  Description
      */
     function d(){
-            $ditte =get_ditte();
+            
             if (!isset($this->_s["year"]))
             {
                 $this->_s["year"]=date("Y");
             }
+            $gare =get_gare($this->_s["year"]);
             //default action
             return ReturnSmarty('gare.tpl',array("year"=>$this->_s["year"],
-                                                 "gare"=>array()));
+                                                 "gare"=>$gare));
     }
     
-    /*function edit(){
-        
-        return ReturnArea($this->status->getSiteView(),"ditte/edit");
+    
+    function edit(){        
+        return ReturnArea($this->status->getSiteView(),"gare/edit");
     }
-    */
+    
     function new_gara(){
         
         return ReturnArea($this->status->getSiteView(),"gare/new_gara");

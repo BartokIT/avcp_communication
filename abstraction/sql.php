@@ -118,6 +118,7 @@ function build_insert_string($table,$params)
     $column_string = substr($column_string,0,-1) . ") ";
     $values_string = substr($values_string,0,-1) . ")";
     $sql_string .= $column_string . $values_string;
+    
     return $sql_string;
 }
 

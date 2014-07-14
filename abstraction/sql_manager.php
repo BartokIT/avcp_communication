@@ -236,12 +236,20 @@ function insert_pubblicazione($titolo,$abstract,$data_pubblicazione, $data_aggio
 /**
  * restituisce l'insieme delle gare di un certo anno e di una determinata pubblicazione
  * */
-function get_gare($numero,$anno)
+function get_gare($anno,$numero=null)
 {
 	global $db;
 	$anno = $db->escape($anno*1);
-	$numero = $db->escape($numero);
-	$gare = $db->get_results("SELECT g.cig, g.oggetto FROM " . $db->prefix . "gara g WHERE g.f_pub_numero = $numero AND g.f_pub_anno = $anno ORDER BY g.cig ASC");
+	$numero_string="";
+	
+	if (!is_null($numero))
+	{
+		$numero = $db->escape($numero);
+		$numero_string = "g.f_pub_numero = $numero";
+	}
+	
+    $query_string= "SELECT g.gid, g.cig, g.oggetto, COUNT(p.pid) as partecipanti FROM " . $db->prefix . "gara g LEFT JOIN " . $db->prefix . "partecipanti p ON g.gid = p.gid  WHERE g.f_pub_anno = $anno " . $numero_string . " GROUP BY g.gid";	
+	$gare = $db->get_results($query_string);
 	
 
 	if ($gare == NULL)
@@ -249,6 +257,27 @@ function get_gare($numero,$anno)
 	else
 		return $gare;
 }
+
+
+/**
+ * restituisce l'insieme delle gare di un certo anno e di una determinata pubblicazione
+ * */
+function get_gara($gid)
+{
+	global $db;
+	$gid = $db->escape($gid*1);
+	
+	$gara = $db->get_row("SELECT g.gid, g.cig, g.oggetto, g.scelta_contraente, " .
+						 "g.importo, g.importo_liquidato,DATE_FORMAT( g.data_inizio,'%d/%m/%Y') as data_inizio, ".
+						 "DATE_FORMAT( g.data_fine,'%d/%m/%Y') as data_fine, g.f_pub_anno, g.f_pub_numero FROM " . $db->prefix . "gara g WHERE  g.gid = $gid ");
+	
+
+	if ($gara == NULL)
+		return array();
+	else
+		return $gara;
+}
+
 
 /**
  * Inserisce una nuova gara nel database
@@ -265,6 +294,7 @@ function insert_gara($cig=null,$oggetto=null,$scelta_contraente=null,$importo=nu
 		$data["cig"] = "0000000000";
 		
 	$sql_string = build_insert_string($db->prefix . "gara",$data);
+	var_dump($sql_string);
 	$result = $db->query($sql_string);
     $db->query("COMMIT");
 
@@ -402,6 +432,70 @@ function update_ditta($id,$identificativo_fiscale=null,$ragione_sociale=null,$es
 		return $result;
 	else
 		return false;	
+}
+
+function get_gara_from_pid($pid)
+{
+    global $db;
+	$pid = $db->escape($pid*1);
+	
+	$gara = $db->get_row("SELECT g.gid, g.cig, g.oggetto, g.scelta_contraente, " .
+						 "g.importo, g.importo_liquidato,DATE_FORMAT( g.data_inizio,'%d/%m/%Y') as data_inizio, ".
+						 "DATE_FORMAT( g.data_fine,'%d/%m/%Y') as data_fine, g.f_pub_anno, g.f_pub_numero " .
+						 "FROM " . $db->prefix . "gara g, " . $db->prefix . "partecipanti p WHERE  p.pid = $pid AND p.gid = g.gid" );
+	
+
+	if ($gara == NULL)
+		return array();
+	else
+		return $gara;
+}
+
+function get_partecipanti($gid)
+{
+    global $db;
+	$raggruppamenti=array();
+	$ditte=array();
+	$ditte = $db->get_results("SELECT d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . "ditta d , " . $db->prefix . "part_ditta pd, " . $db->prefix . "partecipanti p  WHERE p.gid = " . $gid . ' AND p.tipo = "D" AND p.pid = pd.pid AND pd.did = d.did');
+	$ditte_raggruppamento = $db->get_results("SELECT p.pid, r.ruolo, d.did, d.estera, d.identificativo_fiscale, d.ragione_sociale" .
+									   " FROM " . $db->prefix . "partecipanti p LEFT JOIN " . $db->prefix . "raggruppamento r ON  p.pid = r.pid ".
+									   " LEFT JOIN " . $db->prefix . "ditta d  ON  d.did = r.did" .
+									   " WHERE p.gid = $gid " . ' AND p.tipo = "R" ' .
+									   " ORDER BY p.pid");
+	
+	if (!is_null($ditte_raggruppamento ))
+	foreach ($ditte_raggruppamento as $r_ditta)
+	{
+		if (!isset($raggruppamenti[$r_ditta->pid]))
+		{
+		    $raggruppamenti[$r_ditta->pid] = array();
+		}
+		
+		$raggruppamenti[$r_ditta->pid][]=$r_ditta;
+	}
+	
+	if ($ditte == NULL)
+		$ditte= array();
+
+    return array("ditte"=>$ditte,"raggruppamenti"=>$raggruppamenti);	
+}
+
+/**
+ * Permette di aggiungere un raggruppamento alla gara specificata
+ * @param string gid Identificativo della gara
+ * */
+function insert_raggruppamento($gid)
+{
+	global $db;
+	
+	$db->query("BEGIN");
+	$result=$db->query(build_insert_string($db->prefix . "partecipanti",array("gid"=>$gid,"tipo"=>"R")));
+	if (!$result)
+		return false;
+	$pid=$db->insert_id;
+	$db->query("COMMIT");
+	
+	return $pid;
 }
 
 /**

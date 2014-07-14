@@ -5,7 +5,7 @@
         <div id="inside"> <!-- [inside] -->
 	        <div id="header"><!-- [header] -->
                 <div class="content">
-                    <div id="h_main"><img src="resources/css/logo-def.png" alt="Logo del Conservatorio di Latina" /></div>
+                    <div id="h_main"><img src="resources/css/Terracina-Stemma.png" height=75 alt="Logo del Conservatorio di Latina" /></div>
                 </div>
             </div><!-- [/header] -->
 

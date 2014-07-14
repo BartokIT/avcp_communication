@@ -17,7 +17,11 @@ include("framework.php");
 //$stringa = 'Iñtër  nâtiônàl\'izætiøn Haendel and also Hàndel dell\'orto';
 $table_prefix = "idx_";			
 */
-
+$ruoli_partecipanti_raggruppamento=array(1=>"MANDANTE",
+										 2=>"MANDATARIA",
+										 3=>"ASSOCIATA",
+										 4=>"CAPOGRUPPO",
+										 5=>"CONSORZIATA");
 $au = new LDAPAuthentication("dcServer01.terracina.local",3268,
 			     'CN=LDAP Reader,CN=Users,DC=terracina,DC=local',
 			     'Terracina2014!!',
