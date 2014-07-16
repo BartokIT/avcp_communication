@@ -142,10 +142,16 @@ function update_url_indice_pubblicazioni($url,$anno)
 /**
  * Permette di ottenere l'elenco delle pubblicazioni effettuate per un determinato anno
  **/
-function get_pubblicazioni($anno)
+function get_pubblicazioni($anno=NULL)
 {
 	global $db;
-	$publications = $db->get_results("SELECT p.titolo, p.abstract, p.numero, p.url, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione, DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno ORDER BY p.numero ASC");
+	$whereanno="";
+	if (!is_null($anno))
+	{
+		$whereanno = " WHERE p.anno = $anno ";
+	}
+	
+	$publications = $db->get_results("SELECT p.anno, p.titolo, p.abstract, p.numero, p.url, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione, DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento FROM " . $db->prefix . "pubblicazione p $whereanno ORDER BY p.numero ASC");
 
 	if ($publications == NULL)
 		return array();
@@ -160,7 +166,7 @@ function get_pubblicazione_detail($anno,$numero)
 {
 	global $db;
 
-	$publication = $db->get_row("SELECT p.titolo, p.abstract, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione,DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento,p.url FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno AND p.numero = $numero",ARRAY_A);
+	$publication = $db->get_row("SELECT p.anno, p.titolo, p.abstract, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione,DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento,p.url FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno AND p.numero = $numero",ARRAY_A);
  
 	if ($publication == NULL)
 		return array();
@@ -202,6 +208,26 @@ function update_pubblicazione($titolo,$abstract,$data_pubblicazione, $data_aggio
 								'url = "' . $url . '"  WHERE  numero = '.$numero.' AND anno = '. $anno );
     $db->query("COMMIT");
     return $result;
+}
+
+/**
+ *
+ **/
+function set_gare_pubblicazione($anno,$numero,$ids=array())
+{
+    global $db;
+	if (count($ids) == 0 )
+	{
+		$db->query("BEGIN");
+		$result = $db->query("UPDATE " . $db->prefix . 'gara SET ' .
+								' f_pub_numero = ' . $numero .  								
+								' WHERE  f_pub_anno = ' . $anno );
+		$db->query("COMMIT");
+	}
+    if ($result)
+		return true;
+	else
+		return false;
 }
 
 /**

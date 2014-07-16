@@ -23,8 +23,7 @@ CREATE TABLE IF NOT EXISTS `avcpman_pubblicazione` (
 	data_pubblicazione DATE,
 	data_aggiornamento DATE,
 	url VARCHAR(1000),
-	CONSTRAINT PRIMARY KEY (numero, anno),
-	CONSTRAINT fk_anno FOREIGN KEY  (anno) REFERENCES avcpman_indice (anno)	
+	CONSTRAINT PRIMARY KEY (numero, anno)	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sulle pubblicazioni effettuate';
 
 

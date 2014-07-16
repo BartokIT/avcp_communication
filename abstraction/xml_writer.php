@@ -15,14 +15,14 @@
 	function write_avcp_metadata_tostring($meta)
 	{
 		$outstring  = indent(1) . "<metadata>\n";
-		$outstring .= indent(2) . "<titolo>" . $meta["titolo"] . "</titolo>\n";
-		$outstring .= indent(2) . "<abstract>" . $meta["abstract"] . "</abstract>\n";
-		$outstring .= indent(2) . "<dataPubblicazioneDataset>" . $meta["data_pubblicazione"] . "</dataPubblicazioneDataset>\n";
-		$outstring .= indent(2) . "<entePubblicatore>" . $meta["ente_pubblicatore"] . "</entePubblicatore>\n";
-		$outstring .= indent(2) . "<dataUltimoAggiornamentoDataset>" . $meta["data_ultimo_aggiornamento"] . "</dataUltimoAggiornamentoDataset>\n";		
-		$outstring .= indent(2) ."<annoRiferimento>" . $meta["anno"] . "</annoRiferimento>\n";
-		$outstring .= indent(2) ."<urlFile>" . $meta["url"] . "</urlFile>\n";
-		$outstring .= indent(2) ."<licenza>" . $meta["licenza"] . "</licenza>\n";
+		$outstring .= indent(2) . "<titolo>" . $meta->titolo . "</titolo>\n";
+		$outstring .= indent(2) . "<abstract>" . $meta->abstract . "</abstract>\n";
+		$outstring .= indent(2) . "<dataPubblicazioneDataset>" . $meta->data_pubblicazione . "</dataPubblicazioneDataset>\n";
+		$outstring .= indent(2) . "<entePubblicatore>" . $meta->ente_pubblicatore . "</entePubblicatore>\n";
+		$outstring .= indent(2) . "<dataUltimoAggiornamentoDataset>" . $meta->data_aggiornamento . "</dataUltimoAggiornamentoDataset>\n";
+		$outstring .= indent(2) ."<annoRiferimento>" . $meta->anno . "</annoRiferimento>\n";
+		$outstring .= indent(2) ."<urlFile>" . $meta->url . "</urlFile>\n";
+		$outstring .= indent(2) ."<licenza>" . $meta->licenza . "</licenza>\n";
 		$outstring .= indent(1) . "</metadata>\n";
 		return $outstring;
 	}

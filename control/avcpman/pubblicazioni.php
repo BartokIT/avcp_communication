@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\def;
+namespace avcpman\pubblicazioni;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -12,17 +12,13 @@ class Control extends \Control
      */
     function d(){
             //default action
-            return ReturnSmarty('index.tpl',array("name"=>"prova"));
+            $pubs = get_pubblicazioni();
+            $pubblicazioni=array();
+            //TODO: manage index
+            return ReturnSmarty('pubblicazioni.tpl',array("pubblicazioni"=>$pubs));
     }
+
     
-    /**
-     * Summary
-
-     */
-    function logout(){
-            //logout user
-    }
-
       /**
      * @abstract
      */
