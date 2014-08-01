@@ -18,6 +18,7 @@
 		
 		<a href="{urlarea action="add_ditta" parameters="{$gara->gid}"}">+ ditta</a>
 		<a href="{urlarea action="add_raggruppamento" parameters="{$gara->gid}"}">+ raggruppamento</a>
+		{form action="save" parameters=$p}
 		<table>
 			<th>Partecipanti</th>
 			{$indice=1}
@@ -26,6 +27,7 @@
                     <td>{$indice++}</td>
                     <td>{$ditta->ragione_sociale}</td>
 					<td>{$ditta->identificativo_fiscale}</td>
+					<td><input type="radio" name="aggiudicatario" value="{$ditta->pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/></td>
                 </tr>
             {/foreach}
 			{foreach $partecipanti["raggruppamenti"] as $pid=>$rpartecipanti}
@@ -39,11 +41,17 @@
 					<tr>
 						{if $ditta@first}<td rowspan="{$ditta@total}"></td> {/if}
 						<td>{$ditta->ragione_sociale}</td>
-						<td>{$ditta->identificativo_fiscale}</td>				
+						<td>{$ditta->identificativo_fiscale}</td>
+						{if $ditta@first}<td rowspan="{$ditta@total}">
+							<input type="radio" name="aggiudicatario" value="{$pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/>
+						</td> {/if}
 					</tr>
-				{/foreach}
-            {/foreach}
+				{/foreach}				
+            {/foreach}			
 		</table>
+		<button type="submit" name="submit" value="undo">Annulla</button>
+		<button type="submit" name="submit" value="save">Salva</button>		
+		{/form}
         {include file="footer.tpl"}
     </body>
 </html>

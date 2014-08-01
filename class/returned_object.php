@@ -1,4 +1,4 @@
- <?php
+<?php
 
     //Classe astratta utilizzata per le info restituite da una funzione di esecuzione
     abstract class ReturnedObject

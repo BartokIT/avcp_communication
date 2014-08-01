@@ -267,11 +267,5 @@ function verify_nonce($nonce_to_test)
 	return false;
 }
 
-function html_selected($param_value,$checked_value)
-{
-	if ($param_value == $checked_value)
-		return "selected";
-	else
-		return "";
-}
+
 ?>

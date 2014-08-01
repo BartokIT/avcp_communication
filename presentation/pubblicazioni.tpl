@@ -26,6 +26,10 @@
                     <td>
                         {$p->data_aggiornamento}
                     </td>
+                    <td>
+                        {$p = ['numero'=>$p->numero,'anno'=>$p->anno]}
+                        <a href="{urlarea action="download_file" parameters=$p}">d</a>
+                    </td>
                 </tr>
             {/foreach}
         </table>

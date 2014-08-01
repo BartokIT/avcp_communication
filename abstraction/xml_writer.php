@@ -9,6 +9,7 @@
 		}
 		return $out;
 	}
+	
 	/**
 	* Scrive in una stringa la porzione di xml relativa ai metadati
 	**/
@@ -30,35 +31,75 @@
 	/**
 	* Scrive in una stringa la parte iniziale delle informazioni ssu di un singolo lotto
 	*/
-	function write_avcp_lotto_pre_tostring($lotto_info)
+	function write_avcp_lotto_pre_tostring($meta,$lotto_info)
 	{
+		global $contest_type;
 		$outstring = indent(2) ."<lotto>\n";
-		$outstring .= indent(3) ."<cig>" . $lotto_info["cig"] . "</cig>\n";
+		$outstring .= indent(3) ."<cig>" . $lotto_info->cig . "</cig>\n";
 		$outstring .= indent(3) ."<strutturaProponente>\n";
-		$outstring .= indent(4) ."<codiceFiscaleProp>" . $lotto_info["codice_fiscale_proponente"] . "</codiceFiscaleProp>\n";
-		$outstring .= indent(4) ."<denominazione>" . $lotto_info["denominazione_proponente"] . "</denominazione>\n";		
+		$outstring .= indent(4) ."<codiceFiscaleProp>" . $meta->cf_ente_pubblicatore . "</codiceFiscaleProp>\n";
+		$outstring .= indent(4) ."<denominazione>" . $meta->ente_pubblicatore . "</denominazione>\n";		
 		$outstring .= indent(3) ."</strutturaProponente>\n";		
-		$outstring .= indent(3) ."<oggetto>" . $lotto_info["oggetto"] . "</oggetto>\n";
-		$outstring .= indent(3) ."<sceltaContraente>" . $lotto_info["scelta_contraente"] . "</sceltaContraente>\n";
+		$outstring .= indent(3) ."<oggetto>" . $lotto_info->oggetto . "</oggetto>\n";
+		$outstring .= indent(3) ."<sceltaContraente>" . str_pad($lotto_info->scelta_contraente,2,"0",STR_PAD_LEFT) . "-" . strtoupper($contest_type[$lotto_info->scelta_contraente]) . "</sceltaContraente>\n";
 		
 		return $outstring;
 	}
+	
 	/**
 	* Scrive in una stringa la parte finale delle informazioni su di un singolo lotto
 	*/	
 	function write_avcp_lotto_post_tostring($lotto_info)
 	{
 
-		$outstring  =indent(3) . "<importoAggiudicazione>" . $lotto_info["importo_aggiudicazione"] . "</importoAggiudicazione>\n";
+		$outstring  =indent(3) . "<importoAggiudicazione>" . $lotto_info->importo . "</importoAggiudicazione>\n";
 		$outstring .=indent(3) ."<tempiCompletamento>\n";
-		$outstring .=indent(4) ."<dataInizio>" . $lotto_info["data_inizio"] . "</dataInizio>\n";
-		$outstring .=indent(4) ."<dataUltimazione>" . $lotto_info["data_fine"] . "</dataUltimazione>\n";		
+		$outstring .=indent(4) ."<dataInizio>" . $lotto_info->data_inizio . "</dataInizio>\n";
+		$outstring .=indent(4) ."<dataUltimazione>" . $lotto_info->data_fine . "</dataUltimazione>\n";		
 		$outstring .=indent(3) ."</tempiCompletamento>\n";		
-		$outstring .=indent(3) ."<importoSommeLiquidate>" . $lotto_info["importo_liquidato"] . "</importoSommeLiquidate>\n";
+		$outstring .=indent(3) ."<importoSommeLiquidate>" . $lotto_info->importo_liquidato . "</importoSommeLiquidate>\n";
 		$outstring .=indent(2) . "</lotto>\n";		
 		return $outstring;
 	}	
 	
+	function write_avcp_partecipante_tostring_ditta($partecipante_info)
+	{
+		$outstring="";
+		$outstring .= indent(4) ."<partecipante>\n";
+			if (strcmp($partecipante_info->estera,"N") == 0)
+				$outstring .= indent(5) . "<codiceFiscale>" . $partecipante_info->identificativo_fiscale . "</codiceFiscale>\n";
+			else
+				$outstring .= indent(5) . "<identificativoFiscaleEstero>" . $partecipante_info->identificativo_fiscale . "</identificativoFiscaleEstero>\n";
+			$outstring .=indent(5) . "<ragioneSociale>" . $partecipante_info->ragione_sociale . "</ragioneSociale>\n";
+			$outstring .= indent(4) . "</partecipante>\n";
+		return $outstring;
+	}
+	
+	function write_avcp_partecipante_tostring_raggruppamento($partecipante_info)
+	{
+		global $ruoli_partecipanti_raggruppamento;
+		$outstring="";
+		$outstring .= indent(4) . "<raggruppamento>\n";			
+		foreach ($partecipante_info as $membro )
+		{
+			$outstring .= indent(5) . "<membro>\n";
+			if (strcmp($membro->estera,"N") == 0)
+				$outstring .= indent(5) . "<codiceFiscale>" . $membro->identificativo_fiscale . "</codiceFiscale>\n";
+			else
+				$outstring .= indent(5) . "<identificativoFiscaleEstero>" . $membro->identificativo_fiscale . "</identificativoFiscaleEstero>\n";
+			$outstring .= indent(6) ."<ragioneSociale>" . $membro->ragione_sociale . "</ragioneSociale>\n";
+			$outstring .= indent(6) ."<ruolo>" . $ruoli_partecipanti_raggruppamento[$membro->ruolo] . "</ruolo>\n";
+			$outstring .= indent(5) . "</membro>\n";				
+		}
+		$outstring .= indent(4) . "</raggruppamento>\n";			
+		
+		return $outstring;
+	}
+	
+	/**
+	 *
+	 *@deprecated
+	 **/
 	function write_avcp_partecipante_tostring($partecipante_info)
 	{
 		$outstring="";
@@ -133,15 +174,21 @@
 		$outstring .= indent(1) . "<data>\n";
 		foreach ($lotti_info as $lotto_info)
 		{
-			$outstring .= write_avcp_lotto_pre_tostring($lotto_info);
+			$outstring .= write_avcp_lotto_pre_tostring($meta,$lotto_info);
 			$outstring .= indent(3) . "<partecipanti>\n";
-			foreach ($lotto_info["partecipanti"] as $partecipante)
-				$outstring .= write_avcp_partecipante_tostring( $partecipante);
+			if (isset($lotto_info->partecipanti["ditte"]))
+				foreach ($lotto_info->partecipanti["ditte"] as $partecipante)
+					$outstring .= write_avcp_partecipante_tostring_ditta( $partecipante);
+					
+			if (isset($lotto_info->partecipanti["raggruppamenti"]))
+				foreach ($lotto_info->partecipanti["raggruppamenti"] as $partecipante)
+					$outstring .= write_avcp_partecipante_tostring_raggruppamento( $partecipante);
 			$outstring .= indent(3) . "</partecipanti>\n";
 			
 			$outstring .= indent(3) . "<aggiudicatari>\n";
-			foreach ($lotto_info["aggiudicatari"] as $partecipante)
-				$outstring .= write_avcp_aggiudicatario_tostring( $partecipante);			
+			
+			/*foreach ($lotto_info["aggiudicatari"] as $partecipante)
+				$outstring .= write_avcp_aggiudicatario_tostring( $partecipante);	*/		
 			$outstring .= indent(3) . "</aggiudicatari>\n";			
 			$outstring .= write_avcp_lotto_post_tostring($lotto_info);
 		}
@@ -151,9 +198,9 @@
 	}
 	
 	 // Test routine
-	
+	/*
 	header ("Content-Type:text/xml");
-	echo write_avcp_xml_to_string(array("titolo"=>"Pubblicazione n. 1", 
+	/echo write_avcp_xml_to_string(array("titolo"=>"Pubblicazione n. 1", 
 										"abstract"=>"Pubblicazione n. 1 abstract",
 										"data_pubblicazione"=>"2013-05-25",
 										"data_ultimo_aggiornamento"=>"2014-01-10",
@@ -182,5 +229,5 @@
 																								array("nazione"=>"E","identificativo"=>"222","ragione_sociale"=>"ditta 2","ruolo"=>"associata")))
 																		)
 																	   )));
-	
+	*/
 ?>

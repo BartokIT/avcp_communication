@@ -26,6 +26,13 @@ CREATE TABLE IF NOT EXISTS `avcpman_pubblicazione` (
 	CONSTRAINT PRIMARY KEY (numero, anno)	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sulle pubblicazioni effettuate';
 
+CREATE TABLE IF NOT EXISTS `avcpman_settings` (
+	sid INT AUTO_INCREMENT PRIMARY KEY,
+	skey VARCHAR(50),
+	svalue VARCHAR(1000)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sulle impostazioni';
+
+
 
 CREATE TABLE IF NOT EXISTS `avcpman_gara` (
 	gid INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `avcpman_partecipanti` (
 	pid INT AUTO_INCREMENT PRIMARY KEY,
 	gid INT,
 	tipo CHAR(1),
+    aggiudicatario CHAR(1),
 	CONSTRAINT FOREIGN KEY fk_gara (gid) REFERENCES avcpman_gara(gid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sui partecipanti ai lotti';
 

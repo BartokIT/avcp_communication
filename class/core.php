@@ -581,7 +581,7 @@ OUT;
     {
         if ($ro instanceof BackObject && $phase==0)
         {
-            //If the returned object is a new state
+            //If the  returned object is a new state
             if ($ro instanceof ReturnedArea)
             {
                 $this->go_to_state($ro->getStatus());

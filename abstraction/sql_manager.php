@@ -120,7 +120,7 @@ function insert_year($anno)
 function update_crea_indice_pubblicazioni($crea,$anno)
 {
 		global $db;
-		echo $crea;
+		//echo $crea;
 		$generare="F";
 		if ($crea == "true")
 				$generare="T";
@@ -166,7 +166,7 @@ function get_pubblicazione_detail($anno,$numero)
 {
 	global $db;
 
-	$publication = $db->get_row("SELECT p.anno, p.titolo, p.abstract, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione,DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento,p.url FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno AND p.numero = $numero",ARRAY_A);
+	$publication = $db->get_row("SELECT p.anno, p.titolo, p.abstract, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione,DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento,p.url FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno AND p.numero = $numero");
  
 	if ($publication == NULL)
 		return array();
@@ -271,12 +271,13 @@ function get_gare($anno,$numero=null)
 	if (!is_null($numero))
 	{
 		$numero = $db->escape($numero);
-		$numero_string = "g.f_pub_numero = $numero";
+		$numero_string = "AND g.f_pub_numero = $numero";
 	}
 	
-    $query_string= "SELECT g.gid, g.cig, g.oggetto, COUNT(p.pid) as partecipanti FROM " . $db->prefix . "gara g LEFT JOIN " . $db->prefix . "partecipanti p ON g.gid = p.gid  WHERE g.f_pub_anno = $anno " . $numero_string . " GROUP BY g.gid";	
-	$gare = $db->get_results($query_string);
-	
+    $query_string= "SELECT  g.gid, g.cig, g.oggetto, g.scelta_contraente, " .
+	"g.importo, g.importo_liquidato,DATE_FORMAT( g.data_inizio,'%d/%m/%Y') as data_inizio, DATE_FORMAT( g.data_fine,'%d/%m/%Y') as data_fine,".
+	" COUNT(p.pid) as partecipanti FROM " . $db->prefix . "gara g LEFT JOIN " . $db->prefix . "partecipanti p ON g.gid = p.gid  WHERE g.f_pub_anno = $anno " . $numero_string . " GROUP BY g.gid";
+	$gare = $db->get_results($query_string);	
 
 	if ($gare == NULL)
 		return array();
@@ -293,7 +294,7 @@ function get_gara($gid)
 	global $db;
 	$gid = $db->escape($gid*1);
 	
-	$gara = $db->get_row("SELECT g.gid, g.cig, g.oggetto, g.scelta_contraente, " .
+	$gara = $db->get_row("SELECT g.gid, g.cig, g.oggetto, g.scelta_contraente, " .						 
 						 "g.importo, g.importo_liquidato,DATE_FORMAT( g.data_inizio,'%d/%m/%Y') as data_inizio, ".
 						 "DATE_FORMAT( g.data_fine,'%d/%m/%Y') as data_fine, g.f_pub_anno, g.f_pub_numero FROM " . $db->prefix . "gara g WHERE  g.gid = $gid ");
 	
@@ -390,6 +391,7 @@ function get_ditte()
 	{
 		return $ditte;
 	}
+	
 }
 
 
@@ -477,13 +479,24 @@ function get_gara_from_pid($pid)
 		return $gara;
 }
 
+function update_aggiudicatario($gid,$pid)
+{
+	global $db;
+    $result = $db->query("UPDATE " . $db->prefix . 'partecipanti SET aggiudicatario = "Y" WHERE pid = ' . $pid . ' AND gid = ' . $gid );
+	
+	if ($result)
+		return $result;
+	else
+		return false;
+}
+
 function get_partecipanti($gid)
 {
     global $db;
 	$raggruppamenti=array();
 	$ditte=array();
-	$ditte = $db->get_results("SELECT d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . "ditta d , " . $db->prefix . "part_ditta pd, " . $db->prefix . "partecipanti p  WHERE p.gid = " . $gid . ' AND p.tipo = "D" AND p.pid = pd.pid AND pd.did = d.did');
-	$ditte_raggruppamento = $db->get_results("SELECT p.pid, r.ruolo, d.did, d.estera, d.identificativo_fiscale, d.ragione_sociale" .
+	$ditte = $db->get_results("SELECT  p.aggiudicatario, p.pid, d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . "ditta d , " . $db->prefix . "part_ditta pd, " . $db->prefix . "partecipanti p  WHERE p.gid = " . $gid . ' AND p.tipo = "D" AND p.pid = pd.pid AND pd.did = d.did');
+	$ditte_raggruppamento = $db->get_results("SELECT p.aggiudicatario, p.pid, r.ruolo, d.did, d.estera, d.identificativo_fiscale, d.ragione_sociale" .
 									   " FROM " . $db->prefix . "partecipanti p LEFT JOIN " . $db->prefix . "raggruppamento r ON  p.pid = r.pid ".
 									   " LEFT JOIN " . $db->prefix . "ditta d  ON  d.did = r.did" .
 									   " WHERE p.gid = $gid " . ' AND p.tipo = "R" ' .
@@ -591,6 +604,24 @@ function add_partecipante($gid,$tipo,$did,$ruolo=null,$pid=null)
 }
 
 
-
+function get_settings($keys=array())
+{
+		global $db;
+		$return = array();
+		if (count($keys) > 0)
+		{
+				$where = 'skey ="' . implode('" OR skey="',$keys) . '"';
+				$results = $db->get_results("SELECT skey, svalue FROM " .$db->prefix . "settings WHERE " . $where);
+				//	echo "SELECT skey, svalue FROM " .$db->prefix . "settings WHERE " . $where;
+				if (is_null($results))
+						return false;
+				foreach ($results as $row)
+				{
+						$return[$row->skey]=$row->svalue;
+				}
+		}
+		return $return;
+		
+}
 
 ?>

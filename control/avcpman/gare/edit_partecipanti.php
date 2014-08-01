@@ -41,24 +41,17 @@ class Control extends \Control
                 return ReturnArea($this->status->getSiteView(),"gare");
     }
     
-    /*function submit()
+    function save()
     {
         if ($this->_r["submit"] == "save")
         {
-                update_gara(
-                    $this->_r["gid"],
-                    $this->_r["gare_edit_cig"],
-                     $this->_r["gare_edit_subject"],
-                     $this->_r["gare_edit_contest_type"],
-                     $this->_r["gare_edit_amount"],
-                     $this->_r["gare_edit_payed_amount"],
-                     $this->_r["gare_edit_job_start_date"],
-                     $this->_r["gare_edit_job_end_date"],
-                     $this->_r["gare_edit_year"]
-                     );
+            $gid= $this->_r["gid"];
+            $pid= $this->_r["aggiudicatario"];
+            update_aggiudicatario($gid,$pid);
         }
         return ReturnArea($this->status->getSiteView(),"gare");
-    }*/
+    }
+    
     function add_raggruppamento()
     {
         if (isset($this->_r["parameter"]))
