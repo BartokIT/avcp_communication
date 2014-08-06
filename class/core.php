@@ -599,7 +599,7 @@ OUT;
             $this->history->addStatus(new HistoryStatus($this->state,true));
             $ro->out();
             
-            if  ($this->configuration->debug)
+            if  ($this->configuration->debug["framework"])
             {
                 if (!($ro instanceof ReturnedInline))
                 {

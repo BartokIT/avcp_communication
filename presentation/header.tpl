@@ -4,8 +4,32 @@
     <div id="container">
         <div id="inside"> <!-- [inside] -->
 	        <div id="header"><!-- [header] -->
-                <div class="content">
-                    <div id="h_main"><img src="resources/css/Terracina-Stemma.png" height=75 alt="Logo del Conservatorio di Latina" /></div>
-                </div>
+				<div id="mini-top-bar">
+					<div class="content-width">
+						<div class="user_detail">
+						{authorized roles="notlogged"}
+							<a href="{urlarea area="login"}">Accesso area riservata</a>
+						{/authorized}
+						{authorized roles="logged"}
+							{$user->getDisplayName()}
+						{/authorized}
+						</div>
+					</div>
+				</div>
+               <div class="content">
+					<div class="content-width">
+						<div id="h_logo">
+							&nbsp;
+							<img src="resources/css/images/Terracina-Logo.png" height=45 alt="Logo del Comnue di Terracina" />
+						</div>
+	                    <div id="h_stemma">
+							<img src="resources/css/images/Terracina-Stemma-Desaturato.png" height=75 alt="Logo del Comnue di Terracina" />
+						</div>
+						
+					</div>					
+                </div>			
             </div><!-- [/header] -->
+			<div id="menu_h" class="clear">
+				{include file="menu_h.tpl"}
+			</div>
 

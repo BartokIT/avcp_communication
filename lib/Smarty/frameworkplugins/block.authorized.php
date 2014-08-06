@@ -49,6 +49,14 @@ function smarty_block_authorized($params, $content, $template, &$repeat)
 		{
 			$_output=$content;
 		}
+		else if (in_array("logged",$ackuser) && $user->isLogged())
+		{
+			$_output=$content;
+		}
+		else if (in_array("notlogged",$ackuser) && !$user->isLogged())
+		{
+			$_output=$content;
+		}
 		else
 		{
 			$common = array_intersect($ackuser,$user->getRoles());
@@ -57,6 +65,7 @@ function smarty_block_authorized($params, $content, $template, &$repeat)
 				$_output=$content;
 			}
 		}
+		
 	}
 	else
 	{

@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\login;
+namespace general\home;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -12,8 +12,8 @@ class Control extends \Control
      */
     function d(){
             //default action
-            echo "<p>login\n</p>";
-            return $this->user->login("claudio.papa","Inpdap02");            
-    }    
+            return ReturnSmarty('index.tpl');
+    }
+   
 }
 ?>

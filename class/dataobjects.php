@@ -103,6 +103,7 @@ class User implements Serializable {
 			$this->id = $id;
 			$auth_config["userinforetriever"]->getUserInfo($this);
 			$auth_config["rolemapper"]->setUserRoles($this);
+			$this->logged=TRUE;
 			$this->session["_user"]=serialize($this);			
 			$li = $this->pre_login_status;
 			$la = $this->pre_login_action;

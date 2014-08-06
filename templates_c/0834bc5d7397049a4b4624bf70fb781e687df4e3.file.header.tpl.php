@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-07-14 13:04:45
+<?php /* Smarty version Smarty-3.1.18, created on 2014-08-06 12:49:48
          compiled from "presentation\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1847753b1355cbc0083-25660544%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0834bc5d7397049a4b4624bf70fb781e687df4e3' => 
     array (
       0 => 'presentation\\header.tpl',
-      1 => 1405335884,
+      1 => 1407322045,
       2 => 'file',
     ),
   ),
@@ -17,17 +17,54 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'version' => 'Smarty-3.1.18',
   'unifunc' => 'content_53b1355cc83589_84116969',
+  'variables' => 
+  array (
+    'user' => 0,
+  ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_53b1355cc83589_84116969')) {function content_53b1355cc83589_84116969($_smarty_tpl) {?>        <!--[if lt IE 7]>
+<?php if ($_valid && !is_callable('content_53b1355cc83589_84116969')) {function content_53b1355cc83589_84116969($_smarty_tpl) {?><?php if (!is_callable('smarty_block_authorized')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\block.authorized.php';
+if (!is_callable('smarty_function_urlarea')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\function.urlarea.php';
+?>        <!--[if lt IE 7]>
             <p class="chromeframe">State usando un browser <strong>datato</strong>. Per cortesia <a href="http://browsehappy.com/">aggiornate il vostro browser</a> o <a href="http://www.google.com/chromeframe/?redirect=true">attivate Google Chrome Frame</a> per rendere la vostra migliore la vostra esperienza di navigazione.</p>
         <![endif]-->
     <div id="container">
         <div id="inside"> <!-- [inside] -->
 	        <div id="header"><!-- [header] -->
-                <div class="content">
-                    <div id="h_main"><img src="resources/css/Terracina-Stemma.png" height=75 alt="Logo del Conservatorio di Latina" /></div>
-                </div>
+				<div id="mini-top-bar">
+					<div class="content-width">
+						<div class="user_detail">
+						<?php $_smarty_tpl->smarty->_tag_stack[] = array('authorized', array('roles'=>"notlogged")); $_block_repeat=true; echo smarty_block_authorized(array('roles'=>"notlogged"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
+
+							<a href="<?php echo smarty_function_urlarea(array('area'=>"login"),$_smarty_tpl);?>
+">Accesso area riservata</a>
+						<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_authorized(array('roles'=>"notlogged"), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
+
+						<?php $_smarty_tpl->smarty->_tag_stack[] = array('authorized', array('roles'=>"logged")); $_block_repeat=true; echo smarty_block_authorized(array('roles'=>"logged"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
+
+							<?php echo $_smarty_tpl->tpl_vars['user']->value->getDisplayName();?>
+
+						<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_authorized(array('roles'=>"logged"), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
+
+						</div>
+					</div>
+				</div>
+               <div class="content">
+					<div class="content-width">
+						<div id="h_logo">
+							&nbsp;
+							<img src="resources/css/images/Terracina-Logo.png" height=45 alt="Logo del Comnue di Terracina" />
+						</div>
+	                    <div id="h_stemma">
+							<img src="resources/css/images/Terracina-Stemma-Desaturato.png" height=75 alt="Logo del Comnue di Terracina" />
+						</div>
+						
+					</div>					
+                </div>			
             </div><!-- [/header] -->
+			<div id="menu_h" class="clear">
+				<?php echo $_smarty_tpl->getSubTemplate ("menu_h.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
+			</div>
 
 <?php }} ?>

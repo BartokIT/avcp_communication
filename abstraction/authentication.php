@@ -96,6 +96,9 @@ class LDAPAuthentication implements Authenticator, UserInfoRetriever
      * */
     public function authenticate($id,$password=NULL,$domain=NULL)
     {
+        if (trim($id) == "" || trim($password) == "")
+            return false;
+        
         $filter='(&' . $this->filter.'(' . $this->idattribute . '='.$id.'*))';        
         $ldapconn = ldap_connect($this->ldap_host,intval($this->ldap_port));
         
