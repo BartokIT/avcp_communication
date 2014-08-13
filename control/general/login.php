@@ -28,7 +28,7 @@ class Control extends \Control
 		}
 		else
 		{
-			return ReturnArea("avcpman","gare");
+			return ReturnArea("reserved","avcpman/gare");
 		}
 	}
 }

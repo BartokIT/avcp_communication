@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\ditte\new_ditta;
+namespace reserved\avcpman\ditte\new_ditta;
 class Control extends \Control
 {
     /**
@@ -24,7 +24,7 @@ class Control extends \Control
                      $this->_r["ditta_edit_ragione_sociale"],
                      $this->_r["ditta_edit_estero"]);
         }
-        return ReturnArea($this->status->getSiteView(),"ditte");
+        return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
     }
     
 }

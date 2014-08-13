@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\ditte\edit;
+namespace reserved\avcpman\ditte\edit;
 class Control extends \Control
 {
     /**
@@ -18,7 +18,7 @@ class Control extends \Control
                                                        "estero"=>array("N"=>"Italia","Y"=>"Estero")));
         }
         else
-                return ReturnArea($this->status->getSiteView(),"ditte");
+                return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
     }
     
     function submit()
@@ -31,7 +31,7 @@ class Control extends \Control
                      $this->_r["ditta_edit_ragione_sociale"],
                      $this->_r["ditta_edit_estero"]);
         }
-        return ReturnArea($this->status->getSiteView(),"ditte");
+        return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
     }
 }
 ?>

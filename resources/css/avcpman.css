@@ -1,0 +1,164 @@
+.avcpman .container-main #new-gara
+{
+	width: 100px;
+	margin: auto;
+	display: block;
+	text-align: center;
+	padding-left: 30px;
+	padding-right: 3px;
+	height: 32px;
+	line-height: 32px;
+	background: url(images/add_24x24.png)  no-repeat 3px center;
+	color: #000;
+	text-decoration: none;
+	border: 1px solid transparent;
+}
+
+.avcpman .container-main #new-gara:hover
+{
+	border: 1px solid #999;
+	background-color: #EEE;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.avcpman .container-main table
+{
+	margin: auto;
+	width: 80%;
+	border-collapse: collapse;
+}
+
+.avcpman .container-main table thead tr th
+{
+	border-bottom: 2px solid #AAA;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 14px;
+	padding-bottom: 7px;
+}
+
+.avcpman .container-main table tbody tr:first-child td
+{
+	padding-top: 10px;
+}
+
+.avcpman .container-main table tbody tr td
+{
+	padding-bottom: 5px;
+	border-bottom: 1px  dashed #CCC;	
+}
+
+.avcpman .container-main .operations-size
+{
+	width:30px;
+}
+
+.avcpman .container-main .edit-partecipant
+{
+	background: url(images/user_edit20x20.png) no-repeat 3px center;
+	color: transparent;
+	display: block;
+	height: 20px;
+	width: 100%;
+	font-size: 1px;
+}
+
+.avcpman .container-main .edit
+{
+	background: url(images/gare_edit20x20.png) no-repeat 3px center;
+	color: transparent;
+	display: block;
+	height: 20px;
+	width: 100%;
+	font-size: 1px;
+}
+
+.avcpman .container-main .delete
+{
+	background: url(images/gare_delete_20x20.png) no-repeat 3px center;
+	color: transparent;
+	display: block;
+	height: 20px;
+	width: 100%;
+	font-size: 1px;
+}
+
+
+.avcpman .container-main  span.year
+{
+	font-size: 25px;
+	font-weight: bold;
+	color: #CCC;
+	vertical-align: sub;
+}
+
+
+.centered
+{
+	margin: auto;
+	text-align: center;
+}
+
+
+div.box
+{
+	width: 600px;
+	margin: auto;
+}
+div.box label {
+    width: 100%;
+    display: block;
+    background: grey;
+    /*border-top: 1px solid #262626;*/
+    border-bottom: 1px solid #161712;
+    padding: 10px 0 10px 0;
+}
+
+div.box label span {
+    display: block;
+    color: #bbbbbb;
+    font-size: 12px;
+    float: left;
+    width: 250px;
+    text-align: right;
+    padding: 5px 20px 0 0;
+}
+
+div.box input, div.box select {
+    padding: 2px 10px;
+    width: 280px;
+   /* background: #262626;*/
+    border-bottom: 1px double #171717;
+    border-top: 1px double #171717;
+    border-left: 1px double #333333;
+    border-right: 1px double #333333;
+}
+
+div.box.message{
+    padding: 7px 7px;
+    width: 350px;
+    background: #262626;
+    border-bottom: 1px double #171717;
+    border-top: 1px double #171717;
+    border-left: 1px double #333333;
+    border-right: 1px double #333333;
+    overflow: hidden;
+    height: 150px;
+}
+
+div.box .button{
+    margin: 0 0 10px 0;
+    padding: 4px 7px;
+    background: #CC0000;
+    border: 0px;
+    position: relative;
+    top: 10px;
+    left: 382px;
+    width: 100px;
+    border-bottom: 1px double #660000;
+    border-top: 1px double #660000;
+    border-left: 1px double #FF0033;
+    border-right: 1px double #FF0033;
+}

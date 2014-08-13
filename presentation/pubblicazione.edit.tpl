@@ -2,6 +2,9 @@
     <head>
     <title>Comunicazioni AVCP</title>
 	<link href="resources/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet" type="text/css">
+    <title>Comunicazioni AVCP</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	{include file="style.tpl"}		
     </head>
     <body>
         {include file="header.tpl"}

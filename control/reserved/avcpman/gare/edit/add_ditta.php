@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\gare\edit\add_ditta_raggruppamento;
+namespace reserved\avcpman\gare\edit\add_ditta;
 class Control extends \Control
 {
     /**
@@ -8,11 +8,10 @@ class Control extends \Control
      * @return object  Description
      */
     function d(){
-        global $ruoli_partecipanti_raggruppamento;
         if (isset($this->_r["parameter"]))
         {
-            $pid  = (int) $this->_r["parameter"];
-            $gara = get_gara_from_pid($pid);            
+            $gid  = (int) $this->_r["parameter"];
+            $gara = get_gara($gid);            
             //default action
         return ReturnSmarty('gare.add_ditta.tpl',array("ditta"=>(object)array(
                                                     "did"=>-1,
@@ -20,12 +19,10 @@ class Control extends \Control
                                                     "estera"=>"N",
                                                     "identificativo_fiscale"=>""),
                                                    "estero"=>array("N"=>"Italia","Y"=>"Estero"),
-                                                   "gara"=>$gara->gid,
-                                                   "partecipante"=>$pid,
-                                                   "ruolo"=>$ruoli_partecipanti_raggruppamento));
+                                                   "gara"=>$gid));
         }
         else
-            return ReturnArea($this->status->getSiteView(),"gare");
+            return ReturnArea($this->status->getSiteView(),"avcpman/gare");
         
     }
     
@@ -58,10 +55,9 @@ class Control extends \Control
                          $this->_r["ditta_edit_estero"]);
             
             $gid = $this->_r["gid"];
-            $pid = $this->_r["pid"];
-            add_partecipante($gid,"R",$did,$this->_r["gare_edit_ruolo_type"],$pid);
+            add_partecipante($gid,"D",$did);
         }
-        return ReturnArea($this->status->getSiteView(),"gare");
+        return ReturnArea($this->status->getSiteView(),"avcpman/gare");
     }
     
     function add()
@@ -71,10 +67,9 @@ class Control extends \Control
         {
             $gid = $this->_r["gid"];
             $did = $this->_r["gara_edit_search_did"];
-            $pid = $this->_r["pid"];
-            add_partecipante($gid,"R",$did,$this->_r["gare_edit_ruolo_type"],$pid);
+            add_partecipante($gid,"D",$did);
         }
-        return ReturnArea($this->status->getSiteView(),"gare");        
+        return ReturnArea($this->status->getSiteView(),"avcpman/gare");        
     }
 }
 ?>

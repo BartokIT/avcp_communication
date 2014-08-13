@@ -1,16 +1,16 @@
-<ul>
+<ul id="menu_v">
     {authorized roles="administrator,publisher"}
     <li>
-        <a href="{urlarea area="pubblicazioni"}">Pubblicazioni</a>
+        <a href="{urlarea area="avcpman/pubblicazioni"}">Pubblicazioni</a>
     </li>
     {/authorized}
     <li>
-        <a href="{urlarea area="gare"}">Gare</a>
+        <a href="{urlarea area="avcpman/gare"}">Gare</a>
     </li>
     <li>
-        <a href="{urlarea area="ditte"}">Ditte</a>
+        <a href="{urlarea area="avcpman/ditte"}">Ditte</a>
     </li>
     <li>
-        <a href="{urlarea area="impostazioni"}">Impostazioni</a>
+        <a href="{urlarea area="avcpman/impostazioni"}">Impostazioni</a>
     </li>
 </ul>

@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\gare;
+namespace reserved\avcpman\gare;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -25,12 +25,12 @@ class Control extends \Control
     
     
     function edit(){        
-        return ReturnArea($this->status->getSiteView(),"gare/edit");
+        return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit");
     }
     
     function new_gara(){
         
-        return ReturnArea($this->status->getSiteView(),"gare/new_gara");
+        return ReturnArea($this->status->getSiteView(),"avcpman/gare/new_gara");
     }
 }
 ?>

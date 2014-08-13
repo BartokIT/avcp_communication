@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\gare\new_gara;
+namespace reserved\avcpman\gare\new_gara;
 class Control extends \Control
 {
     /**
@@ -35,7 +35,7 @@ class Control extends \Control
                              $this->_r["gare_edit_year"]
                              );
                 }
-                return ReturnArea($this->status->getSiteView(),"gare");
+                return ReturnArea($this->status->getSiteView(),"avcpman/gare");
         }
     
     

@@ -1,5 +1,5 @@
 <?php
-namespace avcpman\gare\edit_partecipanti;
+namespace reserved\avcpman\gare\edit;
 class Control extends \Control
 {
     /**
@@ -26,45 +26,39 @@ class Control extends \Control
                 26=>"Affidamento diretto in adesione ad accordo quadro/convenzione",
                 27=>"Confronto competitivo in adesione ad accordo quadro/convenzione",
                 28=>"Procedura ai sensi dei regolamenti degli organi costituzionali");
-       
         if (isset($this->_r["parameter"]))
         {
             $gid  = (int) $this->_r["parameter"];
             $gara =get_gara($gid);
-            $partecipanti = get_partecipanti($gid);
+            
             //default action
-            return ReturnSmarty('gare.edit_partecipanti.tpl',array("gara"=>$gara,
-                                                "partecipanti"=>$partecipanti,
+            return ReturnSmarty('gare.edit.tpl',array("gara"=>$gara,
                                                 "contest_type"=>$contest_type));
         }
         else
-                return ReturnArea($this->status->getSiteView(),"gare");
+                return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
     }
     
-    function save()
+    function submit()
     {
         if ($this->_r["submit"] == "save")
         {
-            $gid= $this->_r["gid"];
-            $pid= $this->_r["aggiudicatario"];
-            update_aggiudicatario($gid,$pid);
+                update_gara(
+                    $this->_r["gid"],
+                    $this->_r["gare_edit_cig"],
+                     $this->_r["gare_edit_subject"],
+                     $this->_r["gare_edit_contest_type"],
+                     $this->_r["gare_edit_amount"],
+                     $this->_r["gare_edit_payed_amount"],
+                     $this->_r["gare_edit_job_start_date"],
+                     $this->_r["gare_edit_job_end_date"],
+                     $this->_r["gare_edit_year"]
+                     );
+            $this->_r["parameter"]=$this->_r["gid"];
+            return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti");
         }
-        return ReturnArea($this->status->getSiteView(),"gare");
-    }
-    
-    function add_raggruppamento()
-    {
-        if (isset($this->_r["parameter"]))
-        {
-            $gid  = (int) $this->_r["parameter"];
-            insert_raggruppamento($gid);
-        }
-        return ReturnArea($this->status->getSiteView(),"gare/edit_partecipanti");
-    }
-    
-    function add_ditta()
-    {
-        return ReturnArea($this->status->getSiteView(),"gare/edit/add_ditta");
+        else    
+            return ReturnArea($this->status->getSiteView(),"avcpman/gare");
     }    
 }
 ?>
