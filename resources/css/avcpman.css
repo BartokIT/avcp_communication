@@ -1,26 +1,31 @@
 .avcpman .container-main #new-gara
 {
-	width: 100px;
+	width: 100px;	
 	margin: auto;
+	margin-top: 10px;
 	display: block;
 	text-align: center;
-	padding-left: 30px;
-	padding-right: 3px;
+	padding-left: 35px;
+	padding-right: 8px;
 	height: 32px;
 	line-height: 32px;
-	background: url(images/add_24x24.png)  no-repeat 3px center;
+	background: url(images/add_24x24.png)  no-repeat 6px center;
 	color: #000;
 	text-decoration: none;
-	border: 1px solid transparent;
-}
-
-.avcpman .container-main #new-gara:hover
-{
+	/*border: 1px solid transparent;*/
 	border: 1px solid #999;
 	background-color: #EEE;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+}
+
+.avcpman .container-main #new-gara:hover
+{
+	border: 2px solid #888;
+	background-color: #EFEFEF;
+	height: 30px;
+	line-height: 30px;
 }
 
 .avcpman .container-main table
@@ -53,6 +58,12 @@
 .avcpman .container-main .operations-size
 {
 	width:30px;
+}
+
+.avcpman .container-main .counter
+{
+	text-align: center;
+	font-size: .9em;
 }
 
 .avcpman .container-main .edit-partecipant
@@ -88,10 +99,10 @@
 
 .avcpman .container-main  span.year
 {
-	font-size: 25px;
+	font-size: 20px;
 	font-weight: bold;
 	color: #CCC;
-	vertical-align: sub;
+	vertical-align: baseline;
 }
 
 
@@ -102,63 +113,224 @@
 }
 
 
-div.box
-{
-	width: 600px;
+/** Gare - Box Modifica dati **/
+
+div.message {
+	width: 490px;
 	margin: auto;
-}
-div.box label {
-    width: 100%;
-    display: block;
-    background: grey;
-    /*border-top: 1px solid #262626;*/
-    border-bottom: 1px solid #161712;
-    padding: 10px 0 10px 0;
+	text-align: center;
+	border: 2px solid #2d80ad;
+    background: #2d80ad;
+	padding:10px 0 10px 0;
+	color: #FFF;
+	font-size: 14px;
+	font-weight: bold;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
 }
 
-div.box label span {
+div.box
+{
+	width: 490px;
+	margin: auto;
+	border-bottom: 2px solid #BBB;
+	border-left: 2px solid #BBB;
+	border-right: 2px solid #BBB;
+	background-color:#DDD;
+	padding: 20px 0 20px 0;
+	
+	-webkit-border-bottom-left-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+ 
+div.box label, div.box .label {
+    width: 100%;
     display: block;
-    color: #bbbbbb;
+    /*background: grey;*/
+    /*border-top: 1px solid #262626;*/
+    /*border-bottom: 5px solid white;*/
+    padding: 3px 0 3px 0;
+	/*background-color: #BBB;*/
+}
+
+div.box label span{
+    display: block;
+    /*color: #bbbbbb;*/
     font-size: 12px;
     float: left;
-    width: 250px;
+    width: 180px;
     text-align: right;
-    padding: 5px 20px 0 0;
+    padding: 5px 10px 0 0;
+	/*border-bottom: 5px solid #BBB;*/
+}
+
+div.box label.cig
+{
+	height: 40px;
 }
 
 div.box input, div.box select {
     padding: 2px 10px;
-    width: 280px;
+    width: 250px;
+	height: 25px;
+	font-size: 14px;
    /* background: #262626;*/
     border-bottom: 1px double #171717;
     border-top: 1px double #171717;
     border-left: 1px double #333333;
     border-right: 1px double #333333;
+	box-sizing: content-box;
 }
 
-div.box.message{
-    padding: 7px 7px;
-    width: 350px;
-    background: #262626;
-    border-bottom: 1px double #171717;
-    border-top: 1px double #171717;
-    border-left: 1px double #333333;
-    border-right: 1px double #333333;
-    overflow: hidden;
-    height: 150px;
+div.box .button-container
+{
+	width:220px;
+	margin:auto;
+	text-align: center;
 }
 
-div.box .button{
-    margin: 0 0 10px 0;
-    padding: 4px 7px;
-    background: #CC0000;
-    border: 0px;
-    position: relative;
-    top: 10px;
-    left: 382px;
-    width: 100px;
-    border-bottom: 1px double #660000;
-    border-top: 1px double #660000;
-    border-left: 1px double #FF0033;
-    border-right: 1px double #FF0033;
+div.box button.save
+{
+	background: #DFEDF3 url(images/save_20x20.png)  no-repeat 6px center;
+}
+
+
+
+div.box button.undo
+{
+	background:#E0F0DF url(images/return_20x20.png)  no-repeat 6px center;
+}
+
+div.box button {
+	width: 90px;	
+	margin: auto;	
+	margin-top: 10px;
+	position:relative;
+	
+	text-align: center;
+	padding-left: 30px;
+	padding-right: 8px;
+	height: 30px;
+	line-height: 25px;
+	
+	color: #000;
+	text-decoration: none;
+	/*border: 1px solid transparent;*/
+	border: 1px solid #999;
+	background-color: #EEE;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+
+div.box button:hover
+{
+	font-weight: bold;
+	border: 1px solid #555;
+	-webkit-box-shadow: 3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+	-moz-box-shadow:    3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+	box-shadow:         3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+}
+
+
+div.recap-ditta div.label span.left
+{
+	font-size: 14px;
+	
+	height: auto;
+	float: left;
+    width: 190px;
+    text-align: right;
+    padding: 0 10px 0 5px;
+	font-weight: bold;
+}
+
+div.recap-ditta div.label .contraente-type.left
+{
+	height: 40px;	
+}
+
+div.recap-ditta div.label .right
+{
+	font-size: 14px;
+}
+
+
+.avcpman .container-main #add-partecipant-ditta, .avcpman .container-main #add-partecipant-raggruppamento
+{
+	width: 120px;		
+	margin: 10px 0 0 15px;	
+	display: block;
+	float: left;
+	text-align: center;
+	padding-left: 35px;
+	padding-right: 8px;
+	height: 35px;
+	line-height: 17px;
+	background: url(images/add_24x24.png)  no-repeat 6px center;
+	color: #000;
+	text-decoration: none;
+	/*border: 1px solid transparent;*/
+	border: 1px solid #999;
+	background-color: #EEE;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 14px;
+}
+
+.avcpman .container-main #add-partecipant-ditta:hover,  .avcpman .container-main #add-partecipant-raggruppamento:hover
+{
+	border: 2px solid #888;
+	background-color: #EFEFEF;	
+}
+
+.avcpman .container-main .add-partecipant-container
+{
+	width:370px;
+	margin: auto;
+	height: 30px;
+}
+
+.avcpman .container-main .partecipants-table
+{	
+	margin-top: 35px;
+	text-align: center;
+}
+
+.avcpman .container-main .partecipants-table .raggruppamento-header
+{
+	text-align: left;
+	font-variant: small-caps;
+	font-size: .9em;
+	background-color: #EEE;
+	height: 30px;
+	
+}
+
+.avcpman .container-main .partecipants-table .raggruppamento-header .add-ditta-raggruppamento
+{
+	font-size: .9em;
+	font-variant: normal;
+	background: url(images/add_16x16.png)  no-repeat 6px center;
+	display: inline-block;
+	text-decoration: none;
+	/*border: 1px solid transparent;*/
+	border: 1px solid #999;
+	background-color: #EEE;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	padding-left: 35px;
+	padding-right: 8px;
 }

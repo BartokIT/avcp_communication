@@ -8,7 +8,7 @@ class Control extends \Control
      * @return object  Description
      */
         function d(){
-
+                global $contest_type;
                 return ReturnSmarty('gare.edit.tpl',array("gara"=>(object)array(
                                                         "gid"=>-1,
                                                         "cig"=>"",
