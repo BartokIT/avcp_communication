@@ -11,7 +11,8 @@ class Control extends \Control
      * @Access(roles="administrator,editors",redirect=true  )
      * @return object  Description
      */
-    function d(){
+    function d()
+    {
             
             if (!isset($this->_s["year"]))
             {
@@ -24,13 +25,25 @@ class Control extends \Control
     }
     
     
-    function edit(){        
+    function edit()
+    {
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit");
     }
     
-    function new_gara(){
+    function new_gara()
+    {
         
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/new_gara");
+    }
+    
+    function delete()
+    {
+        if (isset($this->_r["parameter"]))
+        {
+            $gid = $this->_r["parameter"];
+            delete_gara($gid);
+        }
+        return ReturnArea($this->status->getSiteView(),$this->status->getArea()); 
     }
 }
 ?>

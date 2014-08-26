@@ -24,8 +24,9 @@ function smarty_function_urlarea($params, $template)
 	$state = $template->tpl_vars['state']->value;
 	if (isset($params['area']))
 	{
-		$link .= "area=" . urlencode($params['area']);
+		$link .= "area=" . urlencode($params['area']);		
 		$counter++;
+		
 	}
 	/*else
 	{
@@ -35,7 +36,12 @@ function smarty_function_urlarea($params, $template)
 	
 	if (isset($params['action']))
 	{
-		if ($counter > 0 ) { $link .="&";};
+		if ($counter > 0 ) { $link .="&";}
+		else
+		{
+			$nonce=get_nonce_value($state->toString());
+			$link .= "nonce=" . urlencode($nonce) . "&";
+		}
 		$link .= "action=" . urlencode($params['action']);
 		$counter++;
 	}

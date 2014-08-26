@@ -125,6 +125,12 @@ class User implements Serializable {
 	public function logout()
 	{
 		unset($this->session["_user"]);
+		$this->logged = FALSE;
+		$this->displayed_name = NULL;
+		$this->surname = NULL;
+		$this->first_name = NULL;
+		$this->id = NULL;
+		
 	}
 	
 	public function setPreLoginStatus($state,$action)
@@ -195,6 +201,7 @@ class Control {
 	public $status;
 	public $user;
 	public $_r;
+	public $_s;
 	/**
 	 * This method make a Control status class.
 	 * @param MainFlow $fl Contain a refer to the main execution flow

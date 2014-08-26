@@ -1,6 +1,6 @@
 .avcpman .container-main #new-gara
 {
-	width: 100px;	
+	width: 110px;	
 	margin: auto;
 	margin-top: 10px;
 	display: block;
@@ -22,10 +22,12 @@
 
 .avcpman .container-main #new-gara:hover
 {
-	border: 2px solid #888;
-	background-color: #EFEFEF;
-	height: 30px;
-	line-height: 30px;
+	font-weight: bold;
+	cursor:pointer;
+	border: 1px solid #555;
+	-webkit-box-shadow: 3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+	-moz-box-shadow:    3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+	box-shadow:         3px 3px 5px 0px rgba(100, 100, 100, 0.5);
 }
 
 .avcpman .container-main table
@@ -158,6 +160,7 @@ div.box label, div.box .label {
     /*background: grey;*/
     /*border-top: 1px solid #262626;*/
     /*border-bottom: 5px solid white;*/
+	min-height: 20px;
     padding: 3px 0 3px 0;
 	/*background-color: #BBB;*/
 }
@@ -191,26 +194,31 @@ div.box input, div.box select {
 	box-sizing: content-box;
 }
 
-div.box .button-container
+div.box .button-container, form .button-container
 {
 	width:220px;
 	margin:auto;
 	text-align: center;
 }
 
-div.box button.save
+div.box button.save,  form .button-container button.save
 {
 	background: #DFEDF3 url(images/save_20x20.png)  no-repeat 6px center;
 }
 
 
 
-div.box button.undo
+div.box button.undo,  form .button-container button.undo
 {
 	background:#E0F0DF url(images/return_20x20.png)  no-repeat 6px center;
 }
 
-div.box button {
+div.box button.undo:hover,  form .button-container button.undo:hover
+{
+	background:#E0F0DF url(images/return_2_20x20.png)  no-repeat 6px center;
+}
+
+div.box button, form .button-container button {
 	width: 90px;	
 	margin: auto;	
 	margin-top: 10px;
@@ -233,20 +241,20 @@ div.box button {
 }
 
 
-div.box button:hover
+div.box button:hover, .button-container button:hover
 {
 	font-weight: bold;
 	border: 1px solid #555;
 	-webkit-box-shadow: 3px 3px 5px 0px rgba(100, 100, 100, 0.5);
 	-moz-box-shadow:    3px 3px 5px 0px rgba(100, 100, 100, 0.5);
 	box-shadow:         3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+	cursor:pointer;
 }
 
 
 div.recap-ditta div.label span.left
 {
-	font-size: 14px;
-	
+	font-size: 14px;	
 	height: auto;
 	float: left;
     width: 190px;
@@ -255,9 +263,14 @@ div.recap-ditta div.label span.left
 	font-weight: bold;
 }
 
-div.recap-ditta div.label .contraente-type.left
+div.recap-ditta div.label.contraente-type
 {
-	height: 40px;	
+	height: 50px;	
+}
+
+div.recap-ditta div.label.contraente-type .left
+{
+	height: 48px;	
 }
 
 div.recap-ditta div.label .right
@@ -292,7 +305,8 @@ div.recap-ditta div.label .right
 .avcpman .container-main #add-partecipant-ditta:hover,  .avcpman .container-main #add-partecipant-raggruppamento:hover
 {
 	border: 2px solid #888;
-	background-color: #EFEFEF;	
+	background-color: #EFEFEF;
+	
 }
 
 .avcpman .container-main .add-partecipant-container
@@ -308,22 +322,119 @@ div.recap-ditta div.label .right
 	text-align: center;
 }
 
+
 .avcpman .container-main .partecipants-table .raggruppamento-header
 {
-	text-align: left;
+	/*text-align: left;*/
 	font-variant: small-caps;
 	font-size: .9em;
 	background-color: #EEE;
 	height: 30px;
-	
+	padding: 0 0 0 10px;	
 }
 
-.avcpman .container-main .partecipants-table .raggruppamento-header .add-ditta-raggruppamento
+.avcpman .container-main .partecipants-table .raggruppamento-header .add-ditta-raggruppamento,
+.avcpman .container-main .partecipants-table .raggruppamento-header .add-ditta-raggruppamento:visited
 {
+	color: #000;
+	height: 22px;
+	line-height: 22px;
 	font-size: .9em;
 	font-variant: normal;
 	background: url(images/add_16x16.png)  no-repeat 6px center;
+	display: block;
+	text-decoration: none;
+	/*border: 1px solid #999;
+	background-color: #EEE;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;*/
+	padding-left: 35px;
+	padding-right: 8px;
+	margin-left: 10px;
+	color: transparent;
+	font-size: 0px;
+}
+
+.avcpman .container-main .partecipants-table .delete-ditta,
+.avcpman .container-main .partecipants-table .raggruppamento-header .delete-raggruppamento,
+.avcpman .container-main .partecipants-table .raggruppamento-header .delete-raggruppamento:visited
+{
+	color: #000;
+	height: 22px;
+	line-height: 22px;
+	font-size: .9em;
+	font-variant: normal;
+	background: url(images/delete_16x16.png)  no-repeat 6px center;
+	display: block;
+	text-decoration: none;
+	/*border: 1px solid #999;
+	background-color: #EEE;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;*/
+	padding-left: 35px;
+	padding-right: 8px;
+	margin-left: 10px;
+	color: transparent;
+	font-size: 0px;
+}
+
+.avcpman .container-main .partecipants-table .raggruppamento .ragione-sociale em
+{
+	font-size: .8em;
+}
+
+.avcpman .container-main .partecipants-table .aggiudicatario
+{
+	background-color: #6abbcf !important;
+}
+
+
+
+/** Pubblicazioni **/
+.avcpman .container-main .publications-table
+{
+	text-align: center;	
+}
+
+.avcpman .container-main .publications-table .download
+{
+	color: #000;
+	height: 22px;
+	line-height: 22px;
+	font-size: .9em;
+	font-variant: normal;
+	background: url(images/download_24x24.png)  no-repeat 6px center;
+	display: block;
+	text-decoration: none;
+	/*border: 1px solid #999;
+	background-color: #EEE;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	padding-left: 35px;
+	padding-right: 8px;
+	margin-left: 10px;*/
+	padding-left: 8px;
+	padding-right: 8px;
+	color: transparent;
+	font-size: 0px;
+}
+
+.avcpman .container-main .form-new-publication button
+{
+	width: 80px;	
+	margin: auto;
+	margin-top: 10px;
 	display: inline-block;
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 5px;
+	height: 24px;
+	line-height: 24	px;
+	background: url(images/add_16x16.png)  no-repeat 6px center;
+	color: #000;
 	text-decoration: none;
 	/*border: 1px solid transparent;*/
 	border: 1px solid #999;
@@ -331,6 +442,124 @@ div.recap-ditta div.label .right
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+}
+
+.avcpman .container-main .form-new-publication button:hover
+{
+	font-weight: bold;
+	cursor:pointer;
+	border: 1px solid #555;
+	-webkit-box-shadow: 3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+	-moz-box-shadow:    3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+	box-shadow:         3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+}
+
+
+/****  Gare ***/
+.avcpman .container-main .ditte-table
+{
+	text-align: center;
+}
+
+.avcpman .container-main .ditte-table .italian-flag
+{
+	background: url(images/italy_flag_24x24.png) no-repeat 3px center;
+	color: transparent;
+	display: block;
+	height: 20px;
+	width: 100%;
+	font-size: 0px;
+}
+.avcpman .container-main .ditte-table .foreign-flag
+{
+	background: url(images/european_flag_24x24.png) no-repeat 3px center;
+	color: transparent;
+	display: block;
+	height: 20px;
+	width: 100%;
+	font-size: 0px;
+}
+.avcpman .container-main #new-ditta
+{
+	width: 110px;	
+	margin: auto;
+	margin-top: 10px;
+	display: block;
+	text-align: center;
 	padding-left: 35px;
 	padding-right: 8px;
+	height: 32px;
+	line-height: 32px;
+	background: url(images/add_24x24.png)  no-repeat 6px center;
+	color: #000;
+	text-decoration: none;
+	/*border: 1px solid transparent;*/
+	border: 1px solid #999;
+	background-color: #EEE;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin-bottom: 20px;
+}
+
+.avcpman .container-main #new-ditta:hover
+{
+	font-weight: bold;
+	cursor:pointer;
+	border: 1px solid #555;
+	-webkit-box-shadow: 3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+	-moz-box-shadow:    3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+	box-shadow:         3px 3px 5px 0px rgba(100, 100, 100, 0.5);
+}
+
+.avcpman .error
+{
+	background: url(images/alert_32x32.png) no-repeat 10px center;
+	background-color: #ed9179;
+	color:#a40000;	
+	font-size: 14px;
+	height: 40px;
+	padding: 8px;
+	padding-top:12px;
+	padding-left: 45px;
+	width: 450px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin: auto;
+	margin-bottom: 10px;
+	
+}
+
+.avcpman .login-content .error em
+{
+	font-weight: bold;
+}
+
+.avcpman .container-main form .radio-estera-italiana
+{
+	width: 280px;
+	margin: auto;
+}
+
+.avcpman .container-main form .radio-estera-italiana label
+{
+	width: 138px;
+	padding:0;
+	margin: 0;
+	display: inline-block;
+	font-size: 13px;
+	line-height: 25px;
+	height: 25px;
+}
+
+.avcpman .container-main form .radio-estera-italiana label input
+{
+	width: auto;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 13px;
+	line-height: 25px;
+	height: 25px;
+	vertical-align: bottom;	
 }

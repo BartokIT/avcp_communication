@@ -1,29 +1,29 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-08-06 12:49:48
+<?php /* Smarty version Smarty-3.1.18, created on 2014-08-26 15:00:28
          compiled from "presentation\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1847753b1355cbc0083-25660544%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:402553fc7798a62de5-06906215%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0834bc5d7397049a4b4624bf70fb781e687df4e3' => 
     array (
       0 => 'presentation\\header.tpl',
-      1 => 1407322045,
+      1 => 1409058024,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1847753b1355cbc0083-25660544',
+  'nocache_hash' => '402553fc7798a62de5-06906215',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_53b1355cc83589_84116969',
+  'unifunc' => 'content_53fc7798b03060_06041920',
   'variables' => 
   array (
     'user' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_53b1355cc83589_84116969')) {function content_53b1355cc83589_84116969($_smarty_tpl) {?><?php if (!is_callable('smarty_block_authorized')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\block.authorized.php';
+<?php if ($_valid && !is_callable('content_53fc7798b03060_06041920')) {function content_53fc7798b03060_06041920($_smarty_tpl) {?><?php if (!is_callable('smarty_block_authorized')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\block.authorized.php';
 if (!is_callable('smarty_function_urlarea')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\function.urlarea.php';
 ?>        <!--[if lt IE 7]>
             <p class="chromeframe">State usando un browser <strong>datato</strong>. Per cortesia <a href="http://browsehappy.com/">aggiornate il vostro browser</a> o <a href="http://www.google.com/chromeframe/?redirect=true">attivate Google Chrome Frame</a> per rendere la vostra migliore la vostra esperienza di navigazione.</p>
@@ -42,8 +42,14 @@ if (!is_callable('smarty_function_urlarea')) include 'E:\\Users\\claudio.papa\\D
 
 						<?php $_smarty_tpl->smarty->_tag_stack[] = array('authorized', array('roles'=>"logged")); $_block_repeat=true; echo smarty_block_authorized(array('roles'=>"logged"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 
+						<div class="submenu">
 							<?php echo $_smarty_tpl->tpl_vars['user']->value->getDisplayName();?>
 
+							<ul>
+								<li><a class="smaller" href="<?php echo smarty_function_urlarea(array('area'=>"avcpman",'action'=>"logout"),$_smarty_tpl);?>
+">Logout</a></li>
+							</ul>
+						</div>
 						<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_authorized(array('roles'=>"logged"), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 
 						</div>

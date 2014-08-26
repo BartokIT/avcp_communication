@@ -40,13 +40,15 @@
     {
 		private $status;
 		private $action=NULL;
+		private $parameters=NULL;
 		
 		public $name_class = __CLASS__;
-		function __construct($site_view, $area, $action=NULL)
+		function __construct($site_view, $area, $action=NULL,$parameters=NULL)
 		{
 			//Create and store the new state
 			$this->status = new State($site_view,$area);
 			$this->action = $action;
+			$this->parameters = $parameters;
 		}
 		
 		public function getStatus()
@@ -58,15 +60,19 @@
 		{
 			return $this->action;
 		}
+		public function getParameters()
+		{
+			return $this->parameters;
+		}
     }
     
     /**
     * Wrapper function that return an object
     * of type ReturnedArea
     * */
-    function ReturnArea($site_view,$area,$action=NULL)
+    function ReturnArea($site_view,$area,$action=NULL,$parameters=NULL)
     {
-		return new ReturnedArea($site_view,$area,$action);	
+		return new ReturnedArea($site_view,$area,$action,$parameters);	
     }
     
     /**

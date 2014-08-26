@@ -15,7 +15,7 @@ class Control extends \Control
             
             //default action
             return ReturnSmarty('ditte.edit.tpl',array("ditta"=>$ditta,
-                                                       "estero"=>array("N"=>"Italia","Y"=>"Estero")));
+                                                       "estero"=>array("N"=>"Italiana","Y"=>"Estera")));
         }
         else
                 return ReturnArea($this->status->getSiteView(),"avcpman/ditte");

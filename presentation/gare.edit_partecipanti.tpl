@@ -12,13 +12,13 @@
 			</div>
             <div class="container-main">
                 <h2>Gara</h2>            
-        {$p = ['gid'=> $gara->gid]}
-		<div class="message">Modifica partecipanti</div>
+				{$p = ['gid'=> $gara->gid]}
+				<div class="message">Modifica partecipanti</div>
                     <div class="box recap-ditta">
 							<div class="label"><span class="left">Anno:</span><span class="right">{$gara->f_pub_anno}</span></div>
 							<div class="label"><span class="left">Codice Identificativo Gara: </span><span class="right">{$gara->cig}</span></div>
 							<div class="label"><span class="left">Oggetto: </span><span class="right">{$gara->oggetto}</span></div>
-							<div class="label"><span class="contraente-type left">Tipo di contraente: </span><span class="right">{$contest_type[$gara->scelta_contraente]}</span></div>
+							<div class="label contraente-type"><span class="left">Tipo di contraente: </span><span class="right">{$contest_type[$gara->scelta_contraente]}</span></div>
 							<div class="label"><span class="left">Importo di aggiudicazione: </span><span class="right">&#8364; {$gara->importo}</span></div>
 							<div class="label"><span class="left">Importo somme liquidate: </span><span class="right">&#8364; {$gara->importo_liquidato}</span></div>
 							<div class="label"><span class="left">Data di inizio lavori: </span><span class="right">{$gara->data_inizio}</span></div>
@@ -34,13 +34,14 @@
 		<table class="partecipants-table">
 			<thead>
 				<tr>
-					<th colspan="4">Partecipanti</th>
+					<th colspan="5">Partecipanti</th>
 				</tr>
 				<tr>
 					<th>N.</th>
 					<th>Ditta</th>
 					<th>Idenfiticativo<br/>fiscale</th>
 					<th>Aggiudicatario</th>
+					<th style="width:50px;">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,37 +52,47 @@
                     <td>{$ditta->ragione_sociale}</td>
 					<td>{$ditta->identificativo_fiscale}</td>
 					<td><input type="radio" name="aggiudicatario" value="{$ditta->pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/></td>
+					<th><a class="delete-ditta" title="Rimovi ditta" href="{urlarea  action="delete_raggruppamento" parameters=$p}">
+						Rimuovi ditta
+					</a></th>
                 </tr>
             {/foreach}
 			{foreach $partecipanti["raggruppamenti"] as $pid=>$rpartecipanti}
-				<tr>
+				<tr class="raggruppamento-header">
 					<td rowspan="{$rpartecipanti|@count + 1}">
-						{$indice++}
-						
+						{$indice++}						
 					</td>
-					<td class="raggruppamento-header" colspan="3">
+					<td colspan="3">
 					Raggruppamento
-					<a class="add-ditta-raggruppamento" href="{urlarea area="avcpman/gare/edit/add_ditta_raggruppamento" parameters="{$pid}"}">
-						Aggiungi ditta
-					</a>
+					{$p = ['pid'=> $pid,'gid'=> $gara->gid]}
+					<td>
+						<a class="delete-raggruppamento" title="Rimuovi raggruppamento" href="{urlarea  action="delete_raggruppamento" parameters=$p}">
+							Rimuovi raggruppamento
+						</a>
+						<a class="add-ditta-raggruppamento" title="Aggiungi ditta" href="{urlarea area="avcpman/gare/edit/add_ditta_raggruppamento" parameters="{$pid}"}">
+							Aggiungi ditta
+						</a>
+					</td>
 				</td></tr>
-				{foreach $rpartecipanti as $ditta}
-					<tr class="raggruppamento">
-						
-						<td>{$ditta->ragione_sociale}</td>
-						<td>{$ditta->identificativo_fiscale}</td>
+				{foreach $rpartecipanti as $ditta}				
+					<tr class="raggruppamento">						
+						<td class="ragione-sociale">{$ditta->ragione_sociale} (<em>{$ruoli_raggruppamento[$ditta->ruolo]}</em>)</td>
+						<td class="identificativo-fiscale">{$ditta->identificativo_fiscale}</td>
 						{if $ditta@first}<td rowspan="{$ditta@total}">
 							<input type="radio" name="aggiudicatario" value="{$pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/>
 						</td> {/if}
+						<td>&nbsp;</td>
 					</tr>
-				{/foreach}				
+				{/foreach}
             {/foreach}
 			</tbody>
 		</table>
-		<button type="submit" name="submit" value="undo">Annulla</button>
-		<button type="submit" name="submit" value="save">Salva</button>		
+		<div class="button-container">
+			<button class="save" type="submit" name="submit" value="save">Salva</button>			
+			<button class="undo" type="submit" name="submit" value="undo">Annulla</button>			
+		</div>
 		{/form}
-		            </div>
+		</div>
 			<hr class="clear" style="display: none"/>
 		</div>
         {include file="footer.tpl"}

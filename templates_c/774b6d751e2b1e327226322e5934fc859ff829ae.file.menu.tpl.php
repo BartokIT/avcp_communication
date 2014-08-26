@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-08-08 12:38:19
+<?php /* Smarty version Smarty-3.1.18, created on 2014-08-26 14:03:36
          compiled from "presentation\menu.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1713953b1357f1c94a4-94678829%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2134353fc7798c52f65-45172749%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1713953b1357f1c94a4-94678829',
+  'nocache_hash' => '2134353fc7798c52f65-45172749',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.18',
-  'unifunc' => 'content_53b1357f2d2f13_33531198',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.18',
+  'unifunc' => 'content_53fc7798cacce9_69202649',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_53b1357f2d2f13_33531198')) {function content_53b1357f2d2f13_33531198($_smarty_tpl) {?><?php if (!is_callable('smarty_block_authorized')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\block.authorized.php';
+<?php if ($_valid && !is_callable('content_53fc7798cacce9_69202649')) {function content_53fc7798cacce9_69202649($_smarty_tpl) {?><?php if (!is_callable('smarty_block_authorized')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\block.authorized.php';
 if (!is_callable('smarty_function_urlarea')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\function.urlarea.php';
 ?><ul id="menu_v">
     <?php $_smarty_tpl->smarty->_tag_stack[] = array('authorized', array('roles'=>"administrator,publisher")); $_block_repeat=true; echo smarty_block_authorized(array('roles'=>"administrator,publisher"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>

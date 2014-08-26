@@ -28,12 +28,23 @@ $(function() {
 
     
     function fill_fields(data) {
-                  var s_estera = 'Italiana';
-                  if (data.estera == 'Y') {
-                                    s_estera='Estera';
-                  }
-        $("#search_result").text(data.ragione_sociale + ' / ' + data.identificativo_fiscale + ' / ' + s_estera);
+        var s_estera = 'Italiana';
+        if (data.estera == 'Y') {
+            s_estera='Estera';
+        }
+        
+        $("#search_result").html(create_label('Ragione sociale',data.ragione_sociale) +
+                                 create_label('Nazionalit&agrave;',s_estera) +
+                                 create_label('Identificativo fiscale', data.identificativo_fiscale));
+        
         $("#ditta_edit_add").prop('disabled',false);
         $("#gara_edit_search_did").val(data.did);
+    }
+    function create_label(label,value)
+    {
+        var s_html_content = '<div class="label"><span class="left">' + label;
+        s_html_content += '</span><span class="right">' + value;
+        s_html_content += '</span></div>';
+        return s_html_content; 
     }
 });

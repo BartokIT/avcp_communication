@@ -49,6 +49,8 @@ class Control extends \Control
             $pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
             
             header ("Content-Type:text/xml");
+            header('Content-Description: File Transfer');
+            header('Content-Disposition: attachment; filename="avcp_' .$anno . '_' . $numero . '"');
             echo write_avcp_xml_to_string($pubblicazione,$lotti);
             
         }

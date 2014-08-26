@@ -287,7 +287,7 @@ function get_gare($anno,$numero=null)
 
 
 /**
- * restituisce l'insieme delle gare di un certo anno e di una determinata pubblicazione
+ * Restituisce l'insieme delle gare di un certo anno e di una determinata pubblicazione
  * */
 function get_gara($gid)
 {
@@ -305,7 +305,78 @@ function get_gara($gid)
 		return $gara;
 }
 
+/**
+ * Cancella una ditta dal database
+ ** */
+function delete_ditta($did)
+{
+	global $db;
+	$did = $db->escape($did*1);
+	
+	$result = $db->query("DELETE FROM " . $db->prefix . "ditta " .	
+						   " WHERE " . $db->prefix . "ditta.did = $did ");
+	
 
+	if (!$result)
+		return false;
+	else
+		return true;
+}
+
+
+/**
+ * Rimuove una gara e tutti i partecipanti associati
+ **/
+function delete_gara($gid)
+{
+    global $db;
+	$db->query("BEGIN");
+	$result = $db->query("DELETE FROM " . $db->prefix . "raggruppamento ".	
+						   " WHERE " . $db->prefix . "raggruppamento.pid IN ( " .
+						   " SELECT p.pid FROM " . $db->prefix . "partecipanti p " .
+						   " WHERE p.gid = $gid " . 
+						   " ) ");
+    if (!$result)
+	{
+		$db->query("ROLLBACK ");
+		return false;
+	}
+	
+	$result = $db->query("DELETE FROM " . $db->prefix . "part_ditta ".	
+						   " WHERE " . $db->prefix . "part_ditta.pid IN ( " .
+						   " SELECT p.pid FROM " . $db->prefix . "partecipanti p " .
+						   " WHERE p.gid = $gid" . 
+						   " ) ");
+    if (!$result)
+	{
+		$db->query("ROLLBACK ");
+		return false;
+	}
+	
+	$result = $db->query("DELETE FROM " . $db->prefix . "partecipanti " .	
+						   " WHERE " . $db->prefix . "partecipanti.gid = $gid ");
+
+	if (!$result)
+	{
+		$db->query("ROLLBACK ");
+		return false;
+	}
+
+	$result = $db->query("DELETE FROM " . $db->prefix . "gara " .	
+						   " WHERE " . $db->prefix . "gara.gid = $gid ");	
+	
+    if (!$result)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+    else
+	{
+		$db->query("COMMIT");
+		return true;
+	}
+
+}
 /**
  * Inserisce una nuova gara nel database
  * */
@@ -409,6 +480,24 @@ function get_ditta($did)
 		return $ditta;
 }
 
+
+/**
+ * Permette di controllare se la ditta è utilizzata in qualche gare
+ * */
+function is_ditta_partecipante($did)
+{
+	global $db;
+	
+	$ditta = $db->get_row("SELECT r.did FROM " . $db->prefix . "raggruppamento r WHERE r.did = " . $did);
+	if ($ditta != NULL)
+		return true;
+	$ditta = $db->get_row("SELECT p.did FROM " . $db->prefix . "part_ditta p WHERE p.did = " . $did);
+	if ($ditta == NULL)
+		return false;
+	else
+		return true;
+}
+
 /**
  * Inserisce una singola ditta nel database
  * */
@@ -509,8 +598,8 @@ function get_partecipanti($gid)
 		{
 		    $raggruppamenti[$r_ditta->pid] = array();
 		}
-		
-		$raggruppamenti[$r_ditta->pid][]=$r_ditta;
+		if (!is_null($r_ditta->did))
+				$raggruppamenti[$r_ditta->pid][]=$r_ditta;
 	}
 	
 	if ($ditte == NULL)
@@ -518,6 +607,7 @@ function get_partecipanti($gid)
 
     return array("ditte"=>$ditte,"raggruppamenti"=>$raggruppamenti);	
 }
+
 
 /**
  * Permette di aggiungere un raggruppamento alla gara specificata
@@ -535,6 +625,37 @@ function insert_raggruppamento($gid)
 	$db->query("COMMIT");
 	
 	return $pid;
+}
+
+/**
+ * Rimuove un raggruppamento partecipante ad una gara, con i suoi partecipanti
+ * @param int $pid Identificatore del raggruppamento partecipante da rimuovere
+ * */
+function delete_raggruppamento($pid)
+{
+	global $db;
+	$db->query("BEGIN");
+	$result = $db->query("DELETE FROM " . $db->prefix . "raggruppamento ".	
+						   " WHERE " . $db->prefix . "raggruppamento.pid = $pid ");
+    if ($result === FALSE)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
+	$result = $db->query("DELETE FROM " . $db->prefix . "partecipanti ".	
+						   " WHERE " . $db->prefix . "partecipanti.pid = $pid ");
+    	
+    if (!$result)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+    else
+	{
+		$db->query("COMMIT");
+		return true;
+	}
 }
 
 /**

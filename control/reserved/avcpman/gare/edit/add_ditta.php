@@ -48,28 +48,29 @@ class Control extends \Control
     
     function insert_and_add()
     {
+        $gid = $this->_r["gid"];
         if ($this->_r["submit"] != "undo")
         {           
             $did= insert_ditta($this->_r["ditta_edit_identificativo"],
                          $this->_r["ditta_edit_ragione_sociale"],
-                         $this->_r["ditta_edit_estero"]);
-            
-            $gid = $this->_r["gid"];
+                         $this->_r["ditta_edit_estero"]);            
             add_partecipante($gid,"D",$did);
         }
-        return ReturnArea($this->status->getSiteView(),"avcpman/gare");
+        return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti",NULL,array("parameter"=>$gid));
     }
     
     function add()
     {
         //TODO : add check if is already added
+        $gid = $this->_r["gid"];        
         if ($this->_r["submit"] != "undo")
         {
-            $gid = $this->_r["gid"];
+
             $did = $this->_r["gara_edit_search_did"];
-            add_partecipante($gid,"D",$did);
+            add_partecipante($gid,"D",$did);        
         }
-        return ReturnArea($this->status->getSiteView(),"avcpman/gare");        
+        
+        return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti",NULL,array("parameter"=>$gid));
     }
 }
 ?>

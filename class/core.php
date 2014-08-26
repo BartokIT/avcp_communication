@@ -104,7 +104,10 @@ class MainFlow
         }
         
         $this->reader=new \Doctrine\Common\Annotations\AnnotationReader();
-        $this->_r = $_REQUEST;
+        if (isset($_REQUEST["nonce"]) && !verify_nonce($_REQUEST["nonce"]))
+            $this->_r = array();
+        else
+            $this->_r = $_REQUEST;
         
         
         //Check if there are some resources to be returned
@@ -540,11 +543,13 @@ OUT;
             //Check if the action exists or not
             if (!$this->action_exists($this->state,$this->action))
             {
+                
                 $ro = $this->error_page(500,"Current application state is not capable to manage specified action");
+                //$this->action=$this->configuration->default_action;
+                //$ro = ReturnArea($this->state->getSiteView(),$this->state->getArea(),$this->configuration->default_action);
             }
             else
             {
-
                 //check if the user has the permission to execute
                 if (!$this->check_permission($this->state,$this->action))
                 {
@@ -584,11 +589,16 @@ OUT;
             //If the  returned object is a new state
             if ($ro instanceof ReturnedArea)
             {
+                if (!is_null($ro->getParameters()))
+                    $this->_r = $ro->getParameters();
+                    
                 $this->go_to_state($ro->getStatus());
+                
                 if (is_null($ro->getAction()))
                     $this->action = $this->configuration->default_action;
                 else
                     $this->action = $ro->getAction();
+                    
             }
         }
         else if ($ro instanceof PrintableObject && $phase==1)

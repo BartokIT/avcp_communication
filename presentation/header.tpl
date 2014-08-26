@@ -11,7 +11,12 @@
 							<a href="{urlarea area="login"}">Accesso area riservata</a>
 						{/authorized}
 						{authorized roles="logged"}
+						<div class="submenu">
 							{$user->getDisplayName()}
+							<ul>
+								<li><a class="smaller" href="{urlarea area="avcpman" action="logout"}">Logout</a></li>
+							</ul>
+						</div>
 						{/authorized}
 						</div>
 					</div>

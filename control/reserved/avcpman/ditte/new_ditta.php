@@ -13,7 +13,7 @@ class Control extends \Control
                                                         "ragione_sociale"=>"",
                                                         "estera"=>"N",
                                                         "identificativo_fiscale"=>""),
-                                                       "estero"=>array("N"=>"Italia","Y"=>"Estero")));
+                                                       "estero"=>array("N"=>"Italiana","Y"=>"Estera")));
 
     }
     

@@ -37,6 +37,7 @@ function smarty_block_form($params, $content, $template, &$repeat)
     if (is_null($content)) {
         return;
     }
+	$counter=0;
 	$state = $template->tpl_vars['state']->value;
 	$user = $template->tpl_vars['user']->value;
 	$configuration = $template->tpl_vars['configuration']->value;
@@ -57,12 +58,21 @@ function smarty_block_form($params, $content, $template, &$repeat)
 	{
 		$area=$params["area"];		
 		$hiddens[] ='<input type="hidden" name="area" value="' .$area . '" />';
+		$counter++;
 	}
-
+	if  (($counter == 0) || (strcmp($method,"post") == 0))
+	{
+			$hiddens[] ='<input type="hidden" name="nonce" value="' .get_nonce_value($state->toString()) . '" />';
+	}
+	
 	if (isset($params["action"]))
 	{
+		
+		
 		$action = $params["action"];
+		$counter++;
 	}
+	
 	if (isset($params["parameters"]))
 	{
 		$params = $params["parameters"];

@@ -11,16 +11,27 @@
                 {include file="menu.tpl"}
             </div>
             <div class="container-main">
-                <h1>Pubblicazioni</h1>
-                <p>
-                    Crea pubblicazione anno:
-                    {form area="pubblicazioni/add_pubblicazione" method="get"}			
-                        <input type="tex" id="pubblicazioni_anno" name="pubblicazioni_anno" value="" />
-                        <button type="submit" name="submit" value="make">Crea</button>
+                <h2>Pubblicazioni</h2>
+                <div class="centered form-new-publication">                    
+                    {form area="pubblicazioni/add_pubblicazione" method="get"}
+                    <label for="pubblicazioni_anno">Crea pubblicazione anno: </label>
+                        <input type="text" id="pubblicazioni_anno" name="pubblicazioni_anno" value="" />
+                        <button class="add" type="submit" name="submit" value="make">Crea</button>
                     {/form}
-                </p>
-                Pubblicazioni:
-                <table>
+                </div>                
+                <table class="publications-table">
+                    <thead>
+                        <tr>
+                            <th colspan="4">Pubblicazioni</th>
+                        </tr>
+                        <tr>
+                            <th>Anno</th>
+                            <th>Descrizione</th>
+                            <th>Ultimo<br/>aggiornamento</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {foreach $pubblicazioni as $p}
                         <tr>                    
                             <td>
@@ -34,10 +45,11 @@
                             </td>
                             <td>
                                 {$p = ['numero'=>$p->numero,'anno'=>$p->anno]}
-                                <a href="{urlarea action="download_file" parameters=$p}">d</a>
+                                <a class="download" title="Download" href="{urlarea action="download_file" parameters=$p}">Download</a>
                             </td>
                         </tr>
                     {/foreach}
+                    </tbody>
                 </table>
             </div>
         </div>

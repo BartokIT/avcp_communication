@@ -9,15 +9,18 @@ class Control extends \Control
      */
     function d(){
        global $contest_type;
-        if (isset($this->_r["parameter"]))
+       global $ruoli_partecipanti_raggruppamento;
+        if (isset($this->_r["parameter"]) || isset($this->_s["gid"]) )
         {
-            $gid  = (int) $this->_r["parameter"];
+            $gid  = (int) isset($this->_r["parameter"])?$this->_r["parameter"]:$this->_s["gid"];
+            $this->_s["gid"]=$gid;
             $gara =get_gara($gid);
             $partecipanti = get_partecipanti($gid);
             //default action
             return ReturnSmarty('gare.edit_partecipanti.tpl',array("gara"=>$gara,
                                                 "partecipanti"=>$partecipanti,
-                                                "contest_type"=>$contest_type));
+                                                "contest_type"=>$contest_type,
+                                                "ruoli_raggruppamento"=>$ruoli_partecipanti_raggruppamento));
         }
         else
                 return ReturnArea($this->status->getSiteView(),"avcpman/gare");
@@ -44,9 +47,23 @@ class Control extends \Control
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti");
     }
     
+    function delete_raggruppamento()
+    {
+        if (isset($this->_r["pid"]))
+        {
+            $pid  = (int) $this->_r["pid"];
+            delete_raggruppamento($pid);
+            return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti",NULL, array("parameter"=>$this->_r["gid"]));
+        }
+        return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti");
+        
+    }
+    
     function add_ditta()
     {
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit/add_ditta");
-    }    
+    }
+    
+    
 }
 ?>
