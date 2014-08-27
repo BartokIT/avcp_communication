@@ -14,7 +14,12 @@
 						<div class="submenu">
 							{$user->getDisplayName()}
 							<ul>
-								<li><a class="smaller" href="{urlarea area="avcpman" action="logout"}">Logout</a></li>
+								{ifarea site-view="reserved"}
+									<li><a class="smaller" href="{urlarea area="avcpman" action="logout"}">Logout</a></li>
+								{/ifarea}
+								{ifarea site-view="general"}
+									<li><a class="smaller" href="{urlarea area="login" action="logout"}">Logout</a></li>
+								{/ifarea}
 							</ul>
 						</div>
 						{/authorized}

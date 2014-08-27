@@ -46,17 +46,17 @@ $au = new LDAPAuthentication("dcServer01.terracina.local",3268,
 			     'DC=terracina,DC=local',
 			     "samaccountname",
 			     '(&(objectClass=user)(objectCategory=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))');
-$rm = new SimpleUserRoleMapper(array("claudio.papa"=>array("administrator","editors")),
-			       array("CN=Remote Desktop Users,CN=Builtin,DC=terracina,DC=local"=>"reader"));
+$rm = new SimpleUserRoleMapper(array(),
+			       array('CN=Intranet Administrators,OU=Comune,DC=terracina,DC=local'=>"administrator"));
 $config =  array("init_status"=>array("site_view"=>"general",
 				      "area"=>"home"),
 		 "authentication"=>array("authenticator"=>$au,
 					 "userinforetriever"=>$au,
 					 "rolemapper"=>$rm,
 					 "external"=>false),
-		 "login_status"=>array("site_view"=>"avcpman",
+		 "login_status"=>array("site_view"=>"general",
 				      "area"=>"login"),
-		"debug"=>array("framework"=>true,
+		"debug"=>array("framework"=>false,
 					   "smarty"=>false),
 		"flow_name"=>"main",
 		"history_len"=>20 );

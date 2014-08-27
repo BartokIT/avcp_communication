@@ -31,8 +31,11 @@ class Control extends \Control
         if ($this->_r["submit"] == "save")
         {
             $gid= $this->_r["gid"];
-            $pid= $this->_r["aggiudicatario"];
-            update_aggiudicatario($gid,$pid);
+            if (isset($this->_r["aggiudicatario"]))
+            {
+                $pid= $this->_r["aggiudicatario"];
+                update_aggiudicatario($gid,$pid);
+            }
         }
         return ReturnArea($this->status->getSiteView(),"avcpman/gare");
     }

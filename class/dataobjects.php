@@ -62,7 +62,7 @@ class User implements Serializable {
 	 * @return array Return the array wich user belong
 	 * */
 	public function getGroups()
-	{
+	{		
 		return $this->groups;
 	}
 	

@@ -134,6 +134,13 @@ class MainFlow
                 $message
             </pre>
 OUT;
+                    echo "=====DEBUG====";
+                    echo "<pre>";
+                        echo $this->history->printRawHistory();
+                    echo "</pre>";
+                    echo "<pre>";
+                        print_r($_SESSION);
+                    echo "</pre>";
         die();
     }
 

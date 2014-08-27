@@ -158,12 +158,15 @@ class SimpleUserRoleMapper implements UserRoleMapper{
                 $user->addUserRole($this->user_list[$user->getID()]);
         }
         
+        
         //Scan for a group role
-        foreach ($user->getGroups() as $group_key=>$group_value)
+        foreach ($user->getGroups() as $group_value)
         {
-            if (isset($this->group_list[$group_key]))
+            
+            if (isset($this->group_list[trim($group_value)]))
             {
-                $roles = $this->group_list[$group_key];
+                
+                $roles = $this->group_list[trim($group_value)];
                 if (is_array($roles))
                 {
                     foreach($roles as $role)

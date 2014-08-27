@@ -13,7 +13,7 @@ class Control extends \Control
                                                         "gid"=>-1,
                                                         "cig"=>"",
                                                         "oggetto"=>"",
-                                                        "f_pub_anno"=>"",
+                                                        "f_pub_anno"=>date("Y"),
                                                         "scelta_contraente"=>1,
                                                         "importo"=>0,
                                                         "importo_liquidato"=>0,
@@ -32,6 +32,7 @@ class Control extends \Control
                              $this->_r["gare_edit_payed_amount"],
                              $this->_r["gare_edit_job_start_date"],
                              $this->_r["gare_edit_job_end_date"],
+                             $this->user->getID(),
                              $this->_r["gare_edit_year"]
                              );
                 }

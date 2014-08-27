@@ -18,7 +18,7 @@ class Control extends \Control
 	function avcpman()
 	{
 		return ReturnArea($this->status->getSiteView(),"avcpman/gare");
-	}   
+	} 
 }
 
 ?>

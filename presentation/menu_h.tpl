@@ -9,6 +9,7 @@
             <a class="home" href="{urlarea area="home"}">Home</a>
         </li>
         {authorized roles="logged"}
+        {ifarea site-view="reserved"}
         <li>
             <div class="submenu">
                 Procedure            
@@ -18,8 +19,9 @@
             </div>
         </li>
         <li>
-            <a href="{urlarea area="ditte"}">Contatti</a>
+            <a href="#">Contatti</a>
         </li>
+        {/ifarea}
         {/authorized}
     </ul>
 </div>

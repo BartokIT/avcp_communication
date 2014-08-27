@@ -13,15 +13,14 @@ class Control extends \Control
      */
     function d()
     {
-            
-            if (!isset($this->_s["year"]))
-            {
-                $this->_s["year"]=date("Y");
-            }
-            $gare =get_gare($this->_s["year"]);
-            //default action
-            return ReturnSmarty('gare.tpl',array("year"=>$this->_s["year"],
-                                                 "gare"=>$gare));
+        if (!isset($this->_s["year"]))
+        {
+            $this->_s["year"]=date("Y");
+        }
+        $gare =get_gare($this->_s["year"],NULL,$this->user->getID());
+        //default action
+        return ReturnSmarty('gare.tpl',array("year"=>$this->_s["year"],
+                                             "gare"=>$gare));
     }
     
     

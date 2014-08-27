@@ -30,19 +30,19 @@ class Control extends \Control
         $ditte=array();
         if (isset($this->_r["ragione_sociale"]))
         {
-            $ditte= search_ditte("",$this->_r["ragione_sociale"]);
+            $ragione_sociale = $this->_r["ragione_sociale"];            
         }
         
         if (isset($this->_r["identificativo_fiscale"]))
         {
-            $ditte= search_ditte($this->_r["identificativo_fiscale"],"");
+            $identificativo_fiscale = $this->_r["identificativo_fiscale"];
         }
-        
+        $ditte= search_ditte($identificativo_fiscale,$ragione_sociale);
         $ditte_string = array();
-        foreach ($ditte as $ditta)
+        /*foreach ($ditte as $ditta)
         {
-            $ditte_string[]= $ditta->ragione_sociale;
-        }
+            $ditte_string[]= $ditta->ragione_sociale . " / " . $ditta->identificativo_fiscale;
+        }*/
         return ReturnInline($ditte,"json");
     }
     

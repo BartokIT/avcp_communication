@@ -41,10 +41,23 @@ function smarty_block_ifarea($params, $content, $template, &$repeat)
 	$state = $template->tpl_vars['state']->value;
 	$_output="";
 	
+	$visualize = true;
 	if (isset($params["value"]))
 	{
-		if ($state->getArea() == $params["value"])
-			$_output .= $content;
+		if ($state->getArea() != $params["value"])
+			$visualize = $visualize && false;
 	}
+	
+	if (isset($params["site-view"]))
+	{
+		if ($state->getSiteView() != $params["site-view"])
+			$visualize = $visualize && false;
+	}
+	
+	if ($visualize)
+	{
+		$_output .= $content;
+	}
+	
     return $_output;
 }

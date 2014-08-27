@@ -3,6 +3,7 @@
     <title>Comunicazioni AVCP</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	{include file="style.tpl"}
+    <link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
     </head>
     <body class="avcpman">
         {include file="header.tpl"}
@@ -53,4 +54,8 @@
 		</div>
         {include file="footer.tpl"}
     </body>
+    <script src="resources/js/jquery-1.10.2.js"></script>
+	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="resources/js/datepicker-it.js"></script>
+	<script src="control/reserved/avcpman/gare/new_gara.js"></script>
 </html>

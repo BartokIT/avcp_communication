@@ -28,8 +28,14 @@ class Control extends \Control
 		}
 		else
 		{
-			return ReturnArea("reserved","avcpman/gare");
+			return ReturnArea("reserved","home");
 		}
+	}
+	
+	function logout()
+	{
+		$result= $this->user->logout();
+		return ReturnArea("general","home");			
 	}
 }
 ?>

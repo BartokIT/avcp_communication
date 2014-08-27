@@ -262,7 +262,7 @@ function insert_pubblicazione($titolo,$abstract,$data_pubblicazione, $data_aggio
 /**
  * restituisce l'insieme delle gare di un certo anno e di una determinata pubblicazione
  * */
-function get_gare($anno,$numero=null)
+function get_gare($anno,$numero=null,$userid=null)
 {
 	global $db;
 	$anno = $db->escape($anno*1);
@@ -271,7 +271,13 @@ function get_gare($anno,$numero=null)
 	if (!is_null($numero))
 	{
 		$numero = $db->escape($numero);
-		$numero_string = "AND g.f_pub_numero = $numero";
+		$numero_string .= "AND g.f_pub_numero = $numero";
+	}
+	
+	if (!is_null($userid))
+	{
+		$userid = $db->escape($userid);
+		$numero_string .= 'AND g.userid = "' .$userid . '"';
 	}
 	
     $query_string= "SELECT  g.gid, g.cig, g.oggetto, g.scelta_contraente, " .
@@ -381,7 +387,7 @@ function delete_gara($gid)
  * Inserisce una nuova gara nel database
  * */
 function insert_gara($cig=null,$oggetto=null,$scelta_contraente=null,$importo=null,$importo_liquidato=null,
-					 $data_inizio=null,$data_fine=null,$f_pub_anno=null,$f_pub_numero=null)
+					 $data_inizio=null,$data_fine=null,$userid=null,$f_pub_anno=null,$f_pub_numero=null)
 {
 	global $db;
 	$db->query("BEGIN");
@@ -392,7 +398,7 @@ function insert_gara($cig=null,$oggetto=null,$scelta_contraente=null,$importo=nu
 		$data["cig"] = "0000000000";
 		
 	$sql_string = build_insert_string($db->prefix . "gara",$data);
-	var_dump($sql_string);
+	
 	$result = $db->query($sql_string);
     $db->query("COMMIT");
 
@@ -437,8 +443,10 @@ function search_ditte($identificativo,$ragione_sociale)
 		$where_clausule[] = "d.ragione_sociale LIKE '%" . $ragione_sociale ."%'";
 
 	if (count($where_clausule) != 0)
-		$where_string = " WHERE " . implode($where_clausule," OR ");
+		$where_string = " WHERE " .  implode(" OR ", $where_clausule);
 	
+	//echo $where_string;
+	$ditte = NULL;
 	$ditte = $db->get_results("SELECT d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . "ditta d " . $where_string);
 	if ($ditte == NULL)
 		return array();

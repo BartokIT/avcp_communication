@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-08-26 14:03:36
+<?php /* Smarty version Smarty-3.1.18, created on 2014-08-27 11:24:15
          compiled from "presentation\menu.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2134353fc7798c52f65-45172749%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '774b6d751e2b1e327226322e5934fc859ff829ae' => 
     array (
       0 => 'presentation\\menu.tpl',
-      1 => 1407494279,
+      1 => 1409131453,
       2 => 'file',
     ),
   ),
@@ -15,9 +15,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.18',
   'unifunc' => 'content_53fc7798cacce9_69202649',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_53fc7798cacce9_69202649')) {function content_53fc7798cacce9_69202649($_smarty_tpl) {?><?php if (!is_callable('smarty_block_authorized')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\block.authorized.php';
 if (!is_callable('smarty_function_urlarea')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\function.urlarea.php';
@@ -39,7 +39,6 @@ if (!is_callable('smarty_function_urlarea')) include 'E:\\Users\\claudio.papa\\D
 ">Ditte</a>
     </li>
     <li>
-        <a href="<?php echo smarty_function_urlarea(array('area'=>"avcpman/impostazioni"),$_smarty_tpl);?>
-">Impostazioni</a>
+        <a href="#">Impostazioni</a>
     </li>
 </ul><?php }} ?>

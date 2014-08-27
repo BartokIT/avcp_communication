@@ -13,6 +13,7 @@ class Control extends \Control
     function d(){
             return ReturnSmarty('index.tpl');
     }
-   
+
+	
 }
 ?>

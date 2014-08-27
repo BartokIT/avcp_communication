@@ -11,6 +11,6 @@
         <a href="{urlarea area="avcpman/ditte"}">Ditte</a>
     </li>
     <li>
-        <a href="{urlarea area="avcpman/impostazioni"}">Impostazioni</a>
+        <a href="#">Impostazioni</a>
     </li>
 </ul>

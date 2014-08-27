@@ -22,7 +22,7 @@
                     <thead>
                         <tr>
                             <th>N.</th>
-                            <th>&nbsp;</th>
+                            <th>I/E</th>
                             <th>Ragione sociale</th>
                             <th>Identificativo fiscale</th>
                             <th colspan="2">&nbsp;</th>

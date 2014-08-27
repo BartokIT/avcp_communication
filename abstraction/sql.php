@@ -27,6 +27,7 @@ $db_schema[$db->prefix . "gara"]=array(
     "importo_liquidato"=>array("type"=>"numeric","null"=>true),
     "data_inizio"=>array("type"=>"date","format"=>'Y-m-d',"null"=>true),
     "data_fine"=>array("type"=>"date","format"=>'Y-m-d',"null"=>true),
+	"userid"=>array("type"=>"string","lenght"=>100,"null"=>true),
     "f_pub_anno"=>array("type"=>"int","null"=>true),
     "f_pub_numero"=>array("type"=>"int","null"=>true)
 );

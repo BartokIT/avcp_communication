@@ -3,7 +3,7 @@
     <title>Comunicazioni AVCP</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	{include file="style.tpl"}
-	<link href="resources/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet" type="text/css">
+	<link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
     </head>
     <body class="avcpman">		
         {include file="header.tpl"}
@@ -16,7 +16,7 @@
 		{$p = ['gid'=> $gara]}
 		
 		<p>
-			<div class="message">Inserisci nuova ditta e aggiungila alla gara</div>
+			<div class="message">Ricerca ditta e aggiungila alla gara</div>
 			<div class="box">
 				<label for="ditta_search"><span>Ricerca ditta:</span>			
 					<input type="text" id="ditta_search" name="ditta_search" value=""/>
