@@ -32,6 +32,16 @@ $db_schema[$db->prefix . "gara"]=array(
     "f_pub_numero"=>array("type"=>"int","null"=>true)
 );
 
+$db_schema[$db->prefix . "pubblicazione"]=array(
+    "numero"=>array("type"=>"int","null"=>false),
+    "anno"=>array("type"=>"int","null"=>false),
+    "titolo"=>array("type"=>"string","lenght"=>1000,"null"=>true),
+	"abstract"=>array("type"=>"string","lenght"=>1000,"null"=>true),
+	"url"=>array("type"=>"string","lenght"=>1000,"null"=>true),
+    "data_pubblicazione"=>array("type"=>"date","format"=>'Y-m-d',"null"=>true),
+    "data_aggiornamento	"=>array("type"=>"date","format"=>'Y-m-d',"null"=>true)
+);
+
 $db_schema[$db->prefix . "part_ditta"]=array(
     "pid"=>array("type"=>"int","null"=>false),
     "did"=>array("type"=>"int","null"=>false)

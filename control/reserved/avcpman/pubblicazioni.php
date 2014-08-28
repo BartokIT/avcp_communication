@@ -25,9 +25,31 @@ class Control extends \Control
      */
     function delete()
     {
-            //insert new pubblication
-            echo "delete";
-            return ReturnInline('<html><body><h1>Default Form</h1><p>'. $this->getStatus()->getArea() .'</p></body></html>','plain');
+        if (isset($this->_r["anno"]) && isset($this->_r["numero"]))
+        {
+            $anno = $this->_r["anno"];
+            $numero = $this->_r["numero"];
+            delete_pubblicazione($anno,$numero);
+            return ReturnArea($this->status->getSiteView(),$this->status->getArea());
+        }
+    }
+    
+    function verify_anno()
+    {
+        if (isset($this->_r["anno"]))
+        {
+            $anno = $this->_r["anno"];
+            if (!is_year_gare_present($anno))
+            {
+                return ReturnInline(array("trouble"=>true,"message"=>"Non sono presenti gare per l'anno specificato"),"json");
+            }
+            else if (is_year_publication_present($anno))
+            {
+                return ReturnInline(array("trouble"=>true,"message"=>"E' stata gia creata una pubblicazione per l'anno richiesto"),"json");
+            }
+            else
+                return ReturnInline(array("trouble"=>false),"json");
+        }        
     }
     
     function download_file()

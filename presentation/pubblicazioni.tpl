@@ -12,13 +12,15 @@
             </div>
             <div class="container-main">
                 <h2>Pubblicazioni</h2>
-                <div class="centered form-new-publication">                    
-                    {form area="pubblicazioni/add_pubblicazione" method="get"}
+                <div class="centered form-new-publication">
+                    <div id="show-error" style="visibility:hidden" class="error"></div>
+                    {form id="new_publication" area="avcpman/pubblicazioni/add_pubblicazione" method="get"}
                     <label for="pubblicazioni_anno">Crea pubblicazione anno: </label>
-                        <input type="text" id="pubblicazioni_anno" name="pubblicazioni_anno" value="" />
+                        <input  autocomplete="off" type="text" maxlength="4" id="pubblicazioni_anno" name="pubblicazioni_anno" value="" />
                         <button class="add" type="submit" name="submit" value="make">Crea</button>
                     {/form}
-                </div>                
+                </div>
+                
                 <table class="publications-table">
                     <thead>
                         <tr>
@@ -28,7 +30,7 @@
                             <th>Anno</th>
                             <th>Descrizione</th>
                             <th>Ultimo<br/>aggiornamento</th>
-                            <th>&nbsp;</th>
+                            <th colspan="2">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +49,9 @@
                                 {$p = ['numero'=>$p->numero,'anno'=>$p->anno]}
                                 <a class="download" title="Download" href="{urlarea action="download_file" parameters=$p}">Download</a>
                             </td>
+                            <td>
+                                <a class="delete" title="Cancella pubblicazione" href="{urlarea action="delete" parameters=$p}">Elimina</a>
+                            </td>
                         </tr>
                     {/foreach}
                     </tbody>
@@ -55,4 +60,7 @@
         </div>
         {include file="footer.tpl"}
     </body>
+    <script src="resources/js/jquery-1.10.2.js"></script>
+	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="control/reserved/avcpman/pubblicazioni.js"></script>
 </html>

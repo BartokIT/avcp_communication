@@ -1,41 +1,58 @@
-<html>
+<!DOCTYPE html>
     <head>
     <title>Comunicazioni AVCP</title>
-	<link href="resources/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet" type="text/css">
-    <title>Comunicazioni AVCP</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	{include file="style.tpl"}		
+	{include file="style.tpl"}
+	<link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
     </head>
-    <body>
+    <body class="avcpman">		
         {include file="header.tpl"}
-        {include file="menu.tpl"}
-        <h1>Nuova pubblicazione</h1>		
-		<p>
-			Inserisci pubblicazione {$anno}
-			{$p = ['pubblicazione_edit_anno'=>$anno]}
-			{form action="add" parameters=$p}
-				<label for="anno">Titolo
-					<input type="text" name="pubblicazione_edit_titolo" value=""/><br/>
-				</label>					
-					<label for="name">Abstract</label>
-					<input type="text" name="pubblicazione_edit_abstract"/><br/>
-					<label for="name">Data pubblicazione</label>
-					<input type="text" name="pubblicazione_edit_pubblicazione"/><br/>
-					<label for="name">Data aggiornamento</label>
-					<input type="text" name="pubblicazione_edit_aggiornamento"/><br/>
-					<label for="name">Url di pubblicazione</label>
-					<input type="text" name="pubblicazione_edit_url"/><br/>
-					<button type="submit" name="submit" value="undo">Annulla</button>
-            {ifarea value="pubblicazioni/edit"}
-                <button type="submit" name="submit" value="save">Salva</button>
-            {/ifarea}
-            {ifarea value="pubblicazioni/add_pubblicazione"}
-                <button type="submit" name="submit" value="save">Inserisci</button>
-            {/ifarea}
-			{/form}
-		</p>
+		<div class="content-width">
+			<div class="left-float container-menu">
+				{include file="menu.tpl"}
+			</div>
+			<div class="container-main">
+				<h2>Nuova Pubblicazione</h2>
+				<p>
+						
+						{$p = ['pubblicazione_edit_anno'=>$anno]}
+						{form action="add" parameters=$p}
+						<div class="message">Inserisci pubblicazione per l'anno {$anno}</div>
+						<div class="box">						
+								<label for="pubblicazione_edit_titolo"><span>Titolo</span>
+									<input type="text" maxlength="1000" name="pubblicazione_edit_titolo" value=""/>
+								</label>					
+								<label for="name"><span>Abstract</span>
+									<input type="text" maxlength="1000" name="pubblicazione_edit_abstract"/>
+								</label>
+								<label for="name"><span>Data pubblicazione</span>
+									<input type="text" maxlength="10" id="pubblicazione_edit_pubblicazione" name="pubblicazione_edit_pubblicazione"/>
+								</label>
+								<label for="name"><span>Data aggiornamento</span>
+									<input type="text" maxlength="10" id="pubblicazione_edit_aggiornamento" name="pubblicazione_edit_aggiornamento"/>
+								</label>
+								<label for="name"><span>Url di pubblicazione</span>
+									<input type="text" maxlength="1000" name="pubblicazione_edit_url"/>
+								</label>
+								<div class="button-container">
+								{ifarea value="avcpman/pubblicazioni/edit"}
+									<button class="save" type="submit" name="submit" value="save">Salva</button>
+								{/ifarea}
+								{ifarea value="avcpman/pubblicazioni/add_pubblicazione"}
+									<button class="save" type="submit" name="submit" value="save">Inserisci</button>
+								{/ifarea}
+								<button class="undo" type="submit" name="submit" value="undo">Annulla</button>
+								</div>
+						</div>						
+						{/form}
+
+				</p>
+				<hr class="clear" style="display: none"/>
+				</div>
+		</div>
         {include file="footer.tpl"}
-		<script src="resources/js/jquery-1.10.2.js"></script>
-		<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
     </body>
+	<script src="resources/js/jquery-1.10.2.js"></script>
+	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="control/reserved/avcpman/pubblicazioni/add_pubblicazione.js"></script>
 </html>

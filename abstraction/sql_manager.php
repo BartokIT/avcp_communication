@@ -102,6 +102,38 @@ function get_years()
 	else
 		return $years;
 }
+
+
+/**
+ * Ottiene la lista degli anni presenti in archivio
+ **/
+function is_year_gare_present($anno)
+{
+	global $db;
+	$anno = $db->escape($anno*1);
+	$years = $db->get_col("SELECT DISTINCT g.f_pub_anno FROM " . $db->prefix . "gara g WHERE g.f_pub_anno = $anno");
+
+	if ($years == NULL)
+		return false;
+	else
+		return true;
+}
+
+/**
+ * Ottiene la lista degli anni presenti in archivio
+ **/
+function is_year_publication_present($anno)
+{
+	global $db;
+	$anno = $db->escape($anno*1);
+	$years = $db->get_col("SELECT DISTINCT anno FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno");
+
+	if ($years == NULL)
+		return false;
+	else
+		return true;
+}
+
 /**
  * Permette di inserire un anno in archivio
  **/
@@ -181,6 +213,7 @@ function delete_pubblicazione($anno,$numero)
 {
 		global $db;
 		$result = $db->query("DELETE FROM " . $db->prefix . "pubblicazione  WHERE anno = $anno AND numero = $numero");
+		return $result;
 }
 
 /**

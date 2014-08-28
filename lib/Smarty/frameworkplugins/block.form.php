@@ -44,6 +44,7 @@ function smarty_block_form($params, $content, $template, &$repeat)
 	$method = "post";
 	$hiddens = array();
 	//$area =$state->getArea();
+	$attribute ="";
 	$action = $configuration->default_action;
 	if (isset($params["method"]))
 	{
@@ -60,9 +61,15 @@ function smarty_block_form($params, $content, $template, &$repeat)
 		$hiddens[] ='<input type="hidden" name="area" value="' .$area . '" />';
 		$counter++;
 	}
+	
 	if  (($counter == 0) || (strcmp($method,"post") == 0))
 	{
 			$hiddens[] ='<input type="hidden" name="nonce" value="' .get_nonce_value($state->toString()) . '" />';
+	}
+	
+	if (isset($params["id"]))
+	{
+		$attribute .= ' id="'.$params["id"] . '" ' ;
 	}
 	
 	if (isset($params["action"]))
@@ -89,7 +96,7 @@ function smarty_block_form($params, $content, $template, &$repeat)
 	
 	$hiddens[] ='<input type="hidden" name="action" value="' .$action . '" />';
 	
-	$_output='<form method="'.$method.'" action="'.INDEX.'">';
+	$_output='<form method="'.$method.'" action="'.INDEX.'" ' . $attribute .'>';
 	$_output .= "\n" . implode($hiddens,"\n") . "\n";
 	$_output .= $content;
 	$_output .= "</form>";

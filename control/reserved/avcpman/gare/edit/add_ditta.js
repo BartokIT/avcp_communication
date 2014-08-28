@@ -4,6 +4,7 @@ $(function() {
             $.ajax({
                 url: "index.php?action=search_ditta",
                 dataType: "json",
+                cache:false,
                 data: {
                       ragione_sociale: request.term,
                       identificativo_fiscale: request.term
