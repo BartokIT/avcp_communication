@@ -144,7 +144,8 @@ function build_update_string($table,$params,$where_clausule="")
     $update_string = "";
 
     foreach ($params as $column=>$value)
-    {        
+    {
+		//echo $column . " = " . $value;
         if (isset($db_schema[$table][$column]))
         {
             $detail = $db_schema[$table][$column];
@@ -152,7 +153,10 @@ function build_update_string($table,$params,$where_clausule="")
             {
                 case "float":
                 case "int":
-                    $update_string .= $column . " = " . $value;
+					if ($value == "NULL")
+						$update_string .= $column . " = NULL ";
+					else
+						$update_string .= $column . " = " . $value;
                     break;
                 case "numeric":
                 case "string":
@@ -170,6 +174,7 @@ function build_update_string($table,$params,$where_clausule="")
 
     $update_string = substr($update_string,0,-1) . " ";
     $sql_string .= $update_string . $where_clausule;
+	//echo $sql_string;
     return $sql_string;
 }
 

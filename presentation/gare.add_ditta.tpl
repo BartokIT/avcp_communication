@@ -42,7 +42,7 @@
 		</p>
 		<p class="centered"><em>oppure</em></p>
 		<p>						
-			{form action="insert_and_add" parameters=$p}
+			{form id="edit-ditta" action="insert_and_add" parameters=$p}
 			<div class="message">Inserisci nuova ditta e aggiungila alla gara</div>
                 <div class="box">
 					<label for="ditta_edit_ragione_sociale"><span>Ragione sociale</span>
@@ -74,4 +74,6 @@
 	<script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
 	<script src="control/reserved/avcpman/gare/edit/add_ditta.js"></script>
+	<script src="resources/js/support.js"></script>	    
+	<script src="control/reserved/avcpman/ditte/edit.js"></script>	
 </html>

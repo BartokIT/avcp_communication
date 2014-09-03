@@ -170,14 +170,14 @@ html, body
 {
 	background: #fff;
 }
-
+/*
 #menu_h li.active a.home
 {
 	min-width:100px;
 	background: #fff url(images/home_20x20.png) no-repeat 7px 3px;
 	padding-left: 35px;	
 }
-
+*/
 #menu_h li.active a, #menu_h li.active div.submenu
 {
 	top:7px;

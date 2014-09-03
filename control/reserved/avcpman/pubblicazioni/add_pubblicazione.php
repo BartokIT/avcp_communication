@@ -11,12 +11,22 @@ class Control extends \Control
         if (isset($this->_r["pubblicazioni_anno"]))
         {
             $anno  = (int) $this->_r["pubblicazioni_anno"];
-                        
-            //default action
-            return ReturnSmarty('pubblicazione.edit.tpl',array("anno"=>$anno));
+            $message = "";
+            if (!is_year_gare_present($anno))
+            {
+                $message= "Non sono presenti gare per l'anno specificato";
+                return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni",NULL,array("error"=>$message));                
+            }
+            else if (is_year_publication_present($anno))
+            {
+                $message= "E' stata gia creata una pubblicazione per l'anno richiesto";
+                return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni",NULL,array("error"=>$message));
+            }
+            else
+                return ReturnSmarty('pubblicazione.edit.tpl',array("anno"=>$anno));
         }
         else
-            return ReturnArea($this->status->getSiteView(),"pubblicazioni");
+            return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");
     }
     
  

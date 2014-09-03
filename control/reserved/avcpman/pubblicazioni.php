@@ -16,7 +16,12 @@ class Control extends \Control
             $pubs = get_pubblicazioni();
             $pubblicazioni=array();
             //TODO: manage index
-            return ReturnSmarty('pubblicazioni.tpl',array("pubblicazioni"=>$pubs));
+            $parameters = array("pubblicazioni"=>$pubs);
+            if (isset($this->_r["error"]))
+            {
+                $parameters["error"]=$this->_r["error"];
+            }
+            return ReturnSmarty('pubblicazioni.tpl',$parameters);
     }
 
     
@@ -29,6 +34,7 @@ class Control extends \Control
         {
             $anno = $this->_r["anno"];
             $numero = $this->_r["numero"];
+            update_gare($anno,$numero,null,null,null,null,null,null,null,null,"NULL");
             delete_pubblicazione($anno,$numero);
             return ReturnArea($this->status->getSiteView(),$this->status->getArea());
         }

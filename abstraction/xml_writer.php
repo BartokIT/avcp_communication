@@ -15,12 +15,14 @@
 	**/
 	function write_avcp_metadata_tostring($meta)
 	{
+		$tmp_dobj=DateTime::createFromFormat('d/m/Y',$meta->data_aggiornamento);
+		$tmp_dobjP=DateTime::createFromFormat('d/m/Y',$meta->data_pubblicazione);
 		$outstring  = indent(1) . "<metadata>\n";
 		$outstring .= indent(2) . "<titolo>" . $meta->titolo . "</titolo>\n";
 		$outstring .= indent(2) . "<abstract>" . $meta->abstract . "</abstract>\n";
-		$outstring .= indent(2) . "<dataPubblicazioneDataset>" . $meta->data_pubblicazione . "</dataPubblicazioneDataset>\n";
+		$outstring .= indent(2) . "<dataPubbicazioneDataset>" . $tmp_dobjP->format("Y-m-d") . "</dataPubbicazioneDataset>\n";
 		$outstring .= indent(2) . "<entePubblicatore>" . $meta->ente_pubblicatore . "</entePubblicatore>\n";
-		$outstring .= indent(2) . "<dataUltimoAggiornamentoDataset>" . $meta->data_aggiornamento . "</dataUltimoAggiornamentoDataset>\n";
+		$outstring .= indent(2) . "<dataUltimoAggiornamentoDataset>" . $tmp_dobj->format("Y-m-d") . "</dataUltimoAggiornamentoDataset>\n";
 		$outstring .= indent(2) ."<annoRiferimento>" . $meta->anno . "</annoRiferimento>\n";
 		$outstring .= indent(2) ."<urlFile>" . $meta->url . "</urlFile>\n";
 		$outstring .= indent(2) ."<licenza>" . $meta->licenza . "</licenza>\n";
@@ -52,10 +54,12 @@
 	function write_avcp_lotto_post_tostring($lotto_info)
 	{
 
+		$tmp_completamento=DateTime::createFromFormat('d/m/Y',$lotto_info->data_fine);
+		$tmp_inizio=DateTime::createFromFormat('d/m/Y', $lotto_info->data_inizio);
 		$outstring  =indent(3) . "<importoAggiudicazione>" . $lotto_info->importo . "</importoAggiudicazione>\n";
 		$outstring .=indent(3) ."<tempiCompletamento>\n";
-		$outstring .=indent(4) ."<dataInizio>" . $lotto_info->data_inizio . "</dataInizio>\n";
-		$outstring .=indent(4) ."<dataUltimazione>" . $lotto_info->data_fine . "</dataUltimazione>\n";		
+		$outstring .=indent(4) ."<dataInizio>" .  $tmp_inizio->format("Y-m-d") . "</dataInizio>\n";
+		$outstring .=indent(4) ."<dataUltimazione>" . $tmp_completamento->format("Y-m-d") . "</dataUltimazione>\n";		
 		$outstring .=indent(3) ."</tempiCompletamento>\n";		
 		$outstring .=indent(3) ."<importoSommeLiquidate>" . $lotto_info->importo_liquidato . "</importoSommeLiquidate>\n";
 		$outstring .=indent(2) . "</lotto>\n";		

@@ -444,6 +444,28 @@ function insert_gara($cig=null,$oggetto=null,$scelta_contraente=null,$importo=nu
 /**
  * Aggiorno i dati principali di una gara
  * */
+function update_gare($anno,$numero,$cig=null,$oggetto=null,$scelta_contraente=null,$importo=null,$importo_liquidato=null,
+					 $data_inizio=null,$data_fine=null,$f_pub_anno=null,$f_pub_numero=null)
+{
+	global $db;
+	$db->query("BEGIN");	
+	$data=sql_create_array(__FUNCTION__,func_get_args());
+	unset($data["anno"]);
+	unset($data["numero"]);
+	$sql_string = build_update_string($db->prefix . "gara",$data," WHERE f_pub_anno = " .  $anno . " AND f_pub_numero = " . $numero );
+	$result = $db->query($sql_string);
+    $db->query("COMMIT");
+
+	if ($result)
+		return $result;
+	else
+		return false;	
+}
+
+
+/**
+ * Aggiorno i dati principali di una gara
+ * */
 function update_gara($gid,$cig=null,$oggetto=null,$scelta_contraente=null,$importo=null,$importo_liquidato=null,
 					 $data_inizio=null,$data_fine=null,$f_pub_anno=null,$f_pub_numero=null)
 {

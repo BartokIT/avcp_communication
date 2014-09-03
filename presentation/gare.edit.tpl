@@ -14,16 +14,16 @@
             <div class="container-main">
                 <h2>Gara</h2>                
                 {$p = ['gid'=> $gara->gid]}
-                {form action="submit" parameters=$p}
+                {form id="edit-gara" action="submit" parameters=$p}
                     <div class="message">Modifica gara</div>
                     <div class="box">
                         
                         <label class="year" for="year"><span>Anno</span>
-                            <input type="text" name="gare_edit_year" id="gare_edit_year" value="{$gara->f_pub_anno}"/></label>
+                            <input type="text" maxlength="4" name="gare_edit_year" id="gare_edit_year" value="{$gara->f_pub_anno}"/></label>
                         <label class="cig" for="cig"><span>Codice Identificativo Gara<br/><em>(rilasciato da AVCP)</em></span>
-                            <input type="text" name="gare_edit_cig" id="gare_edit_cig" value="{$gara->cig}"/></label>
+                            <input type="text"  maxlength="10" name="gare_edit_cig" id="gare_edit_cig" value="{$gara->cig}"/></label>
                         <label for="subject"><span>Oggetto</span>
-                            <input type="text" name="gare_edit_subject" id="gare_edit_subject" value="{$gara->oggetto}"/></label>
+                            <input type="text"  maxlength="250" name="gare_edit_subject" id="gare_edit_subject" value="{$gara->oggetto}"/></label>
                         <label for="contest_type"><span>Tipo di contraente</span>
                             {html_options name="gare_edit_contest_type" options=$contest_type selected=$gara->scelta_contraente separator="<br/>"}</label>
                         <label for="amount"><span>Importo di aggiudicazione</span>
@@ -57,5 +57,6 @@
     <script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
     <script src="resources/js/datepicker-it.js"></script>
+    <script src="resources/js/support.js"></script>	    
 	<script src="control/reserved/avcpman/gare/new_gara.js"></script>
 </html>

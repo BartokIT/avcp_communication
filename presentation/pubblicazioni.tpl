@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
     <head>
     <title>Comunicazioni AVCP</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,7 +13,7 @@
             <div class="container-main">
                 <h2>Pubblicazioni</h2>
                 <div class="centered form-new-publication">
-                    <div id="show-error" style="visibility:hidden" class="error"></div>
+                    <div id="show-error" style="visibility:{if isset($error)}visible{else}hidden{/if}" class="error">{if isset($error)}{$error}{/if}</div>
                     {form id="new_publication" area="avcpman/pubblicazioni/add_pubblicazione" method="get"}
                     <label for="pubblicazioni_anno">Crea pubblicazione anno: </label>
                         <input  autocomplete="off" type="text" maxlength="4" id="pubblicazioni_anno" name="pubblicazioni_anno" value="" />
@@ -62,5 +62,6 @@
     </body>
     <script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="resources/js/support.js"></script>
 	<script src="control/reserved/avcpman/pubblicazioni.js"></script>
 </html>
