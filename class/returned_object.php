@@ -112,7 +112,7 @@
     **/
     function ReturnPage($page,$parameters=array())
     {
-	return new ReturnedPage($page,$parameters);
+		return new ReturnedPage($page,$parameters);
     }
 	
     /**
@@ -139,6 +139,28 @@
 			}
 			else
 				echo $this->data;
+		}
+    }
+	
+	 /**
+     * Class that permit to out a string
+     * */
+    class ReturnedFile extends PrintableObject
+    {
+		private $anon_f;
+		private $parameters;
+		function __construct($anon_f,$params)
+		{
+			$this->anon_f = $anon_f;
+			$this->parameters=$params;
+		}
+		
+		/**
+		 * Out the data passed with given format
+		 * */
+		public function out()
+		{
+			echo $this->anon_f($this->parameters);			
 		}
     }
 	

@@ -254,17 +254,20 @@ function get_nonce_value($action,$itemtype="")
 
 }
 
-function verify_nonce($nonce_to_test)
+function verify_nonce($nonce_to_test,$use=true)
 {
     if (in_array($nonce_to_test,$_SESSION["nonces"]))
     {
 		$nonce_key = array_search($nonce_to_test,$_SESSION["nonces"]);
-		unset($_SESSION["nonces"][$nonce_key]); //verify another method to remove a key
-
+		if ($use)
+			unset($_SESSION["nonces"][$nonce_key]); //verify another method to remove a key
+		
 		return true;
     }
     else
-	return false;
+	{
+		return false;	
+	}
 }
 
 

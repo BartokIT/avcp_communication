@@ -60,6 +60,7 @@ class Control extends \Control
     
     function download_file()
     {
+        global $xml_writer;
         if (isset($this->_r["anno"]) && isset($this->_r["numero"]))
         {
             $anno = $this->_r["anno"];
@@ -79,7 +80,9 @@ class Control extends \Control
             header ("Content-Type:text/xml");
             header('Content-Description: File Transfer');
             header('Content-Disposition: attachment; filename="avcp_' .$anno . '_' . $numero . '"');
-            echo write_avcp_xml_to_string($pubblicazione,$lotti);
+            return new ReturnedFile($xml_writer,array("pubblicazione"=>$pubblicazione,
+                                                      "lotti"=>$lotti))
+            //echo write_avcp_xml_to_string($pubblicazione,$lotti);
             
         }
         else

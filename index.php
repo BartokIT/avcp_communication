@@ -56,7 +56,7 @@ $config =  array("init_status"=>array("site_view"=>"general",
 					 "external"=>false),
 		 "login_status"=>array("site_view"=>"general",
 				      "area"=>"login"),
-		"debug"=>array("framework"=>false,
+		"debug"=>array("framework"=>true,
 					   "smarty"=>false),
 		"flow_name"=>"main",
 		"history_len"=>20 );

@@ -466,7 +466,9 @@ OUT;
         // If the action is null then search from the request
         if (is_null($this->action))
         {
-            if (isset($_REQUEST["action"]))
+            
+            if ( isset($this->_r["action"]))
+            //(isset($_REQUEST["action"]) && isset($_REQUEST["nonce"]) && verify_nonce($_REQUEST["nonce"])) )
             {
                 //if the state is not skippable and is requested a inconditional jump
                 //to another state, than the default action is setted
@@ -474,10 +476,11 @@ OUT;
                     $this->action = $this->configuration->default_action;
                 else
                     $this->action = $_REQUEST["action"];
-
             }
             else //if the action is not set, return the default action
+            {
                 $this->action = $this->configuration->default_action;
+            }
         }
         else
         {
