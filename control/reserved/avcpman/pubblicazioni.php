@@ -77,11 +77,8 @@ class Control extends \Control
             $pubblicazione->ente_pubblicatore = $settings["ente"];
             $pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
             
-            header ("Content-Type:text/xml");
-            header('Content-Description: File Transfer');
-            header('Content-Disposition: attachment; filename="avcp_' .$anno . '_' . $numero . '"');
-            return new ReturnedFile($xml_writer,array("pubblicazione"=>$pubblicazione,
-                                                      "lotti"=>$lotti))
+            return new \ReturnedFile('write_avcp_xml_to_string',array($pubblicazione, $lotti),
+                                     'avcp_' .$anno . '_' . $numero,"text/xml");
             //echo write_avcp_xml_to_string($pubblicazione,$lotti);
             
         }

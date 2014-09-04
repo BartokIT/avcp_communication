@@ -147,12 +147,17 @@
      * */
     class ReturnedFile extends PrintableObject
     {
-		private $anon_f;
-		private $parameters;
-		function __construct($anon_f,$params)
+		private $func;
+		private $args;
+		private $ct;
+		private $filename;
+		public $parameters;
+		function __construct($anon_f,$params,$filename,$content_type)
 		{
-			$this->anon_f = $anon_f;
-			$this->parameters=$params;
+			$this->func = $anon_f;
+			$this->args=$params;
+			$this->filename=$filename;
+			$this->ct=$content_type;
 		}
 		
 		/**
@@ -160,7 +165,11 @@
 		 * */
 		public function out()
 		{
-			echo $this->anon_f($this->parameters);			
+			header ("Content-Type:" . $this->ct);
+            header('Content-Description: File Transfer');
+            header('Content-Disposition: attachment; filename="' . $this->filename . '"');
+
+			echo call_user_func_array($this->func,$this->args);			
 		}
     }
 	
