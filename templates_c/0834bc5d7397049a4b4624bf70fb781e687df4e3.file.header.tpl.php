@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-08-27 11:15:48
+<?php /* Smarty version Smarty-3.1.18, created on 2014-09-15 13:39:24
          compiled from "presentation\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:402553fc7798a62de5-06906215%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0834bc5d7397049a4b4624bf70fb781e687df4e3' => 
     array (
       0 => 'presentation\\header.tpl',
-      1 => 1409130906,
+      1 => 1410781102,
       2 => 'file',
     ),
   ),
@@ -26,10 +26,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <?php if ($_valid && !is_callable('content_53fc7798b03060_06041920')) {function content_53fc7798b03060_06041920($_smarty_tpl) {?><?php if (!is_callable('smarty_block_authorized')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\block.authorized.php';
 if (!is_callable('smarty_function_urlarea')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\function.urlarea.php';
 if (!is_callable('smarty_block_ifarea')) include 'E:\\Users\\claudio.papa\\Documents\\Development\\PHP\\avcp_communication\\lib\\Smarty\\frameworkplugins\\block.ifarea.php';
-?>        <!--[if lt IE 7]>
-            <p class="chromeframe">State usando un browser <strong>datato</strong>. Per cortesia <a href="http://browsehappy.com/">aggiornate il vostro browser</a> o <a href="http://www.google.com/chromeframe/?redirect=true">attivate Google Chrome Frame</a> per rendere la vostra migliore la vostra esperienza di navigazione.</p>
-        <![endif]-->
-    <div id="container">
+?>	<!--[if lt IE 7]>
+		<p class="chromeframe">State usando un browser <strong>datato</strong>.
+		Per cortesia <a href="http://browsehappy.com/">aggiornate il vostro browser</a> oppure utilizzate Mozilla Firefox per rendere la vostra migliore la vostra esperienza di navigazione.</p>
+	<![endif]-->
+    <div id="container"><!-- [container] -->
         <div id="inside"> <!-- [inside] -->
 	        <div id="header"><!-- [header] -->
 				<div id="mini-top-bar">
@@ -79,9 +80,9 @@ if (!is_callable('smarty_block_ifarea')) include 'E:\\Users\\claudio.papa\\Docum
 					</div>					
                 </div>			
             </div><!-- [/header] -->
-			<div id="menu_h" class="clear">
-				<?php echo $_smarty_tpl->getSubTemplate ("menu_h.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+			<div id="menu_h" class="clear"><!-- [menu_h] -->
+ 				<?php echo $_smarty_tpl->getSubTemplate ("menu_h.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-			</div>
+			</div> <!-- [menu_h] -->
 
 <?php }} ?>

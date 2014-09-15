@@ -1,7 +1,8 @@
-        <!--[if lt IE 7]>
-            <p class="chromeframe">State usando un browser <strong>datato</strong>. Per cortesia <a href="http://browsehappy.com/">aggiornate il vostro browser</a> o <a href="http://www.google.com/chromeframe/?redirect=true">attivate Google Chrome Frame</a> per rendere la vostra migliore la vostra esperienza di navigazione.</p>
-        <![endif]-->
-    <div id="container">
+	<!--[if lt IE 7]>
+		<p class="chromeframe">State usando un browser <strong>datato</strong>.
+		Per cortesia <a href="http://browsehappy.com/">aggiornate il vostro browser</a> oppure utilizzate Mozilla Firefox per rendere la vostra migliore la vostra esperienza di navigazione.</p>
+	<![endif]-->
+    <div id="container"><!-- [container] -->
         <div id="inside"> <!-- [inside] -->
 	        <div id="header"><!-- [header] -->
 				<div id="mini-top-bar">
@@ -39,7 +40,7 @@
 					</div>					
                 </div>			
             </div><!-- [/header] -->
-			<div id="menu_h" class="clear">
-				{include file="menu_h.tpl"}
-			</div>
+			<div id="menu_h" class="clear"><!-- [menu_h] -->
+ 				{include file="menu_h.tpl"}
+			</div> <!-- [menu_h] -->
 

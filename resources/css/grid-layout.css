@@ -1,0 +1,27 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.info-box
+{
+  float: left;
+ 
+}
+
+.level-1
+{
+  width:97.1%;
+}
+
+.level-2
+{
+  width:48%;
+}
