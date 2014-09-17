@@ -2705,7 +2705,8 @@ button::-moz-focus-inner {
 /* line 25, ../development/jquery/_dialog.scss */
 .ui-dialog .ui-dialog-titlebar-close span {
   display: block;
-  margin: 1px;
+ /* margin: 1px;*/
+  padding: 1px;
 }
 /* line 32, ../development/jquery/_dialog.scss */
 .ui-dialog .ui-dialog-content {

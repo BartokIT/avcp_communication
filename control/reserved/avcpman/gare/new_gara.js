@@ -15,7 +15,18 @@ $(function() {
         'm':'Inserire un cif di massimo 10 caratteri',
         't': function(s)
         {
-            if (s.length < 11) 
+            if (s.length > 0 &&s.length < 11) 
+                return true;
+            else
+                return false;
+        }
+    } ,
+    {
+        'o':$('#gare_edit_subject'),
+        'm':'Inserire un oggetto di massimo 250 caratteri',
+        't': function(s)
+        {
+            if (s.length > 0 &&s.length < 251) 
                 return true;
             else
                 return false;

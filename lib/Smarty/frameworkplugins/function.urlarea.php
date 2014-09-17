@@ -43,13 +43,13 @@ function smarty_function_urlarea($params, $template)
 	if (isset($params['action']))
 	{
 		if ($counter > 0 )
-			{ $link .="&";}
+			{ $link .="&amp;";}
 		else
 		{
 			if ($nonce)
 			{
 				$nonce=get_nonce_value($state->toString());
-				$link .= "nonce=" . urlencode($nonce) . "&";
+				$link .= "nonce=" . urlencode($nonce) . "&amp;";
 			}
 		}
 		$link .= "action=" . urlencode($params['action']);
@@ -62,14 +62,14 @@ function smarty_function_urlarea($params, $template)
 		{
 			foreach($params['parameters'] as $key=>$value)
 			{
-				if ($counter > 0 ) { $link .="&";};
+				if ($counter > 0 ) { $link .="&amp;";};
 					$link .= "$key=" . urlencode($value);
 				$counter++;
 			}
 		}
 		else
 		{
-			if ($counter > 0 ) { $link .="&";};
+			if ($counter > 0 ) { $link .="&amp;";};
 					$link .= "parameter=" . urlencode($params['parameters']);
 			$counter++;
 		}

@@ -51,16 +51,18 @@
 				
 				c = checkers[v.t];
 			}
+
            if (!c(v.o.val()))
             {
+				
                 v.o.addClass('red-background-error');
-                v.o.next('div').text(v.m);
+                v.o.next('div.inline-error').text(v.m);
                 bValidForm = bValidForm && false;
             }
             else
             {
                 v.o.removeClass('red-background-error');
-                v.o.next('div').text('');
+                v.o.next('div.inline-error').text('');
                 
             }
         });

@@ -213,7 +213,10 @@ function delete_pubblicazione($anno,$numero)
 {
 		global $db;
 		$result = $db->query("DELETE FROM " . $db->prefix . "pubblicazione  WHERE anno = $anno AND numero = $numero");
-		return $result;
+		if ($result === FALSE)
+				return false;
+		else
+				return true;
 }
 
 /**
@@ -356,7 +359,7 @@ function delete_ditta($did)
 						   " WHERE " . $db->prefix . "ditta.did = $did ");
 	
 
-	if (!$result)
+	if ($result === FALSE)
 		return false;
 	else
 		return true;
@@ -375,8 +378,9 @@ function delete_gara($gid)
 						   " SELECT p.pid FROM " . $db->prefix . "partecipanti p " .
 						   " WHERE p.gid = $gid " . 
 						   " ) ");
-    if (!$result)
+    if ($result === FALSE)
 	{
+		echo "p";
 		$db->query("ROLLBACK ");
 		return false;
 	}
@@ -386,8 +390,9 @@ function delete_gara($gid)
 						   " SELECT p.pid FROM " . $db->prefix . "partecipanti p " .
 						   " WHERE p.gid = $gid" . 
 						   " ) ");
-    if (!$result)
+    if ($result ===FALSE)
 	{
+		echo "p";
 		$db->query("ROLLBACK ");
 		return false;
 	}
@@ -395,8 +400,9 @@ function delete_gara($gid)
 	$result = $db->query("DELETE FROM " . $db->prefix . "partecipanti " .	
 						   " WHERE " . $db->prefix . "partecipanti.gid = $gid ");
 
-	if (!$result)
+	if ($result === FALSE)
 	{
+		echo "p";
 		$db->query("ROLLBACK ");
 		return false;
 	}
@@ -404,8 +410,9 @@ function delete_gara($gid)
 	$result = $db->query("DELETE FROM " . $db->prefix . "gara " .	
 						   " WHERE " . $db->prefix . "gara.gid = $gid ");	
 	
-    if (!$result)
+    if ($result ===FALSE )
 	{
+		echo "p";
 		$db->query("ROLLBACK");
 		return false;
 	}

@@ -19,22 +19,20 @@
 						{form id="edit_publication" action="add" parameters=$p}
 						<div class="message">Inserisci pubblicazione per l'anno {$anno}</div>
 						<div class="box">						
-								<label for="pubblicazione_edit_titolo"><span>Titolo</span>
-									<input type="text" maxlength="1000" name="pubblicazione_edit_titolo" id="pubblicazione_edit_titolo" value=""/>
-									<div class="inline-error"></div>
-								</label>					
-								<label for="name"><span>Abstract</span>
-									<input type="text" maxlength="1000" name="pubblicazione_edit_abstract"/>									
+								<label for="pubblicazione_edit_titolo"><span>Titolo</span><input type="text" maxlength="1000" name="pubblicazione_edit_titolo" id="pubblicazione_edit_titolo" value=""/><div class="inline-error"></div></label>					
+								<label for="pubblicazione_edit_abstract">
+									<span>Abstract</span>
+									<input type="text" maxlength="1000" id="pubblicazione_edit_abstract"  name="pubblicazione_edit_abstract"/>									
 								</label>
-								<label for="name"><span>Data pubblicazione</span>
+								<label for="pubblicazione_edit_pubblicazione"><span>Data pubblicazione</span>
 									<input type="text" maxlength="10" id="pubblicazione_edit_pubblicazione" name="pubblicazione_edit_pubblicazione"/>
 									<div class="inline-error"></div>
 								</label>
-								<label for="name"><span>Data aggiornamento</span>
+								<label for="pubblicazione_edit_aggiornamento"><span>Data aggiornamento</span>
 									<input type="text" maxlength="10" id="pubblicazione_edit_aggiornamento" name="pubblicazione_edit_aggiornamento"/>
 									<div class="inline-error"></div>
 								</label>
-								<label for="name"><span>Url di pubblicazione</span>
+								<label for="pubblicazione_edit_url"><span>Url di pubblicazione</span>
 									<input type="text" maxlength="1000" id="pubblicazione_edit_url" name="pubblicazione_edit_url"/>
 									<div class="inline-error"></div>
 								</label>

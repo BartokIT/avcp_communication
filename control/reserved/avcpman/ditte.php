@@ -39,7 +39,7 @@ class Control extends \Control
             
             $error=NULL;
             if ($used)
-                $error=array("error"=>"La partecipa ad una o pi&ugrave; gare, &egrave; necessario eliminare prima le sue partecipazioni");
+                $error=array("error"=>"La ditta partecipa ad una o pi&ugrave; gare, &egrave; necessario eliminare prima le sue partecipazioni");
             else
                 delete_ditta($did);
             return ReturnArea($this->status->getSiteView(),$this->status->getArea(),NULL,$error);

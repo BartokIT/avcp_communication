@@ -446,6 +446,7 @@ body.login, body.home
 .container-main
 {
 	padding-left:150px;
+	padding-bottom: 30px;
 	width:94%;
 }
 
