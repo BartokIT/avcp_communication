@@ -9,7 +9,7 @@
 					<div class="content-width">
 						<div class="user_detail">
 						{authorized roles="notlogged"}
-							<a href="{urlarea area="login"}">Accesso area riservata</a>
+							<a class="smaller" title="Accedi all'area riservata" href="{urlarea area="login"}">Accesso area riservata</a>
 						{/authorized}
 						{authorized roles="logged"}
 						<div class="submenu">

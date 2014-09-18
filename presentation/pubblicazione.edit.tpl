@@ -47,7 +47,6 @@
 								</div>
 						</div>						
 						{/form}
-
 				</p>
 				<hr class="clear" style="display: none"/>
 				</div>

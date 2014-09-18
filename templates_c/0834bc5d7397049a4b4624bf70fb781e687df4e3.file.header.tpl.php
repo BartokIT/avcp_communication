@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-09-15 13:39:24
+<?php /* Smarty version Smarty-3.1.18, created on 2014-09-18 15:02:27
          compiled from "presentation\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:402553fc7798a62de5-06906215%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0834bc5d7397049a4b4624bf70fb781e687df4e3' => 
     array (
       0 => 'presentation\\header.tpl',
-      1 => 1410781102,
+      1 => 1411045344,
       2 => 'file',
     ),
   ),
@@ -38,7 +38,7 @@ if (!is_callable('smarty_block_ifarea')) include 'E:\\Users\\claudio.papa\\Docum
 						<div class="user_detail">
 						<?php $_smarty_tpl->smarty->_tag_stack[] = array('authorized', array('roles'=>"notlogged")); $_block_repeat=true; echo smarty_block_authorized(array('roles'=>"notlogged"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 
-							<a href="<?php echo smarty_function_urlarea(array('area'=>"login"),$_smarty_tpl);?>
+							<a class="smaller" title="Accedi all'area riservata" href="<?php echo smarty_function_urlarea(array('area'=>"login"),$_smarty_tpl);?>
 ">Accesso area riservata</a>
 						<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_authorized(array('roles'=>"notlogged"), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 

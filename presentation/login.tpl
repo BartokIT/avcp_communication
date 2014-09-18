@@ -5,9 +5,10 @@
 	{include file="style.tpl"}
     </head>
     <body class="login">
-        {include file="header.tpl"}
-		<div class="content-width">
+		<div id="stretch"></div>
 		
+        {include file="header.tpl"}
+		<div class="content-width">		
 				<div class="login-content">
 					<div class="blur"></div>
 					

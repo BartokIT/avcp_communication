@@ -70,9 +70,40 @@ class MainFlow
         {
             $arg_list = func_get_args();
             $user_configuration =  $arg_list[0];
-            $this->configuration=array_merge($this->configuration,$user_configuration);
+            
         }
-
+        
+        $this->configure_flow(func_get_args());
+        
+        
+        
+        
+        $this->reader=new \Doctrine\Common\Annotations\AnnotationReader();
+        if (isset($_REQUEST["nonce"]) && !verify_nonce($_REQUEST["nonce"]))
+            $this->_r = array();
+        else
+            $this->_r = $_REQUEST;
+        
+        
+        //Check if there are some resources to be returned
+        //TODO: check if this do some enhancement to rpdoctivity
+        if (isset($_REQUEST["resources"]))
+            $this->print_resources();
+        else
+        {
+            $this->load_state();
+            $this->configure_user();
+            $this->execute_action();
+        }
+    }
+    
+    public function configure_flow($c)
+    {;
+        if (count($c) > 0)
+        {
+            $this->configuration=array_merge($this->configuration,$c[0]);
+        }
+        
         $this->configuration["init_status"]=new State($this->configuration["init_status"]["site_view"],
                                                 $this->configuration["init_status"]["area"]);
         
@@ -102,26 +133,7 @@ class MainFlow
             define("DEBUG",$this->configuration->debug);
             define("DEBUG_SMARTY",$this->configuration->debug);
         }
-        
-        $this->reader=new \Doctrine\Common\Annotations\AnnotationReader();
-        if (isset($_REQUEST["nonce"]) && !verify_nonce($_REQUEST["nonce"]))
-            $this->_r = array();
-        else
-            $this->_r = $_REQUEST;
-        
-        
-        //Check if there are some resources to be returned
-        //TODO: check if this do some enhancement to rpdoctivity
-        if (isset($_REQUEST["resources"]))
-            $this->print_resources();
-        else
-        {
-            $this->load_state();
-            $this->configure_user();
-            $this->execute_action();
-        }
     }
-
     /**
      * Print out an error page to inform the user about
      * eventual problem
@@ -129,18 +141,37 @@ class MainFlow
     public function error_page($http_code,$message)
     {
         http_response_code($http_code);
-        echo <<<OUT
-            <pre>
-                $message
-            </pre>
+        if (isset($this->configuration->error_page))
+        {
+            $ro =  ReturnSmarty($this->configuration->error_page,array("error_code"=>$http_code,
+                                                  "message"=>$message,
+                                                  "debug"=>$this->configuration->debug["framework"]));
+            $this->manage_ro($ro,1);            
+        }
+        else
+        {
+            echo "E' occorso un problema";
+            if ($this->configuration->debug["framework"])
+            {
+                echo <<<OUT
+<html>
+<body>
+<h1>Errore imprevisto!!!</h1>
+<pre>
+    $message
+</pre>
+<body>
+</html>
 OUT;
-                    echo "=====DEBUG====";
-                    echo "<pre>";
-                        echo $this->history->printRawHistory();
-                    echo "</pre>";
-                    echo "<pre>";
-                        print_r($_SESSION);
-                    echo "</pre>";
+                echo "=====DEBUG====";
+                echo "<pre>";
+                    echo $this->history->printRawHistory();
+                echo "</pre>";
+                echo "<pre>";
+                    print_r($_SESSION);
+                echo "</pre>";
+            }
+        }
         die();
     }
 
@@ -201,6 +232,32 @@ OUT;
         }
     }
 
+    
+    /**
+     * Load the include file relative to the current status and ancestor's status
+     * @param $status The class that represent the status
+     * */
+    private function load_include_file($status)
+    {
+        $incs = array();
+        
+        $p = $status->getControlFilePath();
+        array_push($incs,$p);
+        while (dirname($p) != '.')
+        {
+            $t = dirname($p);
+            array_push($incs,$t);
+            $p = $t;
+        }
+        while ($t =array_pop($incs))
+        {
+            
+            $t = preg_replace('/\\.[^.\\s]{3,4}$/', '', $t);
+            if (file_exists($t . ".inc"))
+                include $t . ".inc";
+        }
+        
+    }
     /**
      * Search for a state control file and add it to cache, also permit to check if the
      * control file of the status exists and is valid
@@ -239,8 +296,8 @@ OUT;
                 }
             }
             else
-            {
-                $this->error_page(500,"Impossible to retrieve control file [" . $control_file_path . "]");
+            {                
+                $this->error_page(404,"Impossible to retrieve control file [" . $control_file_path . "]");
             }
         }
     }
@@ -554,7 +611,7 @@ OUT;
             if (!$this->action_exists($this->state,$this->action))
             {
                 
-                $ro = $this->error_page(500,"Current application state is not capable to manage specified action");
+                $this->error_page(500,"Current application state is not capable to manage specified action");
                 //$this->action=$this->configuration->default_action;
                 //$ro = ReturnArea($this->state->getSiteView(),$this->state->getArea(),$this->configuration->default_action);
             }
@@ -569,11 +626,12 @@ OUT;
                         $this->manage_ro($ro,0);
                     }
                     else
-                        $ro = $this->error_page(403,"Access restricted to authorized principal");
+                        $this->error_page(403,"Access restricted to authorized principal");
                 }
                 else                
                 {
                     //$ro = $this->jump_to_state($this->login_state);
+                    $this->load_include_file($this->state);
                     $ro = $this->state->getControlObject()->{$this->action}();
                     $this->manage_ro($ro,0);
                     //reset possibile delegation

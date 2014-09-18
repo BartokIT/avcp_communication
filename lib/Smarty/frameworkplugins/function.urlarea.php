@@ -19,7 +19,7 @@
  */
 function smarty_function_urlarea($params, $template)
 {
-    $link ="?";
+    $link =INDEX . "?";
 	$counter=0;
 	$state = $template->tpl_vars['state']->value;
 	$nonce =true;
