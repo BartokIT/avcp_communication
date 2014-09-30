@@ -54,12 +54,20 @@
 	function write_avcp_lotto_post_tostring($lotto_info)
 	{
 
-		$tmp_completamento=DateTime::createFromFormat('d/m/Y',$lotto_info->data_fine);
-		$tmp_inizio=DateTime::createFromFormat('d/m/Y', $lotto_info->data_inizio);
+	
+		
 		$outstring  =indent(3) . "<importoAggiudicazione>" . $lotto_info->importo . "</importoAggiudicazione>\n";
 		$outstring .=indent(3) ."<tempiCompletamento>\n";
-		$outstring .=indent(4) ."<dataInizio>" .  $tmp_inizio->format("Y-m-d") . "</dataInizio>\n";
-		$outstring .=indent(4) ."<dataUltimazione>" . $tmp_completamento->format("Y-m-d") . "</dataUltimazione>\n";		
+		if (!(is_null($lotto_info->data_inizio)  || trim($lotto_info->data_inizio) == ''))
+		{
+			$tmp_inizio=DateTime::createFromFormat('d/m/Y', $lotto_info->data_inizio);
+			$outstring .=indent(4) ."<dataInizio>" .  $tmp_inizio->format("Y-m-d") . "</dataInizio>\n";
+		}
+		if (!(is_null($lotto_info->data_fine)  || trim($lotto_info->data_fine) == ''))
+		{
+			$tmp_completamento=DateTime::createFromFormat('d/m/Y',$lotto_info->data_fine);
+			$outstring .=indent(4) ."<dataUltimazione>" . $tmp_completamento->format("Y-m-d") . "</dataUltimazione>\n";
+		}
 		$outstring .=indent(3) ."</tempiCompletamento>\n";		
 		$outstring .=indent(3) ."<importoSommeLiquidate>" . $lotto_info->importo_liquidato . "</importoSommeLiquidate>\n";
 		$outstring .=indent(2) . "</lotto>\n";		

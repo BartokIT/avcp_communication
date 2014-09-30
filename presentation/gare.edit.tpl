@@ -4,6 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	{include file="style.tpl"}
     <link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
+    <link href="resources/css/bootstrap-tour-standalone.min.css" rel="stylesheet" type="text/css" />
     </head>
     <body class="avcpman">
         {include file="header.tpl"}
@@ -17,7 +18,6 @@
                 {form id="edit-gara" action="submit" parameters=$p}
                     <div class="message">Modifica gara</div>
                     <div class="box">
-                        
                         <label class="year" for="year"><span>Anno</span>
                             <input type="text" maxlength="4" name="gare_edit_year" id="gare_edit_year" value="{$gara->f_pub_anno}"/>
                             <div class="inline-error"></div>
@@ -67,6 +67,8 @@
     <script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
     <script src="resources/js/datepicker-it.js"></script>
-    <script src="resources/js/support.js"></script>	    
+    <script src="resources/js/support.js"></script>
+    <script src="resources/js/bootstrap-tour-standalone.min.js"></script>
 	<script src="control/reserved/avcpman/gare/new_gara.js"></script>
+    
 </html>

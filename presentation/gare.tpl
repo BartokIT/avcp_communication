@@ -1,9 +1,10 @@
 <!DOCTYPE html>
     <head>
     <title>Comunicazioni AVCP</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	{include file="style.tpl"}
-	<link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		{include file="style.tpl"}
+		<link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/bootstrap-tour-standalone.min.css" rel="stylesheet" type="text/css" />
     </head>
     <body class="avcpman">
         {include file="header.tpl"}
@@ -47,6 +48,7 @@
     </body>
     <script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="resources/js/bootstrap-tour-standalone.min.js"></script>
 	<script>
 		$(function(){
 			
@@ -71,6 +73,47 @@
 					}
 				});
 			});
+			var oTour = new Tour({
+				steps:[
+					{
+						element: "#new-gara",
+						title: "Guida iniziale",
+						content: "Seguendo questa guida, ti verr&agrave; spiegato in breve il funzionamento di questo sito.<br/>Tramite il pulsante 'Aggiungi gara' potrai aggiungere una nuova gara.<br/><strong> Premilo ora</strong>"
+					},
+					{
+						path:"?action=new_gara",
+						element: ".box",
+						title: "Aggiungi una nuova gara",
+						content: "Tramite questo pulsante potrai aggiungere una nuova gara"
+					},
+                    {
+						path:"?action=new_gara",
+						element: ".save",
+						title: "Salva la gara",
+						content: "Finito l'inserimento sar&agrave; necessario premere il pulsante 'Inserisci' per effettuare il salvataggio"
+					},
+                    {
+						element: ".edit-partecipant",
+						placement:"top",
+						title: "Inserisci partecipanti",
+						content: "Ora &egrave; necessario inserire i partecipanti alla gara"
+					},
+					{
+						path : $(".edit-partecipant:first").attr("href"),
+						element: ".edit-partecipant",
+						placement:"top",
+						title: "Insòljòljlti",
+					}
+			],
+			template: "<div class='popover'> <div class='arrow'></div> <h3 class='popover-title'></h3> <div class='popover-content'></div> <div class='popover-navigation'> <div class='btn-group'> <button class='btn btn-sm btn-default' data-role='prev'>&laquo; Prec.</button> <button class='btn btn-sm btn-default' data-role='next'>Succ. &raquo;</button> <button class='btn btn-sm btn-default' data-role='pause-resume' data-pause-text='Pause' data-resume-text='Resume'>Pausa</button> </div> <button class='btn btn-sm btn-default' data-role='end'>Termina tour</button> </div> </div>"
+			});
+			oTour.init();
+			oTour.start();
+			 if (!oTour.ended()) {
+				$("#new-gara").click(function(e){                
+					oTour.next();
+            })
+			}
 		});
 	</script>
 </html>

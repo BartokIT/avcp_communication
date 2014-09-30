@@ -447,11 +447,7 @@ body.login #container, body.home #container
 	display: none;
 }
 
-/* Content width*/
-.content-width {
-	width: 1024px;
-	margin: 0 auto;	
-}
+
 
 .clear
 {
@@ -564,4 +560,27 @@ body.error #container .info-box
 	margin: auto;
 	text-align: center;
 	font-size: 50px;
+}
+
+
+.content-width {
+	width: 800px;
+	margin: 0 auto;	
+}
+
+/** Media size dependent policy **/
+@media all and (max-width: 1281px) and (min-width: 1030px) {
+	/* Content width*/
+	.content-width {
+		width: 1024px;
+		margin: 0 auto;	
+	}
+}
+
+@media all and (min-width: 1282px) {
+	/* Content width*/
+	.content-width {
+		width: 1200px;
+		margin: 0 auto;	
+	}
 }

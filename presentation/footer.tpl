@@ -13,4 +13,5 @@
 				<div class="clr"></div>
 			</div>	<!-- [/content_footer] -->
         </div> <!-- [/footer] -->
+		<script src="resources/js/ie-hacks/css3-mediaqueries.js"></script>
     

@@ -31,9 +31,14 @@ function smarty_function_urlarea($params, $template)
 	}
 	if (isset($params['nonce']))
 	{
-		$nonce=eval($params['nonce']);
+		
+		if ($params['nonce'] == "false")
+			$nonce=false;
+		else
+			$nonce=true;
 	}
 	
+ 
 	/*else
 	{
 		$link .= "area=" . urlencode($state->toString());
@@ -44,16 +49,25 @@ function smarty_function_urlarea($params, $template)
 	{
 		if ($counter > 0 )
 			{ $link .="&amp;";}
-		else
-		{
+		 
 			if ($nonce)
 			{
 				$nonce=get_nonce_value($state->toString());
 				$link .= "nonce=" . urlencode($nonce) . "&amp;";
 			}
-		}
+		
 		$link .= "action=" . urlencode($params['action']);
 		$counter++;
+	}
+	else
+	{
+		if ($nonce)
+		{
+				if ($counter > 0 )
+				{ $link .="&amp;";}
+				$nonce=get_nonce_value($state->toString());
+				$link .= "nonce=" . urlencode($nonce) . "&amp;";
+		}
 	}
 	
 	if (isset($params['parameters']))

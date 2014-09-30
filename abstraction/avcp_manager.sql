@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `avcpman_indice` (
 
 
 CREATE TABLE IF NOT EXISTS `avcpman_pubblicazione` (
-	numero NUMERIC NOT NULL,
+	numero decimal(10,0) NOT NULL,
 	anno INT(4) NOT NULL,
 	titolo VARCHAR(1000),
 	abstract VARCHAR(1000),
@@ -33,7 +33,6 @@ CREATE TABLE IF NOT EXISTS `avcpman_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sulle impostazioni';
 
 
-
 CREATE TABLE IF NOT EXISTS `avcpman_gara` (
 	gid INT AUTO_INCREMENT PRIMARY KEY,
 	cig VARCHAR(10),
@@ -43,10 +42,10 @@ CREATE TABLE IF NOT EXISTS `avcpman_gara` (
 	importo_liquidato NUMERIC(15,2),
 	data_inizio DATE,
 	data_fine DATE,
-	f_pub_numero NUMERIC,
+	f_pub_numero decimal(10,0),
 	f_pub_anno  INT(4),
-    f_user_id  VARCHAR(255)
-	CONSTRAINT fk_pubblicazione FOREIGN KEY  (f_pub_anno,f_pub_numero) REFERENCES avcpman_pubblicazione (anno,numero) ON DELETE SET NULL	
+    f_user_id  VARCHAR(255),
+	CONSTRAINT fk_pubblicazione FOREIGN KEY  (f_pub_anno,f_pub_numero) REFERENCES avcpman_pubblicazione (anno,numero) 	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sui lotti di gara';
 
 

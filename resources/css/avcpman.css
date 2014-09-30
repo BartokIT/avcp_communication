@@ -479,6 +479,11 @@ div.recap-ditta div.label .right
 	text-align: center;
 }
 
+.avcpman .container-main .ditte-table .flags
+{
+	width: 24px;	
+}
+
 .avcpman .container-main .ditte-table .italian-flag
 {
 	background: url(images/italy_flag_24x24.png) no-repeat 3px center;

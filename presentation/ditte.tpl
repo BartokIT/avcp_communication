@@ -24,7 +24,7 @@
                     <thead>
                         <tr>
                             <th>N.</th>
-                            <th>I/E</th>
+                            <th class="flags">I/E</th>
                             <th>Ragione sociale</th>
                             <th>Identificativo fiscale</th>
                             <th >&nbsp;</th>
@@ -35,7 +35,7 @@
                     {section name=ditta loop=$ditte}
                         <tr>
                             <td>{$smarty.section.ditta.index + 1}</td>
-                            <td>
+                            <td class="flags">
                                 <div class="{if $ditte[ditta]->estera eq "Y"}foreign-flag{else}italian-flag{/if}">
                                 {if $ditte[ditta]->estera eq "Y"}
                                     Estera

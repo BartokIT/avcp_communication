@@ -13,13 +13,13 @@
 						{/authorized}
 						{authorized roles="logged"}
 						<div class="submenu">
-							{$user->getDisplayName()}
+							{$user->getDisplayName()|htmlentities}
 							<ul>
 								{ifarea site-view="reserved"}
-									<li><a class="smaller" href="{urlarea area="avcpman" action="logout"}">Logout</a></li>
+									<li><a class="smaller" href="{urlarea area="avcpman" nonce="true" action="logout"}">Logout</a></li>
 								{/ifarea}
 								{ifarea site-view="general"}
-									<li><a class="smaller" href="{urlarea area="login" action="logout"}">Logout</a></li>
+									<li><a class="smaller" href="{urlarea area="login" nonce="true" action="logout"}">Logout</a></li>
 								{/ifarea}
 							</ul>
 						</div>

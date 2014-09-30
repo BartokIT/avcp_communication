@@ -60,6 +60,7 @@ class MainFlow
                                     "flow_name"=>"std",
                                     "login_status"=>NULL,
                                     "history_len"=>10,
+                                    "missing_action_error"=>true,
                                     "default_action"=>"d");
     
     public function __construct()
@@ -97,8 +98,11 @@ class MainFlow
         }
     }
     
+    /**
+    * This method configure the flow basing on the user  configuration
+    **/
     public function configure_flow($c)
-    {;
+    {
         if (count($c) > 0)
         {
             $this->configuration=array_merge($this->configuration,$c[0]);
@@ -608,7 +612,8 @@ OUT;
             }
 
             //Check if the action exists or not
-            if (!$this->action_exists($this->state,$this->action))
+            if (!$this->action_exists($this->state,$this->action) &&
+                $this->configuration->missing_action_error)
             {
                 
                 $this->error_page(500,"Current application state is not capable to manage specified action");
@@ -617,6 +622,12 @@ OUT;
             }
             else
             {
+                if (!$this->action_exists($this->state,$this->action))
+                {
+                    $this->delegation_restore();
+                    $this->action=$this->configuration->default_action;
+                }
+                
                 //check if the user has the permission to execute
                 if (!$this->check_permission($this->state,$this->action))
                 {

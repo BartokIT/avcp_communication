@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-09-18 15:02:27
+<?php /* Smarty version Smarty-3.1.18, created on 2014-09-19 13:49:08
          compiled from "presentation\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:402553fc7798a62de5-06906215%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0834bc5d7397049a4b4624bf70fb781e687df4e3' => 
     array (
       0 => 'presentation\\header.tpl',
-      1 => 1411045344,
+      1 => 1411127345,
       2 => 'file',
     ),
   ),
@@ -45,18 +45,18 @@ if (!is_callable('smarty_block_ifarea')) include 'E:\\Users\\claudio.papa\\Docum
 						<?php $_smarty_tpl->smarty->_tag_stack[] = array('authorized', array('roles'=>"logged")); $_block_repeat=true; echo smarty_block_authorized(array('roles'=>"logged"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 
 						<div class="submenu">
-							<?php echo $_smarty_tpl->tpl_vars['user']->value->getDisplayName();?>
+							<?php echo htmlentities($_smarty_tpl->tpl_vars['user']->value->getDisplayName());?>
 
 							<ul>
 								<?php $_smarty_tpl->smarty->_tag_stack[] = array('ifarea', array('site-view'=>"reserved")); $_block_repeat=true; echo smarty_block_ifarea(array('site-view'=>"reserved"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 
-									<li><a class="smaller" href="<?php echo smarty_function_urlarea(array('area'=>"avcpman",'action'=>"logout"),$_smarty_tpl);?>
+									<li><a class="smaller" href="<?php echo smarty_function_urlarea(array('area'=>"avcpman",'nonce'=>"true",'action'=>"logout"),$_smarty_tpl);?>
 ">Logout</a></li>
 								<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_ifarea(array('site-view'=>"reserved"), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 
 								<?php $_smarty_tpl->smarty->_tag_stack[] = array('ifarea', array('site-view'=>"general")); $_block_repeat=true; echo smarty_block_ifarea(array('site-view'=>"general"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
 
-									<li><a class="smaller" href="<?php echo smarty_function_urlarea(array('area'=>"login",'action'=>"logout"),$_smarty_tpl);?>
+									<li><a class="smaller" href="<?php echo smarty_function_urlarea(array('area'=>"login",'nonce'=>"true",'action'=>"logout"),$_smarty_tpl);?>
 ">Logout</a></li>
 								<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_ifarea(array('site-view'=>"general"), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
 

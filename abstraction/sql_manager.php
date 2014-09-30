@@ -313,7 +313,7 @@ function get_gare($anno,$numero=null,$userid=null)
 	if (!is_null($userid))
 	{
 		$userid = $db->escape($userid);
-		$numero_string .= 'AND g.userid = "' .$userid . '"';
+		$numero_string .= 'AND g.f_user_id = "' .$userid . '"';
 	}
 	
     $query_string= "SELECT  g.gid, g.cig, g.oggetto, g.scelta_contraente, " .
@@ -427,7 +427,7 @@ function delete_gara($gid)
  * Inserisce una nuova gara nel database
  * */
 function insert_gara($cig=null,$oggetto=null,$scelta_contraente=null,$importo=null,$importo_liquidato=null,
-					 $data_inizio=null,$data_fine=null,$userid=null,$f_pub_anno=null,$f_pub_numero=null)
+					 $data_inizio=null,$data_fine=null,$f_user_id=null,$f_pub_anno=null,$f_pub_numero=null)
 {
 	global $db;
 	$db->query("BEGIN");
