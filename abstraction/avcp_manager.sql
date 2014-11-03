@@ -16,21 +16,16 @@ CREATE TABLE IF NOT EXISTS `avcpman_indice` (
 
 
 CREATE TABLE IF NOT EXISTS `avcpman_pubblicazione` (
-	numero decimal(10,0) NOT NULL,
+	numero NUMERIC NOT NULL,
 	anno INT(4) NOT NULL,
 	titolo VARCHAR(1000),
 	abstract VARCHAR(1000),
 	data_pubblicazione DATE,
 	data_aggiornamento DATE,
 	url VARCHAR(1000),
-	CONSTRAINT PRIMARY KEY (numero, anno)	
+	CONSTRAINT PRIMARY KEY (numero, anno),
+	CONSTRAINT fk_anno FOREIGN KEY  (anno) REFERENCES avcpman_indice (anno)	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sulle pubblicazioni effettuate';
-
-CREATE TABLE IF NOT EXISTS `avcpman_settings` (
-	sid INT AUTO_INCREMENT PRIMARY KEY,
-	skey VARCHAR(50),
-	svalue VARCHAR(1000)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sulle impostazioni';
 
 
 CREATE TABLE IF NOT EXISTS `avcpman_gara` (
@@ -40,12 +35,13 @@ CREATE TABLE IF NOT EXISTS `avcpman_gara` (
 	scelta_contraente NUMERIC,
 	importo NUMERIC(15,2),
 	importo_liquidato NUMERIC(15,2),
+	dummy CHAR(1),
 	data_inizio DATE,
 	data_fine DATE,
-	f_pub_numero decimal(10,0),
-	f_pub_anno  INT(4),
-    f_user_id  VARCHAR(255),
-	CONSTRAINT fk_pubblicazione FOREIGN KEY  (f_pub_anno,f_pub_numero) REFERENCES avcpman_pubblicazione (anno,numero) 	
+	f_user_id VARCHAR(100),
+	f_pub_numero NUMERIC,
+	f_pub_anno  INT(4),	
+	CONSTRAINT fk_pubblicazione FOREIGN KEY  (f_pub_anno,f_pub_numero) REFERENCES avcpman_pubblicazione (anno,numero) ON DELETE NO ACTION	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sui lotti di gara';
 
 
@@ -53,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `avcpman_partecipanti` (
 	pid INT AUTO_INCREMENT PRIMARY KEY,
 	gid INT,
 	tipo CHAR(1),
-    aggiudicatario CHAR(1),
+	aggiudicatario CHAR(1),	
 	CONSTRAINT FOREIGN KEY fk_gara (gid) REFERENCES avcpman_gara(gid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sui partecipanti ai lotti';
 
@@ -62,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `avcpman_ditta` (
 	did INT AUTO_INCREMENT PRIMARY KEY,
 	ragione_sociale VARCHAR(250) NOT NULL,
 	estera CHAR(1),
+	dummy CHAR(1),
 	identificativo_fiscale VARCHAR(250) NOT NULL,
     CONSTRAINT uc_id UNIQUE (identificativo_fiscale)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sulle ditte';
@@ -95,3 +92,5 @@ CREATE TABLE `avcpman_users` (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sugli utenti';
 INSERT INTO `avcpman_users` VALUES ('administrator','Utente amministratore','cae3b8895e675a9e38aa9e91b41e82ec4c91e9ba','administrator');
+INSERT INTO `avcpman_ditta` (`did`, `ragione_sociale`, `estera`, `dummy`, `identificativo_fiscale`) VALUES(1, 'Comune di Terracina', 'N', NULL, '00246180590');
+INSERT INTO `avcpman_ditta` (`did`, `ragione_sociale`, `estera`, `dummy`, `identificativo_fiscale`) VALUES(2, 'Ditta Fantasma', 'Y', 'Y', '12345678912');

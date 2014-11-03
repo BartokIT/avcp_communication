@@ -2,6 +2,7 @@
     <head>
     <title>Comunicazioni AVCP</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
      <link  rel="stylesheet" href="resources/css/grid-layout.css" type="text/css">   
 	{include file="style.tpl"}
     </head>

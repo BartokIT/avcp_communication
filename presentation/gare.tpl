@@ -1,7 +1,8 @@
 <!DOCTYPE html>
     <head>
     <title>Comunicazioni AVCP</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 		{include file="style.tpl"}
 		<link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/bootstrap-tour-standalone.min.css" rel="stylesheet" type="text/css" />
@@ -27,7 +28,7 @@
 					</thead>
 					<tbody>
 					{section name=gara loop=$gare}
-						<tr>
+						<tr {if $gare[gara]->dummy == "Y"}class="dummy"{/if}>
 							<td class="counter">{$smarty.section.gara.index + 1}</td>
 							<td class="subject">{$gare[gara]->oggetto}</td>
 							<td style="width: 30px;text-align: center">{$gare[gara]->partecipanti}</td>
@@ -49,71 +50,5 @@
     <script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
 	<script src="resources/js/bootstrap-tour-standalone.min.js"></script>
-	<script>
-		$(function(){
-			
-			$(".delete").click(function(e) {
-				e.preventDefault();
-				var targetUrl = $(this).attr("href");
-				var iGaraNum = $(this).parent().parent().children('.counter').text();
-				var sSubject = $(this).parent().parent().children('.subject').text();
-				
-				$("#modal-box-message").html("Si vuole veramente eliminare la gara n. " + iGaraNum +"<br/> avente come oggetto '" + sSubject +"'?");
-				$("#modal-box").dialog({
-					resizable: false,					
-					modal: true,
-					title: "Eliminazione gara",
-					buttons: {
-					  "Conferma": function() {
-						window.location.href = targetUrl;
-					  },
-					  "Annulla": function() {
-						$( this ).dialog( "close" );
-					  }
-					}
-				});
-			});
-			var oTour = new Tour({
-				steps:[
-					{
-						element: "#new-gara",
-						title: "Guida iniziale",
-						content: "Seguendo questa guida, ti verr&agrave; spiegato in breve il funzionamento di questo sito.<br/>Tramite il pulsante 'Aggiungi gara' potrai aggiungere una nuova gara.<br/><strong> Premilo ora</strong>"
-					},
-					{
-						path:"?action=new_gara",
-						element: ".box",
-						title: "Aggiungi una nuova gara",
-						content: "Tramite questo pulsante potrai aggiungere una nuova gara"
-					},
-                    {
-						path:"?action=new_gara",
-						element: ".save",
-						title: "Salva la gara",
-						content: "Finito l'inserimento sar&agrave; necessario premere il pulsante 'Inserisci' per effettuare il salvataggio"
-					},
-                    {
-						element: ".edit-partecipant",
-						placement:"top",
-						title: "Inserisci partecipanti",
-						content: "Ora &egrave; necessario inserire i partecipanti alla gara"
-					},
-					{
-						path : $(".edit-partecipant:first").attr("href"),
-						element: ".edit-partecipant",
-						placement:"top",
-						title: "Insòljòljlti",
-					}
-			],
-			template: "<div class='popover'> <div class='arrow'></div> <h3 class='popover-title'></h3> <div class='popover-content'></div> <div class='popover-navigation'> <div class='btn-group'> <button class='btn btn-sm btn-default' data-role='prev'>&laquo; Prec.</button> <button class='btn btn-sm btn-default' data-role='next'>Succ. &raquo;</button> <button class='btn btn-sm btn-default' data-role='pause-resume' data-pause-text='Pause' data-resume-text='Resume'>Pausa</button> </div> <button class='btn btn-sm btn-default' data-role='end'>Termina tour</button> </div> </div>"
-			});
-			oTour.init();
-			oTour.start();
-			 if (!oTour.ended()) {
-				$("#new-gara").click(function(e){                
-					oTour.next();
-            })
-			}
-		});
-	</script>
+	<script src="control/reserved/avcpman/gare.js"></script>
 </html>

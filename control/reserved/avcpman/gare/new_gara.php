@@ -25,6 +25,17 @@ class Control extends \Control
         function submit(){
                 if ($this->_r["submit"] == "save")
                 {
+                        $dummy="N";
+                        
+                        if (isset($this->_r["dummy"]))
+                        {
+                                $dummy="Y";
+                        }
+                        if (
+                            (is_dummy_gara_present($this->user->getID()) == null
+                            && isset($this->_r["dummy"])) ||
+                            !(isset($this->_r["dummy"])) )
+                        {
                         insert_gara($this->_r["gare_edit_cig"],
                              $this->_r["gare_edit_subject"],
                              $this->_r["gare_edit_contest_type"],
@@ -33,8 +44,10 @@ class Control extends \Control
                              $this->_r["gare_edit_job_start_date"],
                              $this->_r["gare_edit_job_end_date"],
                              $this->user->getID(),
-                             $this->_r["gare_edit_year"]
-                             );
+                             $this->_r["gare_edit_year"],
+                             null,
+                             $dummy);
+                        }
                 }
                 return ReturnArea($this->status->getSiteView(),"avcpman/gare");
         }

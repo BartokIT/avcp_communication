@@ -2,6 +2,7 @@
     <head>
     <title>Comunicazioni AVCP</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />        
 	{include file="style.tpl"}
     <link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
     <link href="resources/css/bootstrap-tour-standalone.min.css" rel="stylesheet" type="text/css" />

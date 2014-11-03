@@ -295,6 +295,19 @@ function insert_pubblicazione($titolo,$abstract,$data_pubblicazione, $data_aggio
 		return false;
 }
 
+function is_dummy_gara_present($userid)
+{
+	global $db;
+	
+	$userid = $db->escape($userid);
+
+	
+    $query_string= "SELECT  g.gid " .
+	" FROM " . $db->prefix . 'gara g WHERE g.f_user_id = "' .$userid . '" AND g.dummy = "Y"';
+	$gare = $db->get_row($query_string);	
+	return $gare;
+}
+
 /**
  * restituisce l'insieme delle gare di un certo anno e di una determinata pubblicazione
  * */
@@ -316,7 +329,7 @@ function get_gare($anno,$numero=null,$userid=null)
 		$numero_string .= 'AND g.f_user_id = "' .$userid . '"';
 	}
 	
-    $query_string= "SELECT  g.gid, g.cig, g.oggetto, g.scelta_contraente, " .
+    $query_string= "SELECT  g.gid, g.dummy,g.cig, g.oggetto, g.scelta_contraente, " .
 	"g.importo, g.importo_liquidato,DATE_FORMAT( g.data_inizio,'%d/%m/%Y') as data_inizio, DATE_FORMAT( g.data_fine,'%d/%m/%Y') as data_fine,".
 	" COUNT(p.pid) as partecipanti FROM " . $db->prefix . "gara g LEFT JOIN " . $db->prefix . "partecipanti p ON g.gid = p.gid  WHERE g.f_pub_anno = $anno " . $numero_string . " GROUP BY g.gid";
 	$gare = $db->get_results($query_string);	
@@ -427,7 +440,7 @@ function delete_gara($gid)
  * Inserisce una nuova gara nel database
  * */
 function insert_gara($cig=null,$oggetto=null,$scelta_contraente=null,$importo=null,$importo_liquidato=null,
-					 $data_inizio=null,$data_fine=null,$f_user_id=null,$f_pub_anno=null,$f_pub_numero=null)
+					 $data_inizio=null,$data_fine=null,$f_user_id=null,$f_pub_anno=null,$f_pub_numero=null, $dummy=null)
 {
 	global $db;
 	$db->query("BEGIN");
@@ -525,7 +538,7 @@ function get_ditte()
 {
 	global $db;
 	
-	$ditte = $db->get_results("SELECT d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . "ditta d ");
+	$ditte = $db->get_results("SELECT d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . 'ditta d WHERE d.dummy <> "Y" OR d.dummy IS NULL');
 	if ($ditte == NULL)
 		return array();
 	else
@@ -550,6 +563,19 @@ function get_ditta($did)
 		return $ditta;
 }
 
+/**
+ * Restituisce l'elenco di tutte le ditte
+ * */
+function get_ditta_by_cf($cf)
+{
+	global $db;
+	
+	$ditta = $db->get_row("SELECT d.did, d.ragione_sociale, d.estera, d.identificativo_fiscale FROM " . $db->prefix . 'ditta d WHERE d.identificativo_fiscale = "' . $cf . '"');
+	if ($ditta == NULL)
+		return false;
+	else
+		return $ditta;
+}
 
 /**
  * Permette di controllare se la ditta è utilizzata in qualche gare
@@ -582,7 +608,10 @@ function insert_ditta($identificativo_fiscale,$ragione_sociale,$estera)
 	//build the insert string semi-automatically
 	$sql_string = build_insert_string($db->prefix . "ditta",$data);
 	$result = $db->query($sql_string);
-	$db->query("COMMIT");
+	if ($result === FALSE)
+		$db->query("ROLLBACK");
+	else
+		$db->query("COMMIT");
 
 	if ($result)
 		return $db->insert_id;
@@ -812,6 +841,29 @@ function get_settings($keys=array())
 				}
 		}
 		return $return;
+		
+}
+
+function set_settings($keys_value=array())
+{
+		global $db;
+		$return = array();
+		$db->query("BEGIN");
+		
+		$result = false;
+		foreach ($keys_value as $key=>$value)
+		{
+			$value = sql_escape($db->prefix . 'settings','svalue',$value);
+			$result = $db->query("UPDATE " . $db->prefix . 'settings SET svalue = "' . $value . '" WHERE skey = "' . $key .'"');
+			if ($result === false)
+			{
+				$db->query("ROLLBACK");
+				return false;
+			}		
+		}
+
+		$db->query("COMMIT");
+		return true;
 		
 }
 

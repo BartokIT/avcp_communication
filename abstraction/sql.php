@@ -22,6 +22,7 @@ $db_schema=array();
 $db_schema[$db->prefix . "gara"]=array(
     "cig"=>array("type"=>"string","null"=>false),
     "oggetto"=>array("type"=>"string","lenght"=>255,"null"=>true),
+	"dummy"=>array("type"=>"string","lenght"=>1,"null"=>true),
     "scelta_contraente"=>array("type"=>"int","null"=>true),
     "importo"=>array("type"=>"numeric","null"=>true),
     "importo_liquidato"=>array("type"=>"numeric","null"=>true),
@@ -62,8 +63,22 @@ $db_schema[$db->prefix . "raggruppamento"]=array(
     "ruolo"=>array("type"=>"int","null"=>false)
 );
 
+
+$db_schema[$db->prefix . "settings"]=array(
+    "skey"=>array("type"=>"string","lenght"=>50,"null"=>true),
+    "svalue"=>array("type"=>"string","lenght"=>1000,"null"=>true)
+);
+
 function sql_escape($table,$column,$value)
 {
+	global $db_schema;
+	$table_schema = $db_schema[$table];
+	if (isset($table_schema) && $table_schema[$column] !== null &&
+		isset($table_schema[$column]["lenght"]))
+	{
+		if (strlen($value)>$table_schema[$column]["lenght"])
+			$value = substr($value,0,$table_schema[$column]["lenght"]);
+	}
     return $value;
 }
 
@@ -129,7 +144,6 @@ function build_insert_string($table,$params)
     $column_string = substr($column_string,0,-1) . ") ";
     $values_string = substr($values_string,0,-1) . ")";
     $sql_string .= $column_string . $values_string;
-    
     return $sql_string;
 }
 

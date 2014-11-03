@@ -10,7 +10,9 @@
     <li>
         <a href="{urlarea area="avcpman/ditte"}">Ditte</a>
     </li>
+    {authorized roles="administrator,publisher"}
     <li>
-        <a href="#">Impostazioni</a>
+        <a href="{urlarea area="avcpman/impostazioni"}">Impostazioni</a>
     </li>
+    {/authorized}
 </ul>

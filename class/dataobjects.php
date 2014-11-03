@@ -31,6 +31,7 @@ class User implements Serializable {
 	private $surname=NULL;
 	
 	private $id=NULL;
+	private $domain=NULL;
 	private $displayed_name=NULL;
 	private $pre_login_status=NULL;
 	private $pre_login_action=NULL;
@@ -100,7 +101,18 @@ class User implements Serializable {
 		
 		if ($identified)
 		{
-			$this->id = $id;
+			if (preg_match('/\\\/',$id))
+			{
+				list($domain,$user)=preg_split('/\\\/',$id);
+			}
+			else
+			{
+				$domain ="";
+				$user = $id;
+			}
+			
+			$this->id = $user;
+			$this->domain = $domain;	
 			$auth_config["userinforetriever"]->getUserInfo($this);
 			$auth_config["rolemapper"]->setUserRoles($this);
 			$this->logged=TRUE;

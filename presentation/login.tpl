@@ -1,6 +1,7 @@
 <!DOCTYPE html>
     <head>
     <title>Comunicazioni AVCP</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	{include file="style.tpl"}
     </head>

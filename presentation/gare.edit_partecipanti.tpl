@@ -2,6 +2,7 @@
     <head>
     <title>Comunicazioni AVCP</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 		{include file="style.tpl"}
 	    <link href="resources/css/bootstrap-tour-standalone.min.css" rel="stylesheet" type="text/css" />
     </head>
@@ -99,57 +100,93 @@
         {include file="footer.tpl"}
     </body>
 	<script src="resources/js/jquery-1.10.2.js"></script>
-    <script src="resources/js/bootstrap-tour-standalone.min.js"></script>
+    <script src="resources/js/bootstrap-tour-standalone.js"></script>
 	<script>
 		$(function(){
 			var oTour = new Tour({
 				steps:[
-					{
-						element: "#new-gara",
-						title: "0",
-						content: "Seguendo questa guida, ti verr&agrave; spiegato in breve il funzionamento di questo sito.<br/>Tramite il pulsante 'Aggiungi gara' potrai aggiungere una nuova gara.<br/><strong> Premilo ora</strong>"
-					},
-					{
-						path:"?action=new_gara",
-						element: ".box",
-						title: "1",
-						content: "Tramite questo pulsante potrai aggiungere una nuova gara"
-					},
-                    {
-						path:"?action=new_gara",
-						element: ".save",
-						title: "2",
-						content: "Finito l'inserimento sar&agrave; necessario premere il pulsante 'Inserisci' per effettuare il salvataggio"
-					},
-                    {
-						path : "?area=avcpman%2Fgare",
-						element: ".edit-partecipant",
-						placement:"top",
-						title: "3",
-						content: "Ora &egrave; necessario inserire i partecipanti alla gara"
-					},
-					{
+					{   path : "?area=avcpman%2Fgare"},  //step:0
+					{   path : "?area=avcpman%2Fgare%2Fnew_gara"},  //step:1
+                    {   path : "?area=avcpman%2Fgare%2Fnew_gara"},  //step:2
+                    {   path : "?area=avcpman%2Fgare"},  //step:3
+					{	//step:4
 						element: "#add-partecipant-ditta",
 						placement:'left',
+						reflex: true,
 						title:"Aggiungi un partecipante",
-						content: "&Egrave; necessario aggiungere un partecipante oppure un ragguppamento. Clicca sul pulsante per andare avanti",
-					},
-					
-					{
-						path:  $("#add-partecipant-ditta").attr("href"),
+						content: "&Egrave; necessario aggiungere un partecipante oppure un ragguppamento. Clicca sul pulsante per andare avanti"
+					},	
+					{	path:  $("#add-partecipant-ditta").attr("href")	}, //step: 5
+					{	path:  $("#add-partecipant-ditta").attr("href")	}, //step:6
+					{	//step:7
+						element: "#add-partecipant-raggruppamento",
 						placement:'left',
-						title:"Aggiungi un partecipante",
-						content: "&Egrave; possibile aggiungere una ditta, oppure ricercarne una in rubrica",
-					}
+						reflex: true,
+						title:"Aggiungi un raggruppamento di partecipanti",
+						content: "Ora prova ad aggiungere un raggruppamento. Clicca sul pulsante per andare avanti.",
+						onNext: function(tour)
+						{
+							if ($(".add-ditta-raggruppamento").length < 1 ) {
+								window.location = $("#add-partecipant-raggruppamento").attr("href");	//code
+								return false;
+							}						
+						},
+						onShown : function (tour)
+						{							
+							if ($(".add-ditta-raggruppamento").length > 0 ) {
+								tour.next();
+							}
+						}
+					},
+					{	//step:8
+						element: ".add-ditta-raggruppamento:first",
+						placement:'left',
+						reflex: true,
+						title:"Aggiungi una ditta al raggruppamento",
+						content: "Un raggruppamento &egrave; composto da pi&ugrave; ditte.<br/> Clicca sul pulsante per aggiungerne una al raggruppamento."
+						
+					},
+					{   path : $(".add-ditta-raggruppamento:first").attr("href"),						
+					},  //step:9
+					{   path : $(".add-ditta-raggruppamento:first").attr("href")},  //step:10
+					{   path : $(".add-ditta-raggruppamento:first").attr("href")},  //step:11
+					{	//step: 12
+						element: "[name='aggiudicatario']:first",
+						title: "Aggiudicatario",
+						reflex: true,
+						content:"Ora &egrave; necessario specificare un aggiudicatario per la gara, selezionalo premendo sul pallino.",						
+						onNext: function(tour)
+						{
+							tour._options.steps[14].path = '?action=save&submit=save&aggiudicatario=' + $("input[name='aggiudicatario']:checked").val() + '&pid=' + $("input[name='pid']").val()+ '&gid='+$("input[name='gid']").val() + "&nonce=" + $("input[name='nonce']").val();
+						}
+					},
+					{	//step: 13
+						element: "button.save",
+						title: "Salva la selezione",
+						reflex: true,
+						content: "Premere sul pulsante 'Salva' per salvare la scelta dell'aggiudicatario",
+						onShown: function (tour)
+						{
+							if ($("[name='aggiudicatario']:first:checked").length < 1 )
+							{
+								tour.prev();
+							}
+						}
+					},
+					{   path : '?action=save&submit=save&pid=' + $("input[name='pid']").val()+ '&gid='+$("input[name='gid']").val() + "&nonce=" + $("input[name='nonce']").val()}  //step:14
+					
 			],
-			template: "<div class='popover'> <div class='arrow'></div> <h3 class='popover-title'></h3> <div class='popover-content'></div> <div class='popover-navigation'> <div class='btn-group'> <button class='btn btn-sm btn-default' data-role='prev'>&laquo; Prec.</button> <button class='btn btn-sm btn-default' data-role='next'>Succ. &raquo;</button> <button class='btn btn-sm btn-default' data-role='pause-resume' data-pause-text='Pause' data-resume-text='Resume'>Pausa</button> </div> <button class='btn btn-sm btn-default' data-role='end'>Termina tour</button> </div> </div>"
+			template: "<div class='popover'> <div class='arrow'></div> <h3 class='popover-title'></h3> <div class='popover-content'></div> <div class='popover-navigation'> <div class='btn-group'> <button class='btn btn-sm btn-default' data-role='prev'>&laquo; Prec.</button> <button class='btn btn-sm btn-default' data-role='next'>Succ. &raquo;</button> <button class='btn btn-sm btn-default' data-role='pause-resume' data-pause-text='Pause' data-resume-text='Resume'>Pausa</button> </div> <button class='btn btn-sm btn-default' data-role='end'>Termina tour</button> </div> </div>",
+			onEnd: function(tour)
+			{
+				$("a").unbind();
+			}
 			});
 			oTour.init();
 			oTour.start();
 			 if (!oTour.ended()) {
-				$("#add-partecipant-ditta").click(function(e){                
-					oTour.next();
-            })
+				$("a").unbind().click(function(e){ e.preventDefault();});
+                $("button").unbind().click(function(e){ e.preventDefault();});				
 			}
 		});
 	</script>	

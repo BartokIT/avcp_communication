@@ -1,7 +1,8 @@
 <!DOCTYPE html>
     <head>
     <title>Comunicazioni AVCP</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 		{include file="style.tpl"}
 		<link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/bootstrap-tour-standalone.min.css" rel="stylesheet" type="text/css" />
@@ -26,7 +27,7 @@
 					<p id="search_result">				
 					</p>
 				</div>
-				{form action="add" parameters=$p}
+				{form id="add-ditta" action="add" parameters=$p}
 				{ifarea value="avcpman/gare/edit/add_ditta_raggruppamento"}
 					{$p['pid']=$partecipante}
 					<label for="gare_edit_ruolo_type"><span>Ruolo ditta:</span>

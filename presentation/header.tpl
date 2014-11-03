@@ -16,10 +16,10 @@
 							{$user->getDisplayName()|htmlentities}
 							<ul>
 								{ifarea site-view="reserved"}
-									<li><a class="smaller" href="{urlarea area="avcpman" nonce="true" action="logout"}">Logout</a></li>
+									<li><a class="smaller logout" href="{urlarea area="avcpman" nonce="true" action="logout"}">Logout</a></li>
 								{/ifarea}
 								{ifarea site-view="general"}
-									<li><a class="smaller" href="{urlarea area="login" nonce="true" action="logout"}">Logout</a></li>
+									<li><a class="smaller logout" href="{urlarea area="login" nonce="true" action="logout"}">Logout</a></li>
 								{/ifarea}
 							</ul>
 						</div>

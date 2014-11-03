@@ -56,13 +56,20 @@ class Control extends \Control
     {
         $gid = $this->_r["gid"];
         if ($this->_r["submit"] != "undo")
-        {           
-            $did= insert_ditta($this->_r["ditta_edit_identificativo"],
+        {
+            $pid = @$this->_r["pid"];
+            if (isset($this->_r["dummy"]))
+            {
+                $did =2 ;
+            }
+            else
+            {
+                $did= insert_ditta($this->_r["ditta_edit_identificativo"],
                          $this->_r["ditta_edit_ragione_sociale"],
                          $this->_r["ditta_edit_estero"]);
             
+            }
             
-            $pid = $this->_r["pid"];
             add_partecipante($gid,"R",$did,$this->_r["gare_edit_ruolo_type"],$pid);
         }
         

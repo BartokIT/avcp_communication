@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-08-27 11:24:15
+<?php /* Smarty version Smarty-3.1.18, created on 2014-10-31 13:12:22
          compiled from "presentation\menu.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2134353fc7798c52f65-45172749%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '774b6d751e2b1e327226322e5934fc859ff829ae' => 
     array (
       0 => 'presentation\\menu.tpl',
-      1 => 1409131453,
+      1 => 1414757323,
       2 => 'file',
     ),
   ),
@@ -38,7 +38,12 @@ if (!is_callable('smarty_function_urlarea')) include 'E:\\Users\\claudio.papa\\D
         <a href="<?php echo smarty_function_urlarea(array('area'=>"avcpman/ditte"),$_smarty_tpl);?>
 ">Ditte</a>
     </li>
+    <?php $_smarty_tpl->smarty->_tag_stack[] = array('authorized', array('roles'=>"administrator,publisher")); $_block_repeat=true; echo smarty_block_authorized(array('roles'=>"administrator,publisher"), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
+
     <li>
-        <a href="#">Impostazioni</a>
+        <a href="<?php echo smarty_function_urlarea(array('area'=>"avcpman/impostazioni"),$_smarty_tpl);?>
+">Impostazioni</a>
     </li>
+    <?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_authorized(array('roles'=>"administrator,publisher"), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
+
 </ul><?php }} ?>
