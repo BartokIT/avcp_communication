@@ -21,6 +21,8 @@ class Control extends \Control
     
     function save()
     {
+        if ($this->_r["submit"] == "save")
+        {
         if ( isset($this->_r["ente_name_edit"]) &&
              isset($this->_r["ente_cf_edit"]) &&
              isset($this->_r["licenza_edit"]))
@@ -30,6 +32,7 @@ class Control extends \Control
                         "licenza"=>$this->_r["licenza_edit"]);
             if ( set_settings($p) === false)
                 return ReturnArea($this->status->getSiteView(),$this->status->getArea()); 
+        }
         }
         return ReturnArea($this->status->getSiteView(),"avcpman\gare"); 
     }

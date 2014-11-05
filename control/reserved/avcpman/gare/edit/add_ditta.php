@@ -54,7 +54,10 @@ class Control extends \Control
             $did= insert_ditta($this->_r["ditta_edit_identificativo"],
                          $this->_r["ditta_edit_ragione_sociale"],
                          $this->_r["ditta_edit_estero"]);            
-            add_partecipante($gid,"D",$did);
+			if (!is_ditta_partecipante($did,$gid))
+				add_partecipante($gid,"D",$did);
+			else
+				return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti",NULL,array("parameter"=>$gid,"error"=>"La ditta selezionata risulta gi&agrave; essere partecipante per la gara corrente"));				
         }
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti",NULL,array("parameter"=>$gid));
     }
@@ -67,7 +70,10 @@ class Control extends \Control
         {
 
             $did = $this->_r["gara_edit_search_did"];
-            add_partecipante($gid,"D",$did);        
+			if (!is_ditta_partecipante($did,$gid))
+				add_partecipante($gid,"D",$did);
+			else
+				return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti",NULL,array("parameter"=>$gid,"error"=>"La ditta selezionata risulta gi&agrave; essere partecipante per la gara corrente"));
         }
         
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti",NULL,array("parameter"=>$gid));

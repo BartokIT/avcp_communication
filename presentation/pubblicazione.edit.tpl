@@ -16,29 +16,31 @@
 				<h2>Nuova Pubblicazione</h2>
 				<p>
 						
-						{$p = ['pubblicazione_edit_anno'=>$anno]}
-						{form id="edit_publication" action="add" parameters=$p}
+						{$p = ['pubblicazione_edit_anno'=>$anno,'pubblicazione_edit_numero'=>$numero]}
+						{form id="edit_publication" action="save" parameters=$p}
 						<div class="message">Inserisci pubblicazione per l'anno {$anno}</div>
 						<div class="box">						
-								<label for="pubblicazione_edit_titolo"><span>Titolo</span><input type="text" maxlength="1000" name="pubblicazione_edit_titolo" id="pubblicazione_edit_titolo" value=""/><div class="inline-error"></div></label>					
+								<label for="pubblicazione_edit_titolo">
+									<span>Titolo</span>
+									<input type="text" maxlength="1000" name="pubblicazione_edit_titolo" id="pubblicazione_edit_titolo" value="{$titolo}" /><div class="inline-error"></div></label>
 								<label for="pubblicazione_edit_abstract">
 									<span>Abstract</span>
-									<input type="text" maxlength="1000" id="pubblicazione_edit_abstract"  name="pubblicazione_edit_abstract"/>									
+									<input type="text" maxlength="1000" id="pubblicazione_edit_abstract"  name="pubblicazione_edit_abstract" value="{$abstract}" />
 								</label>
 								<label for="pubblicazione_edit_pubblicazione"><span>Data pubblicazione</span>
-									<input type="text" maxlength="10" id="pubblicazione_edit_pubblicazione" name="pubblicazione_edit_pubblicazione"/>
+									<input type="text" maxlength="10" id="pubblicazione_edit_pubblicazione" name="pubblicazione_edit_pubblicazione"  value="{$data_pubblicazione}"/>
 									<div class="inline-error"></div>
 								</label>
 								<label for="pubblicazione_edit_aggiornamento"><span>Data aggiornamento</span>
-									<input type="text" maxlength="10" id="pubblicazione_edit_aggiornamento" name="pubblicazione_edit_aggiornamento"/>
+									<input type="text" maxlength="10" id="pubblicazione_edit_aggiornamento" name="pubblicazione_edit_aggiornamento"  value="{$data_aggiornamento}"/>
 									<div class="inline-error"></div>
 								</label>
 								<label for="pubblicazione_edit_url"><span>Url di pubblicazione</span>
-									<input type="text" maxlength="1000" id="pubblicazione_edit_url" name="pubblicazione_edit_url"/>
+									<input type="text" maxlength="1000" id="pubblicazione_edit_url" name="pubblicazione_edit_url"   value="{$url}"/>
 									<div class="inline-error"></div>
 								</label>
 								<div class="button-container">
-								{ifarea value="avcpman/pubblicazioni/edit"}
+								{ifarea value="avcpman/pubblicazioni/edit_pubblicazione"}
 									<button class="save" type="submit" name="submit" value="save">Salva</button>
 								{/ifarea}
 								{ifarea value="avcpman/pubblicazioni/add_pubblicazione"}

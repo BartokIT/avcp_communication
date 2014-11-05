@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\pubblicazioni\add_pubblicazione;
+namespace reserved\avcpman\pubblicazioni\edit_pubblicazione;
 class Control extends \Control
 {
     /**
@@ -8,22 +8,12 @@ class Control extends \Control
      * @return object  Description
      */
     function d(){
-        if (isset($this->_r["pubblicazioni_anno"]))
+        if (isset($this->_r["anno"]) && isset($this->_r["numero"]))
         {
-            $anno  = (int) $this->_r["pubblicazioni_anno"];
-            $message = "";
-            if (!is_year_gare_present($anno))
-            {
-                $message= "Non sono presenti gare per l'anno specificato";
-                return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni",NULL,array("error"=>$message));                
-            }
-            else if (is_year_publication_present($anno))
-            {
-                $message= "E' stata gia creata una pubblicazione per l'anno richiesto";
-                return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni",NULL,array("error"=>$message));
-            }
-            else
-                return ReturnSmarty('pubblicazione.edit.tpl',array("anno"=>$anno));
+            $anno  = (int) $this->_r["anno"];
+			$numero =  (int) $this->_r["numero"];
+			$p = (array)get_pubblicazione_detail($anno,$numero);
+            return ReturnSmarty('pubblicazione.edit.tpl',$p);
         }
         else
             return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");
@@ -31,7 +21,7 @@ class Control extends \Control
     
  
     
-    function add()
+    function save()
     {
         //TODO : add check if is already added
         if ($this->_r["submit"] != "undo")

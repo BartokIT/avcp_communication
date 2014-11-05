@@ -31,7 +31,7 @@
                             <th>Anno</th>
                             <th>Descrizione</th>
                             <th>Ultimo<br/>aggiornamento</th>
-                            <th colspan="2">&nbsp;</th>
+                            <th colspan="3">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,11 +46,14 @@
                             <td>
                                 {$p->data_aggiornamento}
                             </td>
-                            <td>
+                            <td class="operations-size">
                                 {$p = ['numero'=>$p->numero,'anno'=>$p->anno]}
-                                <a class="download" title="Download" href="{urlarea nonce=false action="download_file" parameters=$p}">Download</a>
+                                <a class="download" title="Download" href="{urlarea nonce="false" action="download_file" parameters=$p}">Download</a>
                             </td>
-                            <td>
+                            <td class="operations-size">
+                                <a class="edit" title="Modifica pubblicazione" href="{urlarea nonce="false" action="edit" parameters=$p}">Modifica</a>
+                            </td>							
+                            <td class="operations-size">
                                 <a class="delete" title="Cancella pubblicazione" href="{urlarea action="delete" parameters=$p}">Elimina</a>
                             </td>
                         </tr>

@@ -15,6 +15,7 @@
             <div class="container-main">
                 <h2>Gara</h2>            
 				{$p = ['gid'=> $gara->gid]}
+				<div id="show-error" style="visibility:{if isset($error)}visible{else}hidden{/if}" class="error">{if isset($error)}{$error}{/if}</div>
 				<div class="message">Modifica partecipanti</div>
                     <div class="box recap-ditta">
 							<div class="label"><span class="left">Anno:</span><span class="right">{$gara->f_pub_anno}</span></div>
@@ -49,12 +50,13 @@
 			<tbody>
 			{$indice=1}
 			{foreach $partecipanti["ditte"] as $ditta}
+				{$p = ['pid'=> $ditta->pid,'gid'=> $gara->gid]}
                 <tr>
                     <td>{$indice++}</td>
                     <td>{$ditta->ragione_sociale}</td>
 					<td>{$ditta->identificativo_fiscale}</td>
 					<td><input type="radio" name="aggiudicatario" value="{$ditta->pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/></td>
-					<th><a class="delete-ditta" title="Rimovi ditta" href="{urlarea  action="delete_raggruppamento" parameters=$p}">
+					<th><a class="delete-ditta" title="Rimovi ditta" href="{urlarea  action="delete_ditta" parameters=$p}">
 						Rimuovi ditta
 					</a></th>
                 </tr>
@@ -76,14 +78,17 @@
 						</a>
 					</td>
 				</td></tr>
-				{foreach $rpartecipanti as $ditta}				
-					<tr class="raggruppamento">						
+				{foreach $rpartecipanti as $ditta}
+					{$pd= ['pid'=> $pid,'gid'=> $gara->gid,'did'=>$ditta->did]}
+					<tr class="raggruppamento">	
 						<td class="ragione-sociale">{$ditta->ragione_sociale} (<em>{$ruoli_raggruppamento[$ditta->ruolo]}</em>)</td>
 						<td class="identificativo-fiscale">{$ditta->identificativo_fiscale}</td>
 						{if $ditta@first}<td rowspan="{$ditta@total}">
 							<input type="radio" name="aggiudicatario" value="{$pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/>
 						</td> {/if}
-						<td>&nbsp;</td>
+						<td><a class="delete-ditta" title="Rimuovi ditta" href="{urlarea  action="delete_ditta_raggruppamento" parameters=$pd}">
+							Rimuovi ditta
+						</a></td>
 					</tr>
 				{/foreach}
             {/foreach}

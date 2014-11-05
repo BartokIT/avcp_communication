@@ -198,7 +198,7 @@ function get_pubblicazione_detail($anno,$numero)
 {
 	global $db;
 
-	$publication = $db->get_row("SELECT p.anno, p.titolo, p.abstract, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione,DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento,p.url FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno AND p.numero = $numero");
+	$publication = $db->get_row("SELECT p.numero, p.anno, p.titolo, p.abstract, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione,DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento,p.url FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno AND p.numero = $numero");
  
 	if ($publication == NULL)
 		return array();
@@ -258,8 +258,10 @@ function set_gare_pubblicazione($anno,$numero,$ids=array())
 		$result = $db->query("UPDATE " . $db->prefix . 'gara SET ' .
 								' f_pub_numero = ' . $numero .  								
 								' WHERE  f_pub_anno = ' . $anno );
+		$db->debug();
 		$db->query("COMMIT");
 	}
+	
     if ($result)
 		return true;
 	else
@@ -282,17 +284,34 @@ function insert_pubblicazione($titolo,$abstract,$data_pubblicazione, $data_aggio
     $data_pubblicazione = DateTime::createFromFormat('d/m/Y',$data_pubblicazione);
 	$data_aggiornamento = DateTime::createFromFormat('d/m/Y',$data_aggiornamento);
 	$db->query("BEGIN");
+	$result = $db->get_row("SELECT anno FROM " . $db->prefix . "indice WHERE anno =" . $anno);
+	if ($result == NULL)
+	{
+		$result = $db->query("INSERT INTO " . $db->prefix . "indice (anno) " .
+						   ' VALUES ( ' . $anno . ')');
+		if ($result === false)
+		{
+			$db->query("ROLLBACK");	
+			return false;
+		}
+	}
 	$numero = $db->get_var("SELECT MAX(p.numero) FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno");
     $numero = $numero*1 + 1;
-	
+	$db->debug();
+	echo $numero;
 	$result = $db->query("INSERT INTO " . $db->prefix . "pubblicazione (numero,titolo,abstract,anno,data_pubblicazione,data_aggiornamento,url) " .
 							   ' VALUES ( ' . $numero . ',"' . $titolo . '","' . $abstract . '",' . $anno . ',"' .
 							   $data_pubblicazione->format('Y-m-d'). '","' . $data_aggiornamento->format('Y-m-d') .'","' . $url . '")');
-    $db->query("COMMIT");
-	if ($result)
-		return $numero;
+    if ($result === false)
+	{	
+		$db->query("ROLLBACK");	    
+	    return false;
+	}
 	else
-		return false;
+	{
+		$db->query("COMMIT");
+		return $numero;
+	}	
 }
 
 function is_dummy_gara_present($userid)
@@ -580,14 +599,17 @@ function get_ditta_by_cf($cf)
 /**
  * Permette di controllare se la ditta è utilizzata in qualche gare
  * */
-function is_ditta_partecipante($did)
+function is_ditta_partecipante($did,$gid=NULL)
 {
 	global $db;
-	
-	$ditta = $db->get_row("SELECT r.did FROM " . $db->prefix . "raggruppamento r WHERE r.did = " . $did);
+	$append = "";
+	if ($gid != NULL)
+		$append = " AND p.gid = " . $gid;
+	$ditta = $db->get_row("SELECT r.did FROM " . $db->prefix . "raggruppamento r, " . $db->prefix . "partecipanti p WHERE r.did = " . $did . " AND r.pid = p.pid " . $append);	
 	if ($ditta != NULL)
 		return true;
-	$ditta = $db->get_row("SELECT p.did FROM " . $db->prefix . "part_ditta p WHERE p.did = " . $did);
+		
+	$ditta = $db->get_row("SELECT pa.did FROM " . $db->prefix . "part_ditta pa, " . $db->prefix . "partecipanti  p WHERE pa.did = " . $did . " AND p.pid = pa.pid " . $append);
 	if ($ditta == NULL)
 		return false;
 	else
@@ -724,6 +746,64 @@ function insert_raggruppamento($gid)
 	$db->query("COMMIT");
 	
 	return $pid;
+}
+
+function delete_partecipante($pid,$type)
+{
+	global $db;
+	if ($type == "R")
+	{
+		$result = $db->query("DELETE FROM " . $db->prefix . "raggruppamento ".	
+						   " WHERE " . $db->prefix . "raggruppamento.pid = $pid ");
+		if ($result === FALSE)
+		{
+			$db->query("ROLLBACK");
+			return false;
+		}
+	}
+	else
+	{
+		$result = $db->query("DELETE FROM " . $db->prefix . "part_ditta ".	
+						   " WHERE " . $db->prefix . "part_ditta.pid = $pid ");
+		if ($result === FALSE)
+		{
+			$db->query("ROLLBACK");
+			return false;
+		}
+	}
+	
+	$result = $db->query("DELETE FROM " . $db->prefix . "partecipanti ".	
+						   " WHERE " . $db->prefix . "partecipanti.pid = $pid ");
+    	
+    if (!$result)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+    else
+	{
+		$db->query("COMMIT");
+		return true;
+	}
+}
+
+function delete_ditta_raggruppamento($pid,$did)
+{
+	global $db;
+	$db->query("BEGIN");
+	$result = $db->query("DELETE FROM " . $db->prefix . "raggruppamento ".	
+						   " WHERE " . $db->prefix . "raggruppamento.pid = $pid AND " . $db->prefix ."raggruppamento.did = $did");
+    	
+    if (!$result)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+    else
+	{
+		$db->query("COMMIT");
+		return true;
+	}
 }
 
 /**

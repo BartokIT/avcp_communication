@@ -40,6 +40,16 @@ class Control extends \Control
         }
     }
     
+	function edit()
+	{
+		if (isset($this->_r["anno"]) && isset($this->_r["numero"]))
+        {
+            $anno = $this->_r["anno"];
+            $numero = $this->_r["numero"];
+            return ReturnArea($this->status->getSiteView(),$this->status->getArea()  . "/edit_pubblicazione");
+        }
+	}
+	
     function verify_anno()
     {
         if (isset($this->_r["anno"]))
