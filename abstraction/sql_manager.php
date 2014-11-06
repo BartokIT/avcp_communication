@@ -138,15 +138,17 @@ function is_year_publication_present($anno)
 /**
  * Permette di inserire un anno in archivio
  **/
-function insert_year($anno)
+function insert_year($anno,$transaction=true)
 {
 		global $db;
 		if (!is_numeric($anno))
 				return false;
 		$anno = $db->escape($anno*1);
-		$db->query("BEGIN");
+		if ($transaction)
+			$db->query("BEGIN");
 		$result = $db->query("INSERT INTO " . $db->prefix . "indice (anno) VALUES ($anno)");
-		$db->query("COMMIT");
+		if ($transaction)
+			$db->query("COMMIT");
 		return $result;
 }
 
@@ -184,7 +186,7 @@ function get_pubblicazioni($anno=NULL)
 		$whereanno = " WHERE p.anno = $anno ";
 	}
 	
-	$publications = $db->get_results("SELECT p.anno, p.titolo, p.abstract, p.numero, p.url, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione, DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento FROM " . $db->prefix . "pubblicazione p $whereanno ORDER BY p.numero ASC");
+	$publications = $db->get_results("SELECT p.anno, p.modified, p.titolo, p.abstract, p.numero, p.url, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione, DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento FROM " . $db->prefix . "pubblicazione p $whereanno ORDER BY p.numero ASC");
 
 	if ($publications == NULL)
 		return array();
@@ -250,16 +252,18 @@ function update_pubblicazione($titolo,$abstract,$data_pubblicazione, $data_aggio
 /**
  *
  **/
-function set_gare_pubblicazione($anno,$numero,$ids=array())
+function set_gare_pubblicazione($anno,$numero,$ids=array(),$transaction=true)
 {
     global $db;
 	if (count($ids) == 0 )
 	{
-		$db->query("BEGIN");
+		if ($transaction)
+			$db->query("BEGIN");
 		$result = $db->query("UPDATE " . $db->prefix . 'gara SET ' .
 								' f_pub_numero = ' . $numero .  								
 								' WHERE  f_pub_anno = ' . $anno );
-		$db->query("COMMIT");
+		if ($transaction)
+			$db->query("COMMIT");
 	}
 	
     if ($result)
@@ -410,7 +414,6 @@ function delete_gara($gid)
 						   " ) ");
     if ($result === FALSE)
 	{
-		echo "p";
 		$db->query("ROLLBACK ");
 		return false;
 	}
@@ -422,7 +425,6 @@ function delete_gara($gid)
 						   " ) ");
     if ($result ===FALSE)
 	{
-		echo "p";
 		$db->query("ROLLBACK ");
 		return false;
 	}
@@ -432,17 +434,23 @@ function delete_gara($gid)
 
 	if ($result === FALSE)
 	{
-		echo "p";
 		$db->query("ROLLBACK ");
 		return false;
 	}
-
+	
+	$result = get_gara($gid);
+	if ($result === FALSE)
+	{		
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
+	set_modified_bit_pubblicazione($result->f_pub_anno);
 	$result = $db->query("DELETE FROM " . $db->prefix . "gara " .	
 						   " WHERE " . $db->prefix . "gara.gid = $gid ");	
 	
     if ($result ===FALSE )
-	{
-		echo "p";
+	{		
 		$db->query("ROLLBACK");
 		return false;
 	}
@@ -467,13 +475,25 @@ function insert_gara($cig=null,$oggetto=null,$scelta_contraente=null,$importo=nu
 	if ($cig==null)
 		$data["cig"] = "0000000000";
 		
-	$sql_string = build_insert_string($db->prefix . "gara",$data);
-	
+	$sql_string = build_insert_string($db->prefix . "gara",$data);	
 	$result = $db->query($sql_string);
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
+	$gid = $db->insert_id;
+	if (!set_modified_bit_pubblicazione($f_pub_anno))
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
     $db->query("COMMIT");
-
+	
 	if ($result)
-		return $result;
+		return $gid;
 	else
 		return false;	
 }
@@ -492,7 +512,7 @@ function update_gare($anno,$numero,$cig=null,$oggetto=null,$scelta_contraente=nu
 	$sql_string = build_update_string($db->prefix . "gara",$data," WHERE f_pub_anno = " .  $anno . " AND f_pub_numero = " . $numero );
 	$result = $db->query($sql_string);
     $db->query("COMMIT");
-
+	
 	if ($result)
 		return $result;
 	else
@@ -512,12 +532,23 @@ function update_gara($gid,$cig=null,$oggetto=null,$scelta_contraente=null,$impor
 	unset($data["gid"]);
 	$sql_string = build_update_string($db->prefix . "gara",$data," WHERE gid = $gid");
 	$result = $db->query($sql_string);
-    $db->query("COMMIT");
-
-	if ($result)
-		return $result;
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
+	$result=set_modified_bit_pubblicazione($f_pub_anno);
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
 	else
-		return false;	
+	{
+		$db->query("COMMIT");
+		return true;
+	}
 }
 
 /**
@@ -687,15 +718,33 @@ function get_gara_from_pid($pid)
 		return $gara;
 }
 
-function update_aggiudicatario($gid,$pid)
+function update_aggiudicatario($gid,$pid,$transaction=true)
 {
 	global $db;
+	if ($transaction)
+		$db->query("BEGIN");
     $result = $db->query("UPDATE " . $db->prefix . 'partecipanti SET aggiudicatario = "Y" WHERE pid = ' . $pid . ' AND gid = ' . $gid );
-	
-	if ($result)
-		return $result;
-	else
+	if ($result === false)
+	{
+		if ($transaction)
+			$db->query("ROLLBACK");
 		return false;
+	}
+	
+	$result = get_gara($gid);
+	$result = set_modified_bit_pubblicazione($result->f_pub_anno);
+	if ($result === false)
+	{
+		if ($transaction)
+			$db->query("ROLLBACK");
+		return false;
+	}
+	else
+	{
+		if ($transaction)
+			$db->query("COMMIT");
+		return true;
+	}
 }
 
 function get_partecipanti($gid)
@@ -738,9 +787,26 @@ function insert_raggruppamento($gid)
 	
 	$db->query("BEGIN");
 	$result=$db->query(build_insert_string($db->prefix . "partecipanti",array("gid"=>$gid,"tipo"=>"R")));
-	if (!$result)
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
 		return false;
+	}
+	
 	$pid=$db->insert_id;
+	$result = get_gara($gid);	
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
+	if (!set_modified_bit_pubblicazione($result->f_pub_anno))
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
 	$db->query("COMMIT");
 	
 	return $pid;
@@ -772,25 +838,60 @@ function delete_partecipante($pid,$type)
 	
 	$result = $db->query("DELETE FROM " . $db->prefix . "partecipanti ".	
 						   " WHERE " . $db->prefix . "partecipanti.pid = $pid ");
-    	
-    if (!$result)
+    
+	$result = $db->get_row("SELECT p.gid FROM " . $db->prefix . "partecipanti p WHERE p.pid = " . $pid);	
+	if ($result === false)
 	{
 		$db->query("ROLLBACK");
 		return false;
 	}
-    else
+	
+	if (!set_modified_bit_pubblicazione($result->f_pub_anno))
 	{
-		$db->query("COMMIT");
-		return true;
+		$db->query("ROLLBACK");
+		return false;
 	}
+	
+	$db->query("COMMIT");
+	return true;
+
 }
 
 function delete_ditta_raggruppamento($pid,$did)
 {
 	global $db;
 	$db->query("BEGIN");
+	
+	$result = $db->get_row("SELECT p.gid FROM " . $db->prefix . "partecipanti p WHERE p.pid = " . $pid);
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
+	$result = get_gara($result->gid);
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	if (!set_modified_bit_pubblicazione($result->f_pub_anno))
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}	
+	
 	$result = $db->query("DELETE FROM " . $db->prefix . "raggruppamento ".	
 						   " WHERE " . $db->prefix . "raggruppamento.pid = $pid AND " . $db->prefix ."raggruppamento.did = $did");
+	
+	
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
+					   
     	
     if (!$result)
 	{
@@ -812,6 +913,19 @@ function delete_raggruppamento($pid)
 {
 	global $db;
 	$db->query("BEGIN");
+	$result = $db->get_row("SELECT p.gid FROM " . $db->prefix . "partecipanti p WHERE p.pid = " . $pid);	
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
+	if (!set_modified_bit_pubblicazione($result->f_pub_anno))
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
 	$result = $db->query("DELETE FROM " . $db->prefix . "raggruppamento ".	
 						   " WHERE " . $db->prefix . "raggruppamento.pid = $pid ");
     if ($result === FALSE)
@@ -822,7 +936,8 @@ function delete_raggruppamento($pid)
 	
 	$result = $db->query("DELETE FROM " . $db->prefix . "partecipanti ".	
 						   " WHERE " . $db->prefix . "partecipanti.pid = $pid ");
-    	
+    
+	
     if (!$result)
 	{
 		$db->query("ROLLBACK");
@@ -870,12 +985,15 @@ function add_partecipante($gid,$tipo,$did,$ruolo=null,$pid=null)
 		
 	}
 	
-	//if we don't have a partecipant idetifier then create e new partecipant
+	//if we don't have a partecipant identifier then create e new partecipant
 	if ($pid === null)
 	{
 		$result=$db->query(build_insert_string($db->prefix . "partecipanti",array("gid"=>$gid,"tipo"=>$tipo)));
-		if (!$result)
+		if ($result === false)
+		{
+			$db->query("ROLLBACK");
 			return false;
+		}
 		$pid=$db->insert_id;
 	}
 	
@@ -885,16 +1003,35 @@ function add_partecipante($gid,$tipo,$did,$ruolo=null,$pid=null)
 		$result=$db->query(build_insert_string($db->prefix . "raggruppamento",
 						       array("pid"=>$pid,"did"=>$did,
 							     "ruolo"=>$ruolo)));
-		if (!$result)
+		if ($result === false)
+		{
+			$db->query("ROLLBACK");
 			return false;
+		}
 	}
 	else if ($tipo == "D")
 	//else if the type is "D" (ditta) we add a single partecipant to the contest
 	{
 		$result=$db->query(build_insert_string($db->prefix . "part_ditta",
 						       array("pid"=>$pid,"did"=>$did)));
-		if (!$result)
+		if ($result === false)
+		{
+			$db->query("ROLLBACK");
 			return false;
+		}
+	}
+	
+	$result = get_gara($gid);	
+	if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+	
+	if (!set_modified_bit_pubblicazione($result->f_pub_anno))
+	{
+		$db->query("ROLLBACK");
+		return false;
 	}
 	
 	$db->query("COMMIT");    
@@ -949,10 +1086,11 @@ function set_settings($keys_value=array())
  * Inserisce un file nel database
  * */
 
-function insert_file($content,$tipo,$anno,$numero=NULL)
+function insert_file($content,$tipo,$anno,$numero=NULL,$transaction=true)
 {
 	global $db;
-	$db->query("BEGIN");
+	if ($transaction)
+		$db->query("BEGIN");
 	//prepare automatically the data array picking parameters name
 	$data=sql_create_array(__FUNCTION__,func_get_args());
 	$content = $db->escape($content);
@@ -960,10 +1098,11 @@ function insert_file($content,$tipo,$anno,$numero=NULL)
 	$sql_string = build_insert_string($db->prefix . "ditta",$data);
 	$result = $db->query("INSERT INTO " . $db->prefix . 'files 	(content, ctype,anno,numero) ' .
 						' VALUES ("' . $content . '","' . $tipo . '",' . $anno . ','. $numero . ' )');	
-	if ($result === FALSE)
-		$db->query("ROLLBACK");
-	else
-		$db->query("COMMIT");
+	if ($transaction)
+		if ($result === FALSE)
+			$db->query("ROLLBACK");
+		else
+			$db->query("COMMIT");
 
 	if ($result)
 		return $db->insert_id;
@@ -982,5 +1121,22 @@ function get_file($anno,$numero)
 		return $result->content;
 	else
 		return false;
+}
+
+function set_modified_bit_pubblicazione($anno)
+{
+	global $db;
+
+	//prepare automatically the data array picking parameters name
+	$data=sql_create_array(__FUNCTION__,func_get_args());
+
+	$result = $db->query("UPDATE " . $db->prefix . 'pubblicazione ' .
+						' SET modified = 1 WHERE anno = ' . $anno);	
+	
+
+	if ($result === false)
+		return false;
+	else
+		return true;	
 }
 ?>

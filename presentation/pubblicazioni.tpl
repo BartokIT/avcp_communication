@@ -30,8 +30,8 @@
                         <tr>
                             <th>Anno</th>
                             <th>Descrizione</th>
-                            <th>Ultimo<br/>aggiornamento</th>
-                            <th colspan="3">&nbsp;</th>
+                            <th>Ultimo<br/>aggiornamento</th>							
+                            <th colspan="4">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +46,11 @@
                             <td>
                                 {$p->data_aggiornamento}
                             </td>
+							<td>
+								{if $p->modified eq 1}
+								<small style="background-color:transparent" class="error">Sono state effettuate delle modifiche<br/>successive alla generazione del file</small>
+								{/if}
+							</td>
                             <td class="operations-size">
                                 {$p = ['numero'=>$p->numero,'anno'=>$p->anno]}
                                 <a class="download" title="Download" href="{urlarea nonce="false" action="download_file" parameters=$p}">Download</a>

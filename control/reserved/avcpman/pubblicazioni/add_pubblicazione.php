@@ -60,7 +60,6 @@ class Control extends \Control
 				$pubblicazione->licenza = $settings["licenza"];
 				$pubblicazione->ente_pubblicatore = $settings["ente"];
 				$pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
-				echo  $pubblicazione->cf_ente_pubblicatore;
 				$content = write_avcp_xml_to_string($pubblicazione, $lotti);
 				insert_file($content,"P",$anno,$pid);
 			}
