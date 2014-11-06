@@ -76,7 +76,7 @@
 
 .avcpman .container-main .edit-partecipant
 {
-	background: url(images/user_edit20x20.png) no-repeat 3px center;
+	background: url(images/user_edit20x20.png) no-repeat center center;
 	color: transparent;
 	display: block;
 	height: 20px;
@@ -86,7 +86,7 @@
 
 .avcpman .container-main .edit
 {
-	background: url(images/gare_edit20x20.png) no-repeat 3px center;
+	background: url(images/gare_edit20x20.png) no-repeat center center;
 	color: transparent;
 	display: block;
 	height: 20px;
@@ -96,7 +96,7 @@
 
 .avcpman .container-main .delete
 {
-	background: url(images/gare_delete_20x20.png) no-repeat 3px center;
+	background: url(images/gare_delete_20x20.png) no-repeat center center;
 	color: transparent;
 	display: block;
 	height: 20px;
@@ -423,7 +423,7 @@ div.recap-ditta div.label .right
 	line-height: 22px;
 	font-size: .9em;
 	font-variant: normal;
-	background: url(images/download_24x24.png)  no-repeat 6px center;
+	background: url(images/download_17x20.png)  no-repeat center center;
 	display: block;
 	text-decoration: none;
 	/*border: 1px solid #999;

@@ -29,7 +29,7 @@ class Control extends \Control
                         
                         if (isset($this->_r["dummy"]))
                         {
-                                $dummy="Y";
+                            $dummy="Y";
                         }
                         if (
                             (is_dummy_gara_present($this->user->getID()) == null

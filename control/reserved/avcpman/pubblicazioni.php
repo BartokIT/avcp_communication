@@ -36,9 +36,11 @@ class Control extends \Control
             $numero = $this->_r["numero"];
             update_gare($anno,$numero,null,null,null,null,null,null,null,null,"NULL");
             delete_pubblicazione($anno,$numero);
-            return ReturnArea($this->status->getSiteView(),$this->status->getArea());
+            
         }
+		return ReturnArea($this->status->getSiteView(),$this->status->getArea());
     }
+	
     
 	function edit()
 	{
@@ -75,7 +77,7 @@ class Control extends \Control
         {
             $anno = $this->_r["anno"];
             $numero = $this->_r["numero"];
-            $settings = get_settings(array("cf_ente","ente","licenza"));
+            /*$settings = get_settings(array("cf_ente","ente","licenza"));
             $pubblicazione = get_pubblicazione_detail($anno,$numero);
             $lotti = get_gare($anno,$numero);
             foreach ($lotti as $lotto)
@@ -86,11 +88,12 @@ class Control extends \Control
             $pubblicazione->licenza = $settings["licenza"];
             $pubblicazione->ente_pubblicatore = $settings["ente"];
             $pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
-            
-            return new \ReturnedFile('write_avcp_xml_to_string',array($pubblicazione, $lotti),
+            */
+            return new \ReturnedFile('get_file',array($anno, $numero),
                                      'avcp_' .$anno . '_' . $numero,"text/xml");
             //echo write_avcp_xml_to_string($pubblicazione,$lotti);
             
+			
         }
         else
         {

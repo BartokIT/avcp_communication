@@ -23,7 +23,7 @@ class Control extends \Control
                 return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni",NULL,array("error"=>$message));
             }
             else
-                return ReturnSmarty('pubblicazione.edit.tpl',array("anno"=>$anno));
+                return ReturnSmarty('pubblicazione.edit.tpl',array("anno"=>$anno,"titolo"=>"","abstract"=>"","numero"=>-1,"data_aggiornamento"=>date("d/m/Y"),"data_pubblicazione"=>date("d/m/Y"),"url"=>"http://www.comune.terracina.lt.it/"));
         }
         else
             return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");
@@ -31,7 +31,7 @@ class Control extends \Control
     
  
     
-    function add()
+    function save()
     {
         //TODO : add check if is already added
         if ($this->_r["submit"] != "undo")
@@ -43,10 +43,27 @@ class Control extends \Control
             $url = $this->_r["pubblicazione_edit_url"];
             $anno = $this->_r["pubblicazione_edit_anno"];
             $pid = insert_pubblicazione($titolo,$abstract,$data_pubblicazione,$data_aggiornamento,$url,$anno);
+
 			if ($pid !== false)
+			{
 				$true = set_gare_pubblicazione($anno,$pid);
-            else	
-				echo "problema";
+				
+				//Now we store the xml file in the database
+				$settings = get_settings(array("cf_ente","ente","licenza"));
+				$pubblicazione = get_pubblicazione_detail($anno,$pid);
+				$lotti = get_gare($anno,$pid);
+				foreach ($lotti as $lotto)
+				{
+					$lotto->partecipanti = get_partecipanti($lotto->gid);
+				}
+				
+				$pubblicazione->licenza = $settings["licenza"];
+				$pubblicazione->ente_pubblicatore = $settings["ente"];
+				$pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
+				echo  $pubblicazione->cf_ente_pubblicatore;
+				$content = write_avcp_xml_to_string($pubblicazione, $lotti);
+				insert_file($content,"P",$anno,$pid);
+			}
         }
         return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");
     }

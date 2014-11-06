@@ -74,6 +74,7 @@ function execute_sql_file($id_sql_connection, $database_name,$sql_file)
 }
 
 
+
 /**
  * Permette di ottenere le credenziali di accesso al sistema
  **/
@@ -258,7 +259,6 @@ function set_gare_pubblicazione($anno,$numero,$ids=array())
 		$result = $db->query("UPDATE " . $db->prefix . 'gara SET ' .
 								' f_pub_numero = ' . $numero .  								
 								' WHERE  f_pub_anno = ' . $anno );
-		$db->debug();
 		$db->query("COMMIT");
 	}
 	
@@ -297,8 +297,6 @@ function insert_pubblicazione($titolo,$abstract,$data_pubblicazione, $data_aggio
 	}
 	$numero = $db->get_var("SELECT MAX(p.numero) FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno");
     $numero = $numero*1 + 1;
-	$db->debug();
-	echo $numero;
 	$result = $db->query("INSERT INTO " . $db->prefix . "pubblicazione (numero,titolo,abstract,anno,data_pubblicazione,data_aggiornamento,url) " .
 							   ' VALUES ( ' . $numero . ',"' . $titolo . '","' . $abstract . '",' . $anno . ',"' .
 							   $data_pubblicazione->format('Y-m-d'). '","' . $data_aggiornamento->format('Y-m-d') .'","' . $url . '")');
@@ -947,4 +945,42 @@ function set_settings($keys_value=array())
 		
 }
 
+/**
+ * Inserisce un file nel database
+ * */
+
+function insert_file($content,$tipo,$anno,$numero=NULL)
+{
+	global $db;
+	$db->query("BEGIN");
+	//prepare automatically the data array picking parameters name
+	$data=sql_create_array(__FUNCTION__,func_get_args());
+	$content = $db->escape($content);
+	//build the insert string semi-automatically
+	$sql_string = build_insert_string($db->prefix . "ditta",$data);
+	$result = $db->query("INSERT INTO " . $db->prefix . 'files 	(content, ctype,anno,numero) ' .
+						' VALUES ("' . $content . '","' . $tipo . '",' . $anno . ','. $numero . ' )');	
+	if ($result === FALSE)
+		$db->query("ROLLBACK");
+	else
+		$db->query("COMMIT");
+
+	if ($result)
+		return $db->insert_id;
+	else
+		return false;	
+}
+
+function get_file($anno,$numero)
+{
+	global $db;
+	//build the insert string semi-automatically
+	
+	$result = $db->get_row('SELECT f.content FROM ' . $db->prefix . 'files f INNER JOIN (SELECT MAX(fid) as maxfid FROM ' . $db->prefix . 'files  WHERE anno = ' . $anno . ' AND numero = ' . $numero . ' ) f1 on (f.fid = f1.maxfid) WHERE f.anno = ' . $anno . ' AND f.numero = ' . $numero );	
+
+	if ($result)
+		return $result->content;
+	else
+		return false;
+}
 ?>

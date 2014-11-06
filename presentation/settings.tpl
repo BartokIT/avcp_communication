@@ -24,11 +24,11 @@
 									<div class="inline-error"></div>
 								</label>
 								<label for="ente_cf_edit"><span>Codice Fiscale Ente</span>
-									<input type="text" maxlength="10" id="ente_cf_edit" name="ente_cf_edit"  value="{$settings["cf_ente"]}"/>
+									<input type="text" maxlength="15" id="ente_cf_edit" name="ente_cf_edit"  value="{$settings["cf_ente"]}"/>
 									<div class="inline-error"></div>
 								</label>
 								<label for="licenza_edit"><span>Licenza</span>
-									<input type="text" maxlength="1000" id="licenza_edit" name="licenza_edit"  value="{$settings["licenza"]}"/>
+									<input type="text" maxlength="10" id="licenza_edit" name="licenza_edit"  value="{$settings["licenza"]}"/>
 									<div class="inline-error"></div>
 								</label>
 								<div class="button-container">

@@ -6,6 +6,17 @@ DROP TABLE IF EXISTS `avcpman_partecipanti`;
 DROP TABLE IF EXISTS `avcpman_gara`;
 DROP TABLE IF EXISTS `avcpman_pubblicazione`;
 DROP TABLE IF EXISTS `avcpman_indice`;
+DROP TABLE IF EXISTS `avcpman_files`;
+
+
+CREATE TABLE IF NOT EXISTS `avcpman_files` (
+	fid INT AUTO_INCREMENT PRIMARY KEY,
+	content BLOB,
+	ctype CHAR(1),
+	numero NUMERIC,
+	anno INT(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene gli indici delle pubblicazioni';
+
 
 
 CREATE TABLE IF NOT EXISTS `avcpman_indice` (
