@@ -34,9 +34,17 @@ class Control extends \Control
         {
             $anno = $this->_r["anno"];
             $numero = $this->_r["numero"];
-            update_gare($anno,$numero,null,null,null,null,null,null,null,null,"NULL");
-            delete_pubblicazione($anno,$numero);
-            
+            start_transaction();
+            $result = update_gare($anno,$numero,null,null,null,null,null,null,null,null,"NULL",false);
+            if (!$result)
+            	rollback_transaction();
+            $result = delete_pubblicazione($anno,$numero);
+            if (!$result)
+            	rollback_transaction();
+            $result = delete_files($anno,$numero,false);
+            if (!$result)
+            	rollback_transaction();            
+            commit_transaction();            
         }
 		return ReturnArea($this->status->getSiteView(),$this->status->getArea());
     }
@@ -49,6 +57,16 @@ class Control extends \Control
             $anno = $this->_r["anno"];
             $numero = $this->_r["numero"];
             return ReturnArea($this->status->getSiteView(),$this->status->getArea()  . "/edit_pubblicazione");
+        }
+	}
+
+	function view()
+	{
+		if (isset($this->_r["anno"]) && isset($this->_r["numero"]))
+        {
+            $anno = $this->_r["anno"];
+            $numero = $this->_r["numero"];
+            return ReturnArea($this->status->getSiteView(),$this->status->getArea()  . "/view_pubblicazione");
         }
 	}
 	
@@ -89,7 +107,7 @@ class Control extends \Control
             $pubblicazione->ente_pubblicatore = $settings["ente"];
             $pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
             */
-            return new \ReturnedFile('get_file',array($anno, $numero),
+            return new \ReturnedFile('get_last_file',array($anno, $numero),
                                      'avcp_' .$anno . '_' . $numero,"text/xml");
             //echo write_avcp_xml_to_string($pubblicazione,$lotti);
             

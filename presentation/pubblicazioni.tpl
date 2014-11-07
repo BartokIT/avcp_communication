@@ -25,13 +25,13 @@
                 <table class="publications-table">
                     <thead>
                         <tr>
-                            <th colspan="4">Pubblicazioni</th>
+                            <th colspan="8">Pubblicazioni</th>
                         </tr>
                         <tr>
                             <th>Anno</th>
                             <th>Descrizione</th>
                             <th>Ultimo<br/>aggiornamento</th>							
-                            <th colspan="4">&nbsp;</th>
+                            <th colspan="5">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,6 +53,9 @@
 							</td>
                             <td class="operations-size">
                                 {$p = ['numero'=>$p->numero,'anno'=>$p->anno]}
+                                <a class="download" title="Download older" href="{urlarea nonce="false" action="view" parameters=$p}">View</a>
+                            </td>
+                            <td class="operations-size">
                                 <a class="download" title="Download" href="{urlarea nonce="false" action="download_file" parameters=$p}">Download</a>
                             </td>
                             <td class="operations-size">

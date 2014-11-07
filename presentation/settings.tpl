@@ -31,6 +31,10 @@
 									<input type="text" maxlength="10" id="licenza_edit" name="licenza_edit"  value="{$settings["licenza"]}"/>
 									<div class="inline-error"></div>
 								</label>
+								<label for="prefisso_url"><span>Prefisso URL</span>
+									<input type="text" maxlength="1000" id="prefisso_url" name="prefisso_url"  value="{$settings["prefisso_url"]}"/>
+									<div class="inline-error"></div>
+								</label>								
 								<div class="button-container">
 								<button class="save" type="submit" name="submit" value="save">Salva</button>								
 								<button class="undo" type="submit" name="submit" value="undo">Annulla</button>
@@ -44,7 +48,45 @@
         {include file="footer.tpl"}
     </body>
     <script src="resources/js/jquery-1.10.2.js"></script>
-	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
-	<script src="resources/js/bootstrap-tour-standalone.min.js"></script>
-	<script src="control/reserved/avcpman/gare.js"></script>
+	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>	
+    <script src="resources/js/support.js"></script>	
+	<script>
+		$(function(){
+			 var s =[{
+				'o':$('#ente_cf_edit'),
+				'm':'Inserire un identificativo fiscale corretto',
+				't':'idfiscale'
+				}
+			];
+		
+			var sButtonPressed;
+			$('button').click(function() { 
+				sButtonPressed = $(this).attr('value') 
+			});
+		
+			$(s).each(function(i,v) {
+				v.o.keydown(function()
+				{
+					v.o.removeClass('red-background-error');
+					v.o.next('div').text('');
+				});
+				
+				v.o.change(function()
+				{
+					v.o.removeClass('red-background-error');
+					v.o.next('div').text('');
+				});
+			});
+		
+			$("#edit_settings").submit(function(event)
+			{
+				
+				if (sButtonPressed == "undo") {
+				    return true;
+				}
+				else
+				    return validateElements(s);
+			});
+		});
+	</script>
 </html>

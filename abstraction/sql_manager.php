@@ -502,21 +502,27 @@ function insert_gara($cig=null,$oggetto=null,$scelta_contraente=null,$importo=nu
  * Aggiorno i dati principali di una gara
  * */
 function update_gare($anno,$numero,$cig=null,$oggetto=null,$scelta_contraente=null,$importo=null,$importo_liquidato=null,
-					 $data_inizio=null,$data_fine=null,$f_pub_anno=null,$f_pub_numero=null)
+					 $data_inizio=null,$data_fine=null,$f_pub_anno=null,$f_pub_numero=null,$transaction=true)
 {
 	global $db;
-	$db->query("BEGIN");	
+	if ($transaction) $db->query("BEGIN");	
 	$data=sql_create_array(__FUNCTION__,func_get_args());
 	unset($data["anno"]);
 	unset($data["numero"]);
 	$sql_string = build_update_string($db->prefix . "gara",$data," WHERE f_pub_anno = " .  $anno . " AND f_pub_numero = " . $numero );
 	$result = $db->query($sql_string);
-    $db->query("COMMIT");
+
 	
-	if ($result)
-		return $result;
+	if ($result === false)
+	{
+	   	if ($transaction) $db->query("ROLLBACK");
+		return false;
+	}
 	else
-		return false;	
+	{
+	   	if ($transaction) $db->query("COMMIT");
+		return true;	
+	}
 }
 
 
@@ -1110,28 +1116,89 @@ function insert_file($content,$tipo,$anno,$numero=NULL,$transaction=true)
 		return false;	
 }
 
-function get_file($anno,$numero)
+
+function get_file($fid)
 {
 	global $db;
 	//build the insert string semi-automatically
-	
+	$result = $db->get_row('SELECT f.content FROM ' . $db->prefix . 'files f WHERE f.fid = ' . $fid  );	
+
+	if ($result)
+	{
+		return $result->content;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+function get_last_file($anno,$numero)
+{
+	global $db;
+	//build the insert string semi-automatically
 	$result = $db->get_row('SELECT f.content FROM ' . $db->prefix . 'files f INNER JOIN (SELECT MAX(fid) as maxfid FROM ' . $db->prefix . 'files  WHERE anno = ' . $anno . ' AND numero = ' . $numero . ' ) f1 on (f.fid = f1.maxfid) WHERE f.anno = ' . $anno . ' AND f.numero = ' . $numero );	
 
 	if ($result)
-		return $result->content;
+	{
+
+			return $result->content;
+	}
 	else
+	{
 		return false;
+	}
 }
 
-function set_modified_bit_pubblicazione($anno)
+
+function get_files_list($anno,$numero)
 {
 	global $db;
+	//build the insert string semi-automatically
+	$result = $db->get_results('SELECT f.fid FROM ' . $db->prefix . 'files f  WHERE f.anno = ' . $anno . ' AND f.numero = ' . $numero  . ' ORDER BY f.fid');	
 
+	if ($result)
+	{
+			return $result;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+function delete_files($anno,$numero,$transaction=true)
+{
+	global $db;
+	//build the insert string semi-automatically
+
+	if ($transaction)	$db->query("BEGIN");
+	
+	$result = $db->query('DELETE FROM ' . $db->prefix . 'files WHERE anno = ' . $anno . ' AND numero = ' . $numero);	
+
+	if ($result === FALSE)
+	{
+		if ($transaction)  $db->query("ROLLBACK");
+		return false;
+	}
+	else
+	{
+		if ($transaction)	$db->query("COMMIT");
+		return true;
+	}
+}
+
+function set_modified_bit_pubblicazione($anno,$bit=1)
+{
+	global $db;
+	$bit = $bit * 1;
 	//prepare automatically the data array picking parameters name
 	$data=sql_create_array(__FUNCTION__,func_get_args());
 
 	$result = $db->query("UPDATE " . $db->prefix . 'pubblicazione ' .
-						' SET modified = 1 WHERE anno = ' . $anno);	
+						' SET modified = ' . $bit. '  WHERE anno = ' . $anno);	
 	
 
 	if ($result === false)
@@ -1139,4 +1206,23 @@ function set_modified_bit_pubblicazione($anno)
 	else
 		return true;	
 }
+
+function start_transaction()
+{
+	global $db;
+	$db->query("BEGIN");
+}
+
+function commit_transaction()
+{
+	global $db;
+	$db->query("COMMIT");
+}
+
+function rollback_transaction()
+{
+	global $db;
+	$db->query("ROLLBACK");
+}
+
 ?>

@@ -5,15 +5,12 @@ include_once "lib/ezSQL/mysqli/ez_sql_mysqli.php";
 //include_once "lib/ezSQL/mssql/ez_sql_mssql.php";
 
 
-$db_host="localhost";
-$db_name="avcp_terracina";
-$db_user="root";
-$db_pass="root";
 
 
 global $id_db_connection,$db;
 
-$db = new ezSQL_mysqli($db_user, $db_pass, $db_name, $db_host); 
+		
+$db = new ezSQL_mysqli($config["database"]["user"], $config["database"]["pass"], $config["database"]["name"], $config["database"]["host"]); 
 //$db = new ezSQL_mssql($db_user, $db_pass, $db_name, $db_host);
 //$other_db_tables = $db->get_results("SHOW TABLES");
 $db->prefix="avcpman_";

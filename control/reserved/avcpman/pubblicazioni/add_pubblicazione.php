@@ -12,6 +12,7 @@ class Control extends \Control
         {
             $anno  = (int) $this->_r["pubblicazioni_anno"];
             $message = "";
+	        $settings =get_settings(array("prefisso_url"));
             if (!is_year_gare_present($anno))
             {
                 $message= "Non sono presenti gare per l'anno specificato";
@@ -23,7 +24,10 @@ class Control extends \Control
                 return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni",NULL,array("error"=>$message));
             }
             else
-                return ReturnSmarty('pubblicazione.edit.tpl',array("anno"=>$anno,"titolo"=>"","abstract"=>"","numero"=>-1,"data_aggiornamento"=>date("d/m/Y"),"data_pubblicazione"=>date("d/m/Y"),"url"=>"http://www.comune.terracina.lt.it/"));
+            {
+				
+			    return ReturnSmarty('pubblicazione.edit.tpl',array("anno"=>$anno,"titolo"=>"","abstract"=>"","numero"=>-1,"data_aggiornamento"=>date("d/m/Y"),"data_pubblicazione"=>date("d/m/Y"),"url"=>$settings["prefisso_url"]));
+			}
         }
         else
             return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");

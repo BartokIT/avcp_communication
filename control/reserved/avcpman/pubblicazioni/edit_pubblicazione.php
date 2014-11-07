@@ -13,7 +13,8 @@ class Control extends \Control
             $anno  = (int) $this->_r["anno"];
 			$numero =  (int) $this->_r["numero"];
 			$p = (array)get_pubblicazione_detail($anno,$numero);
-			$p['data_aggiornamento']=date('d/m/Y');
+
+			$p['data_aggiornamento']= date("d/m/Y");
             return ReturnSmarty('pubblicazione.edit.tpl',$p);
         }
         else
@@ -34,7 +35,27 @@ class Control extends \Control
             $url = $this->_r["pubblicazione_edit_url"];
             $anno = $this->_r["pubblicazione_edit_anno"];
 			$numero = $this->_r["pubblicazione_edit_numero"];
-            $pid = update_pubblicazione($titolo,$abstract,$data_pubblicazione,$data_aggiornamento,$url,$anno,$numero);
+            $result = update_pubblicazione($titolo,$abstract,$data_pubblicazione,$data_aggiornamento,$url,$anno,$numero);
+			if ($result !== false)
+			{
+				$true = set_gare_pubblicazione($anno,$numero);
+				
+				//Now we store the xml file in the database
+				$settings = get_settings(array("cf_ente","ente","licenza"));
+				$pubblicazione = get_pubblicazione_detail($anno,$numero);
+				$lotti = get_gare($anno,$numero);
+				foreach ($lotti as $lotto)
+				{
+					$lotto->partecipanti = get_partecipanti($lotto->gid);
+				}
+				
+				$pubblicazione->licenza = $settings["licenza"];
+				$pubblicazione->ente_pubblicatore = $settings["ente"];
+				$pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
+				$content = write_avcp_xml_to_string($pubblicazione, $lotti);
+				insert_file($content,"P",$anno,$numero);
+				set_modified_bit_pubblicazione($anno,0);
+			}            
         }
         return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");
     }
