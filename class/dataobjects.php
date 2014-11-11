@@ -156,6 +156,13 @@ class User implements Serializable {
 		return $this->logged;
 	}
 	
+	public function isRole($role)
+	{
+		if (in_array($role,$this->roles))
+			return true;
+		else	
+			return false;
+	}
 	public function getRoles()
 	{
 		return $this->roles;

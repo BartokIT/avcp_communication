@@ -15,7 +15,9 @@
 			</div>
 			<div class="container-main">
                 <h2>Ditte</h2>
+				{authorized roles="administrator,editor"}
                 <a id="new-ditta" href="{urlarea area="avcpman/ditte" action="new_ditta"}">Aggiungi ditta</a>
+				{/authorized}
                 {if isset($error)}
                     <p class="error">							
                         {$error}							
@@ -47,8 +49,20 @@
                             </td>
                             <td class="name">{$ditte[ditta]->ragione_sociale}</td>
                             <td class="fiscalid">{$ditte[ditta]->identificativo_fiscale}</td>
-                            <td class="operations-size"><a  class="edit" title="Modifica"  href="{urlarea area="avcpman/ditte" action="edit" parameters="{$ditte[ditta]->did}"}">Modifica</a></td>
-                            <td class="operations-size"><a class="delete" title="Cancella" href="{urlarea action="avcpman/ditte" action="delete" parameters="{$ditte[ditta]->did}"}">Cancella</a></td>
+                            <td class="operations-size">
+								{authorized roles="administrator,editor"}
+									<a  class="edit" title="Modifica"  href="{urlarea area="avcpman/ditte" action="edit" parameters="{$ditte[ditta]->did}"}">
+										Modifica
+									</a>
+								{/authorized}									
+							</td>
+                            <td class="operations-size">
+								{authorized roles="administrator,editor"}
+									<a class="delete" title="Cancella" href="{urlarea action="avcpman/ditte" action="delete" parameters="{$ditte[ditta]->did}"}">
+										Cancella
+									</a>
+								{/authorized}									
+							</td>
                         </tr>
                     {/section}
                     </tbody>   

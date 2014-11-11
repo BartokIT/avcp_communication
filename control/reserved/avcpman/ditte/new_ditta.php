@@ -4,7 +4,7 @@ class Control extends \Control
 {
     /**
      * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
+     * @Access(roles="administrator,editor",redirect=true  )
      * @return object  Description
      */
     function d(){
@@ -16,7 +16,10 @@ class Control extends \Control
                                                        "estero"=>array("N"=>"Italiana","Y"=>"Estera")));
 
     }
-    
+	
+    /**
+     * @Access(roles="administrator,editor" )
+     */    
     function is_ditta_presente()
     {
         $d = get_ditta_by_cf($this->_r["identificativo_fiscale"]);
@@ -25,7 +28,10 @@ class Control extends \Control
         else
                 return  ReturnInline(array("present"=>true),"json");
     }
-    
+
+    /**
+     * @Access(roles="administrator,editor")
+     */    
     function submit(){
         if ($this->_r["submit"] == "save")
         {

@@ -3,9 +3,7 @@ namespace reserved\avcpman\gare\edit;
 class Control extends \Control
 {
     /**
-     * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
-     * @return object  Description
+     * @Access(roles="administrator,editor",redirect=true  )
      */
     function d(){
         global $contest_type;
@@ -19,9 +17,13 @@ class Control extends \Control
                                                 "contest_type"=>$contest_type));
         }
         else
-                return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
+			return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
     }
-    
+
+
+    /**
+     * @Access(roles="administrator,editor",redirect=true)
+     */        
     function submit()
     {
         if ($this->_r["submit"] == "save")

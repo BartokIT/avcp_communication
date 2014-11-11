@@ -439,7 +439,7 @@ h2	.help
 	font-size: 1px;
 }
 
-.avcpman .container-main .publications-table .zoom
+.avcpman .container-main  .zoom
 {
 	background: url(images/zoom_20x20.png) no-repeat center center;
 	color: transparent;

@@ -7,9 +7,7 @@ namespace reserved\avcpman\impostazioni;
 class Control extends \Control
 {
     /**
-     * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
-     * @return object  Description
+     * @Access(roles="administrator",redirect=true  )
      */
     function d()
     {
@@ -18,7 +16,10 @@ class Control extends \Control
         //default action
         return ReturnSmarty('settings.tpl',array("settings"=>$settings));
     }
-    
+
+    /**
+     * @Access(roles="administrator")
+     */    
     function save()
     {
         if ($this->_r["submit"] == "save")
@@ -36,7 +37,7 @@ class Control extends \Control
                 return ReturnArea($this->status->getSiteView(),$this->status->getArea()); 
         }
         }
-        return ReturnArea($this->status->getSiteView(),"avcpman\gare"); 
+        return ReturnArea($this->status->getSiteView(),"avcpman/gare"); 
     }
 }
 ?>

@@ -852,7 +852,7 @@ function delete_partecipante($pid,$type)
 		return false;
 	}
 	
-	if (!set_modified_bit_pubblicazione($result->f_pub_anno))
+	if (!set_modified_bit_pubblicazione(1))
 	{
 		$db->query("ROLLBACK");
 		return false;

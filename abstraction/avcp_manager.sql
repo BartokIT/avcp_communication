@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS `avcpman_gara`;
 DROP TABLE IF EXISTS `avcpman_pubblicazione`;
 DROP TABLE IF EXISTS `avcpman_indice`;
 DROP TABLE IF EXISTS `avcpman_files`;
+DROP TABLE IF EXISTS `avcpman_settings`;
 
 
 CREATE TABLE IF NOT EXISTS `avcpman_files` (
@@ -15,7 +16,14 @@ CREATE TABLE IF NOT EXISTS `avcpman_files` (
 	ctype CHAR(1),
 	numero NUMERIC,
 	anno INT(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene gli indici delle pubblicazioni';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene i files prodotti';
+
+CREATE TABLE IF NOT EXISTS `avcpman_settings` (
+	sid INT AUTO_INCREMENT PRIMARY KEY,
+	skey VARCHAR(50),
+	svalue VARCHAR(1000)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le impostazioni del programma';
+
 
 
 
@@ -33,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `avcpman_pubblicazione` (
 	abstract VARCHAR(1000),
 	data_pubblicazione DATE,
 	data_aggiornamento DATE,
+	modified BIT(1),
 	url VARCHAR(1000),
 	CONSTRAINT PRIMARY KEY (numero, anno),
 	CONSTRAINT fk_anno FOREIGN KEY  (anno) REFERENCES avcpman_indice (anno)	
@@ -91,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `avcpman_raggruppamento` (
 	CONSTRAINT PRIMARY KEY(pid,did),
 	CONSTRAINT fk_rag_part FOREIGN KEY (pid) REFERENCES avcpman_partecipanti (pid),
 	CONSTRAINT fk_rag_ditta FOREIGN KEY (did) REFERENCES avcpman_ditta (did)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sui raggruppamenti sulle ditte';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sui raggruppamenti di ditte';
 
  
 
@@ -105,3 +114,7 @@ CREATE TABLE `avcpman_users` (
 INSERT INTO `avcpman_users` VALUES ('administrator','Utente amministratore','cae3b8895e675a9e38aa9e91b41e82ec4c91e9ba','administrator');
 INSERT INTO `avcpman_ditta` (`did`, `ragione_sociale`, `estera`, `dummy`, `identificativo_fiscale`) VALUES(1, 'Comune di Terracina', 'N', NULL, '00246180590');
 INSERT INTO `avcpman_ditta` (`did`, `ragione_sociale`, `estera`, `dummy`, `identificativo_fiscale`) VALUES(2, 'Ditta Fantasma', 'Y', 'Y', '12345678912');
+INSERT INTO `avcpman_settings` (`skey`, `svalue`) VALUES('ente', '');
+INSERT INTO `avcpman_settings` (`skey`, `svalue`) VALUES('licenza', '');
+INSERT INTO `avcpman_settings` (`skey`, `svalue`) VALUES('cf_ente', '');
+INSERT INTO `avcpman_settings` (`skey`, `svalue`) VALUES('prefisso_url', '');

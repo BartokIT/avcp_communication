@@ -4,7 +4,7 @@ class Control extends \Control
 {
     /**
      * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
+     * @Access(roles="administrator,editor",redirect=true  )
      * @return object  Description
      */
     function d(){
@@ -28,7 +28,11 @@ class Control extends \Control
             return ReturnArea($this->status->getSiteView(),"avcpman/gare");
         
     }
-    
+
+
+    /**
+     * @Access(roles="administrator,editor")
+     */            
     function search_ditta() {
         $ditte=array();
         $ragione_sociale = "";
@@ -52,6 +56,9 @@ class Control extends \Control
         return ReturnInline($ditte,"json");
     }
     
+    /**
+     * @Access(roles="administrator,editor")
+     */        	
     function insert_and_add()
     {
         $gid = $this->_r["gid"];
@@ -77,7 +84,11 @@ class Control extends \Control
         
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti",NULL, array("parameter"=>$this->_r["gid"]));
     }
-    
+
+
+    /**
+     * @Access(roles="administrator,editor")
+     */            
     function add()
     {
         //TODO : add check if is already added

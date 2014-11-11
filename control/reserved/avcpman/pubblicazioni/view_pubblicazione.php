@@ -3,10 +3,8 @@ namespace reserved\avcpman\pubblicazioni\view_pubblicazione;
 class Control extends \Control
 {
     /**
-     * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
-     * @return object  Description
-     */
+     * @Access(roles="administrator,publisher"  )
+     */    
     function d(){
         if (isset($this->_r["anno"]) && isset($this->_r["numero"]))
         {
@@ -21,7 +19,9 @@ class Control extends \Control
             return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");
     }
 
-    
+    /**
+     * @Access(roles="administrator,publisher"  )
+     */        
     function download_file()
     {
         global $xml_writer;

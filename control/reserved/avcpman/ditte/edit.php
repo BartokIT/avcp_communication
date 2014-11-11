@@ -3,9 +3,7 @@ namespace reserved\avcpman\ditte\edit;
 class Control extends \Control
 {
     /**
-     * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
-     * @return object  Description
+     * @Access(roles="administrator,editor",redirect=true  )
      */
     function d(){
         if (isset($this->_r["parameter"]))
@@ -20,7 +18,10 @@ class Control extends \Control
         else
                 return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
     }
-    
+
+    /**
+     * @Access(roles="administrator,editor",redirect=true  )
+     */    
     function submit()
     {
         

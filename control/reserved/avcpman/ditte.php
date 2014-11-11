@@ -7,9 +7,7 @@ namespace reserved\avcpman\ditte;
 class Control extends \Control
 {
     /**
-     * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
-     * @return object  Description
+     * @Access(roles="administrator,publisher,editor,viewer",redirect=true)
      */
     function d(){
             $ditte =get_ditte();
@@ -19,17 +17,26 @@ class Control extends \Control
                 $parameters["error"]=$this->_r["error"];
             return ReturnSmarty('ditte.tpl',$parameters);
     }
-    
+
+    /**
+     * @Access(roles="administrator,editor")
+     */    
     function edit(){
         
         return ReturnArea($this->status->getSiteView(),"avcpman/ditte/edit");
     }
-    
+	
+    /**
+     * @Access(roles="administrator,editor")
+     */        
     function new_ditta(){
         
         return ReturnArea($this->status->getSiteView(),"avcpman/ditte/new_ditta");
     }
-    
+
+    /**
+     * @Access(roles="administrator,editor")
+     */        
     function delete()
     {
         if (isset($this->_r["parameter"]))

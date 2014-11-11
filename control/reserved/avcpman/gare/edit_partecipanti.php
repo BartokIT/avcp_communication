@@ -4,7 +4,7 @@ class Control extends \Control
 {
     /**
      * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
+     * @Access(roles="administrator,editor",redirect=true  )
      * @return object  Description
      */
     function d(){
@@ -23,12 +23,17 @@ class Control extends \Control
 						"ruoli_raggruppamento"=>$ruoli_partecipanti_raggruppamento);
 			if (isset($this->_r["error"]))
 				$p["error"] = $this->_r["error"];
+				
             return ReturnSmarty('gare.edit_partecipanti.tpl',$p);
         }
         else
-                return ReturnArea($this->status->getSiteView(),"avcpman/gare");
+            return ReturnArea($this->status->getSiteView(),"avcpman/gare");
     }
-    
+
+    /**
+     * Summary
+     * @Access(roles="administrator,editor")
+     */    
     function save()
     {
         if ($this->_r["submit"] == "save")
@@ -42,7 +47,11 @@ class Control extends \Control
         }
         return ReturnArea($this->status->getSiteView(),"avcpman/gare");
     }
-    
+
+    /**
+     * Summary
+     * @Access(roles="administrator,editor")
+     */        
     function add_raggruppamento()
     {
         if (isset($this->_r["parameter"]))
@@ -52,7 +61,11 @@ class Control extends \Control
         }
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti");
     }
-    
+
+    /**
+     * Summary
+     * @Access(roles="administrator,editor")
+     */        
     function delete_raggruppamento()
     {
         if (isset($this->_r["pid"]))
@@ -65,6 +78,11 @@ class Control extends \Control
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti");
         
     }
+	
+    /**
+     * Summary
+     * @Access(roles="administrator,editor")
+     */          	
     function delete_ditta_raggruppamento()
 	{
 		if (isset($this->_r["pid"]) && isset($this->_r["did"]))
@@ -75,7 +93,11 @@ class Control extends \Control
             return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit_partecipanti",NULL, array("parameter"=>$this->_r["gid"]));
         }
 	}
+    /**
 	
+     * Summary
+     * @Access(roles="administrator,editor")
+     */        	
     function delete_ditta()
     {
         if (isset($this->_r["pid"]))
@@ -86,6 +108,10 @@ class Control extends \Control
         }
     }
     
+      /**
+     * Summary
+     * @Access(roles="administrator,editor")
+     */          	
     function add_ditta()
     {
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit/add_ditta");

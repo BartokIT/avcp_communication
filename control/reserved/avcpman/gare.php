@@ -7,9 +7,7 @@ namespace reserved\avcpman\gare;
 class Control extends \Control
 {
     /**
-     * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
-     * @return object  Description
+     * @Access(roles="administrator,publisher,editor,viewer",redirect=true)
      */
     function d()
     {
@@ -23,18 +21,50 @@ class Control extends \Control
                                              "gare"=>$gare));
     }
     
-    
+ 
+	function view()
+    {
+		global $contest_type;
+		global $ruoli_partecipanti_raggruppamento;
+        if (isset($this->_r["parameter"]) || isset($this->_s["gid"]) )
+        {
+            $gid  = (int) isset($this->_r["parameter"])?$this->_r["parameter"]:$this->_s["gid"];
+            $this->_s["gid"]=$gid;
+            $gara =get_gara($gid);
+            $partecipanti = get_partecipanti($gid);
+            //default action
+			$p = array("gara"=>$gara,
+						"partecipanti"=>$partecipanti,
+						"contest_type"=>$contest_type,
+						"ruoli_raggruppamento"=>$ruoli_partecipanti_raggruppamento);
+			if (isset($this->_r["error"]))
+				$p["error"] = $this->_r["error"];
+            return ReturnSmarty('gare.view.tpl',$p);
+        }
+        else
+            return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
+    }
+	
+    /**
+     * @Access(roles="administrator,editor")
+     */	
     function edit()
     {
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit");
     }
     
+	 /**
+     * @Access(roles="administrator,editor,viewer")
+     */
     function new_gara()
     {
         
         return ReturnArea($this->status->getSiteView(),"avcpman/gare/new_gara");
     }
-    
+
+	 /**
+     * @Access(roles="administrator,editor,viewer")
+     */    
     function delete()
     {
         if (isset($this->_r["parameter"]))

@@ -7,8 +7,7 @@ namespace reserved\avcpman\pubblicazioni;
 class Control extends \Control
 {
     /**
-     * Summary
-     * @return object  Description
+     * @Access(roles="administrator,publisher",redirect=true  )
      */
     function d()
     {
@@ -25,8 +24,8 @@ class Control extends \Control
     }
 
     
-      /**
-     * @abstract
+    /**
+     * @Access(roles="administrator,publisher"  )
      */
     function delete()
     {
@@ -49,7 +48,9 @@ class Control extends \Control
 		return ReturnArea($this->status->getSiteView(),$this->status->getArea());
     }
 	
-    
+    /**
+     * @Access(roles="administrator,publisher"  )
+     */    
 	function edit()
 	{
 		if (isset($this->_r["anno"]) && isset($this->_r["numero"]))
@@ -60,6 +61,9 @@ class Control extends \Control
         }
 	}
 
+    /**
+     * @Access(roles="administrator,publisher"  )
+     */    	
 	function view()
 	{
 		if (isset($this->_r["anno"]) && isset($this->_r["numero"]))
@@ -69,7 +73,11 @@ class Control extends \Control
             return ReturnArea($this->status->getSiteView(),$this->status->getArea()  . "/view_pubblicazione");
         }
 	}
-	
+
+
+    /**
+     * @Access(roles="administrator,publisher"  )
+     */    	
     function verify_anno()
     {
         if (isset($this->_r["anno"]))
@@ -87,7 +95,10 @@ class Control extends \Control
                 return ReturnInline(array("trouble"=>false),"json");
         }        
     }
-    
+
+    /**
+     * @Access(roles="administrator,publisher"  )
+     */        
     function download_file()
     {
         global $xml_writer;

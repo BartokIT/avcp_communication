@@ -3,10 +3,8 @@ namespace reserved\avcpman\pubblicazioni\add_pubblicazione;
 class Control extends \Control
 {
     /**
-     * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
-     * @return object  Description
-     */
+     * @Access(roles="administrator,publisher"  )
+     */    
     function d(){
         if (isset($this->_r["pubblicazioni_anno"]))
         {
@@ -34,7 +32,9 @@ class Control extends \Control
     }
     
  
-    
+    /**
+     * @Access(roles="administrator,publisher"  )
+     */        
     function save()
     {
         //TODO : add check if is already added

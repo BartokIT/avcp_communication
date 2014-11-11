@@ -16,15 +16,16 @@
 			<div class="container-main">
 				<h2>Gare<a href="#" class="help">Help</a></h2>
 				<div class="centered">Anno di gestione : <span class="year">{$year}</span></div>
+				{authorized roles="administrator,editors"}
 				<a id="new-gara" href="{urlarea action="new_gara"}">Aggiungi gara</a><br/>
+				{/authorized}
 				<table id="gare-table">
 					<thead>
 					<tr>
 						<th class="counter" style="width: 20px">N.</th>
 						<th>Oggetto</th>
 						<th style="width: 30px;font-size: 10px;text-align: center">Partecipanti</th>
-						<th style="width: 90px;" colspan="3">Operazioni</th>					
-					</tr>
+						<th style="width: 90px;" colspan="{if $user->isRole("viewers") || $user->isRole("publisher")}1{else}4{/if}">Operazioni</th>
 					</thead>
 					<tbody>
 					{section name=gara loop=$gare}
@@ -32,9 +33,12 @@
 							<td class="counter">{$smarty.section.gara.index + 1}</td>
 							<td class="subject">{$gare[gara]->oggetto}</td>
 							<td style="width: 30px;text-align: center">{$gare[gara]->partecipanti}</td>
+							<td class="operations-size"><a class="zoom" title="Visualizza dettaglio gara" href="{urlarea area="avcpman/gare" nonce="false" action="view" parameters="{$gare[gara]->gid}"}">Visualizza dettaglio</a></td>
+							{authorized roles="administrator,editor"}
 							<td class="operations-size"><a class="edit" title="Modifica" href="{urlarea area="avcpman/gare" action="edit" parameters="{$gare[gara]->gid}"}">Modifica</a></td>
 							<td class="operations-size"><a class="edit-partecipant" title="Modifica partecipanti" href="{urlarea area="avcpman/gare/edit_partecipanti"  parameters="{$gare[gara]->gid}"}">Modifica Partecipanti</a></td>
-							<td class="operations-size"><a class="delete" title="Cancella" href="{urlarea action="delete"  parameters="{$gare[gara]->gid}"}">Cancella</a></td>
+							<td class="operations-size"><a class="delete" title="Cancella" href="{urlarea action="delete"  parameters="{$gare[gara]->gid}"}">Cancella</a></td>							
+							{/authorized}
 						</tr>
 					{/section}
 					</tbody>
