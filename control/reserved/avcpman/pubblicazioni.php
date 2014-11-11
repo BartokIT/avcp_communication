@@ -95,7 +95,8 @@ class Control extends \Control
         {
             $anno = $this->_r["anno"];
             $numero = $this->_r["numero"];
-            /*$settings = get_settings(array("cf_ente","ente","licenza"));
+            /*
+			$settings = get_settings(array("cf_ente","ente","licenza"));
             $pubblicazione = get_pubblicazione_detail($anno,$numero);
             $lotti = get_gare($anno,$numero);
             foreach ($lotti as $lotto)
@@ -109,9 +110,6 @@ class Control extends \Control
             */
             return new \ReturnedFile('get_last_file',array($anno, $numero),
                                      'avcp_' .$anno . '_' . $numero,"text/xml");
-            //echo write_avcp_xml_to_string($pubblicazione,$lotti);
-            
-			
         }
         else
         {

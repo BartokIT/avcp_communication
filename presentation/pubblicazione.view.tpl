@@ -15,35 +15,37 @@
 			<div class="container-main">
 				<h2>Dettaglio Pubblicazione</h2>
 				<p>
-						
-						{$p = ['pubblicazione_edit_anno'=>$anno,'pubblicazione_edit_numero'=>$numero]}
 						<div class="message">Dettaglio pubblicazione n. {$numero} per l'anno {$anno}</div>
-						<div class="box">						
-								<label for="pubblicazione_edit_titolo">
-									<span>Titolo</span>
-									{$titolo}</label>
-								<label for="pubblicazione_edit_abstract">
-									<span>Abstract</span>
-									<input type="text" maxlength="1000" id="pubblicazione_edit_abstract"  name="pubblicazione_edit_abstract" value="{$abstract}" />
-								</label>
-								<label for="pubblicazione_edit_pubblicazione"><span>Data pubblicazione</span>
-									<input type="text" maxlength="10" id="pubblicazione_edit_pubblicazione" name="pubblicazione_edit_pubblicazione"  value="{$data_pubblicazione}"/>
-									<div class="inline-error"></div>
-								</label>
-								<label for="pubblicazione_edit_aggiornamento"><span>Data aggiornamento</span>
-									<input type="text" maxlength="10" id="pubblicazione_edit_aggiornamento" name="pubblicazione_edit_aggiornamento"  value="{$data_aggiornamento}"/>
-									<div class="inline-error"></div>
-								</label>
-								<label for="pubblicazione_edit_url"><span>Url di pubblicazione</span>
-									<input type="text" maxlength="1000" id="pubblicazione_edit_url" name="pubblicazione_edit_url"   value="{$url}"/>
-									<div class="inline-error"></div>
-								</label>
+						<div class="box recap-pubblicazione">
+							<div class="label"><span class="left">Titolo:</span><span class="right">{$titolo}</span></div>
+							<div class="label"><span class="left">Abstract:</span><span class="right">{$abstract}</span></div>
+							<div class="label"><span class="left">Date pubblicazione:</span><span class="right">{$data_pubblicazione}</span></div>
+							<div class="label"><span class="left">Data aggiornamento:</span><span class="right">{$data_aggiornamento}</span></div>							
+							<div class="label"><span class="left">Url pubblicazione:</span><span class="right">{$url}</span></div>														
 						</div>						
-	                    {foreach $files as $f}
-						{$fid = ['fid'=>{$f->fid}]}
-			               <a class="download" title="Download" href="{urlarea nonce="false" action="download_file" parameters=$fid}">Download</a>
-							<br/>
-						{/foreach}
+						<table class="publications-table">
+						<thead>
+							<tr>
+								<th colspan="5">Revisioni file</th>
+							</tr>
+							<tr>
+								<th>N.</th>
+								<th>Download</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach $files as $f}
+							<tr>
+							<td>{$f@index + 1}</td>
+							<td>
+									{$fid = ['fid'=>{$f->fid}]}
+									   <a class="download" title="Download" href="{urlarea nonce="false" action="download_file" parameters=$fid}">Download</a>
+							</td>
+							</tr>
+							{/foreach}			
+						</tbody>
+					</table>
+
 				</p>
 				<hr class="clear" style="display: none"/>
 				</div>

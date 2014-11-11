@@ -74,27 +74,46 @@
 		return $outstring;
 	}	
 	
-	function write_avcp_partecipante_tostring_ditta($partecipante_info)
+	function write_avcp_partecipante_tostring_ditta($partecipante_info,$aggiudicatario=false)
 	{
 		$outstring="";
-		$outstring .= indent(4) ."<partecipante>\n";
-			if (strcmp($partecipante_info->estera,"N") == 0)
+		if($aggiudicatario)
+		{
+			$outstring .= indent(4) ."<aggiudicatario>\n";
+		}
+		else		
+			$outstring .= indent(4) ."<partecipante>\n";
+			
+		if (strcmp($partecipante_info->estera,"N") == 0)
 				$outstring .= indent(5) . "<codiceFiscale>" . $partecipante_info->identificativo_fiscale . "</codiceFiscale>\n";
 			else
 				$outstring .= indent(5) . "<identificativoFiscaleEstero>" . $partecipante_info->identificativo_fiscale . "</identificativoFiscaleEstero>\n";
 			$outstring .=indent(5) . "<ragioneSociale>" . $partecipante_info->ragione_sociale . "</ragioneSociale>\n";
-			$outstring .= indent(4) . "</partecipante>\n";
+		if($aggiudicatario)
+			$outstring .= indent(4) ."</aggiudicatario>\n";
+		else		
+			$outstring .= indent(4) ."</partecipante>\n";
 		return $outstring;
 	}
 	
-	function write_avcp_partecipante_tostring_raggruppamento($partecipante_info)
+	function write_avcp_partecipante_tostring_raggruppamento($partecipante_info,$aggiudicatario=false)
 	{
 		global $ruoli_partecipanti_raggruppamento;
+		
 		$outstring="";
-		$outstring .= indent(4) . "<raggruppamento>\n";			
+		if($aggiudicatario)
+		{
+			
+			$outstring .= indent(4) ."<aggiudicatarioRaggruppamento>\n";
+		}
+		else		
+			$outstring .= indent(4) ."<raggruppamento>\n";
+		
 		foreach ($partecipante_info as $membro )
 		{
+
 			$outstring .= indent(5) . "<membro>\n";
+			
 			if (strcmp($membro->estera,"N") == 0)
 				$outstring .= indent(5) . "<codiceFiscale>" . $membro->identificativo_fiscale . "</codiceFiscale>\n";
 			else
@@ -103,104 +122,72 @@
 			$outstring .= indent(6) ."<ruolo>" . $ruoli_partecipanti_raggruppamento[$membro->ruolo] . "</ruolo>\n";
 			$outstring .= indent(5) . "</membro>\n";				
 		}
-		$outstring .= indent(4) . "</raggruppamento>\n";			
+		
+		if($aggiudicatario)
+			$outstring .= indent(4) ."</aggiudicatarioRaggruppamento>\n";
+		else		
+			$outstring .= indent(4) ."</raggruppamento>\n";		
 		
 		return $outstring;
 	}
 	
-	/**
-	 *
-	 *@deprecated
-	 **/
-	function write_avcp_partecipante_tostring($partecipante_info)
-	{
-		$outstring="";
-		
-		if (strcmp($partecipante_info["tipo"],"ditta") == 0)
-		{
-			$outstring .= indent(4) ."<partecipante>\n";
-			if (strcmp($partecipante_info["nazione"],"I") == 0)
-				$outstring .= indent(5) . "<codiceFiscale>" . $partecipante_info["identificativo"] . "</codiceFiscale>\n";
-			else
-				$outstring .= indent(5) . "<identificativoFiscaleEstero>" . $partecipante_info["identificativo"] . "</identificativoFiscaleEstero>\n";
-			$outstring .=indent(5) . "<ragioneSociale>" . $partecipante_info["ragione_sociale"] . "</ragioneSociale>\n";
-			$outstring .= indent(4) . "</partecipante>\n";
-		}
-		else
-		{
-			$outstring .= indent(4) . "<raggruppamento>\n";			
-			foreach ($partecipante_info["membri"] as $membro )
-			{
-				$outstring .= indent(5) . "<membro>\n";
-				if (strcmp($membro["nazione"],"I") == 0)
-					$outstring .= indent(6) ."<codiceFiscale>" . $membro["identificativo"] . "</codiceFiscale>\n";
-				else
-					$outstring .= indent(6) ."<identificativoFiscaleEstero>" . $membro["identificativo"] . "</identificativoFiscaleEstero>\n";
-				$outstring .= indent(6) ."<ragioneSociale>" . $membro["ragione_sociale"] . "</ragioneSociale>\n";
-				$outstring .= indent(6) ."<ruolo>" . $membro["ruolo"] . "</ruolo>\n";
-				$outstring .= indent(5) . "</membro>\n";				
-			}
-			$outstring .= indent(4) . "</raggruppamento>\n";			
-		}
-		return $outstring;
-	}
-	
-	function write_avcp_aggiudicatario_tostring($aggiudicatario_info)
-	{
-		$outstring="";
-		
-		if (strcmp($aggiudicatario_info["tipo"],"ditta") == 0)
-		{
-			$outstring .= indent(4) ."<aggiudicatario>\n";
-			if (strcmp($aggiudicatario_info["nazione"],"I") == 0)
-				$outstring .= indent(5) . "<codiceFiscale>" . $aggiudicatario_info["identificativo"] . "</codiceFiscale>\n";
-			else
-				$outstring .= indent(5) . "<identificativoFiscaleEstero>" . $aggiudicatario_info["identificativo"] . "</identificativoFiscaleEstero>\n";
-			$outstring .=indent(5) . "<ragioneSociale>" . $aggiudicatario_info["ragione_sociale"] . "</ragioneSociale>\n";
-			$outstring .= indent(4) . "</aggiudicatario>\n";
-		}
-		else
-		{
-			$outstring .= indent(4) . "<aggiudicatarioRaggruppamento>\n";			
-			foreach ($aggiudicatario_info["membri"] as $membro )
-			{
-				$outstring .= indent(5) . "<membro>\n";
-				if (strcmp($membro["nazione"],"I") == 0)
-					$outstring .= indent(6) ."<codiceFiscale>" . $membro["identificativo"] . "</codiceFiscale>\n";
-				else
-					$outstring .= indent(6) ."<identificativoFiscaleEstero>" . $membro["identificativo"] . "</identificativoFiscaleEstero>\n";
-				$outstring .= indent(6) ."<ragioneSociale>" . $membro["ragione_sociale"] . "</ragioneSociale>\n";
-				$outstring .= indent(6) ."<ruolo>" . $membro["ruolo"] . "</ruolo>\n";
-				$outstring .= indent(5) . "</membro>\n";				
-			}
-			$outstring .= indent(4) . "</aggiudicatarioRaggruppamento>\n";			
-		}	
-		return $outstring;
-	}
-	
+
+
 	function write_avcp_xml_to_string($meta,$lotti_info)	
 	{
 		$outstring ='<?xml version="1.0" encoding="UTF-8" ?>' . "\n";
 		$outstring .= '<legge190:pubblicazione xsi:schemaLocation="legge190_1_0 datasetAppaltiL190.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:legge190="legge190_1_0">' . "\n";
 		$outstring .= write_avcp_metadata_tostring($meta);
 		$outstring .= indent(1) . "<data>\n";
+		
 		foreach ($lotti_info as $lotto_info)
 		{
+			$aggiudicatario=null;
 			$outstring .= write_avcp_lotto_pre_tostring($meta,$lotto_info);
 			$outstring .= indent(3) . "<partecipanti>\n";
 			if (isset($lotto_info->partecipanti["ditte"]))
 				foreach ($lotto_info->partecipanti["ditte"] as $partecipante)
+				{
 					$outstring .= write_avcp_partecipante_tostring_ditta( $partecipante);
+					if ( $partecipante->aggiudicatario != null 
+						&& $partecipante->aggiudicatario == "Y")
+					{					
+						$aggiudicatario = $partecipante;
+					}
+				}
 					
 			if (isset($lotto_info->partecipanti["raggruppamenti"]))
 				foreach ($lotto_info->partecipanti["raggruppamenti"] as $partecipante)
+				{
 					$outstring .= write_avcp_partecipante_tostring_raggruppamento( $partecipante);
+					$fk = key($partecipante);
+					if ( $partecipante[$fk] != null  &&
+						$partecipante[$fk]->aggiudicatario != null  &&
+						$partecipante[$fk]->aggiudicatario == "Y")
+					{
+						$aggiudicatario = $partecipante;
+						$aggiudicatario["tipo"]="raggruppamento";
+					}
+				}				
 			$outstring .= indent(3) . "</partecipanti>\n";
+			
 			
 			$outstring .= indent(3) . "<aggiudicatari>\n";
 			
-			/*foreach ($lotto_info["aggiudicatari"] as $partecipante)
-				$outstring .= write_avcp_aggiudicatario_tostring( $partecipante);	*/		
+			if  ($aggiudicatario != null)
+			{
+
+				if (is_object($aggiudicatario))
+				{
+					$outstring .= write_avcp_partecipante_tostring_ditta( $aggiudicatario,true);
+				}
+				else
+				{
+					unset($aggiudicatario["tipo"]);
+					$outstring .= write_avcp_partecipante_tostring_raggruppamento( $aggiudicatario,true);
+				}
+			}
+			
 			$outstring .= indent(3) . "</aggiudicatari>\n";			
 			$outstring .= write_avcp_lotto_post_tostring($lotto_info);
 		}

@@ -53,7 +53,7 @@
 							</td>
                             <td class="operations-size">
                                 {$p = ['numero'=>$p->numero,'anno'=>$p->anno]}
-                                <a class="download" title="Download older" href="{urlarea nonce="false" action="view" parameters=$p}">View</a>
+                                <a class="zoom" title="Download older" href="{urlarea nonce="false" action="view" parameters=$p}">View</a>
                             </td>
                             <td class="operations-size">
                                 <a class="download" title="Download" href="{urlarea nonce="false" action="download_file" parameters=$p}">Download</a>

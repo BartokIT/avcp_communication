@@ -268,7 +268,7 @@ div.box button:hover, .button-container button:hover
 }
 
 
-div.recap-ditta div.label span.left
+div.recap-pubblicazione div.label span.left, div.recap-ditta div.label span.left
 {
 	font-size: 14px;	
 	height: auto;
@@ -289,7 +289,7 @@ div.recap-ditta div.label.contraente-type .left
 	height: 48px;	
 }
 
-div.recap-ditta div.label .right
+div.recap-pubblicazione div.label .right, div.recap-ditta div.label .right
 {
 	font-size: 14px;
 }
@@ -418,26 +418,23 @@ div.recap-ditta div.label .right
 
 .avcpman .container-main .publications-table .download
 {
-	color: #000;
-	height: 22px;
-	line-height: 22px;
-	font-size: .9em;
-	font-variant: normal;
+
 	background: url(images/download_17x20.png)  no-repeat center center;
-	display: block;
-	text-decoration: none;
-	/*border: 1px solid #999;
-	background-color: #EEE;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	padding-left: 35px;
-	padding-right: 8px;
-	margin-left: 10px;*/
-	padding-left: 8px;
-	padding-right: 8px;
 	color: transparent;
-	font-size: 0px;
+	display: block;
+	height: 20px;
+	width: 100%;
+	font-size: 1px;
+}
+
+.avcpman .container-main .publications-table .zoom
+{
+	background: url(images/zoom_20x20.png) no-repeat center center;
+	color: transparent;
+	display: block;
+	height: 20px;
+	width: 100%;
+	font-size: 1px;
 }
 
 .avcpman .container-main .form-new-publication button
