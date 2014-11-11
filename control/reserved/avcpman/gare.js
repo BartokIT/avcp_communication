@@ -20,6 +20,7 @@ $(function(){
 					}
 				});
 			};
+			
 			$(".delete").click(deleteCallback);
 			var oTour = new Tour({
 				steps:[
@@ -82,9 +83,14 @@ $(function(){
 				$(".delete").deleteCallback();
 			}
 			});
+			
 			oTour.init();
 			oTour.start();
 			if (!oTour.ended()) {				
 				$("a").unbind().click(function(e){e.preventDefault();});
 			}
+			
+			$(".help").click(function () {
+				oTour.restart();
+			});
 		});

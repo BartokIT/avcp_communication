@@ -14,7 +14,7 @@
 				{include file="menu.tpl"}
 			</div>
 			<div class="container-main">
-				<h2>Gare</h2>
+				<h2>Gare<a href="#" class="help">Help</a></h2>
 				<div class="centered">Anno di gestione : <span class="year">{$year}</span></div>
 				<a id="new-gara" href="{urlarea action="new_gara"}">Aggiungi gara</a><br/>
 				<table id="gare-table">
