@@ -14,7 +14,7 @@
             <div class="submenu">
                 Procedure            
                 <ul>
-                    <li><a class="smaller" href="{urlarea area="home" action="avcpman"}">Comunicazioni AVCP</a></li>
+                    <li><a class="smaller" href="{urlarea area="home" nonce="false" action="avcpman"}">Comunicazioni AVCP</a></li>
                 </ul>
             </div>
         </li>

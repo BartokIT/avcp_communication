@@ -80,7 +80,7 @@ $(function(){
 			onEnd: function(tour)
 			{
 				$("a").unbind();
-				$(".delete").deleteCallback();
+				$(".delete").click(deleteCallback);
 			}
 			});
 			
@@ -91,6 +91,31 @@ $(function(){
 			}
 			
 			$(".help").click(function () {
+				oTour.init();
 				oTour.restart();
+			});
+			var url = window.location.href; 
+			var searchTrue = /([?&]all)=true/g;
+			if (url.match(searchTrue))
+			{
+				$("#view-all-gare").prop("checked","checked");
+			}
+			$("#view-all-gare").change(function(){
+				
+				var regEx = /([?&]all)=([^#&]*)/g;
+				if($(this).prop("checked"))
+				{
+					if (url.search(regEx) == -1)
+						window.location.href = window.location.href + "&all=true";
+					else
+						window.location.href  = url.replace(regEx, '$1=true');					
+				}
+				else
+				{
+					if (url.search(regEx) == -1)
+						window.location.href = window.location.href + "&all=false";
+					else
+						window.location.href  = url.replace(regEx, '$1=false');					
+				}
 			});
 		});

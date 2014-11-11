@@ -16,8 +16,12 @@
 			<div class="container-main">
 				<h2>Gare<a href="#" class="help">Help</a></h2>
 				<div class="centered">Anno di gestione : <span class="year">{$year}</span></div>
-				{authorized roles="administrator,editors"}
+				{authorized roles="administrator,editor"}
 				<a id="new-gara" href="{urlarea action="new_gara"}">Aggiungi gara</a><br/>
+				{/authorized}
+				
+				{authorized roles="administrator"}
+				<div class="centered">Visualizza gare di tutti gli utenti<input id="view-all-gare" type="checkbox"  href="#"/></div>
 				{/authorized}
 				<table id="gare-table">
 					<thead>

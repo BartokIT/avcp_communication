@@ -15,8 +15,12 @@ class Control extends \Control
         {
             $this->_s["year"]=date("Y");
         }
-        $gare =get_gare($this->_s["year"],NULL,$this->user->getID());
+		if ($this->user->isRole("administrator") && isset($this->_r["all"]) && ($this->_r["all"] == "true"))
+			$gare =get_gare($this->_s["year"]);
+		else
+			$gare =get_gare($this->_s["year"],NULL,$this->user->getID());
         //default action
+		
         return ReturnSmarty('gare.tpl',array("year"=>$this->_s["year"],
                                              "gare"=>$gare));
     }

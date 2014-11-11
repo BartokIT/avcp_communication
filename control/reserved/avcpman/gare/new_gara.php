@@ -4,7 +4,7 @@ class Control extends \Control
 {
     /**
      * Summary
-     * @Access(roles="administrator,editors",redirect=true  )
+     * @Access(roles="administrator,editor",redirect=true  )
      */
 	function d(){
 			global $contest_type;
@@ -23,7 +23,7 @@ class Control extends \Control
 
 	/**
      * Summary
-     * @Access(roles="administrator,publisher",redirect=true)
+     * @Access(roles="administrator,editor",redirect=true)
      */    
 	function submit(){
 			if ($this->_r["submit"] == "save")
