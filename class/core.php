@@ -191,9 +191,9 @@ OUT;
         else
         {
             $this->user = new User($this,$this->_s);
-            if ($this->configuration->authentication["external"]==true)
+            if ($this->configuration->authentication["external"]==="auto")
             {
-                $this->user->login($_SERVER['PHP_AUTH_USER']);
+                $this->user->login("");
             }
             
         }        

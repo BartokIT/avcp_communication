@@ -12,7 +12,6 @@
 		<div class="content-width">		
 				<div class="login-content">
 					<div class="blur"></div>
-					
 					<!--
 						<img class="profile-img" src="resources/css/avatar_login.png" alt="">
 					-->

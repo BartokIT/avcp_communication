@@ -17,7 +17,7 @@ class Control extends \Control
                                                 "contest_type"=>$contest_type));
         }
         else
-			return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
+			return ReturnArea($this->status->getSiteView(),"avcpman/gare");
     }
 
 

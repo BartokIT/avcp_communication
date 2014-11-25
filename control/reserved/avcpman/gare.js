@@ -103,17 +103,21 @@ $(function(){
 			$("#view-all-gare").change(function(){
 				
 				var regEx = /([?&]all)=([^#&]*)/g;
+				var questionMark ="";
+				if (url.indexOf('?') === -1)
+					questionMark = "?";
+					
 				if($(this).prop("checked"))
 				{
 					if (url.search(regEx) == -1)
-						window.location.href = window.location.href + "&all=true";
+						window.location.href = window.location.href + questionMark + "&all=true";
 					else
 						window.location.href  = url.replace(regEx, '$1=true');					
 				}
 				else
 				{
 					if (url.search(regEx) == -1)
-						window.location.href = window.location.href + "&all=false";
+						window.location.href = window.location.href + questionMark + "&all=false";
 					else
 						window.location.href  = url.replace(regEx, '$1=false');					
 				}

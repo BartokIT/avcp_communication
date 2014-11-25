@@ -33,11 +33,11 @@
                         </label>
                         <label for="contest_type"><span>Tipo di contraente</span>
                             {html_options name="gare_edit_contest_type" options=$contest_type selected=$gara->scelta_contraente separator="<br/>"}</label>
-                        <label for="amount"><span>Importo di aggiudicazione</span>
+                        <label style="height:50px;" for="amount"><span>Importo di aggiudicazione<br/><em>(al lordo oneri sicurezza e a netto IVA)</em></span>
                             <input type="text" name="gare_edit_amount" id="gare_edit_amount" value="{$gara->importo}"/>
                             <div class="inline-error"></div>
                         </label>
-                        <label for="payed_amount"><span>Importo somme liquidate</span>
+                        <label style="height:40px;" for="payed_amount"><span>Importo somme liquidate<br/><em>(al netto IVA)</em></span>
                             <input type="text" name="gare_edit_payed_amount" id="gare_edit_payed_amount" value="{$gara->importo_liquidato}" />
                             <div class="inline-error"></div>
                         </label>

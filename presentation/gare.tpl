@@ -14,7 +14,8 @@
 				{include file="menu.tpl"}
 			</div>
 			<div class="container-main">
-				<h2>Gare<a href="#" class="help">Help</a></h2>
+                {$print_parameter=['all'=>$view_all]}
+				<h2>Gare<a href="#" class="help">Guida</a><a href="{urlarea action="print_pdf" parameters=$print_parameter}" class="print">Stampa</a></h2>
 				<div class="centered">Anno di gestione : <span class="year">{$year}</span></div>
 				{authorized roles="administrator,editor"}
 				<a id="new-gara" href="{urlarea action="new_gara"}">Aggiungi gara</a><br/>

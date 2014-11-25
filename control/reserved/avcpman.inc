@@ -25,4 +25,6 @@ $contest_type=array(
 					26=>"Affidamento diretto in adesione ad accordo quadro/convenzione",
 					27=>"Confronto competitivo in adesione ad accordo quadro/convenzione",
 					28=>"Procedura ai sensi dei regolamenti degli organi costituzionali");
+					
+
 ?>

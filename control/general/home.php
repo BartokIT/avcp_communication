@@ -11,7 +11,15 @@ class Control extends \Control
      * @return object  Description
      */
     function d(){
-            return ReturnSmarty('index.tpl');
+			if ($this->user->isLogged())
+		{
+			return ReturnArea("reserved","home");
+		}
+		else
+		{
+		   return ReturnSmarty('index.tpl');
+        }
+         
     }
 
 	

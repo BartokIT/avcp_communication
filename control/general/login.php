@@ -11,14 +11,8 @@ class Control extends \Control
      * @return object  Description
      */
     function d(){
-       //default action
-		$result = $this->user->login("");
-		if ($result == FALSE)
-			return ReturnSmarty("login.tpl");
-		else
-		{
-            return ReturnArea("reserved","home");
-        }
+       //default action		
+		return ReturnSmarty("login.tpl");	
     }
 	
 	function login()

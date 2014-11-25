@@ -350,7 +350,7 @@ function get_gare($anno,$numero=null,$userid=null)
 		$numero_string .= 'AND g.f_user_id = "' .$userid . '"';
 	}
 	
-    $query_string= "SELECT  g.gid, g.dummy,g.cig, g.oggetto, g.scelta_contraente, " .
+    $query_string= "SELECT  g.gid, g.dummy,g.cig, g.oggetto, g.scelta_contraente, g.f_user_id, " .
 	"g.importo, g.importo_liquidato,DATE_FORMAT( g.data_inizio,'%d/%m/%Y') as data_inizio, DATE_FORMAT( g.data_fine,'%d/%m/%Y') as data_fine,".
 	" COUNT(p.pid) as partecipanti FROM " . $db->prefix . "gara g LEFT JOIN " . $db->prefix . "partecipanti p ON g.gid = p.gid  WHERE g.f_pub_anno = $anno " . $numero_string . " GROUP BY g.gid";
 	$gare = $db->get_results($query_string);	
