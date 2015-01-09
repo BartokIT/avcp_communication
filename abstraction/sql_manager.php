@@ -729,7 +729,8 @@ function update_aggiudicatario($gid,$pid,$transaction=true)
 	global $db;
 	if ($transaction)
 		$db->query("BEGIN");
-    $result = $db->query("UPDATE " . $db->prefix . 'partecipanti SET aggiudicatario = "Y" WHERE pid = ' . $pid . ' AND gid = ' . $gid );
+		
+	$result = $db->query("UPDATE " . $db->prefix . 'partecipanti SET aggiudicatario = "N" WHERE gid = ' . $gid );	
 	if ($result === false)
 	{
 		if ($transaction)
@@ -737,6 +738,13 @@ function update_aggiudicatario($gid,$pid,$transaction=true)
 		return false;
 	}
 	
+    $result = $db->query("UPDATE " . $db->prefix . 'partecipanti SET aggiudicatario = "Y" WHERE pid = ' . $pid . ' AND gid = ' . $gid );
+	if ($result === false)
+	{
+		if ($transaction)
+			$db->query("ROLLBACK");
+		return false;
+	}
 	$result = get_gara($gid);
 	$result = set_modified_bit_pubblicazione($result->f_pub_anno);
 	if ($result === false)
@@ -748,7 +756,46 @@ function update_aggiudicatario($gid,$pid,$transaction=true)
 	else
 	{
 		if ($transaction)
-			$db->query("COMMIT");
+		{	$db->query("COMMIT");
+		}
+		return true;
+	}
+}
+
+function update_aggiudicatari($gid,$pids,$transaction=true)
+{
+	global $db;
+	if ($transaction)
+		$db->query("BEGIN");
+		
+	$result = $db->query("UPDATE " . $db->prefix . 'partecipanti SET aggiudicatario = "N" WHERE gid = ' . $gid );	
+	if ($result === false)
+	{
+		if ($transaction)
+			$db->query("ROLLBACK");
+		return false;
+	}
+	$pids = implode(",",$pids);
+    $result = $db->query("UPDATE " . $db->prefix . 'partecipanti SET aggiudicatario = "Y" WHERE pid IN (' . $pids . ') AND gid = ' . $gid );
+	if ($result === false)
+	{
+		if ($transaction)
+			$db->query("ROLLBACK");
+		return false;
+	}
+	$result = get_gara($gid);
+	$result = set_modified_bit_pubblicazione($result->f_pub_anno);
+	if ($result === false)
+	{
+		if ($transaction)
+			$db->query("ROLLBACK");
+		return false;
+	}
+	else
+	{
+		if ($transaction)
+		{	$db->query("COMMIT");
+		}
 		return true;
 	}
 }

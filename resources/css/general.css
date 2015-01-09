@@ -479,6 +479,7 @@ body.login #container, body.home #container
 	text-align: center;
 	font-variant: small-caps;
 	letter-spacing: 2px;
+	width: 90%;
 }
 
 /**** Home ******/

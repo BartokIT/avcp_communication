@@ -220,6 +220,7 @@ class Control {
 	public $user;
 	public $_r;
 	public $_s;
+	protected $_fl;
 	/**
 	 * This method make a Control status class.
 	 * @param MainFlow $fl Contain a refer to the main execution flow
@@ -232,6 +233,7 @@ class Control {
 		//@TODO: check if the object is an instance of the class State
 		$this->status=$st;
 		$this->user = &$fl->user;
+		$this->_fl=&$fl;
 		$this->_r=&$r;
 		$this->_s=&$s;
 		$st->setControlObject($this); //double linked class :D		

@@ -69,7 +69,14 @@ $db_schema[$db->prefix . "settings"]=array(
 function sql_escape($table,$column,$value)
 {
 	global $db_schema;
+	global $db;
 	$table_schema = $db_schema[$table];
+	if (isset($table_schema) && $table_schema[$column] !== null &&
+		$table_schema[$column]["type"] =="string")
+	{
+		$value = $db->escape($value);
+	}
+	
 	if (isset($table_schema) && $table_schema[$column] !== null &&
 		isset($table_schema[$column]["lenght"]))
 	{
@@ -120,7 +127,7 @@ function build_insert_string($table,$params)
                 case "numeric":
                 case "string":
                     $column_string .= $column;
-                    $values_string .= "\"{$params[$column]}\"";
+                    $values_string .= '"'. sql_escape($table,$column,$params[$column]) . '"';
                     break;
                 case "date":
                     $tmp_dobj=DateTime::createFromFormat('d/m/Y',$params[$column]);

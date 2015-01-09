@@ -1,6 +1,7 @@
 <?php
 namespace reserved\avcpman\gare;
-include_once LIB_PATH . "dompdf-0.6.1/dompdf_config.inc.php";
+#include_once LIB_PATH . "dompdf-0.6.1/dompdf_config.inc.php";
+include_once LIB_PATH . "wkhtmltopdf/Pdf.php";
 	
 /**
 * $action variabile che contiene il nome dell'area corrente
@@ -94,144 +95,203 @@ class Control extends \Control
 	function print_pdf()
 	{
 		global $contest_type;
+		global $ruoli_partecipanti_raggruppamento;	
 		$year = $this->_s["year"];
 		$administrator = $this->user->isRole("administrator") && isset($this->_r["all"]) && ($this->_r["all"] == "true");
 		if ($administrator)
 			$gare =get_gare($year);
 		else
 			$gare =get_gare($year,NULL,$this->user->getID());
+		foreach ($gare as $lotto)
+		{
+			$lotto->partecipanti = get_partecipanti($lotto->gid);
+		}
 		
 		$html = <<<END
 		<html><head>
+		
 		<style type="text/css">
 
-@page {
-	margin: 2cm;
-}
-
 body {
-  font-family: sans-serif;
-	margin: 0.5cm 0;
-	text-align: justify;
-}
-
-#header,
-#footer {
-  position: fixed;
-  left: 0;
-	right: 0;
-	color: #aaa;
-	font-size: 0.9em;
-}
-
-#header {
-  top: 0;
-	border-bottom: 0.1pt solid #0B5A71;
-}
-
-#footer {
-  bottom: 0;
-  border-top: 0.1pt solid #0B5A71;
-}
-
-#header table,
-#footer table {
-	width: 100%;
-	border-collapse: collapse;
-	border: none;
-}
-
-#header td,
-#footer td {
-  padding: 0;
-	width: 50%;
-}
-
-.page-number {
-  text-align: center;
-}
-
-.page-number:before {
-  content: "Pagina " counter(page);
-}
-
-hr {
-  page-break-after: always;
-  border: 0;
-}
-h2 {
-	text-align:center;
+	font-family: sans-serif;
+	font-size: 13px;
+	text-align: center;
 	
 }
+
+
 table#data
 {
-	border-collapse: collapse;
+	width :95%;
 	margin: auto;
-	width: 100%;
+	border-collapse: collapse;
+	font-size:12px;
+}
+
+table#data thead th
+{
+	vertical-align: bottom;
+}
+
+table#data td, table#data th
+{
+	border: 1px solid black;
+	vertical-align: top;
+	
+}
+ 
+table#data thead th, table#data th
+{
+	background-color: #ACD2E1;
+	text-align: center;
+}
+table .subject
+{
+	width: 400px;
+	padding: 10px;
+	text-align: justify;
+}
+table .money, table .cig,table .contest_type, table .data,
+table .partecipante_n, table .partecipante, table .users
+{
 	text-align: center;
 }
 
-table#data td,th
+table .contest_type
 {
-	border: 1px solid #555;
-	padding: .5em;
+	font-size: .95em;
 }
-table#data thead 
+table .users
 {
-	background-color: #7CB2C1;
+	font-size: 11px;
 }
-table#data thead th
+
+table .number
 {
-	
-	font-weight: bold;	
+	background-color: #ACD2E1;
+	text-align:center;
 }
+td div,tbody {
+     page-break-inside: avoid !important;	 
+}
+.grey
+{
+	background-color: #EEE;
+}
+
+table .partecipante_n em
+{
+	font-size: .8em;
+}
+
+tbody 
+{
+	border-bottom: 3px solid  black !important;
+}
+thead
+{
+	margin-bottom: 3px !important;
+	padding-bottom: 3px !important;
+}
+
 </style>
 </head><body>
 END;
-		$html .= '<div id="header"><table><tr><td>Elenco gare per trasmissione AVCP</td><td style="text-align: right;">'. $this->user->getDisplayName() .'</td></tr></table></div>';
-        $html .= '<div id="footer"> <div class="page-number"></div></div>';
+		$html .= '<h1>Elenco gare per trasmissione AVCP</h1><div> Inserimento effettuato da: '. $this->user->getDisplayName() .'</div>';        
 		$html .= '<h2> Anno ' . $year .'</h2>';
 		$html .= '<table id="data">';
 		$html .= <<<END
 		
 		<thead>
 			<tr>
-				<th>Oggetto</th>
-				<th>CIG</th>
-				<th>Tipo contraente</th>
+				<th class="subject">Oggetto</th>
+				<th >CIG</th>
+				<th>Tipo <br/>contraente</th>
 				<th>Importo <br/>aggiudicazione</th>
 				<th>Importo <br/>somme liquidate</th>
 				<th>Data <br/>inizio lavori</th>
 				<th>Data <br/>fine lavori</th>
 END;
+		$cols = 7;
 		if ($administrator)
 		{
 			$html .= "<th>Utente</th>";
+			$cols++;
 		}
 			
 		$html .= <<<END
 			</tr>
 		</thead>
-		<tbody>
+		
 END;
+		$j=1;
 		foreach ($gare as $gara)
 		{
-			$html .= "<tr><td>$gara->oggetto</td><td>$gara->cig</td><td>".$contest_type[$gara->scelta_contraente] ."</td>";
-			$html .= "<td>$gara->importo</td><td>$gara->importo_liquidato</td>";
-			$html .= "<td>$gara->data_inizio</td><td>$gara->data_fine</td>";
+			$count_ditte = 0; $html_partecipanti ="";
+			foreach ($gara->partecipanti["ditte"] as $partecipante)
+			{
+				$aggiudicatario = "";
+				if ($partecipante->aggiudicatario == 'Y')
+					$aggiudicatario = "*";
+				$row_style="";
+				if ($count_ditte % 2)
+				{
+					$row_style="grey";
+				}
+				$html_partecipanti .= '<tr><td class="partecipante_n">' . ($count_ditte + 1)  . $aggiudicatario. '</td><td class="' .  $row_style . ' partecipante" colspan="' . ($cols - 1 ) .  '">' .  htmlentities($partecipante->ragione_sociale,ENT_QUOTES,"UTF-8") . ' / ' . $partecipante->identificativo_fiscale . 	'</td></tr>';
+				$count_ditte++;
+			}
+			$p=0;
+			foreach ($gara->partecipanti["raggruppamenti"] as $raggruppamento)
+			{
+				$p++;
+				$i=0;
+				foreach ($raggruppamento as $ditta)
+				{					
+					$html_partecipanti .= "<tr>";
+					if ($ditta->aggiudicatario == 'Y')
+						$aggiudicatario = "*";
+					if ($i == 0)
+						$html_partecipanti .= '<td  class="partecipante_n" rowspan="' . count($raggruppamento) .'">' . ($count_ditte + 1). $aggiudicatario . '<br/>(<em>Raggr.. ' . $p . '</em>)</td>';
+					$row_style="";
+				if ($count_ditte % 2)
+				{
+					$row_style="grey";
+				}
+					$html_partecipanti .= '<td  class="' .  $row_style . ' partecipante" colspan="' . ($cols - 1) .'">' . htmlentities($ditta->ragione_sociale) . " / " . $ditta->identificativo_fiscale  . " / <em>" . $ruoli_partecipanti_raggruppamento[$ditta->ruolo] .  "</em>" . '</td></tr>';
+					$count_ditte++;	
+					$i++;
+				}	
+			}
+			$count_ditte +=  2;
+			$html .= '<tbody><tr><td  class="number" colspan="' . $cols . '"><strong>Lotto '. $j .'</strong></td></tr><tr class="first"><td class="subject" rowspan="'.$count_ditte.'"><div>' . htmlentities($gara->oggetto,ENT_QUOTES,"UTF-8") . '</div></td><td class="cig">' 
+					. $gara->cig . '</td><td class="contest_type">' . $contest_type[$gara->scelta_contraente] ."</td>";
+			$html .= '<td class="money"> &euro; ' . number_format($gara->importo,2,',','.') . '</td><td class="money"> &euro; ' . number_format($gara->importo_liquidato,2,",",".") .'</td>';
+			$html .= '<td class="data">' . $gara->data_inizio .'</td><td class="data">' . $gara->data_fine . '</td>';
 			if ($administrator)
-				$html .= "<td>$gara->f_user_id</td>";
-			$html .= "</tr>";
+				$html .= '<td class="users">' . $gara->f_user_id . '</td>';
+			$html .= '</tr><tr><th colspan="7">Partecipanti</th></tr>' . $html_partecipanti;
+			
+			$html .= "</tbody>";
+			$j++;
 		}
 		
-		$html .= "<tbody></table>";		
+		$html .= "</table>";		
 		$html .='</body></html>';
-		$dompdf = new \DOMPDF();
-		
-		$dompdf->load_html($html);
-		$dompdf->set_paper('a4', 'landscape');
-		$dompdf->render();
-		$dompdf->stream("hello_world.pdf", array("Attachment" => false));
+;
+		$wkpdf = new \mikehaertl\wkhtmlto\Pdf(array("binary"=>$this->_fl->configuration->pdf["exec"],
+													"orientation"=>"landscape",
+													"footer-font-size"=>"10",
+													"footer-left"=>" * - aggiudicatario lotto",	
+													"header-font-size"=>"9",
+													"header-right"=>"[date] [time]",
+													"footer-right"=>"[page]/[topage]",													
+													"margin-bottom"=>"15mm"
+													));
+		$wkpdf->addPage($html);
+		if (!$wkpdf->send()) {
+			throw new \Exception('Could not create PDF: '.$wkpdf->getError());
+		}
 	}
 }
 ?>

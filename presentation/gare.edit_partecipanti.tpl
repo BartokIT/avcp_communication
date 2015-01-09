@@ -55,7 +55,7 @@
                     <td>{$indice++}</td>
                     <td>{$ditta->ragione_sociale}</td>
 					<td>{$ditta->identificativo_fiscale}</td>
-					<td><input type="radio" name="aggiudicatario" value="{$ditta->pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/></td>
+					<td><input type="checkbox" name="aggiudicatario[]" value="{$ditta->pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/></td>
 					<th><a class="delete-ditta" title="Rimovi ditta" href="{urlarea  action="delete_ditta" parameters=$p}">
 						Rimuovi ditta
 					</a></th>
@@ -84,7 +84,7 @@
 						<td class="ragione-sociale">{$ditta->ragione_sociale} (<em>{$ruoli_raggruppamento[$ditta->ruolo]}</em>)</td>
 						<td class="identificativo-fiscale">{$ditta->identificativo_fiscale}</td>
 						{if $ditta@first}<td rowspan="{$ditta@total}">
-							<input type="radio" name="aggiudicatario" value="{$pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/>
+							<input type="checkbox" name="aggiudicatario[]" value="{$pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{/if}/>
 						</td> {/if}
 						<td><a class="delete-ditta" title="Rimuovi ditta" href="{urlarea  action="delete_ditta_raggruppamento" parameters=$pd}">
 							Rimuovi ditta

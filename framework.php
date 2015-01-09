@@ -2,6 +2,7 @@
 define("CONTROL_PATH","control/");
 define("PRESENTATION_PATH","presentation/");
 define("LIB_PATH","lib/");
+define("RESOURCES_PATH","resources/");
 //inizializzo la sessione
 include_once("class/globalfun.php");
 parse_resources();
