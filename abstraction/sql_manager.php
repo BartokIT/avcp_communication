@@ -1,26 +1,20 @@
 <?php
 include("sql.php");
-function execute_sql_file($id_sql_connection, $database_name,$sql_file)
+function execute_sql_file($id_sql_connection, $database_name, $sql_file)
 {
-	$select_result = mysql_select_db($database_name,$id_sql_connection);
-	$install_path = dirname($_SERVER['SCRIPT_FILENAME']) . "/";
+    $select_result = mysql_select_db($database_name, $id_sql_connection);
+    $install_path = dirname($_SERVER['SCRIPT_FILENAME']) . "/";
 
-	if ($select_result == FALSE)
-	{
-		return FALSE;
-	}
-	else
-	{
+    if ($select_result == false) {
+        return false;
+    } else {
 		$file_array= file($install_path . $sql_file);
 
-		if ($file_array == FALSE)
-		{
+		if ($file_array == false) {
 			//echo $install_path . $sql_file;
-			return FALSE;
-		}
-		else
-		{
-			$no_problem = TRUE;
+			return false;
+		} else {
+			$no_problem = false;
 			$sql_string_commands = "";
 
 			//scorro le righe per vedere quelle che iniziano con un commento
@@ -47,9 +41,8 @@ function execute_sql_file($id_sql_connection, $database_name,$sql_file)
 
 				$create_tables_result = mysql_query($sql_query);
 
-				if (!$create_tables_result)
-				{
-					switch( mysql_errno())
+				if (!$create_tables_result) {
+					switch ( mysql_errno())
 					{
 						//ERRORI GRAVI
 						default: //errore sconosciuto
@@ -104,6 +97,20 @@ function get_years()
 		return $years;
 }
 
+
+function get_years_gare()
+{
+	global $db;
+	$years = $db->get_col("SELECT DISTINCT g.f_pub_anno FROM " . $db->prefix . "gara g ORDER BY g.f_pub_anno DESC");
+    $result = array();
+    foreach ($years as $y) {
+        $result[$y] = $y;
+    }
+	if ($years == NULL)
+		return array();
+	else
+		return $result;
+}
 
 /**
  * Ottiene la lista degli anni presenti in archivio
@@ -1271,5 +1278,7 @@ function rollback_transaction()
 	global $db;
 	$db->query("ROLLBACK");
 }
+
+
 
 ?>

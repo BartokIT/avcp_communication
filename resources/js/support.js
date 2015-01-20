@@ -31,13 +31,13 @@
 		},
 		date : function (s)
 		{
-			return /^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]/i.test(s);
+			return /^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]$/i.test(s);
 		},
 		'idfiscale': function(s)
 		{
-			var test1 =  /^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9A-Za-z]{3}[A-Za-z]{1}/i.test(s);
-			var test2 =  /^[A-Za-z]{6}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{3}[A-Za-z]{1}/i.test(s);
-			var test3 =  /^[0-9]{11,11}/i.test(s);
+			var test1 =  /^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9A-Za-z]{3}[A-Za-z]{1}$/i.test(s);
+			var test2 =  /^[A-Za-z]{6}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{3}[A-Za-z]{1}$/i.test(s);
+			var test3 =  /^[0-9]{11,11}$/i.test(s);
 			return test1 || test2 || test3;
 		}
 	};

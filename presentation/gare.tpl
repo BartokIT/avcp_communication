@@ -4,8 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 		{include file="style.tpl"}
-		<link href="resources/css/ui-absolution/absolution.css" rel="stylesheet" type="text/css">
+        <link href="resources/css/jquery-ui.1.11.2.min.css" rel="stylesheet" type="text/css" />
+        <link href="resources/css/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 		<link href="resources/css/bootstrap-tour-standalone.min.css" rel="stylesheet" type="text/css" />
+        
     </head>
     <body class="avcpman">
         {include file="header.tpl"}
@@ -16,13 +18,18 @@
 			<div class="container-main">
                 {$print_parameter=['all'=>$view_all]}
 				<h2>Gare<a href="#" class="help">Guida</a><a href="{urlarea action="print_pdf" parameters=$print_parameter}" class="print">Stampa</a></h2>
-				<div class="centered">Anno di gestione : <span class="year">{$year}</span></div>
+                
+				<div class="centered">Anno di gestione :
+                    <select id="current-year" name="current-year">
+                        {html_options options=$years selected=$year}
+                    </select>
+                </div>
 				{authorized roles="administrator,editor"}
 				<a id="new-gara" href="{urlarea action="new_gara"}">Aggiungi gara</a><br/>
 				{/authorized}
 				
 				{authorized roles="administrator"}
-				<div class="centered">Visualizza gare di tutti gli utenti<input id="view-all-gare" type="checkbox"  href="#"/></div>
+				<div class="centered">Visualizza gare di tutti gli utenti<input id="view-all-gare" type="checkbox" {if $view_all eq "true" }checked="checked" {/if} href="#"/></div>
 				{/authorized}
 				<table id="gare-table">
 					<thead>
@@ -57,7 +64,7 @@
         {include file="footer.tpl"}
     </body>
     <script src="resources/js/jquery-1.10.2.js"></script>
-	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="resources/js/jquery-ui-1.11.2.min.js"></script>
 	<script src="resources/js/bootstrap-tour-standalone.min.js"></script>
 	<script src="control/reserved/avcpman/gare.js"></script>
 </html>

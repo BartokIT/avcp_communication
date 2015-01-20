@@ -7,10 +7,11 @@ include_once "lib/ezSQL/mysqli/ez_sql_mysqli.php";
 
 
 
-global $id_db_connection,$db;
-
-		
-$db = new ezSQL_mysqli($config["database"]["user"], $config["database"]["pass"], $config["database"]["name"], $config["database"]["host"]); 
+global $id_db_connection,$db;		
+$db = new ezSQL_mysqli($config["database"]["user"],
+					   $config["database"]["pass"],
+					   $config["database"]["name"],
+					   $config["database"]["host"]); 
 //$db = new ezSQL_mssql($db_user, $db_pass, $db_name, $db_host);
 //$other_db_tables = $db->get_results("SHOW TABLES");
 $db->prefix="avcpman_";
@@ -78,7 +79,7 @@ function sql_escape($table,$column,$value)
 	}
 	
 	if (isset($table_schema) && $table_schema[$column] !== null &&
-		isset($table_schema[$column]["lenght"]))
+			isset($table_schema[$column]["lenght"]))
 	{
 		if (strlen($value)>$table_schema[$column]["lenght"])
 			$value = substr($value,0,$table_schema[$column]["lenght"]);
@@ -127,14 +128,14 @@ function build_insert_string($table,$params)
                 case "numeric":
                 case "string":
                     $column_string .= $column;
-                    $values_string .= '"'. sql_escape($table,$column,$params[$column]) . '"';
+                    $values_string .= '"'. sql_escape($table, $column, $params[$column]) . '"';
                     break;
                 case "date":
                     $tmp_dobj=DateTime::createFromFormat('d/m/Y',$params[$column]);
                     $column_string .= $column;
                     
                     $values_string .= '"' . $tmp_dobj->format($detail["format"]) . '"';
-                    break; 
+                    break;
             }
             $column_string .= ",";
             $values_string .= ","; 
@@ -222,4 +223,5 @@ EOF;
 	die();
 }
 mysql_query("SET NAMES utf8");*/
+
 ?>

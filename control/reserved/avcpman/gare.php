@@ -1,8 +1,8 @@
 <?php
 namespace reserved\avcpman\gare;
-#include_once LIB_PATH . "dompdf-0.6.1/dompdf_config.inc.php";
+
 include_once LIB_PATH . "wkhtmltopdf/Pdf.php";
-	
+
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -12,98 +12,128 @@ class Control extends \Control
     /**
      * @Access(roles="administrator,publisher,editor,viewer",redirect=true)
      */
-    function d()
+    public function d()
     {
-        if (!isset($this->_s["year"]))
-        {
-            $this->_s["year"]=date("Y");
+        //Set default year if no year is selected
+        $month = (int) date("m");
+        if (!isset($_SESSION["year"])) {
+            if ($month == 1) {
+                $_SESSION["year"]=((int)date("Y")) - 1;
+            } else {
+                $_SESSION["year"]=date("Y");
+            }
         }
+                      
+        $all=!!($this->user->isRole("administrator") &&
+                isset($this->_s["all"]) && $this->_s["all"]);
         
-        $all=!!($this->user->isRole("administrator") && isset($this->_r["all"]) && ($this->_r["all"] == "true"));        
-		if ($all)
-        {
-            $gare =get_gare($this->_s["year"]);
+        if ($all) {
+            $gare =get_gare($_SESSION["year"]);
             $view_all = "true";
+        } else {
+                $gare =get_gare($_SESSION["year"], null, $this->user->getID());
+                $view_all = "false";
         }
-		else
-        {
-			$gare =get_gare($this->_s["year"],NULL,$this->user->getID());
-            $view_all = "false";
+        $years=get_years_gare();
+        if ($month == 1) {
+                $years[((int)date("Y")) - 1]=((int)date("Y")) - 1;
         }
-        //default action
-		
-        return ReturnSmarty('gare.tpl',array("year"=>$this->_s["year"],
-                                             "gare"=>$gare,
-                                             "view_all"=>$view_all));
+        $years[(int)date("Y") ]=(int)date("Y");
+        return ReturnSmarty('gare.tpl', array("year"=>$_SESSION["year"],
+                                              "years"=>$years,
+                                              "gare"=>$gare,
+                                              "view_all"=>$view_all));
     }
     
- 
-	function view()
+    public function set_current_year()
     {
-		global $contest_type;
-		global $ruoli_partecipanti_raggruppamento;
-        if (isset($this->_r["parameter"]) || isset($this->_s["gid"]) )
-        {
+        if (isset($this->_r["year"])) {
+            $y = $this->_r["year"]*1;
+            $cy = date("Y")*1;
+            if (($y > 1950) && ($y <= $cy)) {
+                $_SESSION["year"] = $y;
+            }
+        }
+        return ReturnArea($this->status->getSiteView(), $this->status->getArea());
+    }
+    
+    public function set_view_all()
+    {
+        if (isset($this->_r["all"])) {
+            if (strcmp($this->_r["all"],"true") == 0) {
+                $this->_s["all"] = true;
+            } else {
+                $this->_s["all"] = false;
+            }
+        }
+        return ReturnArea($this->status->getSiteView(), $this->status->getArea());
+    }
+    
+    public function view()
+    {
+        global $contest_type;
+        global $ruoli_partecipanti_raggruppamento;
+        if (isset($this->_r["parameter"]) || isset($this->_s["gid"])) {
             $gid  = (int) isset($this->_r["parameter"])?$this->_r["parameter"]:$this->_s["gid"];
             $this->_s["gid"]=$gid;
             $gara =get_gara($gid);
             $partecipanti = get_partecipanti($gid);
             //default action
-			$p = array("gara"=>$gara,
-						"partecipanti"=>$partecipanti,
-						"contest_type"=>$contest_type,
-						"ruoli_raggruppamento"=>$ruoli_partecipanti_raggruppamento);
-			if (isset($this->_r["error"]))
-				$p["error"] = $this->_r["error"];
-            return ReturnSmarty('gare.view.tpl',$p);
+            $p = array("gara"=>$gara,
+                       "partecipanti"=>$partecipanti,
+                       "contest_type"=>$contest_type,
+                       "ruoli_raggruppamento"=>$ruoli_partecipanti_raggruppamento);
+            if (isset($this->_r["error"])) {
+                $p["error"] = $this->_r["error"];
+            }
+            return ReturnSmarty('gare.view.tpl', $p);
+        } else {
+            return ReturnArea($this->status->getSiteView(), "avcpman/ditte");
         }
-        else
-            return ReturnArea($this->status->getSiteView(),"avcpman/ditte");
-    }
-	
-    /**
-     * @Access(roles="administrator,editor")
-     */	
-    function edit()
-    {
-        return ReturnArea($this->status->getSiteView(),"avcpman/gare/edit");
-    }
-    
-	 /**
-     * @Access(roles="administrator,editor,viewer")
-     */
-    function new_gara()
-    {
-        
-        return ReturnArea($this->status->getSiteView(),"avcpman/gare/new_gara");
     }
 
-	 /**
-     * @Access(roles="administrator,editor,viewer")
-     */    
-    function delete()
+    /**
+    * @Access(roles="administrator,editor")
+    */
+    public function edit()
     {
-        if (isset($this->_r["parameter"]))
-        {
+        return ReturnArea($this->status->getSiteView(), "avcpman/gare/edit");
+    }
+    
+    /**
+    * @Access(roles="administrator,editor,viewer")
+    */
+    public function new_gara()
+    {
+        return ReturnArea($this->status->getSiteView(), "avcpman/gare/new_gara");
+    }
+
+    /**
+    * @Access(roles="administrator,editor,viewer")
+    */
+    public function delete()
+    {
+        if (isset($this->_r["parameter"])) {
             $gid = $this->_r["parameter"];
             delete_gara($gid);
         }
-        return ReturnArea($this->status->getSiteView(),$this->status->getArea()); 
+        return ReturnArea($this->status->getSiteView(), $this->status->getArea());
     }
 
 
-	function print_pdf()
-	{
-		global $contest_type;
-		global $ruoli_partecipanti_raggruppamento;	
-		$year = $this->_s["year"];
-		$administrator = $this->user->isRole("administrator") && isset($this->_r["all"]) && ($this->_r["all"] == "true");
-		if ($administrator)
+    public function print_pdf()
+    {
+        global $contest_type;
+        global $ruoli_partecipanti_raggruppamento;	
+        $year = $_SESSION["year"];
+        $administrator = $this->_r["all"];
+        if ($administrator) {
 			$gare =get_gare($year);
-		else
-			$gare =get_gare($year,NULL,$this->user->getID());
-		foreach ($gare as $lotto)
-		{
+        } else {
+			$gare =get_gare($year,null, $this->user->getID());
+        }
+        
+		foreach ($gare as $lotto) {
 			$lotto->partecipanti = get_partecipanti($lotto->gid);
 		}
 		
@@ -197,7 +227,7 @@ thead
 </style>
 </head><body>
 END;
-		$html .= '<h1>Elenco gare per trasmissione AVCP</h1><div> Inserimento effettuato da: '. $this->user->getDisplayName() .'</div>';        
+		$html .= '<h1>Elenco gare per trasmissione AVCP</h1><div> Inserimento effettuato da: ' . $this->user->getDisplayName() .'</div>';        
 		$html .= '<h2> Anno ' . $year .'</h2>';
 		$html .= '<table id="data">';
 		$html .= <<<END

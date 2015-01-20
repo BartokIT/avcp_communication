@@ -1,232 +1,175 @@
 <?php
 
-	function indent($level)
-	{
-		$out = "";
-		for ($i=0; $i < $level ; $i++)
-		{
-			$out .= "\t";
-		}
-		return $out;
-	}
-	
-	/**
-	* Scrive in una stringa la porzione di xml relativa ai metadati
-	**/
-	function write_avcp_metadata_tostring($meta)
-	{
-		$tmp_dobj=DateTime::createFromFormat('d/m/Y',$meta->data_aggiornamento);
-		$tmp_dobjP=DateTime::createFromFormat('d/m/Y',$meta->data_pubblicazione);
-		$outstring  = indent(1) . "<metadata>\n";
-		$outstring .= indent(2) . "<titolo>" . $meta->titolo . "</titolo>\n";
-		$outstring .= indent(2) . "<abstract>" . $meta->abstract . "</abstract>\n";
-		$outstring .= indent(2) . "<dataPubbicazioneDataset>" . $tmp_dobjP->format("Y-m-d") . "</dataPubbicazioneDataset>\n";
-		$outstring .= indent(2) . "<entePubblicatore>" . $meta->ente_pubblicatore . "</entePubblicatore>\n";
-		$outstring .= indent(2) . "<dataUltimoAggiornamentoDataset>" . $tmp_dobj->format("Y-m-d") . "</dataUltimoAggiornamentoDataset>\n";
-		$outstring .= indent(2) ."<annoRiferimento>" . $meta->anno . "</annoRiferimento>\n";
-		$outstring .= indent(2) ."<urlFile>" . $meta->url . "</urlFile>\n";
-		$outstring .= indent(2) ."<licenza>" . $meta->licenza . "</licenza>\n";
-		$outstring .= indent(1) . "</metadata>\n";
-		return $outstring;
-	}
-	
-	/**
-	* Scrive in una stringa la parte iniziale delle informazioni ssu di un singolo lotto
-	*/
-	function write_avcp_lotto_pre_tostring($meta,$lotto_info)
-	{
-		global $contest_type;
-		$outstring = indent(2) ."<lotto>\n";
-		$outstring .= indent(3) ."<cig>" . $lotto_info->cig . "</cig>\n";
-		$outstring .= indent(3) ."<strutturaProponente>\n";
-		$outstring .= indent(4) ."<codiceFiscaleProp>" . $meta->cf_ente_pubblicatore . "</codiceFiscaleProp>\n";
-		$outstring .= indent(4) ."<denominazione>" . $meta->ente_pubblicatore . "</denominazione>\n";		
-		$outstring .= indent(3) ."</strutturaProponente>\n";		
-		$outstring .= indent(3) ."<oggetto>" . $lotto_info->oggetto . "</oggetto>\n";
-		$outstring .= indent(3) ."<sceltaContraente>" . str_pad($lotto_info->scelta_contraente,2,"0",STR_PAD_LEFT) . "-" . strtoupper($contest_type[$lotto_info->scelta_contraente]) . "</sceltaContraente>\n";
-		
-		return $outstring;
-	}
-	
-	/**
-	* Scrive in una stringa la parte finale delle informazioni su di un singolo lotto
-	*/	
-	function write_avcp_lotto_post_tostring($lotto_info)
-	{
+function indent($level)
+{
+    $out = "";
+    for ($i=0; $i < $level; $i++) {
+        $out .= "\t";
+    }
+    return $out;
+}
 
-	
-		
-		$outstring  =indent(3) . "<importoAggiudicazione>" . $lotto_info->importo . "</importoAggiudicazione>\n";
-		$outstring .=indent(3) ."<tempiCompletamento>\n";
-		if (!(is_null($lotto_info->data_inizio)  || trim($lotto_info->data_inizio) == ''))
-		{
-			$tmp_inizio=DateTime::createFromFormat('d/m/Y', $lotto_info->data_inizio);
-			$outstring .=indent(4) ."<dataInizio>" .  $tmp_inizio->format("Y-m-d") . "</dataInizio>\n";
-		}
-		if (!(is_null($lotto_info->data_fine)  || trim($lotto_info->data_fine) == ''))
-		{
-			$tmp_completamento=DateTime::createFromFormat('d/m/Y',$lotto_info->data_fine);
-			$outstring .=indent(4) ."<dataUltimazione>" . $tmp_completamento->format("Y-m-d") . "</dataUltimazione>\n";
-		}
-		$outstring .=indent(3) ."</tempiCompletamento>\n";		
-		$outstring .=indent(3) ."<importoSommeLiquidate>" . $lotto_info->importo_liquidato . "</importoSommeLiquidate>\n";
-		$outstring .=indent(2) . "</lotto>\n";		
-		return $outstring;
-	}	
-	
-	function write_avcp_partecipante_tostring_ditta($partecipante_info,$aggiudicatario=false)
-	{
-		$outstring="";
-		if($aggiudicatario)
-		{
-			$outstring .= indent(4) ."<aggiudicatario>\n";
-		}
-		else		
-			$outstring .= indent(4) ."<partecipante>\n";
-			
-		if (strcmp($partecipante_info->estera,"N") == 0)
-				$outstring .= indent(5) . "<codiceFiscale>" . $partecipante_info->identificativo_fiscale . "</codiceFiscale>\n";
-			else
-				$outstring .= indent(5) . "<identificativoFiscaleEstero>" . $partecipante_info->identificativo_fiscale . "</identificativoFiscaleEstero>\n";
-			$outstring .=indent(5) . "<ragioneSociale>" . $partecipante_info->ragione_sociale . "</ragioneSociale>\n";
-		if($aggiudicatario)
-			$outstring .= indent(4) ."</aggiudicatario>\n";
-		else		
-			$outstring .= indent(4) ."</partecipante>\n";
-		return $outstring;
-	}
-	
-	function write_avcp_partecipante_tostring_raggruppamento($partecipante_info,$aggiudicatario=false)
-	{
-		global $ruoli_partecipanti_raggruppamento;
-		
-		$outstring="";
-		if($aggiudicatario)
-		{
-			
-			$outstring .= indent(4) ."<aggiudicatarioRaggruppamento>\n";
-		}
-		else		
-			$outstring .= indent(4) ."<raggruppamento>\n";
-		
-		foreach ($partecipante_info as $membro )
-		{
+/**
+* Scrive in una stringa la porzione di xml relativa ai metadati
+**/
+function write_avcp_metadata_tostring($meta, $xml_e)
+{
+    $tmp_dobj=DateTime::createFromFormat('d/m/Y', $meta->data_aggiornamento);
+    $tmp_dobjP=DateTime::createFromFormat('d/m/Y', $meta->data_pubblicazione);
+    $xml_e= $xml_e->appendChild(new DomElement("metadata"));
+    $xml_e->appendChild(new DomElement("titolo"))->appendChild(new DOMText( $meta->titolo));
+    $xml_e->appendChild(new DomElement("abstract"))->appendChild(new DOMText($meta->abstract));
+    $xml_e->appendChild(new DomElement("dataPubbicazioneDataset", $tmp_dobjP->format("Y-m-d")));
+    $xml_e->appendChild(new DomElement("entePubblicatore", $meta->ente_pubblicatore));
+    $xml_e->appendChild(new DomElement("dataUltimoAggiornamentoDataset", $tmp_dobj->format("Y-m-d")));
+    $xml_e->appendChild(new DomElement("annoRiferimento"))->appendChild(new DOMText($meta->anno));
+    $xml_e->appendChild(new DomElement("urlFile"))->appendChild(new DOMText($meta->url));
+    $xml_e->appendChild(new DomElement("licenza", $meta->licenza));
+    return $outstring;
+}
 
-			$outstring .= indent(5) . "<membro>\n";
-			
-			if (strcmp($membro->estera,"N") == 0)
-				$outstring .= indent(5) . "<codiceFiscale>" . $membro->identificativo_fiscale . "</codiceFiscale>\n";
-			else
-				$outstring .= indent(5) . "<identificativoFiscaleEstero>" . $membro->identificativo_fiscale . "</identificativoFiscaleEstero>\n";
-			$outstring .= indent(6) ."<ragioneSociale>" . $membro->ragione_sociale . "</ragioneSociale>\n";
-			$outstring .= indent(6) ."<ruolo>" . $ruoli_partecipanti_raggruppamento[$membro->ruolo] . "</ruolo>\n";
-			$outstring .= indent(5) . "</membro>\n";				
-		}
-		
-		if($aggiudicatario)
-			$outstring .= indent(4) ."</aggiudicatarioRaggruppamento>\n";
-		else		
-			$outstring .= indent(4) ."</raggruppamento>\n";		
-		
-		return $outstring;
-	}
-	
+/**
+* Scrive in una stringa la parte iniziale delle informazioni ssu di un singolo lotto
+*/
+function write_avcp_lotto_pre_tostring($meta, $lotto_info, $xml_e)
+{
+    global $contest_type;
+
+    $outstring = indent(2) ."<lotto>\n";
+    $xml_e->appendChild(new DomElement("cig", $lotto_info->cig));
+    $xml_e_proponente = $xml_e->appendChild(new DomElement("strutturaProponente"));
+    $xml_e_proponente->appendChild(new DomElement("codiceFiscaleProp"))->appendChild(new DOMText($meta->cf_ente_pubblicatore));
+    $xml_e_proponente->appendChild(new DomElement("denominazione"))->appendChild(new DOMText($meta->ente_pubblicatore));
+    $xml_e->appendChild(new DomElement("oggetto"))->appendChild(new DOMText($lotto_info->oggetto));
+    $xml_e->appendChild(new DomElement("sceltaContraente", str_pad($lotto_info->scelta_contraente, 2, "0", STR_PAD_LEFT) . "-" . strtoupper($contest_type[$lotto_info->scelta_contraente])));
+
+    return $outstring;
+}
+
+/**
+* Scrive in una stringa la parte finale delle informazioni su di un singolo lotto
+*/
+function write_avcp_lotto_post_tostring($lotto_info, $xml_e)
+{
+    $outstring  =indent(3) . "<importoAggiudicazione>" . $lotto_info->importo . "</importoAggiudicazione>\n";
+    $xml_e->appendChild(new DomElement("importoAggiudicazione"))->appendChild(new DOMText($lotto_info->importo));
+    $outstring .=indent(3) ."<tempiCompletamento>\n";
+    $xml_e_tempi = new DomElement("tempiCompletamento");
+    $xml_e->appendChild($xml_e_tempi);
+    if (!(is_null($lotto_info->data_inizio)  || trim($lotto_info->data_inizio) == '')) {
+        $tmp_inizio=DateTime::createFromFormat('d/m/Y', $lotto_info->data_inizio);
+        $outstring .=indent(4) ."<dataInizio>" .  $tmp_inizio->format("Y-m-d") . "</dataInizio>\n";
+        $xml_e_tempi->appendChild(new DomElement("dataInizio"))->appendChild(new DOMText($tmp_inizio->format("Y-m-d")));
+    }
+    if (!(is_null($lotto_info->data_fine)  || trim($lotto_info->data_fine) == '')) {
+        $tmp_completamento=DateTime::createFromFormat('d/m/Y', $lotto_info->data_fine);
+        $outstring .=indent(4) . "<dataUltimazione>" . $tmp_completamento->format("Y-m-d") . "</dataUltimazione>\n";
+        $xml_e_tempi->appendChild(new DomElement("dataUltimazione"))->appendChild(new DOMText($tmp_completamento->format("Y-m-d")));//->appendChild(new DOMText(tmp_completamento->format("Y-m-d")));
+    }
+    $outstring .=indent(3) ."</tempiCompletamento>\n";
+    $outstring .=indent(3) ."<importoSommeLiquidate>" . $lotto_info->importo_liquidato . "</importoSommeLiquidate>\n";
+    $xml_e->appendChild(new DomElement("importoSommeLiquidate"))->appendChild(new DOMText($lotto_info->importo_liquidato));
+    $outstring .=indent(2) . "</lotto>\n";
+    return $outstring;
+}
+
+function write_avcp_partecipante_tostring_ditta($partecipante_info, $xml_e, $aggiudicatario = false)
+{
+    $outstring="";
+    $xml_e_partecipante = null;
+    
+    if ($aggiudicatario) {
+        $xml_e_partecipante = $xml_e->appendChild(new DomElement("aggiudicatario"));
+    } else {
+        $xml_e_partecipante = $xml_e->appendChild(new DomElement("partecipante"));
+    }
+    
+    if (strcmp($partecipante_info->estera, "N") == 0) {
+            $xml_e_partecipante->appendChild(new DomElement("codiceFiscale", $partecipante_info->identificativo_fiscale));
+    } else {
+        $xml_e_partecipante->appendChild(new DomElement("identificativoFiscaleEstero", $partecipante_info->identificativo_fiscale));
+    }
+    $xml_e_partecipante->appendChild(new DomElement("ragioneSociale"))->appendChild(new DOMText($partecipante_info->ragione_sociale));
+
+    return $outstring;
+}
+
+function write_avcp_partecipante_tostring_raggruppamento($partecipante_info, $xml_e, $aggiudicatario = false)
+{
+    global $ruoli_partecipanti_raggruppamento;
+
+    $xml_e_partecipante = null;
+    if ($aggiudicatario) {
+        $xml_e_partecipante = $xml_e->appendChild(new DomElement("aggiudicatarioRaggruppamento"));
+    } else {
+        $xml_e_partecipante = $xml_e->appendChild(new DomElement("raggruppamento"));
+    }
+
+    foreach ($partecipante_info as $membro) {
+        $xml_e_membro = $xml_e_partecipante->appendChild(new DomElement("membro"));
+        if (strcmp($membro->estera, "N") == 0) {
+            $xml_e_membro->appendChild(new DomElement("codiceFiscale", $membro->identificativo_fiscale));
+        } else {
+            $xml_e_membro->appendChild(new DomElement("identificativoFiscaleEstero", $membro->identificativo_fiscale));
+        }
+        $xml_e_membro->appendChild(new DomElement("ragioneSociale", $membro->ragione_sociale));
+        $xml_e_membro->appendChild(new DomElement("ruolo", $ruoli_partecipanti_raggruppamento[$membro->ruolo]));
+    }
+    return $outstring;
+}
 
 
-	function write_avcp_xml_to_string($meta,$lotti_info)	
-	{
-		$outstring ='<?xml version="1.0" encoding="UTF-8" ?>' . "\n";
-		$outstring .= '<legge190:pubblicazione xsi:schemaLocation="legge190_1_0 datasetAppaltiL190.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:legge190="legge190_1_0">' . "\n";
-		$outstring .= write_avcp_metadata_tostring($meta);
-		$outstring .= indent(1) . "<data>\n";
-		
-		foreach ($lotti_info as $lotto_info)
-		{
-			$aggiudicatario=null;
-			$outstring .= write_avcp_lotto_pre_tostring($meta,$lotto_info);
-			$outstring .= indent(3) . "<partecipanti>\n";
-			if (isset($lotto_info->partecipanti["ditte"]))
-				foreach ($lotto_info->partecipanti["ditte"] as $partecipante)
-				{
-					$outstring .= write_avcp_partecipante_tostring_ditta( $partecipante);
-					if ( $partecipante->aggiudicatario != null 
-						&& $partecipante->aggiudicatario == "Y")
-					{					
-						$aggiudicatario = $partecipante;
-					}
-				}
-					
-			if (isset($lotto_info->partecipanti["raggruppamenti"]))
-				foreach ($lotto_info->partecipanti["raggruppamenti"] as $partecipante)
-				{
-					$outstring .= write_avcp_partecipante_tostring_raggruppamento( $partecipante);
-					$fk = key($partecipante);
-					if ( $partecipante[$fk] != null  &&
-						$partecipante[$fk]->aggiudicatario != null  &&
-						$partecipante[$fk]->aggiudicatario == "Y")
-					{
-						$aggiudicatario = $partecipante;
-						$aggiudicatario["tipo"]="raggruppamento";
-					}
-				}				
-			$outstring .= indent(3) . "</partecipanti>\n";
-			
-			
-			$outstring .= indent(3) . "<aggiudicatari>\n";
-			
-			if  ($aggiudicatario != null)
-			{
 
-				if (is_object($aggiudicatario))
-				{
-					$outstring .= write_avcp_partecipante_tostring_ditta( $aggiudicatario,true);
-				}
-				else
-				{
-					unset($aggiudicatario["tipo"]);
-					$outstring .= write_avcp_partecipante_tostring_raggruppamento( $aggiudicatario,true);
-				}
-			}
-			
-			$outstring .= indent(3) . "</aggiudicatari>\n";			
-			$outstring .= write_avcp_lotto_post_tostring($lotto_info);
-		}
-		$outstring .= indent(1) . "</data>\n";
-		$outstring .= '</legge190:pubblicazione>';
-		return $outstring;
-	}
-	
-	 // Test routine
-	/*
-	header ("Content-Type:text/xml");
-	/echo write_avcp_xml_to_string(array("titolo"=>"Pubblicazione n. 1", 
-										"abstract"=>"Pubblicazione n. 1 abstract",
-										"data_pubblicazione"=>"2013-05-25",
-										"data_ultimo_aggiornamento"=>"2014-01-10",
-										"ente_pubblicatore"=>"Comune di Terracina",
-										"anno"=>"2013",
-										"url"=>"http://www.comune.terracina.lt.it",
-										"licenza"=>"IODL"),array(array("cig"=>"1234568790",
-																	   "oggetto"=>"Acquisto tovaglionini",
-																	   "scelta_contraente"=>"14 - BOOO",
-																	   "codice_fiscale_proponente"=>"123123123",
-																	   "denominazione_proponente"=>"Comune di Terracina",
-																	   "importo_aggiudicazione"=>"123.54",
-																	   "importo_liquidato"=>"23.54",
-																	   "data_inizio"=>"2013/05/05",
-																	   "data_fine"=>"2013/08/05",
-																	   "partecipanti"=>array(	
-																			array("tipo"=>"ditta","nazione"=>"E","identificativo"=>"465465","ragione_sociale"=>"smartmedia"),
-																			array("tipo"=>"raggruppamento",
-																				  "membri"=>array(array("nazione"=>"I","identificativo"=>"1111","ragione_sociale"=>"ditta 1","ruolo"=>"capogruppo"),
-																								array("nazione"=>"E","identificativo"=>"222","ragione_sociale"=>"ditta 2","ruolo"=>"associata")))
-																		),
-																	    "aggiudicatari"=>array(	
-																			array("tipo"=>"ditta","nazione"=>"E","identificativo"=>"465465","ragione_sociale"=>"smartmedia"),
-																			array("tipo"=>"raggruppamento",
-																				  "membri"=>array(array("nazione"=>"I","identificativo"=>"1111","ragione_sociale"=>"ditta 1","ruolo"=>"capogruppo"),
-																								array("nazione"=>"E","identificativo"=>"222","ragione_sociale"=>"ditta 2","ruolo"=>"associata")))
-																		)
-																	   )));
-	*/
+function write_avcp_xml_to_string($meta, $lotti_info)
+{
+    $xml_doc = new DOMDocument();
+    $xml_doc->formatOutput = true;
+    $xml_e=$xml_doc->createElementNS('legge190_1_0', 'legge190:pubblicazione');
+    $xml_e->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+    $xml_e->setAttributeNS('http://www.w3.org/2001/XMLSchema-instance', 'schemaLocation', 'legge190_1_0 datasetAppaltiL190.xsd');
+    $xml_doc->appendChild($xml_e);
+    $xml_e_data = $xml_doc->createElement('data');
+    $xml_e->appendChild($xml_e_data);
+    foreach ($lotti_info as $lotto_info) {
+        $aggiudicatario=null;
+        $xml_e_lotto = $xml_doc->createElement('lotto');
+        $xml_e_data->appendChild($xml_e_lotto);
+        write_avcp_lotto_pre_tostring($meta, $lotto_info, $xml_e_lotto);
+        $xml_e_partecipanti = $xml_e_lotto->appendChild($xml_doc->createElement('partecipanti'));
+        
+        if (isset($lotto_info->partecipanti["ditte"])) {
+            foreach ($lotto_info->partecipanti["ditte"] as $partecipante) {
+                write_avcp_partecipante_tostring_ditta($partecipante, $xml_e_partecipanti);
+                if ($partecipante->aggiudicatario != null && $partecipante->aggiudicatario == "Y") {
+                    $aggiudicatario = $partecipante;
+                }
+            }
+        }
+        
+        if (isset($lotto_info->partecipanti["raggruppamenti"])) {
+            foreach ($lotto_info->partecipanti["raggruppamenti"] as $partecipante) {
+                write_avcp_partecipante_tostring_raggruppamento($partecipante, $xml_e_partecipanti);
+                $fk = key($partecipante);
+                if ($partecipante[$fk] != null  &&
+                    $partecipante[$fk]->aggiudicatario != null  &&
+                    $partecipante[$fk]->aggiudicatario == "Y") {
+                    $aggiudicatario = $partecipante;
+                    $aggiudicatario["tipo"]="raggruppamento";
+                }
+            }
+        }
+        $xml_e_aggiudicatari = $xml_e_lotto->appendChild($xml_doc->createElement('aggiudicatari'));
+
+        if ($aggiudicatario != null) {
+            if (is_object($aggiudicatario)) {
+                write_avcp_partecipante_tostring_ditta($aggiudicatario, $xml_e_aggiudicatari, true);
+            } else {
+                unset($aggiudicatario["tipo"]);
+                write_avcp_partecipante_tostring_raggruppamento($aggiudicatario, $xml_e_aggiudicatari, true);
+            }
+        }
+    }
+    return $xml_doc->saveXML();
+}
+
 ?>
