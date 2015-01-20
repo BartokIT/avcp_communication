@@ -14,8 +14,17 @@ class Control extends \Control
      */
     public function d()
     {
-        //Set default year if no year is selected
+        
         $month = (int) date("m");
+        
+        //Get the list of years to be used
+        $years=get_years_gare();
+        if ($month == 1) {
+                $years[((int)date("Y")) - 1]=((int)date("Y")) - 1;
+        }
+        $years[(int)date("Y") ]=(int)date("Y");
+        
+        //Set default year if no year is selected
         if (!isset($_SESSION["year"])) {
             if ($month == 1) {
                 $_SESSION["year"]=((int)date("Y")) - 1;
@@ -23,7 +32,16 @@ class Control extends \Control
                 $_SESSION["year"]=date("Y");
             }
         }
-                      
+        else {
+            if (!in_array($_SESSION["year"],$years)) {
+                if ($month == 1) {
+                    $_SESSION["year"]=((int)date("Y")) - 1;
+                } else {
+                    $_SESSION["year"]=date("Y");
+                }   
+            }
+        }            
+        
         $all=!!($this->user->isRole("administrator") &&
                 isset($this->_s["all"]) && $this->_s["all"]);
         
@@ -34,11 +52,8 @@ class Control extends \Control
                 $gare =get_gare($_SESSION["year"], null, $this->user->getID());
                 $view_all = "false";
         }
-        $years=get_years_gare();
-        if ($month == 1) {
-                $years[((int)date("Y")) - 1]=((int)date("Y")) - 1;
-        }
-        $years[(int)date("Y") ]=(int)date("Y");
+        
+        
         return ReturnSmarty('gare.tpl', array("year"=>$_SESSION["year"],
                                               "years"=>$years,
                                               "gare"=>$gare,
@@ -60,7 +75,7 @@ class Control extends \Control
     public function set_view_all()
     {
         if (isset($this->_r["all"])) {
-            if (strcmp($this->_r["all"],"true") == 0) {
+            if (strcmp($this->_r["all"], "true") == 0) {
                 $this->_s["all"] = true;
             } else {
                 $this->_s["all"] = false;
@@ -124,21 +139,20 @@ class Control extends \Control
     public function print_pdf()
     {
         global $contest_type;
-        global $ruoli_partecipanti_raggruppamento;	
+        global $ruoli_partecipanti_raggruppamento;
         $year = $_SESSION["year"];
         $administrator = $this->_r["all"];
         if ($administrator) {
-			$gare =get_gare($year);
+            $gare =get_gare($year);
         } else {
-			$gare =get_gare($year,null, $this->user->getID());
+            $gare =get_gare($year,null, $this->user->getID());
         }
         
-		foreach ($gare as $lotto) {
-			$lotto->partecipanti = get_partecipanti($lotto->gid);
+        foreach ($gare as $lotto) {
+            $lotto->partecipanti = get_partecipanti($lotto->gid);
 		}
-		
 		$html = <<<END
-		<html><head>
+        <html><head>
 		
 		<style type="text/css">
 
@@ -254,9 +268,8 @@ END;
 		</thead>
 		
 END;
-		$j=1;
-		foreach ($gare as $gara)
-		{
+        $j=1;
+        foreach ($gare as $gara) {
 			$count_ditte = 0; $html_partecipanti ="";
 			foreach ($gara->partecipanti["ditte"] as $partecipante)
 			{
@@ -324,4 +337,3 @@ END;
 		}
 	}
 }
-?>

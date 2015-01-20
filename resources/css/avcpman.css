@@ -581,6 +581,10 @@ h2	.help
 	margin-bottom: 10px;	
 }
 
+.avcpman .warning
+{
+    background-color: rgba(255, 243, 151, 0.86);
+}
 .avcpman .login-content .error em
 {
 	font-weight: bold;
