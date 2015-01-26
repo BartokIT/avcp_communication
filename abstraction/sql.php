@@ -19,7 +19,7 @@ $db->prefix="avcpman_";
 $db_schema=array();
 $db_schema[$db->prefix . "gara"]=array(
     "cig"=>array("type"=>"string","null"=>false),
-    "oggetto"=>array("type"=>"string","lenght"=>255,"null"=>true),
+    "oggetto"=>array("type"=>"string","lenght"=>249,"null"=>true),
 	"dummy"=>array("type"=>"string","lenght"=>1,"null"=>true),
     "scelta_contraente"=>array("type"=>"int","null"=>true),
     "importo"=>array("type"=>"numeric","null"=>true),
@@ -128,7 +128,7 @@ function build_insert_string($table,$params)
                 case "numeric":
                 case "string":
                     $column_string .= $column;
-                    $values_string .= '"'. sql_escape($table, $column, $params[$column]) . '"';
+                    $values_string .= '"'. sql_escape($table, $column, trim($params[$column])) . '"';
                     break;
                 case "date":
                     $tmp_dobj=DateTime::createFromFormat('d/m/Y',$params[$column]);

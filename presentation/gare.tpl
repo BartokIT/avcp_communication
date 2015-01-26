@@ -38,10 +38,13 @@
 						<th>Oggetto</th>
 						<th style="width: 30px;font-size: 10px;text-align: center">Partecipanti</th>
 						<th style="width: 90px;" colspan="{if $user->isRole("viewers") || $user->isRole("publisher")}1{else}4{/if}">Operazioni</th>
+                        {if $user->isRole("administrator") &&  $view_all eq "true"}
+                            <th>Utente</th>    
+                        {/if}
 					</thead>
 					<tbody>
 					{section name=gara loop=$gare}
-						<tr class="{if $gare[gara]->dummy == "Y"}dummy{/if}{if $gare[gara]->partecipanti eq 0}warning{/if}">
+						<tr class="{if $gare[gara]->dummy == "Y"}dummy{/if} {if $gare[gara]->warning}warning{/if}">
 							<td class="counter">{$smarty.section.gara.index + 1}</td>
 							<td class="subject">{$gare[gara]->oggetto}</td>
 							<td style="width: 30px;text-align: center">{$gare[gara]->partecipanti}</td>
@@ -49,8 +52,11 @@
 							{authorized roles="administrator,editor"}
 							<td class="operations-size"><a class="edit" title="Modifica" href="{urlarea area="avcpman/gare" action="edit" parameters="{$gare[gara]->gid}"}">Modifica</a></td>
 							<td class="operations-size"><a class="edit-partecipant" title="Modifica partecipanti" href="{urlarea area="avcpman/gare/edit_partecipanti"  parameters="{$gare[gara]->gid}"}">Modifica Partecipanti</a></td>
-							<td class="operations-size"><a class="delete" title="Cancella" href="{urlarea action="delete"  parameters="{$gare[gara]->gid}"}">Cancella</a></td>							
+							<td class="operations-size"><a class="delete" title="Cancella" href="{urlarea action="delete"  parameters="{$gare[gara]->gid}"}">Cancella</a></td>	                            
 							{/authorized}
+                            {if $user->isRole("administrator") &&  $view_all eq "true"}
+                            <td style="font-size: .8em">{$gare[gara]->f_user_id}</td>    
+                        {/if}
 						</tr>
 					{/section}
 					</tbody>
@@ -66,5 +72,5 @@
     <script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.11.2.min.js"></script>
 	<script src="resources/js/bootstrap-tour-standalone.min.js"></script>
-	<script src="control/reserved/avcpman/gare.js"></script>
+	<script src="control/reserved/avcpman/gare.js?v=0001"></script>
 </html>

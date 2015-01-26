@@ -52,8 +52,21 @@ class Control extends \Control
                 $gare =get_gare($_SESSION["year"], null, $this->user->getID());
                 $view_all = "false";
         }
-        
-        
+        //verifiche sui problemi relativi ad una gara
+        foreach ($gare as $gid=>$gara) {
+            $gare[$gid]->warning=false;
+            //se non ci sono partecipanti
+            if ($gara->partecipanti == 0) {
+                $gare[$gid]->warning=true;
+            }
+            if ($gara->importo > $gara->importo_liquidato) {
+                $gare[$gid]->warning=true;
+            }
+            if (is_null($gara->data_inizio) || is_null($gara->data_fine)) {
+                $gare[$gid]->warning=true;
+            }
+        }
+            
         return ReturnSmarty('gare.tpl', array("year"=>$_SESSION["year"],
                                               "years"=>$years,
                                               "gare"=>$gare,

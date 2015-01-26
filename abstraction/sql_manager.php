@@ -1,5 +1,19 @@
 <?php
 include("sql.php");
+
+function clean_currency_value($amount)
+{
+    if (preg_match("/^\d+(?:,?[0-9]{3})*(?:\.\d{0,2})?$/i", $amount, $matches))
+    {
+        $amount = str_replace(",","",$amount);
+    }
+    else if (preg_match("/^\d+(?:\.?[0-9]{3})*(?:,\d{0,2})?$/i", $amount, $matches))
+    {
+        $amount = str_replace(".","",$amount);
+        $amount = str_replace(",",".",$amount);
+    }
+    return $amount;
+}
 function execute_sql_file($id_sql_connection, $database_name, $sql_file)
 {
     $select_result = mysql_select_db($database_name, $id_sql_connection);
@@ -336,6 +350,23 @@ function is_dummy_gara_present($userid)
 	return $gare;
 }
 
+function update_dummy_gara_year($userid, $year)
+{
+	global $db;
+	
+	$userid = $db->escape($userid);
+    $year = $db->escape($year);
+	
+    //$query_string= "SELECT  g.gid " . " FROM " . $db->prefix . 'gara g WHERE g.f_user_id = "' .$userid . '" AND g.dummy = "Y"';
+    $query_string= "UPDATE " . $db->prefix . 'gara SET f_pub_anno = ' . $year . '  WHERE dummy = "Y" AND f_user_id ="' . $userid . '"';
+	$result = $db->query($query_string);
+    if ($result === false)
+	{
+		return false;
+	}
+	return true;
+}
+
 /**
  * restituisce l'insieme delle gare di un certo anno e di una determinata pubblicazione
  * */
@@ -468,6 +499,7 @@ function delete_gara($gid)
 	}
 
 }
+
 /**
  * Inserisce una nuova gara nel database
  * */
@@ -807,6 +839,11 @@ function update_aggiudicatari($gid,$pids,$transaction=true)
 	}
 }
 
+function get_gare_by_ditta($did)
+{
+    $sql = 'select * from avcpman_ditta d, avcpman_part_ditta pd, avcpman_partecipanti p, avcpman_gara g where d.did= 48 AND d.did = pd.did AND p.pid=pd.pid AND g.gid = p.gid;';
+    
+}
 function get_partecipanti($gid)
 {
     global $db;
@@ -870,6 +907,29 @@ function insert_raggruppamento($gid)
 	$db->query("COMMIT");
 	
 	return $pid;
+}
+
+function insert_or_update_user_info($id, $name=null, $access_password=null, $user_roles=null, $transaction=true)
+{
+	global $db;
+	if ($transaction)
+		$db->query("BEGIN");
+	
+    
+	//build the insert string semi-automatically
+	$sql_string = build_insert_string($db->prefix . "ditta",$data);
+	$result = $db->query("INSERT INTO " . $db->prefix . 'files 	(content, ctype,anno,numero) ' .
+						' VALUES ("' . $content . '","' . $tipo . '",' . $anno . ','. $numero . ' )');	
+	if ($transaction)
+		if ($result === FALSE)
+			$db->query("ROLLBACK");
+		else
+			$db->query("COMMIT");
+
+	if ($result)
+		return $db->insert_id;
+	else
+		return false;	
 }
 
 function delete_partecipante($pid,$type)

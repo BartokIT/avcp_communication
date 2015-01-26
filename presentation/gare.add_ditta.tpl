@@ -48,13 +48,15 @@
 			<div class="message">Inserisci nuova ditta e aggiungila alla gara</div>
                 <div class="box">
 					<label for="ditta_edit_ragione_sociale"><span>Ragione sociale</span>
-						<input type="text" id="ditta_edit_ragione_sociale" name="ditta_edit_ragione_sociale" value="{$ditta->ragione_sociale}"/><br/>
+						<input type="text" id="ditta_edit_ragione_sociale" name="ditta_edit_ragione_sociale" value="{$ditta->ragione_sociale}"/>
+                        <div class="inline-error"></div>
 					</label>
 				<div class="radio-estera-italiana">
 					{html_radios name="ditta_edit_estero" options=$estero selected=$ditta->estera separator=""}
 				</div>
 				<label for="ditta_edit_identificativo"><span>Identificativo fiscale</span>
-					<input type="text" id="ditta_edit_identificativo" name="ditta_edit_identificativo" value="{$ditta->identificativo_fiscale}"/><br/>
+					<input type="text" id="ditta_edit_identificativo" name="ditta_edit_identificativo" value="{$ditta->identificativo_fiscale}"/>
+                    <div class="inline-error"></div>
 				</label>
 				{ifarea value="avcpman/gare/edit/add_ditta_raggruppamento"}
 				    {$p['pid']=$partecipante}
@@ -76,7 +78,7 @@
 	<script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
 	<script src="control/reserved/avcpman/gare/edit/add_ditta.js"></script>
-	<script src="resources/js/support.js"></script>
+	<script src="resources/js/support.js?v=0001"></script>
 	<script src="resources/js/bootstrap-tour-standalone.min.js"></script>
-	<script src="control/reserved/avcpman/ditte/edit.js"></script>	
+	<script src="control/reserved/avcpman/ditte/edit.js?v=0001"></script>	
 </html>

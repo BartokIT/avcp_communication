@@ -31,7 +31,17 @@ $(function() {
             else
                 return false;
         }
-    }    
+    },
+    {
+        'o':$('#gare_edit_amount'),
+        'm':'Inserire un importo corretto (es. 2000.35)',
+        't':'currency'
+    },
+    {
+        'o':$('#gare_edit_payed_amount'),
+        'm':'Inserire un importo corretto (es. 2000.35)',
+        't':'currency'
+    }      
     ];
     var sButtonPressed;
     $('button').click(function() { 
@@ -65,7 +75,7 @@ $(function() {
 				steps:[
 					{   path : "index.php?area=avcpman%2Fgare"},  //step:0
 					{   //step: 1
-						element: ".box",
+						element: "#gare_edit_year",
 						title: "Inserimento dati",                        
 						content: "Tramite questa schermata potrai inserire i dati relativi ad alla nuova gara. <br/> Andando avanti verranno inseriti dei dati esemplificativi."
 					},
@@ -83,7 +93,7 @@ $(function() {
                         }                        
 					},
                     {   //step: 3
-                        path : "?gid=-1&action=submit&gare_edit_year=2014&gare_edit_cig=0000000&gare_edit_subject=Gara+di+prova&gare_edit_contest_type=1&gare_edit_amount=0&gare_edit_payed_amount=10000&gare_edit_job_start_date=01%2F01%2F2014&gare_edit_job_end_date=&dummy=dummy&submit=save&nonce=" + $("[name='nonce']").val(),
+                        path : "?gid=-1&action=submit&gare_edit_year=" + $("#gare_edit_year").val() + "&gare_edit_cig=0000000&gare_edit_subject=Gara+di+prova&gare_edit_contest_type=1&gare_edit_amount=0&gare_edit_payed_amount=10000&gare_edit_job_start_date=01%2F01%2F2014&gare_edit_job_end_date=&dummy=dummy&submit=save&nonce=" + $("[name='nonce']").val(),
                         element: ".dummy .edit-partecipant"
 					},
                     {   path : "?area=avcpman%2Fgare"},  //step:4

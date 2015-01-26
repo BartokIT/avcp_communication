@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS `avcpman_settings`;
 
 CREATE TABLE IF NOT EXISTS `avcpman_files` (
 	fid INT AUTO_INCREMENT PRIMARY KEY,
-	content BLOB,
+	content MEDIUMBLOB,
 	ctype CHAR(1),
 	numero NUMERIC,
 	anno INT(4) NOT NULL

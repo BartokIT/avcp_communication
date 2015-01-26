@@ -75,5 +75,5 @@
     <script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
     <script src="resources/js/support.js"></script>
-	<script src="control/reserved/avcpman/pubblicazioni.js"></script>
+	<script src="control/reserved/avcpman/pubblicazioni.js?v=0001"></script>
 </html>

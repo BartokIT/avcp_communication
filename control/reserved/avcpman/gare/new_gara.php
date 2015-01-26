@@ -22,7 +22,7 @@ class Control extends \Control
                 "importo_liquidato"=>0,
                 "data_inizio"=>"",
                 "data_fine"=>""),
-                  "contest_type"=>$contest_type)
+                "contest_type"=>$contest_type)
         );
     }
 
@@ -44,8 +44,8 @@ class Control extends \Control
                     $this->_r["gare_edit_cig"],
                     $this->_r["gare_edit_subject"],
                     $this->_r["gare_edit_contest_type"],
-                    $this->_r["gare_edit_amount"],
-                    $this->_r["gare_edit_payed_amount"],
+                    clean_currency_value($this->_r["gare_edit_amount"]),
+                    clean_currency_value($this->_r["gare_edit_payed_amount"]),
                     $this->_r["gare_edit_job_start_date"],
                     $this->_r["gare_edit_job_end_date"],
                     $this->user->getID(),
@@ -53,9 +53,10 @@ class Control extends \Control
                     null,
                     $dummy
                 );
+            } else {
+                update_dummy_gara_year($this->user->getID(), $this->_r["gare_edit_year"]);
             }
         }
         return ReturnArea($this->status->getSiteView(), "avcpman/gare");
     }
 }
-?>

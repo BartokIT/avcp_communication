@@ -28,7 +28,7 @@
                             <div class="inline-error"></div>
                         </label>
                         <label for="subject"><span>Oggetto</span>
-                            <input type="text"  maxlength="250" name="gare_edit_subject" id="gare_edit_subject" value="{$gara->oggetto}"/>
+                            <input type="text"  maxlength="240" name="gare_edit_subject" id="gare_edit_subject" value="{$gara->oggetto}"/>
                             <div class="inline-error"></div>
                         </label>
                         <label for="contest_type"><span>Tipo di contraente</span>
@@ -68,8 +68,8 @@
     <script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
     <script src="resources/js/datepicker-it.js"></script>
-    <script src="resources/js/support.js"></script>
+    <script src="resources/js/support.js?v=0003"></script>
     <script src="resources/js/bootstrap-tour-standalone.min.js"></script>
-	<script src="control/reserved/avcpman/gare/new_gara.js"></script>
+	<script src="control/reserved/avcpman/gare/new_gara.js?v=0003"></script>
     
 </html>

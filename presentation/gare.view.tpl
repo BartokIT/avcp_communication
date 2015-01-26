@@ -47,7 +47,7 @@
 							<td>{$indice++}</td>
 							<td>{$ditta->ragione_sociale}</td>
 							<td>{$ditta->identificativo_fiscale}</td>
-							<td><input type="radio" name="aggiudicatario" value="{$ditta->pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{else} disabled="disabled"{/if}/></td>
+							<td><input type="checkbox" name="aggiudicatario" value="{$ditta->pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{else} disabled="disabled"{/if}/></td>
 						</tr>
 					{/foreach}
 					{foreach $partecipanti["raggruppamenti"] as $pid=>$rpartecipanti}

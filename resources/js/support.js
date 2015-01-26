@@ -39,7 +39,14 @@
 			var test2 =  /^[A-Za-z]{6}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{3}[A-Za-z]{1}$/i.test(s);
 			var test3 =  /^[0-9]{11,11}$/i.test(s);
 			return test1 || test2 || test3;
-		}
+		},
+        'currency' : function(s)
+        {
+            
+            var test1 = /^\d+(?:,?[0-9]{3})*(?:\.\d{0,2})?$/i.test(s);
+            var test2 = /^\d+(?:\.?[0-9]{3})*(?:,\d{0,2})?$/i.test(s);
+            return test1 || test2;
+        }
 	};
 	
     validateElements = function(s) {

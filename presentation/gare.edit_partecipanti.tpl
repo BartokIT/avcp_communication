@@ -107,7 +107,7 @@
 	<script src="resources/js/jquery-1.10.2.js"></script>
     <script src="resources/js/bootstrap-tour-standalone.js"></script>
 	<script>
-		$(function(){
+		$(function(){            
 			var oTour = new Tour({
 				steps:[
 					{   path : "?area=avcpman%2Fgare"},  //step:0
@@ -156,13 +156,14 @@
 					{   path : $(".add-ditta-raggruppamento:first").attr("href")},  //step:10
 					{   path : $(".add-ditta-raggruppamento:first").attr("href")},  //step:11
 					{	//step: 12
-						element: "[name='aggiudicatario']:first",
+						element: "[name='aggiudicatario\\[\\]']:first",
 						title: "Aggiudicatario",
 						reflex: true,
-						content:"Ora &egrave; necessario specificare un aggiudicatario per la gara, selezionalo premendo sul pallino.",						
+                        placement: 'top',
+						content:"Ora &egrave; necessario specificare un aggiudicatario per la gara, selezionalo premendo sul quadrato.",						
 						onNext: function(tour)
 						{
-							tour._options.steps[14].path = '?action=save&submit=save&aggiudicatario=' + $("input[name='aggiudicatario']:checked").val() + '&pid=' + $("input[name='pid']").val()+ '&gid='+$("input[name='gid']").val() + "&nonce=" + $("input[name='nonce']").val();
+							tour._options.steps[14].path = '?action=save&submit=save&aggiudicatario[]=' + $("input[name='aggiudicatario\\[\\]']:checked:first").val() + '&pid=' + $("input[name='pid']").val()+ '&gid='+$("input[name='gid']").val() + "&nonce=" + $("input[name='nonce']").val();
 						}
 					},
 					{	//step: 13
@@ -172,7 +173,7 @@
 						content: "Premere sul pulsante 'Salva' per salvare la scelta dell'aggiudicatario",
 						onShown: function (tour)
 						{
-							if ($("[name='aggiudicatario']:first:checked").length < 1 )
+							if ($("[name='aggiudicatario\\[\\]']:first:checked").length < 1 )
 							{
 								tour.prev();
 							}

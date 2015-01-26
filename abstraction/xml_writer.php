@@ -49,21 +49,27 @@ function write_avcp_lotto_pre_tostring($meta, $lotto_info, $xml_e)
 */
 function write_avcp_lotto_post_tostring($lotto_info, $xml_e)
 {
-
-    $xml_e->appendChild(new DomElement("importoAggiudicazione"))->appendChild(new DOMText($lotto_info->importo));
+    $importLiquidato = 0;
+    $importoAggiudicato = 0;
+    if ($lotto_info->importo != "") {
+        $importoAggiudicato  = $lotto_info->importo;
+    }
+    $xml_e->appendChild(new DomElement("importoAggiudicazione"))->appendChild(new DOMText($importoAggiudicato));
     $xml_e_tempi = new DomElement("tempiCompletamento");
     $xml_e->appendChild($xml_e_tempi);
     if (!(is_null($lotto_info->data_inizio)  || trim($lotto_info->data_inizio) == '')) {
         $tmp_inizio=DateTime::createFromFormat('d/m/Y', $lotto_info->data_inizio);
-        $outstring .=indent(4) ."<dataInizio>" .  $tmp_inizio->format("Y-m-d") . "</dataInizio>\n";
         $xml_e_tempi->appendChild(new DomElement("dataInizio"))->appendChild(new DOMText($tmp_inizio->format("Y-m-d")));
     }
     if (!(is_null($lotto_info->data_fine)  || trim($lotto_info->data_fine) == '')) {
         $tmp_completamento=DateTime::createFromFormat('d/m/Y', $lotto_info->data_fine);
-        $outstring .=indent(4) . "<dataUltimazione>" . $tmp_completamento->format("Y-m-d") . "</dataUltimazione>\n";
         $xml_e_tempi->appendChild(new DomElement("dataUltimazione"))->appendChild(new DOMText($tmp_completamento->format("Y-m-d")));
     }
-    $xml_e->appendChild(new DomElement("importoSommeLiquidate"))->appendChild(new DOMText($lotto_info->importo_liquidato));
+    
+    if ($lotto_info->importo_liquidato != "") {
+        $importLiquidato  = $lotto_info->importo_liquidato;
+    }
+    $xml_e->appendChild(new DomElement("importoSommeLiquidate"))->appendChild(new DOMText($importLiquidato));
 
 }
 
@@ -107,7 +113,7 @@ function write_avcp_partecipante_tostring_raggruppamento($partecipante_info, $xm
             $xml_e_membro->appendChild(new DomElement("identificativoFiscaleEstero", $membro->identificativo_fiscale));
         }
         $xml_e_membro->appendChild(new DomElement("ragioneSociale", $membro->ragione_sociale));
-        $xml_e_membro->appendChild(new DomElement("ruolo", $ruoli_partecipanti_raggruppamento[$membro->ruolo]));
+        $xml_e_membro->appendChild(new DomElement("ruolo", sprintf('%02d', $membro->ruolo) . "-".$ruoli_partecipanti_raggruppamento[$membro->ruolo]));
     }
 
 }
