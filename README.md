@@ -7,4 +7,5 @@ Le caratteristiche salienti sono:
 - multi-utenza indipendente
 - presenza di più ruoli 
 - integrazione con LPDAP / Active Directory
+- autenticazione via LDAP o database
 - memorizzazione di più versioni dei file xml
