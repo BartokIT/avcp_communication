@@ -24,7 +24,17 @@ class Control extends \Control
             else
             {
 				
-			    return ReturnSmarty('pubblicazione.edit.tpl',array("anno"=>$anno,"titolo"=>"","abstract"=>"","numero"=>-1,"data_aggiornamento"=>date("d/m/Y"),"data_pubblicazione"=>date("d/m/Y"),"url"=>$settings["prefisso_url"]));
+			    return ReturnSmarty('pubblicazione.edit.tpl',
+                                    array(
+                                        "anno"=>$anno,
+                                        "titolo"=>"",
+                                        "abstract"=>"",
+                                        "numero"=>-1,
+                                        "data_aggiornamento"=>date("d/m/Y"),
+                                        "data_pubblicazione"=>date("d/m/Y"),
+                                        "url"=>$settings["prefisso_url"] .$anno . ".xml"
+                                    )
+                                   );
 			}
         }
         else
@@ -65,8 +75,14 @@ class Control extends \Control
 				$pubblicazione->ente_pubblicatore = $settings["ente"];
 				$pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
 				$content = write_avcp_xml_to_string($pubblicazione, $lotti);
-				
-				insert_file($content,"P",$anno,$pid);
+				$name="avcp_" . $anno . "_" . $pid . ".xml";
+                preg_match('@^(?:https?://)?(?:[^/]+/)+([^/]+)@i',$pubblicazione->url, $matches);
+                if (count($matches) == 2)
+                {
+                    $name = $matches[1];
+                }
+                
+				insert_file($content, "P", $anno, $pid, $name);
 			}
         }
         return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");

@@ -222,7 +222,7 @@ function get_pubblicazione_detail($anno,$numero)
 {
 	global $db;
 
-	$publication = $db->get_row("SELECT p.numero, p.anno, p.titolo, p.abstract, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione,DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento,p.url FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno AND p.numero = $numero");
+	$publication = $db->get_row("SELECT p.numero, p.anno, p.titolo, p.abstract, DATE_FORMAT(p.data_pubblicazione,'%d/%m/%Y') as data_pubblicazione,DATE_FORMAT(p.data_aggiornamento,'%d/%m/%Y') as data_aggiornamento, p.url FROM " . $db->prefix . "pubblicazione p WHERE p.anno = $anno AND p.numero = $numero");
  
 	if ($publication == NULL)
 		return array();
@@ -1206,7 +1206,7 @@ function set_settings($keys_value=array())
  * Inserisce un file nel database
  * */
 
-function insert_file($content,$tipo,$anno,$numero=NULL,$transaction=true)
+function insert_file($content,$tipo,$anno,$numero=NULL,$filename=NULL,$transaction=true)
 {
 	global $db;
 	if ($transaction)
@@ -1215,9 +1215,9 @@ function insert_file($content,$tipo,$anno,$numero=NULL,$transaction=true)
 	$data=sql_create_array(__FUNCTION__,func_get_args());
 	$content = $db->escape($content);
 	//build the insert string semi-automatically
-	$sql_string = build_insert_string($db->prefix . "ditta",$data);
-	$result = $db->query("INSERT INTO " . $db->prefix . 'files 	(content, ctype,anno,numero) ' .
-						' VALUES ("' . $content . '","' . $tipo . '",' . $anno . ','. $numero . ' )');	
+	//$sql_string = build_insert_string($db->prefix . "ditta",$data);
+	$result = $db->query("INSERT INTO " . $db->prefix . 'files 	(content, ctype, anno, numero, filename) ' .
+						' VALUES ("' . $content . '","' . $tipo . '",' . $anno . ','. $numero . ',"' . $filename . '")');	
 	if ($transaction)
 		if ($result === FALSE)
 			$db->query("ROLLBACK");
@@ -1231,6 +1231,21 @@ function insert_file($content,$tipo,$anno,$numero=NULL,$transaction=true)
 }
 
 
+function get_file_filename($fid)
+{
+    global $db;
+	//build the insert string semi-automatically
+	$result = $db->get_row('SELECT f.filename FROM ' . $db->prefix . 'files f WHERE f.fid = ' . $fid  );	
+
+	if ($result)
+	{
+		return $result->filename;
+	}
+	else
+	{
+		return false;
+	}
+}
 function get_file($fid)
 {
 	global $db;
@@ -1247,6 +1262,22 @@ function get_file($fid)
 	}
 }
 
+
+function get_last_filename($anno,$numero)
+{
+	global $db;
+	//build the insert string semi-automatically
+	$result = $db->get_row('SELECT f.filename FROM ' . $db->prefix . 'files f INNER JOIN (SELECT MAX(fid) as maxfid FROM ' . $db->prefix . 'files  WHERE anno = ' . $anno . ' AND numero = ' . $numero . ' ) f1 on (f.fid = f1.maxfid) WHERE f.anno = ' . $anno . ' AND f.numero = ' . $numero );	
+
+	if ($result)
+	{
+		return $result->filename;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 function get_last_file($anno,$numero)
 {

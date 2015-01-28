@@ -106,21 +106,9 @@ class Control extends \Control
         {
             $anno = $this->_r["anno"];
             $numero = $this->_r["numero"];
-            /*
-			$settings = get_settings(array("cf_ente","ente","licenza"));
-            $pubblicazione = get_pubblicazione_detail($anno,$numero);
-            $lotti = get_gare($anno,$numero);
-            foreach ($lotti as $lotto)
-            {
-                $lotto->partecipanti = get_partecipanti($lotto->gid);
-            }
-            
-            $pubblicazione->licenza = $settings["licenza"];
-            $pubblicazione->ente_pubblicatore = $settings["ente"];
-            $pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
-            */
+            $filename = get_last_filename($anno, $numero);
             return new \ReturnedFile('get_last_file',array($anno, $numero),
-                                     'avcp_' .$anno . '_' . $numero,"text/xml");
+                                     $filename ,"text/xml");
         }
         else
         {

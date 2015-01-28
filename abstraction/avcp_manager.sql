@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `avcpman_files` (
 	content MEDIUMBLOB,
 	ctype CHAR(1),
 	numero NUMERIC,
+    name VARCHAR(1024),
 	anno INT(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene i files prodotti';
 
@@ -101,17 +102,16 @@ CREATE TABLE IF NOT EXISTS `avcpman_raggruppamento` (
 	CONSTRAINT fk_rag_part FOREIGN KEY (pid) REFERENCES avcpman_partecipanti (pid),
 	CONSTRAINT fk_rag_ditta FOREIGN KEY (did) REFERENCES avcpman_ditta (did)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sui raggruppamenti di ditte';
-
- 
-
+b
 CREATE TABLE `avcpman_users` (
   id varchar(255) NOT NULL,
   name varchar(255) DEFAULT NULL,
   access_password varchar(255) DEFAULT NULL,
   user_roles VARCHAR(255) DEFAULT NULL,
+    filename VARCHAR(1024) 
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Contiene le informazioni sugli utenti';
-INSERT INTO `avcpman_users` VALUES ('administrator','Utente amministratore','cae3b8895e675a9e38aa9e91b41e82ec4c91e9ba','administrator');
+INSERT INTO `avcpman_users` VALUES ('administrator','Utente amministratore','$2y$10$k8MM746TrhQCyZEUw7fTA.u0YsYx8WZJMkF5HGGW.R3TK0l582Yx6','administrator');
 INSERT INTO `avcpman_ditta` (`did`, `ragione_sociale`, `estera`, `dummy`, `identificativo_fiscale`) VALUES(1, 'Comune di Terracina', 'N', NULL, '00246180590');
 INSERT INTO `avcpman_ditta` (`did`, `ragione_sociale`, `estera`, `dummy`, `identificativo_fiscale`) VALUES(2, 'Ditta Fantasma', 'Y', 'Y', '12345678912');
 INSERT INTO `avcpman_settings` (`skey`, `svalue`) VALUES('ente', '');

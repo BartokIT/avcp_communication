@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Represente an user that access to the application
@@ -306,7 +306,7 @@ class State implements Serializable {
 	}
 	
 	/**
-     * Controlla se � possibile uscire incondizionatamente dallo stato in questione
+     * Controlla se è possibile uscire incondizionatamente dallo stato in questione
      * @return boolean <strong>true</strong> se e' possibile uscirne/<strong>false</strong> altrimenti
      */
 	public function isSkippable()
@@ -621,7 +621,3 @@ final class Access
 		return "$this->roles";
 	}
 }
-
-
-
-?>

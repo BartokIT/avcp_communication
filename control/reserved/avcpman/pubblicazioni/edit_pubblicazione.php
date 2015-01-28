@@ -52,8 +52,16 @@ class Control extends \Control
 				$pubblicazione->licenza = $settings["licenza"];
 				$pubblicazione->ente_pubblicatore = $settings["ente"];
 				$pubblicazione->cf_ente_pubblicatore = $settings["cf_ente"];
+                $name="avcp_" . $anno . "_" . $numero . ".xml";
+                preg_match('@^(?:https?://)?(?:[^/]+/)+([^/]+)@i',$pubblicazione->url, $matches);
+                if (count($matches) == 2)
+                {
+                    $name = $matches[1];
+                }
+                
+                    
 				$content = write_avcp_xml_to_string($pubblicazione, $lotti);
-				insert_file($content,"P",$anno,$numero);
+				insert_file($content,"P",$anno,$numero,$name);
 				set_modified_bit_pubblicazione($anno,0);
 			}            
         }

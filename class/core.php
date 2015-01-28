@@ -103,15 +103,53 @@ class MainFlow
     **/
     public function configure_flow($c)
     {
-        if (count($c) > 0)
-        {
+        if (count($c) > 0) {
             $this->configuration=array_merge($this->configuration,$c[0]);
         }
         
         $this->configuration["init_status"]=new State($this->configuration["init_status"]["site_view"],
                                                 $this->configuration["init_status"]["area"]);
-        
+        $ldap = null;                
+        $sql = null;
         $this->configuration = (object)$this->configuration;
+        if ($this->configuration->authentication["authenticator"] == 'ldap' || 
+            $this->configuration->authentication["userinforetriever"] == 'ldap'
+           ) {
+             $ldap=new LDAPAuthentication(
+                 $this->configuration->ldap['host'],
+                 $this->configuration->ldap['port'],
+			     $this->configuration->ldap['root_dn'],
+			     $this->configuration->ldap['root_dn_password'],
+			     $this->configuration->ldap['base_dn'],
+			     $this->configuration->ldap['id_attribute'],
+			     $this->configuration->ldap['filter']
+             );            
+        }
+        
+         if ($this->configuration->authentication["authenticator"] == 'sql') {
+             global $db;        
+             $sql=new SQLAuthentication($db);
+            
+        }
+        
+        if ($this->configuration->authentication["authenticator"] == 'ldap') {
+            $this->configuration->authentication["authenticator"]= $ldap;
+        } else if ($this->configuration->authentication["authenticator"] == 'sql') {
+            $this->configuration->authentication["authenticator"]= $sql;
+        }
+        
+        if ($this->configuration->authentication["userinforetriever"] == 'ldap') {
+            $this->configuration->authentication["userinforetriever"]= $ldap;
+        } else if ($this->configuration->authentication["userinforetriever"] == 'sql') {
+            $this->configuration->authentication["userinforetriever"]= $sql;
+        }
+        if ($this->configuration->authentication["rolemapper"] == 'simple') {
+           $this->configuration->authentication["rolemapper"] = new SimpleUserRoleMapper(
+               $this->configuration->ldap_mapper["users"],
+               $this->configuration->ldap_mapper["groups"]
+           );
+        }
+        
         
         //if specified use a login status
         if (!is_null($this->configuration->login_status))
@@ -123,14 +161,14 @@ class MainFlow
         if (is_array($this->configuration->debug))
         {
             if (isset($this->configuration->debug["framework"]))
-                define("DEBUG",$this->configuration->debug["framework"]);
+                define("DEBUG", $this->configuration->debug["framework"]);
             else
-                define("DEBUG",false);
+                define("DEBUG", false);
                 
             if (isset($this->configuration->debug["smarty"]))
-                define("DEBUG_SMARTY",$this->configuration->debug["smarty"]);
+                define("DEBUG_SMARTY", $this->configuration->debug["smarty"]);
             else
-                define("DEBUG_SMARTY",false);
+                define("DEBUG_SMARTY", false);
         }
         else
         {

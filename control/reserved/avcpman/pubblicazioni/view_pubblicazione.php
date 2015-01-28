@@ -28,9 +28,9 @@ class Control extends \Control
         if (isset($this->_r["fid"]))
         {
             $fid = $this->_r["fid"];
-
+            $filename=get_file_filename($fid);
             return new \ReturnedFile('get_file',array($fid),
-                                     'avcp_' .$fid,"text/xml");			
+                                     $filename,"text/xml");			
         }
         else
         {

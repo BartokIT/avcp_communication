@@ -154,7 +154,7 @@ class Control extends \Control
         global $contest_type;
         global $ruoli_partecipanti_raggruppamento;
         $year = $_SESSION["year"];
-        $administrator = $this->_r["all"];
+        $administrator = @$this->_s["all"];
         if ($administrator) {
             $gare =get_gare($year);
         } else {
@@ -172,8 +172,7 @@ class Control extends \Control
 body {
 	font-family: sans-serif;
 	font-size: 13px;
-	text-align: center;
-	
+	text-align: center;	
 }
 
 

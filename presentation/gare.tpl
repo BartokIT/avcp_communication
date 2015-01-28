@@ -46,7 +46,7 @@
 					{section name=gara loop=$gare}
 						<tr class="{if $gare[gara]->dummy == "Y"}dummy{/if} {if $gare[gara]->warning}warning{/if}">
 							<td class="counter">{$smarty.section.gara.index + 1}</td>
-							<td class="subject">{$gare[gara]->oggetto}</td>
+							<td class="subject">{$gare[gara]->oggetto} - <strong>{$gare[gara]->cig}</strong></td>
 							<td style="width: 30px;text-align: center">{$gare[gara]->partecipanti}</td>
 							<td class="operations-size"><a class="zoom" title="Visualizza dettaglio gara" href="{urlarea area="avcpman/gare" nonce="false" action="view" parameters="{$gare[gara]->gid}"}">Visualizza dettaglio</a></td>
 							{authorized roles="administrator,editor"}

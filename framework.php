@@ -13,8 +13,11 @@ require_once(LIB_PATH . 'Smarty/Smarty.class.php');
 require_once "class/dataobjects.php";
 include_once("class/returned_object.php");
 include_once("class/core.php");
-include ("abstraction/authentication.php");
+
 include("config.php");
+include ("abstraction/authentication/authentication.php");
+include ("abstraction/authentication/authentication_LDAP.php");
+include ("abstraction/authentication/authentication_SQL.php");
 include ("abstraction/sql_manager.php");
 include ("abstraction/xml_writer.php");
 /*
