@@ -1,0 +1,2191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<legge190:pubblicazione xsi:schemaLocation="legge190_1_0 datasetAppaltiL190.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:legge190="legge190_1_0">
+	<metadata>
+	<titolo> Pubblicazione 1 legge 190</titolo>
+	<abstract> Pubblicazione 1 legge 190 anno 1 rif. 2010 aggiornamento del 2014-01-29 12:34:04</abstract>
+	<dataPubbicazioneDataset>2014-01-31</dataPubbicazioneDataset>
+	<entePubblicatore>Comune di Terracina</entePubblicatore>
+	<dataUltimoAggiornamentoDataset>2014-01-29</dataUltimoAggiornamentoDataset>
+	<annoRiferimento>2013</annoRiferimento><urlFile>http://www.comune.terracina.lt.it/190/appalti2013.xml</urlFile>
+
+	<licenza>IODL 2.0</licenza>
+	</metadata>
+<data>
+<lotto>
+<cig>5044003AF1</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>manutenzione sw CIVILIA OPEN</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01763870225</codiceFiscale>
+<ragioneSociale>DEDAGROUP S.P.A.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01763870225</codiceFiscale>
+<ragioneSociale>DEDAGROUP S.P.A.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>40188.64</importoAggiudicazione><tempiCompletamento><dataInizio>2013-01-01</dataInizio><dataUltimazione>2013-12-31</dataUltimazione></tempiCompletamento><importoSommeLiquidate>40188.64</importoSommeLiquidate></lotto>
+<lotto>
+<cig>48453930CC</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Lav. somma urgenza per la mitigaz. del rischio caduta massi  dissesto idrog. del versante occid. del Monte Cucca</oggetto>
+<sceltaContraente>17-AFFIDAMENTO DIRETTO EX ART. 5 DELLA LEGGE N.381/91</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>09140311003</codiceFiscale>
+<ragioneSociale>Ditta M.S. Costruzioni srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>09140311003</codiceFiscale>
+<ragioneSociale>Ditta M.S. Costruzioni srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>331768.17</importoAggiudicazione><tempiCompletamento><dataInizio>2012-12-20</dataInizio><dataUltimazione>2013-03-20</dataUltimazione></tempiCompletamento><importoSommeLiquidate>200000.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>47480739C8</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Affidamento dei servizi cimiteriali di manutenzione, inumazioni, esumazioni, tumulazioni, etc. per l'anno 2013</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>07389801213</codiceFiscale>
+<ragioneSociale>Ditta Paradiso srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>03417500612</codiceFiscale>
+<ragioneSociale>Ditta A.P.S.  Solare srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>03041420617</codiceFiscale>
+<ragioneSociale>Ditta Ser.Cim srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>07389801213</codiceFiscale>
+<ragioneSociale>Ditta Paradiso srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>94798.80</importoAggiudicazione><tempiCompletamento><dataInizio>2013-01-01</dataInizio><dataUltimazione>2013-12-31</dataUltimazione></tempiCompletamento><importoSommeLiquidate>94798.80</importoSommeLiquidate></lotto>
+<lotto>
+<cig>4766312516</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Lavori di manutenzione straordinaria dei cimiteri comunali - 2° stralcio funzionale</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>00113041008</codiceFiscale>
+<ragioneSociale>Ditta Candida Pio</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>08366821000</codiceFiscale>
+<ragioneSociale>Ditta Gemini Appalti SRL</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>00113041008</codiceFiscale>
+<ragioneSociale>Ditta Candida Pio</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>109206.75</importoAggiudicazione><tempiCompletamento><dataInizio>2013-03-18</dataInizio><dataUltimazione>2013-07-12</dataUltimazione></tempiCompletamento><importoSommeLiquidate>124183.53</importoSommeLiquidate></lotto>
+<lotto>
+<cig>51396079DC</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Lavori di rifacimento segnaletica orizzontale e verticale parcheggio a pagamento</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01936100609</codiceFiscale>
+<ragioneSociale>Ditta 3 S Società Servizi Stradali e Aziendali srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>05633051007</codiceFiscale>
+<ragioneSociale>Ditta Sovrappalti srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01936100609</codiceFiscale>
+<ragioneSociale>Ditta 3 S Società Servizi Stradali e Aziendali srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>22882.92</importoAggiudicazione><tempiCompletamento><dataInizio>2013-06-19</dataInizio><dataUltimazione>2013-08-20</dataUltimazione></tempiCompletamento><importoSommeLiquidate>22882.92</importoSommeLiquidate></lotto>
+<lotto>
+<cig>464974749B</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Servizio di Nettezza Urbana, raccolta e trasporto dei rifiuti urbani rd assimilati compresi gli oneri di smaltimento ed altri servizi connessi</oggetto>
+<sceltaContraente>01-PROCEDURA APERTA</sceltaContraente>
+<partecipanti>
+<raggruppamento>
+<membro>
+<codiceFiscale>03757510015</codiceFiscale>
+<ragioneSociale>Ditta Costituenda De Vizia Treansfer spa n.2</ragioneSociale>
+<ruolo>02-MANDATARIA</ruolo></membro>
+<membro>
+<identificativoFiscaleEstero>A79524057</identificativoFiscaleEstero><ragioneSociale>Ditta Urbaser n.1</ragioneSociale>
+<ruolo>01-MANDANTE</ruolo></membro>
+</raggruppamento>
+<partecipante>
+<codiceFiscale>02063730598</codiceFiscale>
+<ragioneSociale>Ditta Servizi Industriali srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>04749820652</codiceFiscale>
+<ragioneSociale>Ditta A.M. Tecnology</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01368180129</codiceFiscale>
+<ragioneSociale>Ditta Econord spa</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02063730598</codiceFiscale>
+<ragioneSociale>Ditta Servizi Industriali srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>43836741.60</importoAggiudicazione><tempiCompletamento><dataInizio>2013-07-12</dataInizio><dataUltimazione>2019-07-11</dataUltimazione></tempiCompletamento><importoSommeLiquidate>1019984.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>5037375D57</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Servizio di fornitura dei presidi antincendio presso edifici comunali</oggetto>
+<sceltaContraente>01-PROCEDURA APERTA</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02874630615</codiceFiscale>
+<ragioneSociale>Ditta  Antrincendio Faella srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01883620568</codiceFiscale>
+<ragioneSociale>Ditta Centro Anticicendio Viterbese srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02429470541</codiceFiscale>
+<ragioneSociale>Ditta Aliservice Soc. Coop di Servizi</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>03288741212</codiceFiscale>
+<ragioneSociale>Ditta Antincendio Oplonti</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01750131003</codiceFiscale>
+<ragioneSociale>Ditta Blitz Antincendio</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>12647740153</codiceFiscale>
+<ragioneSociale>Ditta Ciodue Spa</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>10335641006</codiceFiscale>
+<ragioneSociale>Ditta Pim Antincendio</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01442190854</codiceFiscale>
+<ragioneSociale>Ditta Di Marca Service srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02874630615</codiceFiscale>
+<ragioneSociale>Ditta  Antrincendio Faella srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>17056.30</importoAggiudicazione><tempiCompletamento><dataInizio>2013-07-25</dataInizio><dataUltimazione>2013-07-29</dataUltimazione></tempiCompletamento><importoSommeLiquidate>17056.30</importoSommeLiquidate></lotto>
+<lotto>
+<cig>507687736F</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Adeguamento del sistema informativo comunale</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01763870225</codiceFiscale>
+<ragioneSociale>DEDAGROUP S.P.A.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01763870225</codiceFiscale>
+<ragioneSociale>DEDAGROUP S.P.A.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>158928.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-04-18</dataInizio></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z830995EE2</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Manutenzione sistema controllo accessi e rilevazione presenze</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01763870225</codiceFiscale>
+<ragioneSociale>DEDAGROUP S.P.A.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01763870225</codiceFiscale>
+<ragioneSociale>DEDAGROUP S.P.A.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>16398.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-01-01</dataInizio><dataUltimazione>2015-12-31</dataUltimazione></tempiCompletamento><importoSommeLiquidate>5466.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZB90930A04</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>fornitura di servizi di assistenza e formazione su applicativi CIVILIA da parte della soc. DEDAGROUP</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01763870225</codiceFiscale>
+<ragioneSociale>DEDAGROUP S.P.A.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01763870225</codiceFiscale>
+<ragioneSociale>DEDAGROUP S.P.A.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>29404.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-02-14</dataInizio></tempiCompletamento><importoSommeLiquidate>12482.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>54411524AC</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Fornitura gasolio impianti termici di proprietà comunale</oggetto>
+<sceltaContraente>06-PROCEDURA NEGOZIATA SENZA PREVIA INDIZIONE DI GARA ART. 221 D.LGS. 163/2006</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>98585501001</codiceFiscale>
+<ragioneSociale>Petrolcave srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>98585501001</codiceFiscale>
+<ragioneSociale>Petrolcave srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>86065.57</importoAggiudicazione><tempiCompletamento><dataInizio>2013-11-26</dataInizio><dataUltimazione>2014-12-31</dataUltimazione></tempiCompletamento><importoSommeLiquidate>12553.06</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZBB09CEC2A</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Lavori di bonifica del sito in Terracina in via Appia  Loc.Morelle</oggetto>
+<sceltaContraente>01-PROCEDURA APERTA</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02628000602</codiceFiscale>
+<ragioneSociale>Soc. C. R.M. I. srl Unipersonale</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>03347831210</codiceFiscale>
+<ragioneSociale>Ditta Ecosystem srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>MGRMRK74A30H64FB</codiceFiscale>
+<ragioneSociale>Ditta Magrin Mirko</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02628000602</codiceFiscale>
+<ragioneSociale>Soc. C. R.M. I. srl Unipersonale</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>16000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-07-29</dataInizio><dataUltimazione>2013-09-16</dataUltimazione></tempiCompletamento><importoSommeLiquidate>16000.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>224086DC2A</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Realizzazione isola ecologica nell'area ex depuratore via pantani da Basso -1 stralcio</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02543390591</codiceFiscale>
+<ragioneSociale>Ditta Geom. Iannizzi Corrado Costruzioni Edili</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02538670593</codiceFiscale>
+<ragioneSociale>Ditta R.G.M.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02543390591</codiceFiscale>
+<ragioneSociale>Ditta Geom. Iannizzi Corrado Costruzioni Edili</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>28779.91</importoAggiudicazione><tempiCompletamento><dataInizio>2013-02-27</dataInizio><dataUltimazione>2013-04-03</dataUltimazione></tempiCompletamento><importoSommeLiquidate>28779.72</importoSommeLiquidate></lotto>
+<lotto>
+<cig>50964267C6</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Lavori di messa in sicurezza banchina Lungolinea Pio VI</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>03547870612</codiceFiscale>
+<ragioneSociale>Ditta Ener Sud srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02506290606</codiceFiscale>
+<ragioneSociale>Ditta C.S.C. di Roma</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01204190662</codiceFiscale>
+<ragioneSociale>Ditta Codisab srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>03547870612</codiceFiscale>
+<ragioneSociale>Ditta Ener Sud srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>131155.32</importoAggiudicazione><tempiCompletamento><dataInizio>2013-06-10</dataInizio><dataUltimazione>2013-12-08</dataUltimazione></tempiCompletamento><importoSommeLiquidate>119600.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>5144124968</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Realizzazione isola ecologica nell'area ex depuratore via pantani da Basso -2 stralcio</oggetto>
+<sceltaContraente>01-PROCEDURA APERTA</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02508130602</codiceFiscale>
+<ragioneSociale>Ditta Esseci srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>11031341008</codiceFiscale>
+<ragioneSociale>Ditta MC Appalti</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02516640592</codiceFiscale>
+<ragioneSociale>Imp. Gianfranco Molinaro srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02018750592</codiceFiscale>
+<ragioneSociale>Ditta Edlizia D'urso sas</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>08366821000</codiceFiscale>
+<ragioneSociale>Ditta Gemini Appalti SRL</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>00266190594</codiceFiscale>
+<ragioneSociale>Ditta Cimino Giuseppe</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>04346961214</codiceFiscale>
+<ragioneSociale>Ditta Creart Intonaci srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02369520594</codiceFiscale>
+<ragioneSociale>Ditta Liso Picozza srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>03456740616</codiceFiscale>
+<ragioneSociale>Ditta Vigliotti Costruzioni srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02442640609</codiceFiscale>
+<ragioneSociale>Ditta GP di Paolo Graziani srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>09138941001</codiceFiscale>
+<ragioneSociale>Ditta SO.S.L. Edil srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02506290606</codiceFiscale>
+<ragioneSociale>Ditta C.S.C. di Roma</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02543390591</codiceFiscale>
+<ragioneSociale>Ditta Geom. Iannizzi Corrado Costruzioni Edili</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>06801281004</codiceFiscale>
+<ragioneSociale>Ditta Geopan srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>06379911214</codiceFiscale>
+<ragioneSociale>Ditta Troiano &amp; Cariello srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02219900590</codiceFiscale>
+<ragioneSociale>D.F.C. Costruzioni srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02738000609</codiceFiscale>
+<ragioneSociale>Ditta edil G.I. di iacoucci Giuseppe</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>03262651213</codiceFiscale>
+<ragioneSociale>Ditta Sa.Co.Gen.  Srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>08449391005</codiceFiscale>
+<ragioneSociale>Ditta Emi.Ro Appalti srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01742030594</codiceFiscale>
+<ragioneSociale>Ditta Gif costruzioni srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02088440595</codiceFiscale>
+<ragioneSociale>Ditta Lorella Costruzioni srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>03346560612</codiceFiscale>
+<ragioneSociale>Ditta Costruzioni Genreali Maisto srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02278850595</codiceFiscale>
+<ragioneSociale>Ditta Acos srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>00292030590</codiceFiscale>
+<ragioneSociale>Impresa Magliozzi Bruno Saverio</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>10036651007</codiceFiscale>
+<ragioneSociale>I.G.C. Costruzioni srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>05958000639</codiceFiscale>
+<ragioneSociale>Ditta ge.Co. Costruzioni srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>00723660593</codiceFiscale>
+<ragioneSociale>Ditta Costruzioni Mastruzzo srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02444070607</codiceFiscale>
+<ragioneSociale>Impresa Global srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01332150596</codiceFiscale>
+<ragioneSociale>Ditta Iris srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>05273650589</codiceFiscale>
+<ragioneSociale>Impresa Marino e Figli srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>05402111214</codiceFiscale>
+<ragioneSociale>Impresa TP srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01699670608</codiceFiscale>
+<ragioneSociale>Impresa Ed. Cianfarani Mauro</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>11185721005</codiceFiscale>
+<ragioneSociale>Ditta Beta Appalti srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01791340662</codiceFiscale>
+<ragioneSociale>Impresa Edile Rinascita di D'Alessandro Giuseppe</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>20304570594</codiceFiscale>
+<ragioneSociale>Ditta Co.Ge Strade srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>05098291213</codiceFiscale>
+<ragioneSociale>Ditta D.A.F. srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01976170595</codiceFiscale>
+<ragioneSociale>Ditta Somoter srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>09149201007</codiceFiscale>
+<ragioneSociale>Ditta Di Cori sergio srl - D.F.C. Costruzioni srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>08396531009</codiceFiscale>
+<ragioneSociale>Ditta Nomentana Appalti srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02306350600</codiceFiscale>
+<ragioneSociale>Ditta Tuca 2000 srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02320470590</codiceFiscale>
+<ragioneSociale>Ditta Mase.L.N. Costruzioni srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>03508200619</codiceFiscale>
+<ragioneSociale>Ditta Co Ap. Srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02419450602</codiceFiscale>
+<ragioneSociale>Ditta Rotondi Cantieri srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02285170599</codiceFiscale>
+<ragioneSociale>Ditta P.A. Costruzioni generali srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01047190598</codiceFiscale>
+<ragioneSociale>Impresa Molinaro Rocco</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02355580594</codiceFiscale>
+<ragioneSociale>Ditta Fel Costruzioni sas</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02575500604</codiceFiscale>
+<ragioneSociale>Ditta Amato Costruzioni srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02409860596</codiceFiscale>
+<ragioneSociale>Ditta APL sas</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>09535941000</codiceFiscale>
+<ragioneSociale>Ditta C.L.T. Trasporti srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02966450617</codiceFiscale>
+<ragioneSociale>Ditta IM.E.CO srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02399950605</codiceFiscale>
+<ragioneSociale>Impresa F.lli Rotondi srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02508130602</codiceFiscale>
+<ragioneSociale>Ditta Esseci srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>68863.16</importoAggiudicazione><tempiCompletamento><dataInizio>2013-08-30</dataInizio><dataUltimazione>2014-02-26</dataUltimazione></tempiCompletamento><importoSommeLiquidate>53989.39</importoSommeLiquidate></lotto>
+<lotto>
+<cig>529705433E</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Lavori di adeguamento stadio comunale &quot;Colavolpe&quot;</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>05402111214</codiceFiscale>
+<ragioneSociale>Impresa TP srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>00928860592</codiceFiscale>
+<ragioneSociale>Ditta edumol di Molinaro Eduardo</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>08366821000</codiceFiscale>
+<ragioneSociale>Ditta Gemini Appalti SRL</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>00150430569</codiceFiscale>
+<ragioneSociale>Ditta Careca</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>05402111214</codiceFiscale>
+<ragioneSociale>Impresa TP srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>96978.81</importoAggiudicazione><tempiCompletamento><dataInizio>2013-09-06</dataInizio></tempiCompletamento><importoSommeLiquidate>27000.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z190A59A5D</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>N. 3 PANNELLI LUMINOSI ATTIVAZIONE EMANUTENZIONE</oggetto>
+<sceltaContraente>17-AFFIDAMENTO DIRETTO EX ART. 5 DELLA LEGGE N.381/91</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02052370166</codiceFiscale>
+<ragioneSociale>AESY S.p.A.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02052370166</codiceFiscale>
+<ragioneSociale>AESY S.p.A.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>22420.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-05-04</dataInizio><dataUltimazione>2015-12-31</dataUltimazione></tempiCompletamento><importoSommeLiquidate>8800.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>536573696A</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Servizio di mnautenzione ordinaria conduzione degli impianti termici e pompe di calore edifici comunali</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01277170591</codiceFiscale>
+<ragioneSociale>P.C.C. IMPIANTI</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02257830592</codiceFiscale>
+<ragioneSociale>Ditta Gemma Marigliani</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>19716805598</codiceFiscale>
+<ragioneSociale>Ditta Termoidraulica di Veglianti Stefano</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01906260599</codiceFiscale>
+<ragioneSociale>Ditta Simoneschi srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01277170591</codiceFiscale>
+<ragioneSociale>P.C.C. IMPIANTI</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>37687.20</importoAggiudicazione><tempiCompletamento><dataInizio>2013-12-02</dataInizio><dataUltimazione>2014-11-28</dataUltimazione></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZBFO858985</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Acquisto divise per dotazione al Gruppo Volontario di protezione Civile Comunale</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01168220893</codiceFiscale>
+<ragioneSociale>Ditta Blu Style</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01136490594</codiceFiscale>
+<ragioneSociale>Ditta F.A.L.C.I.M. snc</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01881100687</codiceFiscale>
+<ragioneSociale>Ditta C.S. Emergenza</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01136490594</codiceFiscale>
+<ragioneSociale>Ditta F.A.L.C.I.M. snc</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>4205.20</importoAggiudicazione><tempiCompletamento><dataInizio>2013-01-28</dataInizio><dataUltimazione>2013-01-28</dataUltimazione></tempiCompletamento><importoSommeLiquidate>4205.20</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZD30B1ECA9</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>LAVORI DI RESTAURO MATERIALI ARCHEOLOGICI- lr 42/97 Piano 2009</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>07298921003</codiceFiscale>
+<ragioneSociale>DITTA KAVAKLIK RESTAURO</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>07298921003</codiceFiscale>
+<ragioneSociale>DITTA KAVAKLIK RESTAURO</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>5663.20</importoAggiudicazione><tempiCompletamento><dataInizio>2013-09-10</dataInizio><dataUltimazione>2013-10-11</dataUltimazione></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>PRDMLN57A60H501A</codiceFiscale>
+<ragioneSociale>MARILENA PARADISI</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>PRDMLN57A60H501A</codiceFiscale>
+<ragioneSociale>MARILENA PARADISI</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>605.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-19</dataInizio><dataUltimazione>2013-10-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>605.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>01-PROCEDURA APERTA</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>MCRVNI75T18H501X</codiceFiscale>
+<ragioneSociale>IVAN MACERA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>MCRVNI75T18H501X</codiceFiscale>
+<ragioneSociale>IVAN MACERA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>605.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-19</dataInizio><dataUltimazione>2013-10-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>605.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01487460535</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE CULTURALE ARCHEOWORLD</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01487460535</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE CULTURALE ARCHEOWORLD</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>659.84</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-19</dataInizio><dataUltimazione>2013-10-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>659.84</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>91108340596</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE CULTURALE ARCHEOCLUB D'ITALIA -  SEDE DI TERRACINA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>91108340596</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE CULTURALE ARCHEOCLUB D'ITALIA -  SEDE DI TERRACINA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>200.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-19</dataInizio><dataUltimazione>2013-10-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>200.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>06741911009</codiceFiscale>
+<ragioneSociale>DITTA FRANCO MASCIOLI</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>06741911009</codiceFiscale>
+<ragioneSociale>DITTA FRANCO MASCIOLI</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>1250.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-19</dataInizio><dataUltimazione>2013-10-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>1250.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>09526251005</codiceFiscale>
+<ragioneSociale>DOTT. VALENTI MASSIMILIANO</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>09526251005</codiceFiscale>
+<ragioneSociale>DOTT. VALENTI MASSIMILIANO</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>625.41</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-19</dataInizio><dataUltimazione>2013-10-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>625.41</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02329050591</codiceFiscale>
+<ragioneSociale>DITTA GALASERVICE SRL DI ANTONIO GALARDO &amp; C.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02329050591</codiceFiscale>
+<ragioneSociale>DITTA GALASERVICE SRL DI ANTONIO GALARDO &amp; C.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>410.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-19</dataInizio><dataUltimazione>2013-10-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>410.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>0000000000</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01822970594</codiceFiscale>
+<ragioneSociale>CAFFE' DEL DUOMO DI GERMANI INGRID</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01822970594</codiceFiscale>
+<ragioneSociale>CAFFE' DEL DUOMO DI GERMANI INGRID</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>272.73</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-19</dataInizio><dataUltimazione>2013-10-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>272.73</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01198230524</codiceFiscale>
+<ragioneSociale>DITTA BARGAGLI AUTOLINEE SRL</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01198230524</codiceFiscale>
+<ragioneSociale>DITTA BARGAGLI AUTOLINEE SRL</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>363.64</importoAggiudicazione><tempiCompletamento><dataInizio>2013-09-22</dataInizio><dataUltimazione>2013-09-22</dataUltimazione></tempiCompletamento><importoSommeLiquidate>363.64</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>11277811003</codiceFiscale>
+<ragioneSociale>DOTT. VINCENZO DESIDERIO</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>11277811003</codiceFiscale>
+<ragioneSociale>DOTT. VINCENZO DESIDERIO</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>166.94</importoAggiudicazione><tempiCompletamento><dataInizio>2013-09-22</dataInizio><dataUltimazione>2013-09-22</dataUltimazione></tempiCompletamento><importoSommeLiquidate>166.94</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01621770567</codiceFiscale>
+<ragioneSociale>AZIENDA AGRICOLA PACCHIAROTTI ANTONELLA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01621770567</codiceFiscale>
+<ragioneSociale>AZIENDA AGRICOLA PACCHIAROTTI ANTONELLA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>496.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-09-22</dataInizio><dataUltimazione>2013-09-22</dataUltimazione></tempiCompletamento><importoSommeLiquidate>496.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>95031860588</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE CULTURALE &quot;AMICI DEL MUSEO DI SEGNI&quot;</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>95031860588</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE CULTURALE &quot;AMICI DEL MUSEO DI SEGNI&quot;</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>2627.23</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-12</dataInizio><dataUltimazione>2013-10-12</dataUltimazione></tempiCompletamento><importoSommeLiquidate>2627.23</importoSommeLiquidate></lotto>
+<lotto>
+<cig>76E0B83FA5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMA MUSEALE ARCHEOLOGICO PROUST LR 42/97 PIANO MUSEI 2012 ATTIVAZIONE PROGETTO &quot;LA PIETRA NELLE MANI LA PIETRA SOTTO I PIEDI&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>05009551002</codiceFiscale>
+<ragioneSociale>DITTA GIUSEPPE PULITANI</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>05009551002</codiceFiscale>
+<ragioneSociale>DITTA GIUSEPPE PULITANI</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>2929.38</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-05</dataInizio></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z580C1D6B1</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>lr 42/97 PIANO 2009- UTILIZZO CONTRIBUTO PER RESTAURO DOCUMENTI ARCHIVIO STORICO COMUNALE - AFFIDAMENTO DITTA AF STUDIO SRL DI ROMA</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>04715691004</codiceFiscale>
+<ragioneSociale>DITTA AF STUDIO</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>05653981000</codiceFiscale>
+<ragioneSociale>DITTA CIENNE SNC DI CIANGOLA BARBARA E C.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>04715691004</codiceFiscale>
+<ragioneSociale>DITTA AF STUDIO</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>3347.11</importoAggiudicazione><tempiCompletamento><dataInizio>2013-12-17</dataInizio><dataUltimazione>2014-03-03</dataUltimazione></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZE70C3EB64</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>FORNITURA BIGLIETTI DI INGRESSO MUSEO CIVICO ARCHEOLOGICO &quot;P. CAPPONI&quot;</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01084300597</codiceFiscale>
+<ragioneSociale>DITTA EREDI V. PIETRICOLA SNC</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01698480595</codiceFiscale>
+<ragioneSociale>DITTA PENSIERI &amp; PAROLE S.A.S. DI ALOVISI GIUSEPPE E C.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01084300597</codiceFiscale>
+<ragioneSociale>DITTA EREDI V. PIETRICOLA SNC</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>220.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-12-13</dataInizio></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z220C64444</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>DOTT. MASSIMILIANO VLENTI PROROGA INCARICO PROF. DI DIRETTORE SCIENTIFICO MUSEO ARCH. COMUNALE  DAL 29/10/2013 AL 28/10/2014-</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>09526251005</codiceFiscale>
+<ragioneSociale>DOTT. VALENTI MASSIMILIANO</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>09526251005</codiceFiscale>
+<ragioneSociale>DOTT. VALENTI MASSIMILIANO</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>10000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-29</dataInizio><dataUltimazione>2014-10-28</dataUltimazione></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZFA0C705CA</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>LR 42/97 ARCHIVIO STORICO PIANO 2009- UTILIZZO CONTRIBUTO PER PRESENTAZIONE MATERIALI PROMOZIONALI ARCHIVIO STORICO COMUNALE.</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>91108340596</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE CULTURALE ARCHEOCLUB D'ITALIA -  SEDE DI TERRACINA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>91108340596</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE CULTURALE ARCHEOCLUB D'ITALIA -  SEDE DI TERRACINA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>233.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-11-28</dataInizio><dataUltimazione>2013-11-28</dataUltimazione></tempiCompletamento><importoSommeLiquidate>233.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZFA0C705CA</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>LR 42/97 ARCHIVIO STORICO PIANO 2009- UTILIZZO CONTRIBUTO PER PRESENTAZIONE MATERIALI PROMOZIONALI ARCHIVIO STORICO COMUNALE.</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01698480595</codiceFiscale>
+<ragioneSociale>DITTA PENSIERI &amp; PAROLE S.A.S. DI ALOVISI GIUSEPPE E C.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01698480595</codiceFiscale>
+<ragioneSociale>DITTA PENSIERI &amp; PAROLE S.A.S. DI ALOVISI GIUSEPPE E C.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>150.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-11-18</dataInizio><dataUltimazione>2013-11-28</dataUltimazione></tempiCompletamento><importoSommeLiquidate>150.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZFA0C705CA</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>LR 42/97 ARCHIVIO STORICO PIANO 2009- UTILIZZO CONTRIBUTO PER PRESENTAZIONE MATERIALI PROMOZIONALI ARCHIVIO STORICO COMUNALE.</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>80004020592</codiceFiscale>
+<ragioneSociale>ISTITUTO PROFESSIONALE DI STATO &quot;A. FILOSI&quot; DI TERRACINA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>80004020592</codiceFiscale>
+<ragioneSociale>ISTITUTO PROFESSIONALE DI STATO &quot;A. FILOSI&quot; DI TERRACINA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>200.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-11-28</dataInizio><dataUltimazione>2013-11-28</dataUltimazione></tempiCompletamento><importoSommeLiquidate>200.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z210C70DF9</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>AFFIDAMENTO STAMPA OPUSCOLO IN DIGITALE ARCHIVIO STORICO COMUNALE  DITTA NONSOLOCARTA PROFIN DI LUIGI LO SORDO &amp; C. S.A.S.</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01602770594</codiceFiscale>
+<ragioneSociale>DITTA NONSOLOCARTA PROFIN DI LUIGI LO SORDO &amp;C. s.a.s.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01602770594</codiceFiscale>
+<ragioneSociale>DITTA NONSOLOCARTA PROFIN DI LUIGI LO SORDO &amp;C. s.a.s.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>131.15</importoAggiudicazione><tempiCompletamento><dataInizio>2013-11-28</dataInizio><dataUltimazione>2013-11-28</dataUltimazione></tempiCompletamento><importoSommeLiquidate>131.15</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZE40C92ACE</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SEPOLTURA PRIVILEGIATA DON ADRIANO BRAGAZZI- CONCESSIONE CONTRIBUTO ALLA PARROCCHIA SS. SALVATORE DI TERRACINA</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>80013020591</codiceFiscale>
+<ragioneSociale>PARROCCHIA SS. SALVATORE- TERRACINA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>80013020591</codiceFiscale>
+<ragioneSociale>PARROCCHIA SS. SALVATORE- TERRACINA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>3000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-12-13</dataInizio></tempiCompletamento><importoSommeLiquidate>3000.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z810963575</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Alienazione Mezzi usati di proprietà comunale</oggetto>
+<sceltaContraente>01-PROCEDURA APERTA</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02267020606</codiceFiscale>
+<ragioneSociale>E.V.A. TRADING S.R.L.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02267020606</codiceFiscale>
+<ragioneSociale>E.V.A. TRADING S.R.L.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>15000.00</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>22687.50</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z690995FB8</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Acquisto Parcometri Ditta Parkeon  S.P.A  Milano</oggetto>
+<sceltaContraente>08-AFFIDAMENTO IN ECONOMIA - COTTIMO FIDUCIARIO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>04065160964</codiceFiscale>
+<ragioneSociale>Ditta Parkeon spa</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>04065160964</codiceFiscale>
+<ragioneSociale>Ditta Parkeon spa</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>32103.72</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>32103.72</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z160A98A75</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Vigilanza parcometricomunali istituto di vigilanza</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>00257560599</codiceFiscale>
+<ragioneSociale>Istituto Vigilanza Metronotte</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>00257560599</codiceFiscale>
+<ragioneSociale>Istituto Vigilanza Metronotte</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>2400.00</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>2400.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZD20B147AC</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Installazione parcometri Ditta T+E srl di Terracina</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02622830590</codiceFiscale>
+<ragioneSociale>Ditta T+E srl</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>04065160964</codiceFiscale>
+<ragioneSociale>Ditta Parkeon spa</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>02431850599</codiceFiscale>
+<ragioneSociale>Lady Appalti Costruzioni Generali Soc. Cooperativa</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02622830590</codiceFiscale>
+<ragioneSociale>Ditta T+E srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>3146.00</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>3146.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z400BC1767</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Servizio di tesoreria attivazione mandato</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01827210228</codiceFiscale>
+<ragioneSociale>Uni IT</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01827210228</codiceFiscale>
+<ragioneSociale>Uni IT</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>6534.00</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>5856.40</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z190C194B0</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Ditta Parkeon riscatto parcometri a noleggio</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>04065160964</codiceFiscale>
+<ragioneSociale>Ditta Parkeon spa</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>04065160964</codiceFiscale>
+<ragioneSociale>Ditta Parkeon spa</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>12810.00</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>12810.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>53741454BF</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Convenzione per la fornitura di carburante per autotrazione mediante fuel card e dei servizi connessi per le pubbliche amministrazioni  ai sensi dell'art. 26 legge 488/99</oggetto>
+<sceltaContraente>26-AFFIDAMENTO DIRETTO IN ADESIONE AD ACCORDO QUADRO/CONVENZIONE</sceltaContraente>
+<partecipanti>
+<partecipante>
+<identificativoFiscaleEstero>IT00891951006</identificativoFiscaleEstero><ragioneSociale>Kuwait Petroleum Italia Spa</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<identificativoFiscaleEstero>IT00891951006</identificativoFiscaleEstero><ragioneSociale>Kuwait Petroleum Italia Spa</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>92700.00</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>5451185C28</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Veicolo a noleggio per il funzionamneto degli uffici comunali - impegno di spesa</oggetto>
+<sceltaContraente>08-AFFIDAMENTO IN ECONOMIA - COTTIMO FIDUCIARIO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02421300597</codiceFiscale>
+<ragioneSociale>2014 By Autogarden, srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02421300597</codiceFiscale>
+<ragioneSociale>2014 By Autogarden, srl</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>198492.00</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>9340.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z1A0D47B92</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Noleggio n. 5 macchine fotocopiatrici per gli uffici comunali.</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01512510593</codiceFiscale>
+<ragioneSociale>Ditta C.R. Ufficio di Giorgio Vignaroli</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>00939531000</codiceFiscale>
+<ragioneSociale>Ditta Euro Informatica Sistemi Srl</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01512510593</codiceFiscale>
+<ragioneSociale>Ditta C.R. Ufficio di Giorgio Vignaroli</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>20203.20</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z3B0B2713C</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>RICHIESTA AMBULANZA PER MANIFESTAZIONE &quot;IL BRUTTO ANATROCCOLO&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>91017890590</codiceFiscale>
+<ragioneSociale>CROCE AZZURRA SABAUDIA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>91017890590</codiceFiscale>
+<ragioneSociale>CROCE AZZURRA SABAUDIA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>200.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-08-07</dataInizio><dataUltimazione>2013-08-07</dataUltimazione></tempiCompletamento><importoSommeLiquidate>200.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z5C0C306BC</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SERVIZI MUSICALI ISTITUZIONALI E TURISTICI - BANDA MUSICALE CITTA' DI TERRACINA</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>91001000594</codiceFiscale>
+<ragioneSociale>CORPO BANDISTICO CITTA' DI TERRACINA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>91001000594</codiceFiscale>
+<ragioneSociale>CORPO BANDISTICO CITTA' DI TERRACINA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>5950.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-01-01</dataInizio><dataUltimazione>2013-12-31</dataUltimazione></tempiCompletamento><importoSommeLiquidate>5950.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z080C2290F</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>STAGE ALLENAMENTO DI TAEKWONDO DEL CAMPIONE OLIMPIONICO CARLO MOLFETTA</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02615060593</codiceFiscale>
+<ragioneSociale>ASD SCUOLA TAEKWONDO  TERRACINA 1984</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02615060593</codiceFiscale>
+<ragioneSociale>ASD SCUOLA TAEKWONDO  TERRACINA 1984</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>800.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-06-19</dataInizio><dataUltimazione>2013-06-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>800.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z900C22875</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>FESTA DEL MARE 2013 IN ONORE DELLA MADONNA DEL CARMELO</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>91095320593</codiceFiscale>
+<ragioneSociale>ASS. MM.SS. DEL CARMELO</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>91095320593</codiceFiscale>
+<ragioneSociale>ASS. MM.SS. DEL CARMELO</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>13000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-07-18</dataInizio><dataUltimazione>2013-07-21</dataUltimazione></tempiCompletamento><importoSommeLiquidate>13000.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZC80C227DD</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>MANIFESTAZIONE ATINA JAZZ AL MARE</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02585140607</codiceFiscale>
+<ragioneSociale>KUNOICHI PROMOTION AGENCY</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02585140607</codiceFiscale>
+<ragioneSociale>KUNOICHI PROMOTION AGENCY</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>10000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-07-05</dataInizio><dataUltimazione>2013-07-06</dataUltimazione></tempiCompletamento><importoSommeLiquidate>10000.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZEA0C1641C</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SPETTACOLO MUSICALE CON ELHAIDA DANI</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02613120597</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE TERRAPONTINA.IT</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02613120597</codiceFiscale>
+<ragioneSociale>ASSOCIAZIONE TERRAPONTINA.IT</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>3500.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-08-08</dataInizio><dataUltimazione>2013-08-08</dataUltimazione></tempiCompletamento><importoSommeLiquidate>3500.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z0D0C119D6</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>CONCERTO ORCHESTRA DI VITTORIO PALMACCI</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01537290593</codiceFiscale>
+<ragioneSociale>PALMACCI VITTORIO &amp; C. SAS</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01537290593</codiceFiscale>
+<ragioneSociale>PALMACCI VITTORIO &amp; C. SAS</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>811.47</importoAggiudicazione><tempiCompletamento><dataInizio>2013-08-12</dataInizio><dataUltimazione>2013-08-12</dataUltimazione></tempiCompletamento><importoSommeLiquidate>811.47</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z1D0BD0AEE</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>NOLEGGIO PULLMAN PER SCAMBI GIOVANILI BILATERALI CON LA CITTA' DI SERGHIEV POSAD</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>00297700601</codiceFiscale>
+<ragioneSociale>AUTONOLEGGIO VIAGGI PAPA SNC</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>00297700601</codiceFiscale>
+<ragioneSociale>AUTONOLEGGIO VIAGGI PAPA SNC</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>1800.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-13</dataInizio><dataUltimazione>2013-10-20</dataUltimazione></tempiCompletamento><importoSommeLiquidate>1800.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z960BC7E00</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SERVIZIO AMBULANZA CAMPIONATI DEL MONDO OFF SHORE</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>91017890590</codiceFiscale>
+<ragioneSociale>CROCE AZZURRA SABAUDIA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>91017890590</codiceFiscale>
+<ragioneSociale>CROCE AZZURRA SABAUDIA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>5300.00</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>5300.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z510CE0A8A</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SISTEMAZIONE ALBERGHIERE E ASSISTENZA LOGISTICA TAPPA CAMP. ITAL. SERIE A BEACH SOCCER</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02305120590</codiceFiscale>
+<ragioneSociale>AGENZIA VIAGGI LITTLE ITALY TOURS SRL</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02305120590</codiceFiscale>
+<ragioneSociale>AGENZIA VIAGGI LITTLE ITALY TOURS SRL</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>6800.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-06-19</dataInizio><dataUltimazione>2013-06-24</dataUltimazione></tempiCompletamento><importoSommeLiquidate>6800.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZA20CE05E6</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SERVIZIO HOSTESS E GESTIONE GASTRONOMICA E LOGISTICA AREA VIP</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>12007981009</codiceFiscale>
+<ragioneSociale>T EVENT SOC. COOP.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>12007981009</codiceFiscale>
+<ragioneSociale>T EVENT SOC. COOP.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>6475.41</importoAggiudicazione><tempiCompletamento><dataInizio>2013-06-19</dataInizio><dataUltimazione>2013-06-24</dataUltimazione></tempiCompletamento><importoSommeLiquidate>6475.41</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZE10CE0345</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>FESTIVAL E TROFEO DI BEACH RUGBY</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>91119770591</codiceFiscale>
+<ragioneSociale>A.S.D. TERRACINA RUGBY CLUB</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>91119770591</codiceFiscale>
+<ragioneSociale>A.S.D. TERRACINA RUGBY CLUB</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>800.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-07-06</dataInizio><dataUltimazione>2013-08-04</dataUltimazione></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZCA0CE01F9</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>INTERNAZIONALI D'ITALIA DI BEACH TENNIS ITF</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02555580592</codiceFiscale>
+<ragioneSociale>ASD RDT EVENTI</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02555580592</codiceFiscale>
+<ragioneSociale>ASD RDT EVENTI</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>3500.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-05-31</dataInizio><dataUltimazione>2013-06-02</dataUltimazione></tempiCompletamento><importoSommeLiquidate>3500.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z470CD990D</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>PUNTO INFORMATIVO</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>91099570599</codiceFiscale>
+<ragioneSociale>ASS.NE PRO LOCO TERRACINA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>91099570599</codiceFiscale>
+<ragioneSociale>ASS.NE PRO LOCO TERRACINA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>5000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-06-11</dataInizio><dataUltimazione>2013-09-30</dataUltimazione></tempiCompletamento><importoSommeLiquidate>5000.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z1A0CE0B67</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>TAPPA CAMPIONATO DEL MONDO DI OFF SHORE &quot;GRAN PREMIO DEL MEDITERRANEO&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<identificativoFiscaleEstero>2720290598</identificativoFiscaleEstero><ragioneSociale>ASS. OVER 100 MPH</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<identificativoFiscaleEstero>2720290598</identificativoFiscaleEstero><ragioneSociale>ASS. OVER 100 MPH</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>25000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-18</dataInizio><dataUltimazione>2013-10-20</dataUltimazione></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z110CE0AF0</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>CONCERTO MUSICALE DEL GRUPPO &quot;ORCHESTRACCIA&quot;</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>06734461004</codiceFiscale>
+<ragioneSociale>MR CITY DI MARCO CONIDI</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>06734461004</codiceFiscale>
+<ragioneSociale>MR CITY DI MARCO CONIDI</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>5000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-09-21</dataInizio><dataUltimazione>2013-09-21</dataUltimazione></tempiCompletamento><importoSommeLiquidate>5000.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZCF0CF16D5</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>MATERIALE  PER PREMIAZIONI EURO BEACH SOCCER</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02275310593</codiceFiscale>
+<ragioneSociale>DITTA BA…SAR di DI FONSI SARA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02275310593</codiceFiscale>
+<ragioneSociale>DITTA BA…SAR di DI FONSI SARA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>636.00</importoAggiudicazione><tempiCompletamento><dataUltimazione>2013-07-09</dataUltimazione></tempiCompletamento><importoSommeLiquidate>636.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZEA0CFFEA3</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SOSTITUZIONE SERRATURE PALACARUCCI</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>00718160591</codiceFiscale>
+<ragioneSociale>DITTA METAL.SER.PLAST</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>00718160591</codiceFiscale>
+<ragioneSociale>DITTA METAL.SER.PLAST</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>122.00</importoAggiudicazione><tempiCompletamento></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z1E0D00180</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>COMITATO MADONNA DELLA NEVE - LA PEDALATA 2013</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>91046600598</codiceFiscale>
+<ragioneSociale>COMITATO MADONNA DELLA NEVE</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>91046600598</codiceFiscale>
+<ragioneSociale>COMITATO MADONNA DELLA NEVE</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>900.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-09-01</dataInizio><dataUltimazione>2013-09-01</dataUltimazione></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZF60D0DF75</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>MANIFESTAZIONI NATALIZIE E DI CAPODANNO</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02347490597</codiceFiscale>
+<ragioneSociale>UMBERTO CODA COMUNICATION</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>10355031005</codiceFiscale>
+<ragioneSociale>WEC EVENTI SRL</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02347490597</codiceFiscale>
+<ragioneSociale>UMBERTO CODA COMUNICATION</ragioneSociale>
+</aggiudicatario>
+<aggiudicatario>
+<codiceFiscale>10355031005</codiceFiscale>
+<ragioneSociale>WEC EVENTI SRL</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>5737.70</importoAggiudicazione><tempiCompletamento><dataInizio>2013-12-28</dataInizio><dataUltimazione>2013-12-31</dataUltimazione></tempiCompletamento><importoSommeLiquidate>5737.70</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z090B5A71E</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>MATERIALE DI CONSUMO BIBLIOTECA COMUNALE A. OLIVETTI</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01084300597</codiceFiscale>
+<ragioneSociale>DITTA EREDI V. PIETRICOLA SNC</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01084300597</codiceFiscale>
+<ragioneSociale>DITTA EREDI V. PIETRICOLA SNC</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>380.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-09-05</dataInizio><dataUltimazione>2013-09-30</dataUltimazione></tempiCompletamento><importoSommeLiquidate>380.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z030C153EE</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>ABBONAMENTO ANNO 2013 ANNALI DEL LAZIO MERIDIONALE</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01385600596</codiceFiscale>
+<ragioneSociale>TIPOGRAFIA FABRIZIO DI FABRIZIO DOMENICO</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01385600596</codiceFiscale>
+<ragioneSociale>TIPOGRAFIA FABRIZIO DI FABRIZIO DOMENICO</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>20.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-10-24</dataInizio></tempiCompletamento><importoSommeLiquidate>20.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z510D00280</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SPIAGGE SICURE 2013 - PIANO DI SALVATAGGIO COLLETTIVO COMUNE DI TERRACINA</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02366140594</codiceFiscale>
+<ragioneSociale>LANDER SERVICE  COOP. ARL</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02366140594</codiceFiscale>
+<ragioneSociale>LANDER SERVICE  COOP. ARL</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>16393.44</importoAggiudicazione><tempiCompletamento><dataInizio>2013-06-15</dataInizio><dataUltimazione>2013-09-15</dataUltimazione></tempiCompletamento><importoSommeLiquidate>16393.44</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z95075CF2E</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>Affidamento del servizio di fonoregistrazione e trascrizione delle sedute consiliari</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01783820598</codiceFiscale>
+<ragioneSociale>Centro Servizi Stenotipia Roma snc</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01783820598</codiceFiscale>
+<ragioneSociale>Centro Servizi Stenotipia Roma snc</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>5925.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-03-26</dataInizio><dataUltimazione>2014-03-25</dataUltimazione></tempiCompletamento><importoSommeLiquidate>2962.50</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z230C58F26</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>AFFIDAMENTO FORNITURA SERVIZIO RILEVAZIONE ANNUALE PATRIMONIO E INVIO TELEMATICO DATI</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01190430262</codiceFiscale>
+<ragioneSociale>KIBERNETES S.R.L.</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01190430262</codiceFiscale>
+<ragioneSociale>KIBERNETES S.R.L.</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>2550.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-11-13</dataInizio><dataUltimazione>2013-12-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>2550.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z10083D51B</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>GARA PER SERVIZIO SOSTITUTIVO BUONI PASTO</oggetto>
+<sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE DEL BANDO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>03105300101</codiceFiscale>
+<ragioneSociale>QUI GROUP SPA</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01014660418</codiceFiscale>
+<ragioneSociale>EDENRED ITALIA SPA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>03105300101</codiceFiscale>
+<ragioneSociale>QUI GROUP SPA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>100800.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-03-19</dataInizio><dataUltimazione>2014-03-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>86710.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z47092A3B7</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>AFFIDAMENTO SERVIZIO PICK-UP CORRISPONDENZA UFFICIO</oggetto>
+<sceltaContraente>26-AFFIDAMENTO DIRETTO IN ADESIONE AD ACCORDO QUADRO/CONVENZIONE</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>97103880585</codiceFiscale>
+<ragioneSociale>POSTE ITALIANE SPA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>97103880585</codiceFiscale>
+<ragioneSociale>POSTE ITALIANE SPA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>850.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-03-19</dataInizio><dataUltimazione>2014-03-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>650.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZBE092A36F</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>AFFIDAMENTO SERVIZIO POSTA EASY BASIC</oggetto>
+<sceltaContraente>26-AFFIDAMENTO DIRETTO IN ADESIONE AD ACCORDO QUADRO/CONVENZIONE</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>97103880585</codiceFiscale>
+<ragioneSociale>POSTE ITALIANE SPA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>97103880585</codiceFiscale>
+<ragioneSociale>POSTE ITALIANE SPA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>30000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-03-19</dataInizio><dataUltimazione>2014-03-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>28757.98</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZDE092A241</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>AFFIDAMENTO SERVIZIO GED – DEMATERIALIZZAZIONE ARCHIVI E CONSERVAZIONE CARTACEO</oggetto>
+<sceltaContraente>26-AFFIDAMENTO DIRETTO IN ADESIONE AD ACCORDO QUADRO/CONVENZIONE</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>97103880585</codiceFiscale>
+<ragioneSociale>POSTE ITALIANE SPA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>97103880585</codiceFiscale>
+<ragioneSociale>POSTE ITALIANE SPA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>15000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-03-19</dataInizio><dataUltimazione>2014-03-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>0.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z8E092A33E</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>GED – GESTIONE ELETTRONICA DOCUMENTALE</oggetto>
+<sceltaContraente>26-AFFIDAMENTO DIRETTO IN ADESIONE AD ACCORDO QUADRO/CONVENZIONE</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>97103880585</codiceFiscale>
+<ragioneSociale>POSTE ITALIANE SPA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>97103880585</codiceFiscale>
+<ragioneSociale>POSTE ITALIANE SPA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>20000.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-03-19</dataInizio><dataUltimazione>2014-03-19</dataUltimazione></tempiCompletamento><importoSommeLiquidate>19000.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z460A8781E</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SERVIZIO ASSISTENZA PER PROCEDURA CONCORSUALE</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01976410686</codiceFiscale>
+<ragioneSociale>SELEZIONI ITALIA SRL</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01976410686</codiceFiscale>
+<ragioneSociale>SELEZIONI ITALIA SRL</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>800.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-06-27</dataInizio><dataUltimazione>2013-07-23</dataUltimazione></tempiCompletamento><importoSommeLiquidate>800.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZE10ACB22C</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>ABBONAMENTO ON LINE RIVISTA PUBBLICHE AMMINISTRAZIONI (MODULO P.A.)</oggetto>
+<sceltaContraente>08-AFFIDAMENTO IN ECONOMIA - COTTIMO FIDUCIARIO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>00777910159</codiceFiscale>
+<ragioneSociale>IL SOLE 24ORE SPA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>00777910159</codiceFiscale>
+<ragioneSociale>IL SOLE 24ORE SPA</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>1200.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-07-11</dataInizio><dataUltimazione>2016-07-11</dataUltimazione></tempiCompletamento><importoSommeLiquidate>400.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z4E0C22A47</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>SERVIZIO ASSISTENZA PER PROCEDURA CONCORSUALE</oggetto>
+<sceltaContraente>08-AFFIDAMENTO IN ECONOMIA - COTTIMO FIDUCIARIO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>04617030657</codiceFiscale>
+<ragioneSociale>PFORM SRL</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>01976410686</codiceFiscale>
+<ragioneSociale>SELEZIONI ITALIA SRL</ragioneSociale>
+</partecipante>
+<partecipante>
+<codiceFiscale>04330930266</codiceFiscale>
+<ragioneSociale>TEMPI MODERNI SPA</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>04617030657</codiceFiscale>
+<ragioneSociale>PFORM SRL</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>700.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-11-05</dataInizio><dataUltimazione>2013-11-13</dataUltimazione></tempiCompletamento><importoSommeLiquidate>700.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>0000000000</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>ACQUISTO TABELLONI ELETTORALI – ELEZIONI 2013</oggetto>
+<sceltaContraente>08-AFFIDAMENTO IN ECONOMIA - COTTIMO FIDUCIARIO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>02084140595</codiceFiscale>
+<ragioneSociale>F.LLI CETRONE SRL</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>02084140595</codiceFiscale>
+<ragioneSociale>F.LLI CETRONE SRL</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>33800.00</importoAggiudicazione><tempiCompletamento><dataInizio>2013-02-18</dataInizio><dataUltimazione>2013-02-20</dataUltimazione></tempiCompletamento><importoSommeLiquidate>33800.00</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z1C08DC8A8</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>PUBBLICAZIONE AVVISO PUBBLICO SU GURI</oggetto>
+<sceltaContraente>08-AFFIDAMENTO IN ECONOMIA - COTTIMO FIDUCIARIO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>06429700724</codiceFiscale>
+<ragioneSociale>PUBLI.COM DI RIZZI PAOLA &amp; CO. SNC</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>06429700724</codiceFiscale>
+<ragioneSociale>PUBLI.COM DI RIZZI PAOLA &amp; CO. SNC</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>36.30</importoAggiudicazione><tempiCompletamento><dataInizio>2013-02-26</dataInizio><dataUltimazione>2013-04-26</dataUltimazione></tempiCompletamento><importoSommeLiquidate>36.30</importoSommeLiquidate></lotto>
+<lotto>
+<cig>Z5D0AFC630</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>PUBBLICAZIONE AVVISO PUBBLICO SU GURI</oggetto>
+<sceltaContraente>08-AFFIDAMENTO IN ECONOMIA - COTTIMO FIDUCIARIO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>06429700724</codiceFiscale>
+<ragioneSociale>PUBLI.COM DI RIZZI PAOLA &amp; CO. SNC</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>06429700724</codiceFiscale>
+<ragioneSociale>PUBLI.COM DI RIZZI PAOLA &amp; CO. SNC</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>36.30</importoAggiudicazione><tempiCompletamento><dataInizio>2013-07-26</dataInizio><dataUltimazione>2013-08-09</dataUltimazione></tempiCompletamento><importoSommeLiquidate>36.30</importoSommeLiquidate></lotto>
+<lotto>
+<cig>ZDF0AC2F3</cig>
+<strutturaProponente>
+<codiceFiscaleProp>00246180590</codiceFiscaleProp>
+<denominazione>Comune di Terracina</denominazione>
+</strutturaProponente>
+<oggetto>AFFIDAMENTO DIRETTO PER ACQUISTO PROGRAMMA DAS – PIANO ANNUALE DEGLI INTERVENTI PER IL DIRITTO ALLO STUDIO- DGR 546 DEL 02.11.2012.</oggetto>
+<sceltaContraente>23-AFFIDAMENTO IN ECONOMIA - AFFIDAMENTO DIRETTO</sceltaContraente>
+<partecipanti>
+<partecipante>
+<codiceFiscale>01652690668</codiceFiscale>
+<ragioneSociale>S R L</ragioneSociale>
+</partecipante>
+</partecipanti>
+<aggiudicatari>
+<aggiudicatario>
+<codiceFiscale>01652690668</codiceFiscale>
+<ragioneSociale>S R L</ragioneSociale>
+</aggiudicatario>
+</aggiudicatari>
+<importoAggiudicazione>495.87</importoAggiudicazione><tempiCompletamento><dataInizio>2013-07-12</dataInizio><dataUltimazione>2013-07-26</dataUltimazione></tempiCompletamento><importoSommeLiquidate>495.87</importoSommeLiquidate></lotto>
+</data>
+</legge190:pubblicazione>

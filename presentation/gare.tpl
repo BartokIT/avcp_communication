@@ -17,7 +17,12 @@
 			</div>
 			<div class="container-main">
                 {$print_parameter=['all'=>$view_all]}
-				<h2>Gare<a href="#" class="help">Guida</a><a href="{urlarea action="print_pdf" parameters=$print_parameter}" class="print">Stampa</a></h2>
+				<h2>Gare
+                    
+                    <a href="#" class="help">Guida</a>
+                    <a href="{urlarea action="print_pdf" parameters=$print_parameter}" class="print">Stampa</a>
+                    <a href="{urlarea nonce="false" area="avcpman/gare/copy"}" title="Copia anno successivo" class="copy">Copia gare</a>
+                </h2>
                 
 				<div class="centered">Anno di gestione :
                     <select id="current-year" name="current-year">

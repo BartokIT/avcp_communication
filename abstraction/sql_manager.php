@@ -1,8 +1,9 @@
 <?php
 include("sql.php");
 
-function clean_currency_value($amount)
-{
+
+
+function clean_currency_value($amount) {
     if (preg_match("/^\d+(?:,?[0-9]{3})*(?:\.\d{0,2})?$/i", $amount, $matches))
     {
         $amount = str_replace(",","",$amount);
@@ -14,8 +15,8 @@ function clean_currency_value($amount)
     }
     return $amount;
 }
-function execute_sql_file($id_sql_connection, $database_name, $sql_file)
-{
+
+function execute_sql_file($id_sql_connection, $database_name, $sql_file) {
     $select_result = mysql_select_db($database_name, $id_sql_connection);
     $install_path = dirname($_SERVER['SCRIPT_FILENAME']) . "/";
 
@@ -85,8 +86,7 @@ function execute_sql_file($id_sql_connection, $database_name, $sql_file)
 /**
  * Permette di ottenere le credenziali di accesso al sistema
  **/
-function get_user_credential($user)
-{
+function get_user_credential($user) {
 	global $db;
 	$user=$db->escape($user);
 	$row = $db->get_row("SELECT u.name, u.access_password, u.user_roles FROM " . $db->prefix . "users u  WHERE u.id='$user'");
@@ -100,8 +100,7 @@ function get_user_credential($user)
 /**
  * Ottiene la lista degli anni presenti in archivio
  **/
-function get_years()
-{
+function get_years() {
 	global $db;
 	$years = $db->get_results("SELECT DISTINCT anno, i.url, i.generare FROM " . $db->prefix . "indice i ORDER BY anno DESC");
 
@@ -367,6 +366,30 @@ function update_dummy_gara_year($userid, $year)
 	return true;
 }
 
+function get_gare_stream($anno, $anno_destination, $userid=null) {
+    global $db;
+    $numero_string="";
+    $anno = $db->escape($anno*1);    
+    $anno_destination = $db->escape($anno_destination*1);
+    
+    if (!is_null($userid))
+	{
+		$userid = $db->escape($userid);
+		$numero_string .= 'AND g.f_user_id = "' .$userid . '"';
+	}
+	
+    $query_string = "SELECT  g.gid, g.dummy, g.cig, g.oggetto, g.scelta_contraente, g.f_user_id, g.streamid, g2.gid as present, " .
+        "g.importo, g.importo_liquidato, DATE_FORMAT( g.data_inizio,'%d/%m/%Y') as data_inizio, DATE_FORMAT( g.data_fine,'%d/%m/%Y') as data_fine " .
+        " from (SELECT streamid, gid from avcpman_gara where streamid <> gid AND f_pub_anno = $anno_destination ) g2 " . 
+        " right join avcpman_gara g on g.gid = g2.streamid where g.gid = g.streamid AND g.f_pub_anno = $anno " . $numero_string;
+    
+    $gare = $db->get_results($query_string);
+    if ($gare == NULL)
+        return array();
+    else
+        return $gare;
+}
+
 /**
  * restituisce l'insieme delle gare di un certo anno e di una determinata pubblicazione
  * */
@@ -500,6 +523,68 @@ function delete_gara($gid)
 
 }
 
+function copy_gare($gids, $destination_year) {
+	global $db;
+
+    $db->query("BEGIN");
+    
+    $gids_string = implode(",",$gids);
+    
+    $query_string= "SELECT gid, cig, oggetto, scelta_contraente, importo, importo_liquidato, data_inizio, data_fine, f_user_id, f_pub_anno, dummy, streamid FROM " .
+                    $db->prefix . 'gara WHERE gid IN (' . $gids_string .')';
+    $gare = $db->get_results($query_string);
+	if ($gare === NULL) {
+		$db->query("ROLLBACK");
+		return false;
+	}
+    else {
+        $new_ids = array();
+        foreach ($gare as $gara) {
+            $sql_string = build_insert_string($db->prefix . "gara", array("cig"=>$gara->cig, "oggetto"=>$gara->oggetto, 
+                                                                        "scelta_contraente"=>$gara->scelta_contraente,"importo"=>$gara->importo,
+                                                                        "importo_liquidato"=>$gara->importo_liquidato,"data_inizio"=>$gara->data_inizio,
+                                                                        "data_fine"=>$gara->data_fine, "f_user_id" => $gara->f_user_id,
+                                                                        "f_pub_anno"=>$destination_year, "streamid"=>$gara->streamid,
+                                                                        "dummy"=>$gara->dummy));
+           $result = $db->query($sql_string);
+            if ($result === false) {
+                $db->query("ROLLBACK");
+                return false;
+            }
+            else {
+                $new_gara_id = $db->insert_id;
+                $part_string = "SELECT pa.pid, pa.gid, pa.tipo, pa.aggiudicatario, pd.did FROM " . $db->prefix . 'partecipanti pa, ' . 
+                                $db->prefix . 'part_ditta pd  WHERE pa.tipo = "D"  AND pa.gid ='  . $gara->gid . ' AND pa.pid = pd.pid';
+                $part_ditte = $db->get_results($part_string);
+                foreach ($part_ditte as $ditta) {
+                    
+                    $insert_partecipante = "INSERT INTO " . $db->prefix . "partecipanti (gid,tipo, aggiudicatario) VALUES (" . $new_gara_id . ',"' . 
+                        $ditta->tipo . '","'. $ditta->aggiudicatario . '")';
+                    $result = $db->query($insert_partecipante);
+                    if ($result === false) {
+                        $db->query("ROLLBACK");
+                        return false;
+                    } 
+                    $pid_new = $db->insert_id;
+                    $insert_partecipante = "INSERT INTO " . $db->prefix . "part_ditta (did,pid) VALUES (" . $ditta->did . ',' . 
+                        $pid_new . ')';
+                    $result = $db->query($insert_partecipante);
+                    if ($result === false) {
+                        $db->query("ROLLBACK");
+                        return false;
+                    } 
+                }
+                                
+                $new_ids[] = $new_gara_id;
+            }
+        }
+        
+
+        $db->query("COMMIT");
+        return $new_ids;
+    }
+}
+
 /**
  * Inserisce una nuova gara nel database
  * */
@@ -523,6 +608,15 @@ function insert_gara($cig=null,$oggetto=null,$scelta_contraente=null,$importo=nu
 	}
 	
 	$gid = $db->insert_id;
+    $sql_string = build_update_string($db->prefix . "gara",array("streamid"=>$gid), "WHERE gid =" . $gid);
+    $result = $db->query($sql_string);
+	
+    if ($result === false)
+	{
+		$db->query("ROLLBACK");
+		return false;
+	}
+    
 	if (!set_modified_bit_pubblicazione($f_pub_anno))
 	{
 		$db->query("ROLLBACK");

@@ -43,7 +43,7 @@ class Control extends \Control
         }            
         
         $all=!!($this->user->isRole("administrator") &&
-                isset($this->_s["all"]) && $this->_s["all"]);
+                isset($_SESSION["all"]) && $_SESSION["all"]);
         
         if ($all) {
             $gare =get_gare($_SESSION["year"]);
@@ -52,6 +52,7 @@ class Control extends \Control
                 $gare =get_gare($_SESSION["year"], null, $this->user->getID());
                 $view_all = "false";
         }
+        
         //verifiche sui problemi relativi ad una gara
         foreach ($gare as $gid=>$gara) {
             $gare[$gid]->warning=false;
@@ -89,9 +90,9 @@ class Control extends \Control
     {
         if (isset($this->_r["all"])) {
             if (strcmp($this->_r["all"], "true") == 0) {
-                $this->_s["all"] = true;
+                $_SESSION["all"] = true;
             } else {
-                $this->_s["all"] = false;
+                $_SESSION["all"] = false;
             }
         }
         return ReturnArea($this->status->getSiteView(), $this->status->getArea());
@@ -148,7 +149,6 @@ class Control extends \Control
         return ReturnArea($this->status->getSiteView(), $this->status->getArea());
     }
 
-
     public function print_pdf()
     {
         global $contest_type;
@@ -164,6 +164,192 @@ class Control extends \Control
         foreach ($gare as $lotto) {
             $lotto->partecipanti = get_partecipanti($lotto->gid);
 		}
+		$html = <<<END
+        <html><head>	
+		<style type="text/css">
+html {
+    width: 900px;
+}
+body {
+	font-family: sans-serif;
+	font-size: 13px;
+	text-align: center;	
+}
+
+table {
+    page-break-inside:auto;
+}
+
+tr {
+    page-break-inside:avoid;
+    page-break-after:auto;
+}
+    
+table#main {
+    width: 98%;
+    margin-top: 2em;   
+}
+
+
+table#main tr.first-level {
+    border: 2px solid grey;  
+}
+
+td.detail {
+    width: 400px;
+}
+
+td.cardinal {
+    width: 40px;
+    font-size: 2em;
+    color: grey;
+}
+
+table.sub td {
+    border: 1px solid grey;
+}
+
+table.sub {
+    margin: 0;
+    width:100%;
+    border-collapse: collapse;
+}
+
+table.sub td {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+
+
+td.header-money {
+    font-size: .8em;
+}
+
+td.header {
+    background-color:rgb(255, 216, 127);
+}
+
+td.aggiudicatario  {
+    width: 50px;
+}
+
+td.partecipant td.aggiudicatario
+{
+    font-size: .8em;
+}
+.partecipant table td {
+    text-align: center;
+}
+
+</style>
+</head><body>
+END;
+		$html .= '<h1>Elenco gare</h1>';        
+		$html .= '<h2> Anno ' . $year .'</h2>';
+		
+        $j=1;
+        foreach ($gare as $gara) {
+            $html .= '<table cellpadding="0" id="main"><tr class="first-level">';
+            $html .= '<td class="cardinal">' . $j . '</td><td class="detail">' ;
+            //table containing detail
+            $html .= '<table class="sub"><tr><td colspan="4"><strong>' .  htmlentities($gara->oggetto,ENT_QUOTES,"UTF-8")  . '</strong></td></tr>';
+            $html .= '<tr><td class="header">CIG</td><td colspan="3">' . $gara->cig  . '</td></tr>';
+            $html .= '<tr><td class="header">Tipo</td><td colspan="3">' . $contest_type[$gara->scelta_contraente] . '</td></tr>';
+            $html .= '<tr><td class="header" colspan="4">Lavori</td></tr>';
+            $html .= '<tr><td class="header">dal</td><td>' . $gara->data_inizio . '</td><td class="header">al</td><td>' . $gara->data_fine . '</td></tr>';
+            $html .= '<tr><td class="header" colspan="4">Importi</td></tr>';
+            $html .= '<tr><td class="header header-money">Aggiudicazione</td><td> &euro; ' . number_format($gara->importo,2,',','.') . '</td><td class="header  header-money"> Liquidato</td><td> &euro; ' . number_format($gara->importo_liquidato,2,',','.') . '</td></tr>';
+            $html .= '</table>';
+            $html .= '</td><td valign="top" class="partecipant">';
+                
+            //sub-table containing partecipant
+            $html .= '<table class="sub"><tr><td class="header" colspan="2">Partecipante</td><td class="header aggiudicatario">Aggiudicatario</td></tr>';
+			$count_ditte = 0; $html_partecipanti ="";
+			foreach ($gara->partecipanti["ditte"] as $partecipante)
+			{
+				$aggiudicatario = "";
+				if ($partecipante->aggiudicatario == 'Y')
+					$aggiudicatario = "&radic;";
+				$row_style="";
+				if ($count_ditte % 2)
+				{
+					$row_style="grey";
+				}
+				$html_partecipanti .= '<tr><td colspan="2" class="' .  $row_style . ' partecipante">' .  htmlentities($partecipante->ragione_sociale,ENT_QUOTES,"UTF-8") . ' / ' . $partecipante->identificativo_fiscale . 	'</td><td class="aggiudicatario">' . $aggiudicatario . '</td></tr>';
+				$count_ditte++;
+			}
+            
+			$p=0;
+			foreach ($gara->partecipanti["raggruppamenti"] as $raggruppamento)
+			{
+				$p++;
+				$i=0;
+                $aggiudicatario="";
+				foreach ($raggruppamento as $ditta)
+				{					
+					$html_partecipanti .= "<tr>";
+					if ($ditta->aggiudicatario == 'Y')
+						$aggiudicatario = "&radic;";
+					if ($i == 0)
+						$html_partecipanti .= '<td rowspan="' . count($raggruppamento) .'">' . $p . ' Raggr.</td>';
+					$row_style="";
+				if ($count_ditte % 2)
+				{
+					$row_style="grey";
+				}
+				$html_partecipanti .= '<td class="' .  $row_style . ' partecipante">' . htmlentities($ditta->ragione_sociale) . " / " . $ditta->identificativo_fiscale  . " / <em>" . $ruoli_partecipanti_raggruppamento[$ditta->ruolo] .  "</em>" . '</td>';
+                if ($i == 0)
+						$html_partecipanti .= '<td rowspan="' . count($raggruppamento) .'">' . $aggiudicatario . '</td>';
+                $html_partecipanti .= '</tr>';
+					$count_ditte++;	
+					$i++;
+				}	
+			}
+			$count_ditte +=  2;
+			$html .= $html_partecipanti;
+			$html .= '</table></td></tr>';
+            $html .= '</table>';
+			$j++;
+		}
+		
+				
+		$html .='</body></html>';
+
+		$wkpdf = new \mikehaertl\wkhtmlto\Pdf(array("binary"=>$this->_fl->configuration->pdf["exec"],
+													//"orientation"=>"landscape",
+													"footer-font-size"=>"10",													
+													"header-font-size"=>"9",
+													/*"header-right"=>"[date] [time]",*/
+													"footer-right"=>"[page]/[topage]",
+													"margin-bottom"=>"15mm"
+													));
+		$wkpdf->addPage($html);
+		if (!$wkpdf->send()) {
+			throw new \Exception('Could not create PDF: '.$wkpdf->getError());
+		}
+	}
+
+
+
+
+
+    public function print_pdf2()
+    {
+        global $contest_type;
+        global $ruoli_partecipanti_raggruppamento;
+        $year = $_SESSION["year"];
+        $administrator = @$this->_s["all"];
+        if ($administrator) {
+            $gare =get_gare($year);
+        } else {
+            $gare =get_gare($year,null, $this->user->getID());
+        }
+        
+        foreach ($gare as $lotto) {
+            $lotto->partecipanti = get_partecipanti($lotto->gid);
+		}
+        
 		$html = <<<END
         <html><head>
 		

@@ -26,8 +26,9 @@ $db_schema[$db->prefix . "gara"]=array(
     "importo_liquidato"=>array("type"=>"numeric","null"=>true),
     "data_inizio"=>array("type"=>"date","format"=>'Y-m-d',"null"=>true),
     "data_fine"=>array("type"=>"date","format"=>'Y-m-d',"null"=>true),
+    "streamid"=>array("type"=>"int","null"=>true),
 	"f_user_id"=>array("type"=>"string","lenght"=>100,"null"=>true),
-    "f_pub_anno"=>array("type"=>"int","null"=>true),
+    "f_pub_anno"=>array("type"=>"int","null"=>true),    
     "f_pub_numero"=>array("type"=>"int","null"=>true)
 );
 
@@ -131,9 +132,13 @@ function build_insert_string($table,$params)
                     $values_string .= '"'. sql_escape($table, $column, trim($params[$column])) . '"';
                     break;
                 case "date":
-                    $tmp_dobj=DateTime::createFromFormat('d/m/Y',$params[$column]);
+                    //try to create with sql type forma
+                    $tmp_dobj=DateTime::createFromFormat($detail["format"],$params[$column]);  
+                    if ($tmp_dobj === false) {
+                        $tmp_dobj=DateTime::createFromFormat('d/m/Y',$params[$column]);  
+                    }
+                
                     $column_string .= $column;
-                    
                     $values_string .= '"' . $tmp_dobj->format($detail["format"]) . '"';
                     break;
             }

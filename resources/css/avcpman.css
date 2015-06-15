@@ -3,7 +3,7 @@
     background:url('images/ajax-loader.gif') no-repeat right center;
 }
 
-.avcpman #current-year
+.avcpman #current-year, .avcpman #destination-year
 {
     width:100px;
     height:20px;
@@ -425,6 +425,19 @@ h2	.help
 {
 
 	background: url(images/question-icon.gif)  no-repeat center center;
+	float: right;
+	color: transparent;
+	display: block;
+	height: 20px;
+	width: 20px;
+	font-size: 0px;
+    margin-left:5px;
+}
+
+h2	.copy
+{
+
+	background: url(images/copy_20x20.png)  no-repeat center center;
 	float: right;
 	color: transparent;
 	display: block;
