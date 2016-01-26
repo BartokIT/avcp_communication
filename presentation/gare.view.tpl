@@ -64,8 +64,8 @@
 							<tr class="raggruppamento">	
 								<td class="ragione-sociale">{$ditta->ragione_sociale} (<em>{$ruoli_raggruppamento[$ditta->ruolo]}</em>)</td>
 								<td class="identificativo-fiscale">{$ditta->identificativo_fiscale}</td>
-								{if $ditta@first}<td rowspan="{$ditta@total}">
-									<input type="radio" name="aggiudicatario" value="{$pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{else} disabled="disabled"{/if}/>
+								{if $ditta@first}<td rowspan="{$ditta@total}">									
+                                    <input type="checkbox" name="aggiudicatario" value="{$pid}" {if $ditta->aggiudicatario == "Y"}checked="checked"{else} disabled="disabled"{/if}/>
 								</td> {/if}
 							</tr>
 						{/foreach}

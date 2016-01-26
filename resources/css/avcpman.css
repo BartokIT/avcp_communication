@@ -594,10 +594,6 @@ h2	.copy
 	margin-bottom: 10px;	
 }
 
-.avcpman .warning
-{
-    background-color: rgba(255, 243, 151, 0.86);
-}
 .avcpman .login-content .error em
 {
 	font-weight: bold;
@@ -634,4 +630,8 @@ h2	.copy
 .red-background-error
 {
 	background:	#ed9179 !important;
+}
+
+.avcpman .warning {
+    background-color: rgb(255, 243, 151);
 }

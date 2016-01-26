@@ -1,5 +1,5 @@
--- ALTER TABLE  `avcpman_gara` 
--- ADD COLUMN streamid INT;
+ALTER TABLE  `avcpman_gara` 
+ ADD COLUMN streamid INT;
 
 DELIMITER //
 DROP PROCEDURE IF EXISTS update_gare;

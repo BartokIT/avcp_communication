@@ -49,7 +49,7 @@
 					</thead>
 					<tbody>
 					{section name=gara loop=$gare}
-						<tr class="{if $gare[gara]->dummy == "Y"}dummy{/if} {if $gare[gara]->warning}warning{/if}">
+						<tr class="{if $gare[gara]->dummy == "Y"}dummy {/if}{if $gare[gara]->warning}warning{/if}">
 							<td class="counter">{$smarty.section.gara.index + 1}</td>
 							<td class="subject">{$gare[gara]->oggetto} - <strong>{$gare[gara]->cig}</strong></td>
 							<td style="width: 30px;text-align: center">{$gare[gara]->partecipanti}</td>

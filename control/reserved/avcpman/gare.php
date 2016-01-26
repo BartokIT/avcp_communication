@@ -155,7 +155,10 @@ class Control extends \Control
         global $ruoli_partecipanti_raggruppamento;
         $year = $_SESSION["year"];
         $administrator = @$this->_s["all"];
-        if ($administrator) {
+
+        $all=!!($this->user->isRole("administrator") &&
+                isset($_SESSION["all"]) && $_SESSION["all"]);
+        if ($all) {
             $gare =get_gare($year);
         } else {
             $gare =get_gare($year,null, $this->user->getID());

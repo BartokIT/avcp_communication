@@ -24,7 +24,7 @@
                 </div>
 				<div class="centered">Copia nell'anno :
                     <select id="destination-year" name="destination-year">
-                        {html_options options=$years_destination selected=$year+1}
+                        {html_options options=$years_destination selected=$destination_year}
                     </select>
                 </div>
 				{authorized roles="administrator"}
@@ -51,7 +51,7 @@
                             </td>
 							<td class="counter">{$gara@index + 1}</td>
 							<td class="subject">{$gara->oggetto} - <strong>{$gara->cig}</strong></td>                            
-                            {if $user->isRole("administrator") &&  $view_all eq "true"}
+                            {if $user->isRole("administrator") && $view_all eq "true"}
                             <td style="font-size: .8em">{$gara->f_user_id}</td>    
                         {/if}
 						</tr>

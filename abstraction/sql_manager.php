@@ -381,8 +381,7 @@ function get_gare_stream($anno, $anno_destination, $userid=null) {
     $query_string = "SELECT  g.gid, g.dummy, g.cig, g.oggetto, g.scelta_contraente, g.f_user_id, g.streamid, g2.gid as present, " .
         "g.importo, g.importo_liquidato, DATE_FORMAT( g.data_inizio,'%d/%m/%Y') as data_inizio, DATE_FORMAT( g.data_fine,'%d/%m/%Y') as data_fine " .
         " from (SELECT streamid, gid from avcpman_gara where streamid <> gid AND f_pub_anno = $anno_destination ) g2 " . 
-        " right join avcpman_gara g on g.gid = g2.streamid where g.gid = g.streamid AND g.f_pub_anno = $anno " . $numero_string;
-    
+        " right join avcpman_gara g on g.gid = g2.streamid where  g.f_pub_anno = $anno " . $numero_string;
     $gare = $db->get_results($query_string);
     if ($gare == NULL)
         return array();
@@ -538,6 +537,7 @@ function copy_gare($gids, $destination_year) {
 		return false;
 	}
     else {
+        
         $new_ids = array();
         foreach ($gare as $gara) {
             $sql_string = build_insert_string($db->prefix . "gara", array("cig"=>$gara->cig, "oggetto"=>$gara->oggetto, 
@@ -552,10 +552,13 @@ function copy_gare($gids, $destination_year) {
                 return false;
             }
             else {
+
                 $new_gara_id = $db->insert_id;
+                //Search for single company partecipation
                 $part_string = "SELECT pa.pid, pa.gid, pa.tipo, pa.aggiudicatario, pd.did FROM " . $db->prefix . 'partecipanti pa, ' . 
                                 $db->prefix . 'part_ditta pd  WHERE pa.tipo = "D"  AND pa.gid ='  . $gara->gid . ' AND pa.pid = pd.pid';
                 $part_ditte = $db->get_results($part_string);
+                if ($part_ditte)
                 foreach ($part_ditte as $ditta) {
                     
                     $insert_partecipante = "INSERT INTO " . $db->prefix . "partecipanti (gid,tipo, aggiudicatario) VALUES (" . $new_gara_id . ',"' . 
@@ -564,7 +567,8 @@ function copy_gare($gids, $destination_year) {
                     if ($result === false) {
                         $db->query("ROLLBACK");
                         return false;
-                    } 
+                    }
+
                     $pid_new = $db->insert_id;
                     $insert_partecipante = "INSERT INTO " . $db->prefix . "part_ditta (did,pid) VALUES (" . $ditta->did . ',' . 
                         $pid_new . ')';
@@ -573,8 +577,36 @@ function copy_gare($gids, $destination_year) {
                         $db->query("ROLLBACK");
                         return false;
                     } 
+
                 }
-                                
+                
+                //Search for group of companies partecipation 
+                $part_string = "SELECT pa.pid, pa.gid, pa.tipo, pa.aggiudicatario, r.did, r.ruolo FROM " 
+                    . $db->prefix . 'partecipanti pa, ' . $db->prefix . 'raggruppamento r WHERE pa.tipo = "R"  AND pa.pid = r.pid ' . 
+                    'AND pa.gid ='  . $gara->gid ;
+                $part_ditte = $db->get_results($part_string);
+                $pid_new = -1;
+                if ($part_ditte)                
+                foreach ($part_ditte as $i=>$ditta)  {
+
+                    //if is the first record insert a new partecipanti record
+                    if ( $i== 0) {
+                        $insert_partecipante = "INSERT INTO " . $db->prefix . "partecipanti (gid,tipo, aggiudicatario) VALUES (" . $new_gara_id . ',"' . 
+                            $ditta->tipo . '","'. $ditta->aggiudicatario . '")';
+                        $result = $db->query($insert_partecipante);
+                        if ($result === false) {
+                            $db->query("ROLLBACK");
+                            return false;
+                        }
+                        $pid_new = $db->insert_id;
+                    }
+                    $insert_raggr = 'INSERT INTO ' . $db->prefix . 'raggruppamento (pid, did, ruolo) VALUES (' . $pid_new . ',' . $ditta->did . ',"' . $ditta->ruolo . '")';
+                    $result = $db->query($insert_raggr);
+                    if ($result === false) {
+                        $db->query("ROLLBACK");
+                        return false;
+                    }
+                }
                 $new_ids[] = $new_gara_id;
             }
         }

@@ -18,35 +18,24 @@ class Control extends \Control
                 $years[((int)date("Y")) - 1]=((int)date("Y")) - 1;
         }
         $years[$today_year]=$today_year;
+        unset($years[$today_year]); //is bit oossible to copy item of current year
+        asort($years);
         
         //Set default year if no year is selected
         if (!isset($_SESSION["year"])) {
-            if ($month == 1) {
-                $_SESSION["year"]=((int)date("Y")) - 1;
-            } else {
-                $_SESSION["year"]=date("Y");
-            }
+            $_SESSION["year"]=end($years);
+            
         }
         else {
             if (!in_array($_SESSION["year"],$years)) {
-                if ($month == 1) {
-                    $_SESSION["year"]=((int)date("Y")) - 1;
-                } else {
-                    $_SESSION["year"]=date("Y");
-                }   
+                $_SESSION["year"]=end($years);
             }
         }            
         
         $all=!!($this->user->isRole("administrator") &&
                 isset($_SESSION["all"]) && $_SESSION["all"]);
         
-        if ($all) {
-            $gare = get_gare_stream($_SESSION["year"],2015);            
-            $view_all = "true";
-        } else {
-                $gare =get_gare_stream($_SESSION["year"],2015, $this->user->getID());
-                $view_all = "false";
-        }
+        #List possible destination year
         $years_destination = array();
         if ($_SESSION["year"] < $today_year)
         {
@@ -54,8 +43,23 @@ class Control extends \Control
             do {
                 $years_destination[$y]=$y;
                 $y++;
-            } while ($y < $today_year);
+            } while ($y <= $today_year);
         }
+        
+        //Pick last destination year as default destination year
+        $destination_year = end($years_destination);
+        if (isset($this->_s["destination_year"]) and in_array($this->_s["destination_year"],$years_destination))
+            $destination_year = $this->_s["destination_year"];
+        
+        //Retrieve contest 
+        if ($all) {
+            $gare = get_gare_stream($_SESSION["year"],$destination_year);            
+            $view_all = "true";
+        } else {
+            $gare =get_gare_stream($_SESSION["year"],$destination_year, $this->user->getID());
+            $view_all = "false";
+        }
+
         
         
         $gare_warning=array();
@@ -76,11 +80,11 @@ class Control extends \Control
             }
             
         }
-        
-            
+
         return ReturnSmarty('gare.copy.tpl', array("year"=>$_SESSION["year"],
                                               "years"=>$years,
                                               "years_destination"=>$years_destination,
+                                              "destination_year"=>$destination_year,
                                               "gare"=>$gare_warning,
                                               "view_all"=>$view_all));
     }
@@ -97,7 +101,18 @@ class Control extends \Control
         }
         return ReturnArea($this->status->getSiteView(), $this->status->getArea());
     }
-
+    
+    public function set_destination_year()
+    {
+        if (isset($this->_r["year"])) {
+            $y = $this->_r["year"]*1;
+            $cy = date("Y")*1;
+            if (($y > 1950) && ($y <= $cy)) {
+                $this->_s["destination_year"] = $y;
+            }
+        }
+        return ReturnArea($this->status->getSiteView(), $this->status->getArea());
+    }
    /**
     * @Access(roles="administrator")
     */
@@ -119,10 +134,11 @@ class Control extends \Control
      */
     public function submit()
     {
-        if ($this->_r["submit"] == "save") {
+        if ($this->_r["submit"] == "save" and isset($this->_r["gid"])) {
             $gids = $this->_r["gid"];
             $destination_year = $this->_r["destination-year"];
             copy_gare($gids, $destination_year);
+            $_SESSION["year"] = $destination_year;
             return ReturnArea($this->status->getSiteView(), "avcpman/gare");
         } else {
             return ReturnArea($this->status->getSiteView(), "avcpman/gare");

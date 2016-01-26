@@ -18,7 +18,9 @@ $(function() {
          select: function( event, ui ) {            
              fill_fields(ui.item);                  
         }
-    }).on('change keyup paste',function () {
+    }).on('click',function(e){
+        $("#ditta_search").autocomplete('search');
+    }).on('keyup paste',function (e) {
         $("#search_result").text('');
         $("#ditta_edit_add").prop('disabled',true);
     }).data('ui-autocomplete')._renderItem= function( ul, item ) {

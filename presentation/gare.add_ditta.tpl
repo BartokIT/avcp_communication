@@ -65,7 +65,7 @@
 					</label>
 				{/ifarea}<br/>
 				<div class="button-container">
-					<button class="save" type="submit" id="ditta_edit_insert_and_add" name="submit" value="add">Inserisci e Aggiungi</button>					
+					<button class="save" type="submit" id="ditta_edit_insert_and_add" name="submit" value="add">Inserisci</button>					
 					<button class="undo" type="submit" name="submit" value="undo">Annulla</button>
 				</div>
 				{/form}
@@ -77,7 +77,7 @@
     </body>
 	<script src="resources/js/jquery-1.10.2.js"></script>
 	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
-	<script src="control/reserved/avcpman/gare/edit/add_ditta.js"></script>
+	<script src="control/reserved/avcpman/gare/edit/add_ditta.js?v=0003"></script>
 	<script src="resources/js/support.js?v=0001"></script>
 	<script src="resources/js/bootstrap-tour-standalone.min.js"></script>
 	<script src="control/reserved/avcpman/ditte/edit.js?v=0001"></script>	
