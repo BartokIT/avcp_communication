@@ -110,10 +110,10 @@
 		$(function(){            
 			var oTour = new Tour({
 				steps:[
-					{   path : "?area=avcpman%2Fgare"},  //step:0
-					{   path : "?area=avcpman%2Fgare%2Fnew_gara"},  //step:1
-                    {   path : "?area=avcpman%2Fgare%2Fnew_gara"},  //step:2
-                    {   path : "?area=avcpman%2Fgare"},  //step:3
+					{   path : "?area=avcpman%2Fgare" },  //step:0
+					{   path : "?area=avcpman%2Fgare%2Fnew_gara" },  //step:1
+                    {   path : "?area=avcpman%2Fgare%2Fnew_gara" },  //step:2
+                    {   path : "?area=avcpman%2Fgare" },  //step:3
 					{	//step:4
 						element: "#add-partecipant-ditta",
 						placement:'left',
@@ -129,15 +129,13 @@
 						reflex: true,
 						title:"Aggiungi un raggruppamento di partecipanti",
 						content: "Ora prova ad aggiungere un raggruppamento. Clicca sul pulsante per andare avanti.",
-						onNext: function(tour)
-						{
+						onNext: function(tour) {
 							if ($(".add-ditta-raggruppamento").length < 1 ) {
 								window.location = $("#add-partecipant-raggruppamento").attr("href");	//code
 								return false;
 							}						
 						},
-						onShown : function (tour)
-						{							
+						onShown : function (tour) {							
 							if ($(".add-ditta-raggruppamento").length > 0 ) {
 								tour.next();
 							}
