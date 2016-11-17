@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\gare\new_gara;
+//namespace reserved\avcpman\gare\new_gara;
 
 class Control extends \Control
 {
@@ -11,7 +11,7 @@ class Control extends \Control
     {
         global $contest_type;
         return ReturnSmarty(
-            'gare.edit.tpl',
+            'avcp\gare.edit.tpl',
             array("gara"=>(object) array(
                 "gid"=>-1,
                 "cig"=>"",

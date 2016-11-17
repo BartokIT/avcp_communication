@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\pubblicazioni\view_pubblicazione;
+//namespace reserved\avcpman\pubblicazioni\view_pubblicazione;
 class Control extends \Control
 {
     /**
@@ -13,7 +13,7 @@ class Control extends \Control
 			$p = (array)get_pubblicazione_detail($anno,$numero);
 			$file_list = get_files_list($anno,$numero);
 			$p["files"] = $file_list;
-            return ReturnSmarty('pubblicazione.view.tpl',$p);
+            return ReturnSmarty('avcp/pubblicazione.view.tpl',$p);
         }
         else
             return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");
@@ -34,7 +34,7 @@ class Control extends \Control
         }
         else
         {
-            return ReturnSmarty('pubblicazioni.tpl',array("pubblicazioni"=>$pubs));            
+            return ReturnSmarty('avcp/pubblicazioni.tpl',array("pubblicazioni"=>$pubs));            
         }
     }
     

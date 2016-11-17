@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\ditte\edit;
+//namespace reserved\avcpman\ditte\edit;
 class Control extends \Control
 {
     /**
@@ -12,7 +12,7 @@ class Control extends \Control
             $ditta =get_ditta($did);
             
             //default action
-            return ReturnSmarty('ditte.edit.tpl',array("ditta"=>$ditta,
+            return ReturnSmarty('avcp/ditte.edit.tpl',array("ditta"=>$ditta,
                                                        "estero"=>array("N"=>"Italiana","Y"=>"Estera")));
         }
         else

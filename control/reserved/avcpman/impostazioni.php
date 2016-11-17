@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\impostazioni;
+//namespace reserved\avcpman\impostazioni;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -14,7 +14,7 @@ class Control extends \Control
 
         $settings =get_settings(array("ente","licenza","cf_ente","prefisso_url"));
         //default action
-        return ReturnSmarty('settings.tpl',array("settings"=>$settings));
+        return ReturnSmarty('avcp/settings.tpl',array("settings"=>$settings));
     }
 
     /**

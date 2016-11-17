@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Represente an user that access to the application
@@ -361,7 +361,8 @@ class State implements Serializable {
     
 	public function getControlManagerClassName()
     {
-        return  $this->getSiteView() . '\\' . str_replace("/","\\",$this->getArea()) . "\\Control";
+        //return  $this->getSiteView() . '\\' . str_replace("/","\\",$this->getArea()) . "\\Control";
+       return  $this->getSiteView() . '_' . str_replace("/","_",$this->getArea()) . "_Control";
     }
     public function getControlFilePath()
     {

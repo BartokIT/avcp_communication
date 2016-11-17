@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\pubblicazioni\add_pubblicazione;
+//namespace reserved\avcpman\pubblicazioni\add_pubblicazione;
 class Control extends \Control
 {
     /**
@@ -24,7 +24,7 @@ class Control extends \Control
             else
             {
 				
-			    return ReturnSmarty('pubblicazione.edit.tpl',
+			    return ReturnSmarty('avcp/pubblicazione.edit.tpl',
                                     array(
                                         "anno"=>$anno,
                                         "titolo"=>"",

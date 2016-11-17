@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\ditte\new_ditta;
+//namespace reserved\avcpman\ditte\new_ditta;
 class Control extends \Control
 {
     /**
@@ -8,7 +8,7 @@ class Control extends \Control
      * @return object  Description
      */
     function d(){
-            return ReturnSmarty('ditte.edit.tpl',array("ditta"=>(object)array(
+            return ReturnSmarty('avcp/ditte.edit.tpl',array("ditta"=>(object)array(
                                                         "did"=>-1,
                                                         "ragione_sociale"=>"",
                                                         "estera"=>"N",
@@ -38,7 +38,7 @@ class Control extends \Control
                 $d = get_ditta_by_cf($this->_r["ditta_edit_identificativo"]);
                 if ($d !== false)
                 {
-                        return ReturnSmarty('ditte.edit.tpl',array("ditta"=>(object)array(
+                        return ReturnSmarty('avcp/ditte.edit.tpl',array("ditta"=>(object)array(
                                                         "did"=>-1,
                                                         "ragione_sociale"=>$this->_r["ditta_edit_ragione_sociale"],
                                                         "estera"=>$this->_r["ditta_edit_estero"],

@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\pubblicazioni;
+//namespace reserved\avcpman\pubblicazioni;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -20,7 +20,7 @@ class Control extends \Control
             {
                 $parameters["error"]=$this->_r["error"];
             }
-            return ReturnSmarty('pubblicazioni.tpl',$parameters);
+            return ReturnSmarty('avcp/pubblicazioni.tpl',$parameters);
     }
 
     
@@ -112,7 +112,7 @@ class Control extends \Control
         }
         else
         {
-            return ReturnSmarty('pubblicazioni.tpl',array("pubblicazioni"=>$pubs));            
+            return ReturnSmarty('avcp/pubblicazioni.tpl',array("pubblicazioni"=>$pubs));            
         }
     }
 }

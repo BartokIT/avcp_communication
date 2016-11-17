@@ -15,6 +15,11 @@
                 Procedure            
                 <ul>
                     <li><a class="smaller" href="{urlarea area="home" nonce="false" action="avcpman"}">Comunicazioni AVCP</a></li>
+                   <li><a class="smaller" href="{urlarea area="home" nonce="false" action="locroyalties"}">Canoni di locazione</a></li>
+                    <li><a class="smaller" href="http://intranet.terracina.local/folium/">Protocollo</a></li>
+                    <li><a class="smaller" href="http://intranet.terracina.local/portal/">CiviliaWeb - Procedure</a></li>
+                    <li><a class="smaller" href="http://intranet.terracina.local/cartellini/">Cartellino Web</a></li>
+
                 </ul>
             </div>
         </li>

@@ -1,5 +1,5 @@
 <?php
-namespace general\login;
+//namespace general\login;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable

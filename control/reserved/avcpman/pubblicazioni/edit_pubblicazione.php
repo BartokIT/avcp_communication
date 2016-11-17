@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\pubblicazioni\edit_pubblicazione;
+//namespace reserved\avcpman\pubblicazioni\edit_pubblicazione;
 class Control extends \Control
 {
     /**
@@ -13,7 +13,7 @@ class Control extends \Control
 			$p = (array)get_pubblicazione_detail($anno,$numero);
 
 			$p['data_aggiornamento']= date("d/m/Y");
-            return ReturnSmarty('pubblicazione.edit.tpl',$p);
+            return ReturnSmarty('avcp/pubblicazione.edit.tpl',$p);
         }
         else
             return ReturnArea($this->status->getSiteView(),"avcpman/pubblicazioni");

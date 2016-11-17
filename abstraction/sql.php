@@ -1,5 +1,5 @@
 <?php
-
+global $config;
 include_once "lib/ezSQL/shared/ez_sql_core.php";
 include_once "lib/ezSQL/mysqli/ez_sql_mysqli.php";
 //include_once "lib/ezSQL/mssql/ez_sql_mssql.php";
@@ -7,7 +7,7 @@ include_once "lib/ezSQL/mysqli/ez_sql_mysqli.php";
 
 
 
-global $id_db_connection,$db;		
+global $id_db_connection,$db,$db_schema;		
 $db = new ezSQL_mysqli($config["database"]["user"],
 					   $config["database"]["pass"],
 					   $config["database"]["name"],
@@ -15,7 +15,6 @@ $db = new ezSQL_mysqli($config["database"]["user"],
 //$db = new ezSQL_mssql($db_user, $db_pass, $db_name, $db_host);
 //$other_db_tables = $db->get_results("SHOW TABLES");
 $db->prefix="avcpman_";
-
 $db_schema=array();
 $db_schema[$db->prefix . "gara"]=array(
     "cig"=>array("type"=>"string","null"=>false),

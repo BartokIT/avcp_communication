@@ -1,5 +1,5 @@
 <?php
-namespace reserved\home;
+//namespace reserved\home;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -19,6 +19,10 @@ class Control extends \Control
 	{
 		return ReturnArea($this->status->getSiteView(),"avcpman/gare");
 	} 
+	function locroyalties()
+	{
+		return ReturnArea($this->status->getSiteView(),"locroyalties/alloggi");
+	}    
 }
 
 ?>

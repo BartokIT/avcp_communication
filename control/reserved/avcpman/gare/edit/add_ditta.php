@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\gare\edit\add_ditta;
+//namespace reserved\avcpman\gare\edit\add_ditta;
 class Control extends \Control
 {
     /**
@@ -13,7 +13,7 @@ class Control extends \Control
             $gid  = (int) $this->_r["parameter"];
             $gara = get_gara($gid);            
             //default action
-        return ReturnSmarty('gare.add_ditta.tpl',array("ditta"=>(object)array(
+        return ReturnSmarty('avcp/gare.add_ditta.tpl',array("ditta"=>(object)array(
                                                     "did"=>-1,
                                                     "ragione_sociale"=>"",
                                                     "estera"=>"N",

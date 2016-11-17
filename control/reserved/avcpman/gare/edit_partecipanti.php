@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\gare\edit_partecipanti;
+//namespace reserved\avcpman\gare\edit_partecipanti;
 class Control extends \Control
 {
     /**
@@ -24,7 +24,7 @@ class Control extends \Control
 			if (isset($this->_r["error"]))
 				$p["error"] = $this->_r["error"];
 				
-            return ReturnSmarty('gare.edit_partecipanti.tpl',$p);
+            return ReturnSmarty('avcp/gare.edit_partecipanti.tpl',$p);
         }
         else
             return ReturnArea($this->status->getSiteView(),"avcpman/gare");

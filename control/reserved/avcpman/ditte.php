@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\ditte;
+//namespace reserved\avcpman\ditte;
 /**
 * $action variabile che contiene il nome dell'area corrente
 * @Skippable
@@ -15,7 +15,7 @@ class Control extends \Control
             //default action
             if (isset($this->_r["error"]))
                 $parameters["error"]=$this->_r["error"];
-            return ReturnSmarty('ditte.tpl',$parameters);
+            return ReturnSmarty('avcp/ditte.tpl',$parameters);
     }
 
     /**

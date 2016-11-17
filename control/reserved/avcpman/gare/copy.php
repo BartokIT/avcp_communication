@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\gare\copy;
+//namespace reserved\avcpman\gare\copy;
 
 class Control extends \Control
 {
@@ -81,7 +81,7 @@ class Control extends \Control
             
         }
 
-        return ReturnSmarty('gare.copy.tpl', array("year"=>$_SESSION["year"],
+        return ReturnSmarty('avcp/gare.copy.tpl', array("year"=>$_SESSION["year"],
                                               "years"=>$years,
                                               "years_destination"=>$years_destination,
                                               "destination_year"=>$destination_year,

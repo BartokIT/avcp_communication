@@ -295,8 +295,8 @@ OUT;
         {
             
             $t = preg_replace('/\\.[^.\\s]{3,4}$/', '', $t);
-            if (file_exists($t . ".inc"))
-                include $t . ".inc";
+            if (file_exists($t . ".inc.php"))
+                include_once $t . ".inc.php";
         }
         
     }
@@ -311,7 +311,7 @@ OUT;
         //if the status control file is already read, set the correspondently control object
         if (isset($this->states_cache[$status . ""]))
         {
-            $status->setControlObject($this->states_cache[$status . ""]->getControlObject());
+            $status->setControlObject($this->states_cache[$status . ""]->getControlObject());           
             return;
         }
         else
@@ -322,19 +322,35 @@ OUT;
             {
                 //check if some reserved words are used in namespace string
                 $unusable_words  = array_intersect($status->getAreaArray(),$keywords);
+                
                 if (count($unusable_words)>0)
                 {
                     $this->error_page(500,"Sorry you are using reserved word in control object namespace [" . implode(",",$unusable_words) . "]");
                 }
                 else
                 {
+                    $cn = $status->getSiteView() . '_' . str_replace("/","_",$status->getArea()) . "_Control";
+                   
                     //Extract control class annotation
+                    //require_once $control_file_path;
+                    /*ob_start(function($content) {                         
+                       
+                        $content= preg_replace("/class (\w+) extends \\\\?Control/", "class " . $cn . " extends Control", $content);
+                        return $content;  
+                    });
                     require_once $control_file_path;
+                    ob_end_flush();*/
+                    $content = file_get_contents($control_file_path);
+                    $content = preg_replace("/class (\w+) extends \\\\?Control/", "class " . $cn . " extends Control", $content);
+                    file_put_contents($this->configuration->public_folder . $cn . ".php",$content);
+                    require_once($this->configuration->public_folder . $cn . ".php");
                     $session = &$this->init_session($status);
+                  
                     eval('$c= new ' . $status->getControlManagerClassName() . '($this,$status,$this->_r,$session);');
                     $this->read_annotation($c);
                     $this->states_cache[$status .""] = $status;
                     $status->setControlObject($c);
+                   
                 }
             }
             else

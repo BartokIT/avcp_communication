@@ -223,6 +223,6 @@
      **/
     function ReturnSmarty($page,$parameters=array())
     {
-	return new ReturnedSmarty($page,$parameters);
+	  return new ReturnedSmarty($page,$parameters);
     }
 ?>

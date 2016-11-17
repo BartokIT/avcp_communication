@@ -1,0 +1,11 @@
+{
+    "config": {
+        "vendor-dir": "lib"
+    },
+    "require": {
+        "propel/propel": "~2.0@dev"
+    },
+     "autoload": {
+    "classmap": ["abstraction/loc_royalties/"]
+  }
+}

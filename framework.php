@@ -18,8 +18,9 @@ include("config.php");
 include ("abstraction/authentication/authentication.php");
 include ("abstraction/authentication/authentication_LDAP.php");
 include ("abstraction/authentication/authentication_SQL.php");
-include ("abstraction/sql_manager.php");
-include ("abstraction/xml_writer.php");
+#include ("abstraction/sql_manager_locroyalties.php");
+#include ("abstraction/sql_manager_avcp.php");
+#include ("abstraction/xml_writer.php");
 /*
 ini_set('error_reporting',  E_ALL & ~E_DEPRECATED  );
 ini_set('display_errors', 'On');

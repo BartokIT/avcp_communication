@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\gare;
+//namespace reserved\avcpman\gare;
 
 include_once LIB_PATH . "wkhtmltopdf/Pdf.php";
 
@@ -68,7 +68,7 @@ class Control extends \Control
             }
         }
             
-        return ReturnSmarty('gare.tpl', array("year"=>$_SESSION["year"],
+        return ReturnSmarty('avcp/gare.tpl', array("year"=>$_SESSION["year"],
                                               "years"=>$years,
                                               "gare"=>$gare,
                                               "view_all"=>$view_all));
@@ -115,7 +115,7 @@ class Control extends \Control
             if (isset($this->_r["error"])) {
                 $p["error"] = $this->_r["error"];
             }
-            return ReturnSmarty('gare.view.tpl', $p);
+            return ReturnSmarty('avcp/gare.view.tpl', $p);
         } else {
             return ReturnArea($this->status->getSiteView(), "avcpman/ditte");
         }

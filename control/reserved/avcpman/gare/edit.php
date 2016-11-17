@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\gare\edit;
+#namespace reserved\avcpman\gare\edit;
 
 class Control extends \Control
 {
@@ -14,7 +14,7 @@ class Control extends \Control
             $gara =get_gara($gid);
             
             //default action
-            return ReturnSmarty('gare.edit.tpl', array("gara"=>$gara,
+            return ReturnSmarty('avcp/gare.edit.tpl', array("gara"=>$gara,
                                                 "contest_type"=>$contest_type));
         } else {
             return ReturnArea($this->status->getSiteView(), "avcpman/gare");

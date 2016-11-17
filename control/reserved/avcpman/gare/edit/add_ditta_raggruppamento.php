@@ -1,5 +1,5 @@
 <?php
-namespace reserved\avcpman\gare\edit\add_ditta_raggruppamento;
+//namespace reserved\avcpman\gare\edit\add_ditta_raggruppamento;
 class Control extends \Control
 {
     /**
@@ -14,7 +14,7 @@ class Control extends \Control
             $pid  = (int) $this->_r["parameter"];
             $gara = get_gara_from_pid($pid);            
             //default action
-        return ReturnSmarty('gare.add_ditta.tpl',array("ditta"=>(object)array(
+        return ReturnSmarty('avcp/gare.add_ditta.tpl',array("ditta"=>(object)array(
                                                     "did"=>-1,
                                                     "ragione_sociale"=>"",
                                                     "estera"=>"N",
