@@ -1,0 +1,27 @@
+<?php
+$au = new LDAPAuthentication("10.10.10.221",3268,
+			     'CN=LDAP Reader,CN=Users,DC=terracina,DC=local',
+			     'Terracina2014!!',
+			     'DC=terracina,DC=local',
+			     "samaccountname",
+			     '(&(objectClass=user)(objectCategory=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))');
+$rm = new SimpleUserRoleMapper(array(),
+			       array('CN=Intranet Administrators,OU=Comune,DC=terracina,DC=local'=>"administrator",
+						 'CN=AVCP Communication Users,OU=Comune,DC=terracina,DC=local'=>"editors"));
+$config =  array(
+		"init_status"=>		array(	"site_view"=>"general",
+									"area"=>"home"),
+		"authentication"=>	array(	"authenticator"=>$au,
+									"userinforetriever"=>$au,
+									"rolemapper"=>$rm,
+									"external"=>true),
+		"login_status"=>	array(	"site_view"=>"general",
+									"area"=>"login"),
+		"debug"=>			array(	"framework"=>false,
+									"smarty"=>false),
+		"error_page"=>		"error.tpl",
+		"missing_action_error"=>false,
+		"flow_name"=>		"main",
+		"history_len"=>		20 );
+
+?>

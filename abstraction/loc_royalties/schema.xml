@@ -81,34 +81,38 @@
         <column name="civico" type="varchar" size="10" required="false"/>
         
         <column name="scala" type="varchar" size="10" required="false"/>
-        <column name="piano" type="int" size="2" required="false"/>
+        <column name="piano" type="integer" size="2" required="false"/>
         <column name="interno" type="varchar" size="255" required="false"/>
         <column name="attico" type="boolean" required="false"/>
         <column name="ascensore" type="boolean" required="false"/>
     </table>
     <table name="assegnazioni" phpName="Assegnazioni">
-        <column name="aid" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
-        <column name="first_name" type="varchar" size="128" required="true"/>
-        <column name="last_name" type="varchar" size="128" required="true"/>
+        <column name="asid" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="causa_successivo" type="varchar" size="512" required="false"/>
+        <!--
+            Riferimenti a se stesso sotto forma di alberatura
+        -->
+        <behavior name="nested_set" />
         <!--
             A foreign key represents a relationship. Just like a table or a column, a relationship has a `phpName`.
             By default, Propel uses the `phpName` of the foreign table as the `phpName` of the relation.
 
             The `refPhpName` defines the name of the relation as seen from the foreign table.
         -->
-        <foreign-key foreignTable="alloggi" refPhpName="Book">
-            <reference local="publisher_id" foreign="id"/>
-        </foreign-key>
-        <foreign-key foreignTable="author">
-            <reference local="author_id" foreign="id"/>
+        <!--
+            Riferimento alla tabella degli alloggi
+            -->
+        <foreign-key foreignTable="alloggi">
+            <reference local="asid" foreign="alid"/>
         </foreign-key>        
     </table>
-
-    <table name="publisher" phpName="Publisher">
-        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
-        <column name="name" type="varchar" size="128" required="true"/>
+    <table name="persone" phpName="Persone">
+        <column name="pid" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="nome" type="varchar" size="255" required="false"/>
+        <column name="cognome" type="varchar" size="255" required="false"/>
+        <column name="cf" type="varchar" size="14" required="false"/>
+        <column name="disabile" type="boolean" required="false"/>
     </table>
-
     <!--
         When you're done with editing, open a terminal and run
             `$ cd E:\Users\claudio.papa\Documents\Development\PHP\avcp_communication\abstraction`
